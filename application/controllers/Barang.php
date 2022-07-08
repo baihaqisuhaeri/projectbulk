@@ -234,7 +234,7 @@ class Barang extends CI_Controller
         }
 
         foreach ($unit_akses as $u) {
-            echo '<option value="' . $u->kode_unit . '">' . $u->nama_unit . '</option>';
+            echo '<option value="' . $u->kode_unit . '">' . "$u->nama_unit ". '</option>';
         }
     }
 

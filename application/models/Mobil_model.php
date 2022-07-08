@@ -13,9 +13,11 @@ class Mobil_model extends CI_Model
     var $order = array('n_mobil' => 'desc'); // default order
     public function get_data_tabel_mobil()
     {
-
+        $nama = $_SESSION['nama'];
 
         $this->db->select('*');
+        $this->db->join('hak_akses', 'mobil.k_cabang = hak_akses.kode_unit');
+        $this->db->where('hak_akses.nama_user', $nama);
         $this->db->order_by('n_mobil asc');
 
         $this->db->from($this->table);

@@ -34,60 +34,30 @@ class Mobil extends CI_Controller
         $this->load->view("Mobil_view");
     }
 
-    public function tambahCabang()
+    public function tambahMobil()
     {
-        $namaCabang = $_POST['namaCabang'];
-        $alamat1Cabang = $_POST['alamat1Cabang'];
-        $alamat2Cabang = $_POST['alamat2Cabang'];
-        $alamat3Cabang = $_POST['alamat3Cabang'];
-        $nomorTelepon = $_POST['nomorTelepon'];
-        $namaKontak = $_POST['namaKontak'];
-        $namaKepalaCabang = $_POST['namaKepalaCabang'];
-        $jabatan = $_POST['jabatan'];
-        $npwp = $_POST['npwp'];
-        $sk = $_POST['sk'];
-        $tanggalSk = $_POST['tanggalSk'];
-        $namaFp = $_POST['namaFp'];
-        $lokasi = $_POST['lokasi'];
-        $kodeNomor = $_POST['kodeNomor'];
+        $namaUnit = $_POST['namaUnit'];
+        $namaMobil = $_POST['namaMobil'];
+        $platNomor = $_POST['platNomor'];
+        $tahun = $_POST['tahun'];
+        $tanggalStnk = $_POST['tanggalStnk'];
+        $tanggalKirim = $_POST['tanggalKirim'];
 
-        $tanggalAktif = $_POST['tanggalAktif'];
-
-        $namaPt = $_POST['namaPt'];
-        $alamatPjk1 = $_POST['alamatPjk1'];
-        $alamatPjk2 = $_POST['alamatPjk2'];
-        $kodeSpm = $_POST['kodeSpm'];
-        $plafonUnit = $_POST['plafonUnit'];
 
 
 
 
         $data = array(
-            'n_cabang' => $namaCabang,
-            'al1_cab' => $alamat1Cabang,
-            'al2_cab' => $alamat2Cabang,
-            'al3_cab' => $alamat3Cabang,
-            'telp' => $nomorTelepon,
-            'kontak' => $namaKontak,
-            'n_kacab' => $namaKepalaCabang,
-            'j_kacab' => $jabatan,
-            'npwp' => $npwp,
-            'sk' => $sk,
-            'tgl_sk' => $tanggalSk,
-            'nama_fp' => $namaFp,
-            'lokasi' => $lokasi,
-            'kode_nomor' => $kodeNomor,
+            'k_mobil' => $platNomor,
+            'n_mobil' => $namaMobil,
+            'k_cabang' => $namaUnit,
+            'tahun' => $tahun,
+            'stnk' => $tanggalStnk,
+            'kir_mobil' => $tanggalKirim
 
-            'tgl_aktif' => $tanggalAktif,
-            'ttpbln' => 0,
-            'n_pt' => $namaPt,
-            'al_pjk' => $alamatPjk1,
-            'al_pjk2' => $alamatPjk2,
-            'kode_spm' => $kodeSpm,
-            'plaf_unit' => $plafonUnit
 
         );
-        $this->Cabang_model->tambah_cabang('dbm003', $data);
+        $this->Mobil_model->tambah_mobil('mobil', $data);
         $query = $this->db->affected_rows();
 
 
@@ -109,6 +79,29 @@ class Mobil extends CI_Controller
         }
     }
 
+    function get_unit_mobil()
+    {
+
+        $daftar_unit = "";
+        $unit_akses = $this->db->query("select * from hak_akses where nama_user = '" . $_SESSION['nama'] . "' ")->result();
+        foreach ($unit_akses as $unit) {
+            $daftar_unit .= " OR kd_unit = '$unit->kode_unit'";
+        }
+        $daftar_unit = substr($daftar_unit, 4);
+
+        //$unit = $this->db->query("select * from tb_unit where (".$daftar_unit.") order by nm_unit asc ")->result();        
+        $unit = $this->db->query("select * from tb_unit order by nm_unit desc ")->result();
+
+        if (empty($unit_akses)) {
+            echo '<option value="kosong">Belum ada data</option>';
+        } else {
+            echo '<option value="">Pilih Unit</option>';
+        }
+
+        foreach ($unit_akses as $u) {
+            echo '<option value="' . $u->kode_unit . '">' . $u->nama_unit . '</option>';
+        }
+    }
 
     public function ajax_list()
     {
@@ -122,7 +115,7 @@ class Mobil extends CI_Controller
             // var_dump($_SESSION['bulanAktif']);
             // die();
         }
-        $list = $this->Cabang_model->get_datatables();
+        $list = $this->Mobil_model->get_datatables();
         $data = array();
         $total = 0;
         $no = $_POST['start'];
@@ -131,36 +124,22 @@ class Mobil extends CI_Controller
             $row = array();
 
             $row[] = $no;
-            // $row[] = $p->k_cabang;
-            $row[] = $p->n_cabang;
-            $row[] = $p->al1_cab;
-            $row[] = $p->al2_cab;
-            $row[] = $p->al3_cab;
-            $row[] = $p->telp;
-            $row[] = $p->kontak;
-            $row[] = $p->n_kacab;
-            $row[] = $p->j_kacab;
-            $row[] = $p->npwp;
-            $row[] = $p->sk;
-            $row[] = $p->tgl_sk;
-            $row[] = $p->nama_fp;
-            $row[] = $p->lokasi;
-            $row[] = $p->kode_nomor;
-
-            $row[] = $p->tgl_aktif;
-            $row[] = $p->ttpbln;
-            $row[] = $p->n_pt;
-            $row[] = $p->al_pjk;
-            $row[] = $p->al_pjk2;
-            $row[] = $p->kode_spm;
-            $row[] = $p->plaf_unit;
+           
+            $row[] = $p->k_mobil;
+            $row[] = $p->n_mobil;
+            $row[] = $p->tahun;
+            $row[] = $p->k_cabang;
+            $row[] = $p->stnk;
+            $row[] = $p->kir_mobil;
+      
+            
 
 
 
 
 
             // $row[] = '<a href="javascript:void(0);" class="fas fa-edit" onclick="get_data_po('.$p->id.')" title="Ubah data PO" style="color:black;"></a> | <a href="javascript:void(0);" class="fas fa-trash" onclick="hapus_po('.$p->id.')" title="Hapus data PO" style="color:black;"></a>';
-            $row[] = '<a href="#!" class="fas fa-edit edit_cabang" data-id="' . $p->id . '"  title="Ubah data PO" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteCabang" data-id="' . $p->id . '" title="Hapus data PO" style="color:black;"></a>';
+            $row[] = '<a href="#!" class="fas fa-edit edit_mobil" data-id="' . $p->k_mobil . '"  title="Ubah data PO" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteMobil" data-id="' . $p->k_mobil . '" title="Hapus data PO" style="color:black;"></a>';
 
 
 
@@ -169,8 +148,8 @@ class Mobil extends CI_Controller
 
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->Cabang_model->count_all(),
-            "recordsFiltered" => $this->Cabang_model->count_filtered(),
+            "recordsTotal" => $this->Mobil_model->count_all(),
+            "recordsFiltered" => $this->Mobil_model->count_filtered(),
             "data" => $data,
         );
         //output to json format
@@ -179,11 +158,11 @@ class Mobil extends CI_Controller
 
 
 
-    function hapus_cabang()
+    function hapus_mobil()
     {
         $id = $_POST['id'];
 
-        $this->Cabang_model->hapus_cabang($id);
+        $this->Mobil_model->hapus_mobil($id);
         $query = $this->db->affected_rows();
         if ($query == true) {
             $data = array(
@@ -203,58 +182,30 @@ class Mobil extends CI_Controller
     }
 
 
-    function edit_cabang()
+    function edit_mobil()
     {
-        $id = $_POST['id'];
-        $namaCabang2 = $_POST['namaCabang2'];
-        $alamat1Cabang2 = $_POST['alamat1Cabang2'];
-        $alamat2Cabang2 = $_POST['alamat2Cabang2'];
-        $alamat3Cabang2 = $_POST['alamat3Cabang2'];
-        $nomorTelepon2 = $_POST['nomorTelepon2'];
-        $namaKontak2 = $_POST['namaKontak2'];
-        $namaKepalaCabang2 = $_POST['namaKepalaCabang2'];
-        $jabatan2 = $_POST['jabatan2'];
-        $npwp2 = $_POST['npwp2'];
-        $sk2 = $_POST['sk2'];
-        $tanggalSk2 = $_POST['tanggalSk2'];
-        $namaFp2 = $_POST['namaFp2'];
-        $lokasi2 = $_POST['lokasi2'];
-        $kodeNomor2 = $_POST['kodeNomor2'];
+        $namaUnit = $_POST['namaUnit2'];
+        $namaMobil = $_POST['namaMobil2'];
+        $platNomor = $_POST['platNomor2'];
+        $tahun = $_POST['tahun2'];
+        $tanggalStnk = $_POST['tanggalStnk2'];
+        $tanggalKirim = $_POST['tanggalKirim2'];
 
-        $tanggalAktif2 = $_POST['tanggalAktif2'];
 
-        $namaPt2 = $_POST['namaPt2'];
-        $alamatPjk12 = $_POST['alamatPjk12'];
-        $alamatPjk22 = $_POST['alamatPjk22'];
-        $kodeSpm2 = $_POST['kodeSpm2'];
-        $plafonUnit2 = $_POST['plafonUnit2'];
+
+
 
         $data = array(
-            'n_cabang' => $namaCabang2,
-            'al1_cab' => $alamat1Cabang2,
-            'al2_cab' => $alamat2Cabang2,
-            'al3_cab' => $alamat3Cabang2,
-            'telp' => $nomorTelepon2,
-            'kontak' => $namaKontak2,
-            'n_kacab' => $namaKepalaCabang2,
-            'j_kacab' => $jabatan2,
-            'npwp' => $npwp2,
-            'sk' => $sk2,
-            'tgl_sk' => $tanggalSk2,
-            'nama_fp' => $namaFp2,
-            'lokasi' => $lokasi2,
-            'kode_nomor' => $kodeNomor2,
+            
+            'n_mobil' => $namaMobil,
+            'k_cabang' => $namaUnit,
+            'tahun' => $tahun,
+            'stnk' => $tanggalStnk,
+            'kir_mobil' => $tanggalKirim
 
-            'tgl_aktif' => $tanggalAktif2,
-
-            'n_pt' => $namaPt2,
-            'al_pjk' => $alamatPjk12,
-            'al_pjk2' => $alamatPjk22,
-            'kode_spm' => $kodeSpm2,
-            'plaf_unit' => $plafonUnit2
 
         );
-        $this->Cabang_model->edit_cabang($id, $data);
+        $this->Mobil_model->edit_mobil($platNomor, $data);
         $query = $this->db->affected_rows();
 
 
@@ -277,4 +228,29 @@ class Mobil extends CI_Controller
             echo json_encode($data);
         }
     }
+
+
+    //penting kalo mau nanti dibutuhin
+    // function get_supir(){
+        
+    //     $unitMobil = $this->input->post("unitMobil");
+        
+    //  //   if($unitMobil != ""){
+    //         $supir = $this->db->query("select * from supir where kd_unit = '$unitMobil' order by k_sales asc")->result();
+    //   //  }
+        
+    //     if(empty($supir)){
+    //         echo '<option value="">Belum ada data</option>';
+    //     }else{
+    //        // echo '<option value="">Nama Supir</option>';
+    //     }
+        
+    //     foreach ($supir as $u){
+    //         echo '<option value="'.$u->k_sales.'">'.$u->n_sales.' ('.$u->kd_unit.')</option>';
+    //     }
+        
+    // }
+
+
+
 }

@@ -93,6 +93,8 @@ $route['mobil/tambah-mobil'] = 'Mobil/tambahMobil';
 $route['mobil/tabel-mobil'] = 'Mobil/ajax_list';
 $route['mobil/hapus-mobil'] = 'Mobil/hapus_mobil';
 $route['mobil/edit-mobil'] = 'Mobil/edit_mobil';
+$route['mobil/unit-mobil'] = 'Mobil/get_unit_mobil';
+$route['mobil/supir'] = 'Mobil/get_supir';
 
 
 
@@ -101,3 +103,5 @@ $route['supir/tambah-supir'] = 'Supir/tambahSupir';
 $route['supir/tabel-supir'] = 'Supir/ajax_list';
 $route['supir/hapus-supir'] = 'Supir/hapus_supir';
 $route['supir/edit-supir'] = 'Supir/edit_supir';
+$route['supir/unit-supir'] = 'Supir/get_unit_supir';
+

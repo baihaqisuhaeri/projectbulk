@@ -29,19 +29,19 @@ $(document).ready(function () {
       {
         extend: "excelHtml5",
         exportOptions: {
-          columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+          columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
         },
       },
       {
         extend: "print",
         exportOptions: {
-          columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+          columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
         },
       },
       {
         extend: "pdfHtml5",
         exportOptions: {
-          columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+          columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
         },
       },
       "colvis",
@@ -271,19 +271,19 @@ $(document).on("change", "#bulan_aktif", function () {
       {
         extend: "excelHtml5",
         exportOptions: {
-          columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+          columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
         },
       },
       {
         extend: "print",
         exportOptions: {
-          columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+          columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
         },
       },
       {
         extend: "pdfHtml5",
         exportOptions: {
-          columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+          columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
         },
       },
       "colvis",
@@ -461,4 +461,8 @@ $(document).on("submit", "#edit_barang", function (e) {
 //     buttons: ["copy", "csv", "excel", "pdf", "print"],
 //   });
 // });
+$(".select2").select2({ width: "100%" });
 
+$(".select2bs4").select2({
+  theme: "bootstrap4",
+});

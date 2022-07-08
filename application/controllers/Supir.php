@@ -51,7 +51,7 @@ class Supir extends CI_Controller
 
 
         );
-        $this->Supir_model->tambah_supir('dbm003', $data);
+        $this->Supir_model->tambah_supir('supir', $data);
         $query = $this->db->affected_rows();
 
 
@@ -73,6 +73,29 @@ class Supir extends CI_Controller
         }
     }
 
+    function get_unit_supir()
+    {
+
+        $daftar_unit = "";
+        $unit_akses = $this->db->query("select * from hak_akses where nama_user = '" . $_SESSION['nama'] . "' ")->result();
+        foreach ($unit_akses as $unit) {
+            $daftar_unit .= " OR kd_unit = '$unit->kode_unit'";
+        }
+        $daftar_unit = substr($daftar_unit, 4);
+
+        //$unit = $this->db->query("select * from tb_unit where (".$daftar_unit.") order by nm_unit asc ")->result();        
+        $unit = $this->db->query("select * from tb_unit order by nm_unit desc ")->result();
+
+        if (empty($unit_akses)) {
+            echo '<option value="kosong">Belum ada data</option>';
+        } else {
+            echo '<option value="">Pilih Unit</option>';
+        }
+
+        foreach ($unit_akses as $u) {
+            echo '<option value="' . $u->kode_unit . '">' . $u->nama_unit . '</option>';
+        }
+    }
 
     public function ajax_list()
     {
@@ -95,36 +118,19 @@ class Supir extends CI_Controller
             $row = array();
 
             $row[] = $no;
-            // $row[] = $p->k_cabang;
-            $row[] = $p->n_cabang;
-            $row[] = $p->al1_cab;
-            $row[] = $p->al2_cab;
-            $row[] = $p->al3_cab;
-            $row[] = $p->telp;
-            $row[] = $p->kontak;
-            $row[] = $p->n_kacab;
-            $row[] = $p->j_kacab;
-            $row[] = $p->npwp;
-            $row[] = $p->sk;
-            $row[] = $p->tgl_sk;
-            $row[] = $p->nama_fp;
-            $row[] = $p->lokasi;
-            $row[] = $p->kode_nomor;
-
-            $row[] = $p->tgl_aktif;
-            $row[] = $p->ttpbln;
-            $row[] = $p->n_pt;
-            $row[] = $p->al_pjk;
-            $row[] = $p->al_pjk2;
-            $row[] = $p->kode_spm;
-            $row[] = $p->plaf_unit;
+           
+            $row[] = $p->n_sales;
+            $row[] = $p->k_sales;
+            $row[] = $p->kd_unit;
+      
+            
 
 
 
 
 
             // $row[] = '<a href="javascript:void(0);" class="fas fa-edit" onclick="get_data_po('.$p->id.')" title="Ubah data PO" style="color:black;"></a> | <a href="javascript:void(0);" class="fas fa-trash" onclick="hapus_po('.$p->id.')" title="Hapus data PO" style="color:black;"></a>';
-            $row[] = '<a href="#!" class="fas fa-edit edit_cabang" data-id="' . $p->id . '"  title="Ubah data PO" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteCabang" data-id="' . $p->id . '" title="Hapus data PO" style="color:black;"></a>';
+            $row[] = '<a href="#!" class="fas fa-edit edit_supir" data-id="' . $p->id . '"  title="Ubah data PO" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteSupir" data-id="' . $p->id . '" title="Hapus data PO" style="color:black;"></a>';
 
 
 
@@ -133,8 +139,8 @@ class Supir extends CI_Controller
 
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->Cabang_model->count_all(),
-            "recordsFiltered" => $this->Cabang_model->count_filtered(),
+            "recordsTotal" => $this->Supir_model->count_all(),
+            "recordsFiltered" => $this->Supir_model->count_filtered(),
             "data" => $data,
         );
         //output to json format
@@ -143,11 +149,11 @@ class Supir extends CI_Controller
 
 
 
-    function hapus_cabang()
+    function hapus_supir()
     {
         $id = $_POST['id'];
 
-        $this->Cabang_model->hapus_cabang($id);
+        $this->Supir_model->hapus_supir($id);
         $query = $this->db->affected_rows();
         if ($query == true) {
             $data = array(
@@ -167,58 +173,22 @@ class Supir extends CI_Controller
     }
 
 
-    function edit_cabang()
+    function edit_supir()
     {
         $id = $_POST['id'];
-        $namaCabang2 = $_POST['namaCabang2'];
-        $alamat1Cabang2 = $_POST['alamat1Cabang2'];
-        $alamat2Cabang2 = $_POST['alamat2Cabang2'];
-        $alamat3Cabang2 = $_POST['alamat3Cabang2'];
-        $nomorTelepon2 = $_POST['nomorTelepon2'];
-        $namaKontak2 = $_POST['namaKontak2'];
-        $namaKepalaCabang2 = $_POST['namaKepalaCabang2'];
-        $jabatan2 = $_POST['jabatan2'];
-        $npwp2 = $_POST['npwp2'];
-        $sk2 = $_POST['sk2'];
-        $tanggalSk2 = $_POST['tanggalSk2'];
-        $namaFp2 = $_POST['namaFp2'];
-        $lokasi2 = $_POST['lokasi2'];
-        $kodeNomor2 = $_POST['kodeNomor2'];
-
-        $tanggalAktif2 = $_POST['tanggalAktif2'];
-
-        $namaPt2 = $_POST['namaPt2'];
-        $alamatPjk12 = $_POST['alamatPjk12'];
-        $alamatPjk22 = $_POST['alamatPjk22'];
-        $kodeSpm2 = $_POST['kodeSpm2'];
-        $plafonUnit2 = $_POST['plafonUnit2'];
+        $namaUnit2 = $_POST['namaUnit2'];
+        $namaSupir2 = $_POST['namaSupir2'];
+        
+        
 
         $data = array(
-            'n_cabang' => $namaCabang2,
-            'al1_cab' => $alamat1Cabang2,
-            'al2_cab' => $alamat2Cabang2,
-            'al3_cab' => $alamat3Cabang2,
-            'telp' => $nomorTelepon2,
-            'kontak' => $namaKontak2,
-            'n_kacab' => $namaKepalaCabang2,
-            'j_kacab' => $jabatan2,
-            'npwp' => $npwp2,
-            'sk' => $sk2,
-            'tgl_sk' => $tanggalSk2,
-            'nama_fp' => $namaFp2,
-            'lokasi' => $lokasi2,
-            'kode_nomor' => $kodeNomor2,
-
-            'tgl_aktif' => $tanggalAktif2,
-
-            'n_pt' => $namaPt2,
-            'al_pjk' => $alamatPjk12,
-            'al_pjk2' => $alamatPjk22,
-            'kode_spm' => $kodeSpm2,
-            'plaf_unit' => $plafonUnit2
+           
+            'n_sales' => $namaSupir2,
+            'kd_unit' => $namaUnit2,
+            
 
         );
-        $this->Cabang_model->edit_cabang($id, $data);
+        $this->Supir_model->edit_supir($id, $data);
         $query = $this->db->affected_rows();
 
 
@@ -241,4 +211,10 @@ class Supir extends CI_Controller
             echo json_encode($data);
         }
     }
+
+
+
+    
+
+
 }

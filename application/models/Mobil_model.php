@@ -2,21 +2,21 @@
 
 class Mobil_model extends CI_Model
 {
-    public function tambah_cabang($table, $data)
+    public function tambah_mobil($table, $data)
     {
         $this->db->insert($table, $data);
     }
 
-    var $table = 'dbm003';
-    var $column_order = array(null, 'id', 'k_cabang', 'n_cabang', 'al1_cab', 'al2_cab', 'al3_cab', 'telp', 'kontak', 'n_kacab', 'j_kacab', 'npwp', 'sk', 'tgl_sk', 'nama_fp', 'lokasi', 'kode_nomor', 'tgl_aktif', 'ttpbln', 'n_pt', 'al_pjk', 'al_pjk2', 'kode_spm', 'plaf_unit'); //set column field database for datatable orderable
-    var $column_search = array('id', 'k_cabang', 'n_cabang', 'al1_cab', 'al2_cab', 'al3_cab', 'telp', 'kontak', 'n_kacab', 'j_kacab', 'npwp', 'sk', 'tgl_sk', 'nama_fp', 'lokasi', 'kode_nomor', 'tgl_aktif', 'ttpbln', 'n_pt', 'al_pjk', 'al_pjk2', 'kode_spm', 'plaf_unit'); //set column field database for datatable searchable
-    var $order = array('k_cabang' => 'desc'); // default order
-    public function get_data_tabel_barang()
+    var $table = 'mobil';
+    var $column_order = array(null, 'k_mobil', 'n_mobil', 'k_cabang', 'tahun', 'stnk', 'kir_mobil'); //set column field database for datatable orderable
+    var $column_search = array('k_mobil', 'n_mobil', 'k_cabang', 'tahun', 'stnk', 'kir_mobil'); //set column field database for datatable searchable
+    var $order = array('n_mobil' => 'desc'); // default order
+    public function get_data_tabel_mobil()
     {
 
 
         $this->db->select('*');
-        $this->db->order_by('k_cabang asc');
+        $this->db->order_by('n_mobil asc');
 
         $this->db->from($this->table);
 
@@ -52,7 +52,7 @@ class Mobil_model extends CI_Model
 
     public function get_datatables()
     {
-        $this->get_data_tabel_barang();
+        $this->get_data_tabel_mobil();
         if ($_POST['length'] != -1)
             $this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
@@ -61,7 +61,7 @@ class Mobil_model extends CI_Model
 
     public function count_filtered()
     {
-        $this->get_data_tabel_barang();
+        $this->get_data_tabel_mobil();
         $query = $this->db->get();
         return $query->num_rows();
     }
@@ -73,15 +73,15 @@ class Mobil_model extends CI_Model
         return $this->db->count_all_results();
     }
 
-    public function hapus_cabang($id)
+    public function hapus_mobil($platNomor)
     {
-        $this->db->where('id', $id);
+        $this->db->where('k_mobil', $platNomor);
         $this->db->delete($this->table);
     }
 
-    public function edit_cabang($id, $data)
+    public function edit_mobil($platNomor, $data)
     {
-        $this->db->where('id', $id);
-        $this->db->update('dbm003', $data);
+        $this->db->where('k_mobil', $platNomor);
+        $this->db->update('mobil', $data);
     }
 }

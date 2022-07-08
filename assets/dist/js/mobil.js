@@ -2,7 +2,7 @@ $("#bagian_2_edit").hide();
 var table;
 $(document).ready(function () {
   //datatables
-  table = $("#tabel_supir").DataTable({
+  table = $("#tabel_mobil").DataTable({
     scrollX: true,
     processing: true, //Feature control the processing indicator.
     serverSide: true, //Feature control DataTables' server-side processing mode.
@@ -10,7 +10,7 @@ $(document).ready(function () {
 
     // Load data for the table's content from an Ajax source
     ajax: {
-      url: "supir/tabel-supir",
+      url: "mobil/tabel-mobil",
       type: "POST",
     },
 
@@ -54,7 +54,7 @@ $(document).ready(function () {
     ],
   });
 
-  $("#tabel_supir tbody").on("click", ".edit_supir", function () {
+  $("#tabel_mobil tbody").on("click", ".edit_mobil", function () {
     var data = table.row($(this).parents("tr")).data();
     var id = $(this).data("id");
     //var unitBarang = $("#unitBarang :selected").text();
@@ -67,60 +67,76 @@ $(document).ready(function () {
     );
 
     $("#bagian_2_edit").slideDown("slow");
-    get_unit_supir2();
-    //$("#unitSupir2").val(data[1]);
-    $("#nama_supir2").val(data[1]);
+    get_unit_mobil2();
+    $("#plat_nomor2").val(data[1]);
+    $("#nama_mobil2").val(data[2]);
+    $("#tahun2").val(data[3]);
+    $("#unitBarang2").val(data[4]);
+    $("#tanggal_stnk2").val(data[5]);
+    $("#tanggal_kirim2").val(data[6]);
 
     $("#btn_edit").val(id);
   });
   $("#bagian_2_edit").hide();
 });
 
-get_unit_supir();
+get_unit_mobil();
 
-function get_unit_supir() {
+function get_unit_mobil() {
   $.ajax({
-    url: "supir/unit-supir",
+    url: "mobil/unit-mobil",
     success: function (data) {
-      $("#unitSupir").html(data);
+      $("#unitMobil").html(data);
       //$("#unit_spm").html(data);
     },
   });
 }
 
-function get_unit_supir2() {
+function get_unit_mobil2() {
   $.ajax({
-    url: "supir/unit-supir",
+    url: "mobil/unit-mobil",
     success: function (data) {
-      $("#unitSupir2").html(data);
+      $("#unitMobil2").html(data);
       //$("#unit_spm").html(data);
     },
   });
 }
 // function tambahBarang() {
-$(document).on("submit", "#tambahSupir", function (e) {
+$(document).on("submit", "#tambahMobil", function (e) {
   e.preventDefault();
 
-  var namaUnit = $("#unitSupir").val();
-  var namaSupir = $("#nama_supir").val();
+  var namaUnit = $("#unitMobil").val();
+  var namaMobil = $("#nama_mobil").val();
+  var platNomor = $("#plat_nomor").val();
+  var tahun = $("#tahun").val();
+  var tanggalStnk = $("#tanggal_stnk").val();
+  var tanggalKirim = $("#tanggal_kirim").val();
 
-  if (namaUnit != "" && namaSupir != "") {
+  if (namaUnit != "" && namaMobil != "") {
     $.ajax({
-      url: "supir/tambah-supir",
+      url: "mobil/tambah-mobil",
       type: "post",
       data: {
         namaUnit: namaUnit,
-        namaSupir: namaSupir,
+        namaMobil: namaMobil,
+        platNomor: platNomor,
+        tahun: tahun,
+        tanggalStnk: tanggalStnk,
+        tanggalKirim: tanggalKirim,
       },
       success: function (data) {
         var json = JSON.parse(data);
         var status = json.status;
         if (status == "true") {
-          mytable = $("#tabel_supir").DataTable();
+          mytable = $("#tabel_mobil").DataTable();
           mytable.draw();
-          Swal.fire("Berhasil!", "Supir berhasil ditambahkan!", "success");
-          $("#unitSupir").val("");
-          $("#nama_supir").val("");
+          Swal.fire("Berhasil!", "Mobil berhasil ditambahkan!", "success");
+          $("#unitMobil").val("");
+          $("#nama_mobil").val("");
+          $("#plat_nomor").val("");
+          $("#tahun").val("");
+          $("#tanggal_stnk").val("");
+          $("#tanggal_kirim").val("");
         } else {
           alert("failed");
         }
@@ -131,14 +147,14 @@ $(document).on("submit", "#tambahSupir", function (e) {
   }
 });
 //}
-$(document).on("click", ".deleteSupir", function (event) {
-  var table = $("#tabel_supir").DataTable();
+$(document).on("click", ".deleteMobil", function (event) {
+  var table = $("#tabel_mobil").DataTable();
   event.preventDefault();
   var id = $(this).data("id");
 
   Swal.fire({
-    title: "Apakah anda yakin ingin menghapus supir ini ? ",
-    text: "Supir tidak dapat dikembalikan setelah dihapus!",
+    title: "Apakah anda yakin ingin menghapus mobil ini ? ",
+    text: "Mobil tidak dapat dikembalikan setelah dihapus!",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
@@ -148,7 +164,7 @@ $(document).on("click", ".deleteSupir", function (event) {
   }).then((result) => {
     if (result.dismiss !== "cancel") {
       $.ajax({
-        url: "supir/hapus-supir",
+        url: "mobil/hapus-mobil",
         data: {
           id: id,
         },
@@ -157,7 +173,7 @@ $(document).on("click", ".deleteSupir", function (event) {
           var json = JSON.parse(data);
           status = json.status;
           if (status == "success") {
-            mytable = $("#tabel_supir").DataTable();
+            mytable = $("#tabel_mobil").DataTable();
             mytable.draw();
 
             $("#" + id)
@@ -169,7 +185,7 @@ $(document).on("click", ".deleteSupir", function (event) {
           }
         },
       });
-      Swal.fire("Berhasil!", "Supir berhasil dihapus!", "success");
+      Swal.fire("Berhasil!", "Mobil berhasil dihapus!", "success");
     } else {
       return null;
       // Swal.fire("Berhasil!", "Barang berhasil dihapus!", "success");
@@ -177,33 +193,41 @@ $(document).on("click", ".deleteSupir", function (event) {
   });
 });
 
-$(document).on("submit", "#edit_supir", function (e) {
+$(document).on("submit", "#edit_mobil", function (e) {
   e.preventDefault();
   var id = $("#btn_edit").val();
-  var namaUnit2 = $("#unitSupir2").val();
-  var namaSupir2 = $("#nama_supir2").val();
+  var namaUnit2 = $("#unitMobil2").val();
+  var namaMobil2 = $("#nama_mobil2").val();
+  var platNomor2 = $("#plat_nomor2").val();
+  var tahun2 = $("#tahun2").val();
+  var tanggalStnk2 = $("#tanggal_stnk2").val();
+  var tanggalKirim2 = $("#tanggal_kirim2").val();
 
-  if (namaUnit2 != "" && namaSupir2 != "") {
+  if (namaUnit2 != "" && namaMobil2 != "") {
     $.ajax({
-      url: "supir/edit-supir",
+      url: "mobil/edit-mobil",
       type: "post",
       data: {
         id: id,
         namaUnit2: namaUnit2,
-        namaSupir2: namaSupir2,
+        namaMobil2: namaMobil2,
+        platNomor2: platNomor2,
+        tahun2: tahun2,
+        tanggalStnk2: tanggalStnk2,
+        tanggalKirim2: tanggalKirim2,
       },
       success: function (data) {
         var json = JSON.parse(data);
         var status = json.status;
         if (status == "true") {
-          mytable = $("#tabel_supir").DataTable();
+          mytable = $("#tabel_mobil").DataTable();
           mytable.draw();
-          Swal.fire("Berhasil!", "Supir berhasil diubah!", "success");
+          Swal.fire("Berhasil!", "Mobil berhasil diubah!", "success");
           $("#bagian_2_edit").hide();
           // $("#unitBarang").val("Pilih Unit");
           // $("#tabel_barang").DataTable().ajax.reload();
         } else {
-          Swal.fire("Gagal", "Supir gagal diubah, mohon coba kembali", "error");
+          Swal.fire("Gagal", "Mobil gagal diubah, mohon coba kembali", "error");
         }
       },
     });
@@ -211,6 +235,22 @@ $(document).on("submit", "#edit_supir", function (e) {
     alert("Ada data yang masih kosong");
   }
 });
+
+// $("#unitMobil").on("change", function () {
+//   get_supir();
+// });
+
+// function get_supir() {
+//   var unitMobil = $("#unitMobil").val();
+//   $.ajax({
+//     url: "mobil/supir",
+//     type: "post",
+//     data: { unitMobil: unitMobil },
+//     success: function (data) {
+//       $("#nama_supir").html(data);
+//     },
+//   });
+// }
 
 $(".select2").select2({ width: "100%" });
 

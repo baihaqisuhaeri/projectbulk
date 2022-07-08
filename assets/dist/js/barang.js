@@ -170,6 +170,7 @@ $(document).on("submit", "#tambahBarang", function (e) {
           mytable.draw();
           //  alert("Barang berhasil ditambahkan");
           Swal.fire("Berhasil!", "Barang berhasil ditambahkan!", "success");
+          $("#unitBarang").val("").change();
           $("#nama_barang").val("");
           $("#harga_pokok").val("");
           $("#harga_jual").val("");
@@ -446,9 +447,10 @@ $(document).on("submit", "#edit_barang", function (e) {
           // alert("Barang gagal diubah");
           Swal.fire(
             "Gagal",
-            "Barang gagal diubah, mohon coba kembali",
+            "Tidak ada perubahan data!",
             "error"
           );
+          $("#bagian_2_edit").hide();
         }
       },
     });

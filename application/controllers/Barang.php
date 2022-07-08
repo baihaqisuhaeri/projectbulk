@@ -136,7 +136,7 @@ class Barang extends CI_Controller
 
         $query = $this->db->query("SELECT AUTO_INCREMENT
          FROM information_schema.TABLES
-         WHERE TABLE_SCHEMA = 'itjticom_spm_bulk'
+         WHERE TABLE_SCHEMA = 'itjticom_input_cust'
          AND TABLE_NAME = 'dbm002'");
         $hasil = $query->result();
 

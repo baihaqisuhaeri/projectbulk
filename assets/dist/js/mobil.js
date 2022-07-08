@@ -105,6 +105,14 @@ function get_unit_mobil2() {
 $(document).on("submit", "#tambahMobil", function (e) {
   e.preventDefault();
 
+  $("#error_unit_mobil").html("");
+  $("#error_nama_mobil").html("");
+  $("#error_plat_nomor").html("");
+  $("#error_tahun").html("");
+  $("#error_tanggal_stnk").html("");
+  $("#error_tanggal_kirim").html("");
+ 
+
   var namaUnit = $("#unitMobil").val();
   var namaMobil = $("#nama_mobil").val();
   var platNomor = $("#plat_nomor").val();
@@ -112,7 +120,37 @@ $(document).on("submit", "#tambahMobil", function (e) {
   var tanggalStnk = $("#tanggal_stnk").val();
   var tanggalKirim = $("#tanggal_kirim").val();
 
-  if (namaUnit != "" && namaMobil != "") {
+
+  var err = 0;
+
+  if (namaUnit == "") {
+    $("#error_unit_mobil").html("Unit tidak boleh kosong!");
+    err += 1;
+  }
+  if (namaMobil == "") {
+    $("#error_nama_mobil").html("Nama mobil tidak boleh kosong!");
+    err += 1;
+  }
+  if (platNomor == "") {
+    $("#error_plat_nomor").html("Plat nomor tidak boleh kosong!");
+    err += 1;
+  }
+  if (tahun == "") {
+    $("#error_tahun").html("Tahun tidak boleh kosong!");
+    err += 1;
+  }
+  if (tanggalStnk == "") {
+    $("#error_tanggal_stnk").html("Tanggal STNK tidak boleh kosong!");
+    err += 1;
+  }
+  if (tanggalKirim == "") {
+    $("#error_tanggal_kirim").html("Tanggal kirim tidak boleh kosong!");
+    err += 1;
+  }
+
+
+
+  if (err == 0) {
     $.ajax({
       url: "mobil/tambah-mobil",
       type: "post",
@@ -131,7 +169,7 @@ $(document).on("submit", "#tambahMobil", function (e) {
           mytable = $("#tabel_mobil").DataTable();
           mytable.draw();
           Swal.fire("Berhasil!", "Mobil berhasil ditambahkan!", "success");
-          $("#unitMobil").val("");
+          $("#unitMobil").val("").change();
           $("#nama_mobil").val("");
           $("#plat_nomor").val("");
           $("#tahun").val("");
@@ -142,9 +180,7 @@ $(document).on("submit", "#tambahMobil", function (e) {
         }
       },
     });
-  } else {
-    alert("Ada data yang masih kosong");
-  }
+  } 
 });
 //}
 $(document).on("click", ".deleteMobil", function (event) {
@@ -195,6 +231,17 @@ $(document).on("click", ".deleteMobil", function (event) {
 
 $(document).on("submit", "#edit_mobil", function (e) {
   e.preventDefault();
+
+  $("#error_unit_mobil2").html("");
+  $("#error_nama_mobil2").html("");
+  $("#error_plat_nomor2").html("");
+  $("#error_tahun2").html("");
+  $("#error_tanggal_stnk2").html("");
+  $("#error_tanggal_kirim2").html("");
+
+
+
+
   var id = $("#btn_edit").val();
   var namaUnit2 = $("#unitMobil2").val();
   var namaMobil2 = $("#nama_mobil2").val();
@@ -203,7 +250,36 @@ $(document).on("submit", "#edit_mobil", function (e) {
   var tanggalStnk2 = $("#tanggal_stnk2").val();
   var tanggalKirim2 = $("#tanggal_kirim2").val();
 
-  if (namaUnit2 != "" && namaMobil2 != "") {
+
+
+  var err = 0;
+
+  if (namaUnit2 == "") {
+    $("#error_unit_mobil2").html("Unit tidak boleh kosong!");
+    err += 1;
+  }
+  if (namaMobil2 == "") {
+    $("#error_nama_mobil2").html("Nama mobil tidak boleh kosong!");
+    err += 1;
+  }
+  if (platNomor2 == "") {
+    $("#error_plat_nomor2").html("Plat nomor tidak boleh kosong!");
+    err += 1;
+  }
+  if (tahun2 == "") {
+    $("#error_tahun2").html("Tahun tidak boleh kosong!");
+    err += 1;
+  }
+  if (tanggalStnk2 == "") {
+    $("#error_tanggal_stnk2").html("Tanggal STNK tidak boleh kosong!");
+    err += 1;
+  }
+  if (tanggalKirim2 == "") {
+    $("#error_tanggal_kirim2").html("Tanggal kirim tidak boleh kosong!");
+    err += 1;
+  }
+
+  if (err == 0) {
     $.ajax({
       url: "mobil/edit-mobil",
       type: "post",
@@ -223,17 +299,23 @@ $(document).on("submit", "#edit_mobil", function (e) {
           mytable = $("#tabel_mobil").DataTable();
           mytable.draw();
           Swal.fire("Berhasil!", "Mobil berhasil diubah!", "success");
+          $("#unitMobil2").val("").change();
+          $("#nama_mobil2").val("");
+          $("#plat_nomor2").val("");
+          $("#tahun2").val("");
+          $("#tanggal_stnk2").val("");
+          $("#tanggal_kirim2").val("");
           $("#bagian_2_edit").hide();
           // $("#unitBarang").val("Pilih Unit");
           // $("#tabel_barang").DataTable().ajax.reload();
         } else {
-          Swal.fire("Gagal", "Mobil gagal diubah, mohon coba kembali", "error");
+          Swal.fire("Gagal", "Tidak ada perubahan data mobil!", "error");
+          
+          $("#bagian_2_edit").hide();
         }
       },
     });
-  } else {
-    alert("Ada data yang masih kosong");
-  }
+  } 
 });
 
 // $("#unitMobil").on("change", function () {

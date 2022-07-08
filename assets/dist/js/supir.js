@@ -101,10 +101,26 @@ function get_unit_supir2() {
 $(document).on("submit", "#tambahSupir", function (e) {
   e.preventDefault();
 
+  $("#error_unit_supir").html("");
+  $("#error_nama_supir").html("");
+
   var namaUnit = $("#unitSupir").val();
   var namaSupir = $("#nama_supir").val();
 
-  if (namaUnit != "" && namaSupir != "") {
+  var err = 0;
+
+  if (namaUnit == "") {
+    $("#error_unit_supir").html("Unit tidak boleh kosong!");
+    err += 1;
+  }
+  
+
+  if (namaSupir == "") {
+    $("#error_nama_supir").html("Nama supir tidak boleh kosong!");
+    err += 1;
+  }
+
+  if (err == 0) {
     $.ajax({
       url: "supir/tambah-supir",
       type: "post",
@@ -119,16 +135,14 @@ $(document).on("submit", "#tambahSupir", function (e) {
           mytable = $("#tabel_supir").DataTable();
           mytable.draw();
           Swal.fire("Berhasil!", "Supir berhasil ditambahkan!", "success");
-          $("#unitSupir").val("");
+          $("#unitSupir").val("").change();
           $("#nama_supir").val("");
         } else {
           alert("failed");
         }
       },
     });
-  } else {
-    alert("Ada data yang masih kosong");
-  }
+  } 
 });
 //}
 $(document).on("click", ".deleteSupir", function (event) {
@@ -179,11 +193,29 @@ $(document).on("click", ".deleteSupir", function (event) {
 
 $(document).on("submit", "#edit_supir", function (e) {
   e.preventDefault();
+
+  $("#error_unit_supir2").html("");
+  $("#error_nama_supir2").html("");
+
+
   var id = $("#btn_edit").val();
   var namaUnit2 = $("#unitSupir2").val();
   var namaSupir2 = $("#nama_supir2").val();
 
-  if (namaUnit2 != "" && namaSupir2 != "") {
+  var err = 0;
+
+  if (namaUnit2 == "") {
+    $("#error_unit_supir2").html("Unit tidak boleh kosong!");
+    err += 1;
+  }
+  
+
+  if (namaSupir2 == "") {
+    $("#error_nama_supir2").html("Nama supir tidak boleh kosong!");
+    err += 1;
+  }
+
+  if (err == 0) {
     $.ajax({
       url: "supir/edit-supir",
       type: "post",
@@ -204,12 +236,11 @@ $(document).on("submit", "#edit_supir", function (e) {
           // $("#tabel_barang").DataTable().ajax.reload();
         } else {
           Swal.fire("Gagal", "Supir gagal diubah, mohon coba kembali", "error");
+          $("#bagian_2_edit").hide();
         }
       },
     });
-  } else {
-    alert("Ada data yang masih kosong");
-  }
+  } 
 });
 
 $(".select2").select2({ width: "100%" });

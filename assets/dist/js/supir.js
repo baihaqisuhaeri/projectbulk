@@ -100,6 +100,7 @@ function get_unit_supir2() {
 // function tambahBarang() {
 $(document).on("submit", "#tambahSupir", function (e) {
   e.preventDefault();
+  
 
   $("#error_unit_supir").html("");
   $("#error_nama_supir").html("");
@@ -121,6 +122,13 @@ $(document).on("submit", "#tambahSupir", function (e) {
   }
 
   if (err == 0) {
+    $('#modal_konfirmasi').modal('show');
+    $(document).on("click", "#btn_konfirmasi", function (event) {
+    
+      $('#modal_konfirmasi').modal('hide');
+    
+
+    
     $.ajax({
       url: "supir/tambah-supir",
       type: "post",
@@ -142,7 +150,10 @@ $(document).on("submit", "#tambahSupir", function (e) {
         }
       },
     });
+  });
+
   } 
+
 });
 //}
 $(document).on("click", ".deleteSupir", function (event) {
@@ -248,3 +259,5 @@ $(".select2").select2({ width: "100%" });
 $(".select2bs4").select2({
   theme: "bootstrap4",
 });
+
+

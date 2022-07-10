@@ -3,6 +3,7 @@
 
 
 <!-- <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed"> -->
+
 <body class="hold-transition sidebar-mini sidebar-collapse">
     <div class="wrapper">
 
@@ -17,7 +18,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Surat Perintah Muat - Bulk | Mobil</h1>
+                            <h1 class="m-0 text-dark">Bulk | Mobil</h1>
 
                         </div><!-- /.col -->
                         <div class="col-sm-6">
@@ -91,21 +92,21 @@
                                                             <span class="text-danger" id="error_nama_mobil"></span>
 
                                                         </div>
-    
+
                                                         <div class="form-group col-lg-4">
                                                             <label>Plat Nomor<span style="color: red;">*</span></label>
                                                             <input class="form-control" type="text" name="plat_nomor" id="plat_nomor" placeholder="Plat Nomor">
                                                             <span class="text-danger" id="error_plat_nomor"></span>
 
                                                         </div>
-                                                        
+
 
                                                     </div>
 
 
                                                     <div class="row">
 
-                                                 
+
 
                                                         <div class="form-group col-lg-4">
                                                             <label>Tahun<span style="color: red;">*</span></label>
@@ -188,56 +189,56 @@
                                                 <!-- CAF0F8 F9DFDC -->
 
                                                 <div class="row">
-                                                        <div class="form-group col-lg-4">
-                                                            <label>Nama Unit<span style="color: red;">*</span></label>
-                                                            <select class="form-control select2" id="unitMobil2" name="unitMobil2">
-                                                            </select>
-                                                            <span class="text-danger" id="error_unit_mobil2"></span>
+                                                    <div class="form-group col-lg-4">
+                                                        <label>Nama Unit<span style="color: red;">*</span></label>
+                                                        <select class="form-control select2" id="unitMobil2" name="unitMobil2">
+                                                        </select>
+                                                        <span class="text-danger" id="error_unit_mobil2"></span>
 
-                                                        </div>
+                                                    </div>
 
-                                                        <div class="form-group col-lg-4">
-                                                            <label>Nama Mobil<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="nama_mobil2" id="nama_mobil2" placeholder="Nama Mobil">
-                                                            <span class="text-danger" id="error_nama_mobil2"></span>
+                                                    <div class="form-group col-lg-4">
+                                                        <label>Nama Mobil<span style="color: red;">*</span></label>
+                                                        <input class="form-control" type="text" name="nama_mobil2" id="nama_mobil2" placeholder="Nama Mobil">
+                                                        <span class="text-danger" id="error_nama_mobil2"></span>
 
-                                                        </div>
-    
-                                                        <div class="form-group col-lg-4">
-                                                            <label>Plat Nomor<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="plat_nomor2" id="plat_nomor2" placeholder="Plat Nomor">
-                                                            <span class="text-danger" id="error_plat_nomor2"></span>
+                                                    </div>
 
-                                                        </div>
-                                                        
+                                                    <div class="form-group col-lg-4">
+                                                        <label>Plat Nomor<span style="color: red;">*</span></label>
+                                                        <input class="form-control" type="text" name="plat_nomor2" id="plat_nomor2" placeholder="Plat Nomor">
+                                                        <span class="text-danger" id="error_plat_nomor2"></span>
 
                                                     </div>
 
 
-                                                    <div class="row">
+                                                </div>
 
-                                                 
 
-                                                        <div class="form-group col-lg-4">
-                                                            <label>Tahun<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="tahun2" id="tahun2" placeholder="Tahun">
-                                                            <span class="text-danger" id="error_tahun2"></span>
+                                                <div class="row">
 
-                                                        </div>
 
-                                                        <div class="form-group col-lg-2">
-                                                            <label>Tanggal STNK<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="date" name="tanggal_stnk2" id="tanggal_stnk2" placeholder="Tanggal STNK">
-                                                            <span class="text-danger" id="error_tanggal_stnk2"></span>
-                                                        </div>
 
-                                                        <div class="form-group col-lg-2">
-                                                            <label>Tanggal Kirim<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="date" name="tanggal_kirim2" id="tanggal_kirim2" placeholder="Tanggal Kirim">
-                                                            <span class="text-danger" id="error_tanggal_kirim2"></span>
-                                                        </div>
+                                                    <div class="form-group col-lg-4">
+                                                        <label>Tahun<span style="color: red;">*</span></label>
+                                                        <input class="form-control" type="text" name="tahun2" id="tahun2" placeholder="Tahun">
+                                                        <span class="text-danger" id="error_tahun2"></span>
 
                                                     </div>
+
+                                                    <div class="form-group col-lg-2">
+                                                        <label>Tanggal STNK<span style="color: red;">*</span></label>
+                                                        <input class="form-control" type="date" name="tanggal_stnk2" id="tanggal_stnk2" placeholder="Tanggal STNK">
+                                                        <span class="text-danger" id="error_tanggal_stnk2"></span>
+                                                    </div>
+
+                                                    <div class="form-group col-lg-2">
+                                                        <label>Tanggal Kirim<span style="color: red;">*</span></label>
+                                                        <input class="form-control" type="date" name="tanggal_kirim2" id="tanggal_kirim2" placeholder="Tanggal Kirim">
+                                                        <span class="text-danger" id="error_tanggal_kirim2"></span>
+                                                    </div>
+
+                                                </div>
 
 
 
@@ -314,7 +315,7 @@
 
     <script src="<?php echo base_url(); ?>assets/dist/js/mobil.js"></script>
 
-    
+
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>

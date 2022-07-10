@@ -4,6 +4,7 @@
 
 
 <!-- <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed"> -->
+
 <body class="hold-transition sidebar-mini sidebar-collapse">
     <div class="wrapper">
 
@@ -18,7 +19,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Surat Perintah Muat - Bulk | Supir</h1>
+                            <h1 class="m-0 text-dark">Bulk | Supir</h1>
 
                         </div><!-- /.col -->
                         <div class="col-sm-6">
@@ -244,7 +245,7 @@
 
     <script src="<?php echo base_url(); ?>assets/dist/js/supir.js"></script>
 
-    
+
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>

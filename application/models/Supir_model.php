@@ -16,7 +16,7 @@ class Supir_model extends CI_Model
 
 
         $nama = $_SESSION['nama'];
-        $this->db->select('*');
+        $this->db->select('*, supir.id as id');
         $this->db->join('hak_akses', 'supir.kd_unit = hak_akses.kode_unit');
         $this->db->where('hak_akses.nama_user', $nama);
         $this->db->order_by('k_sales asc');

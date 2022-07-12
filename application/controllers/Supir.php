@@ -40,14 +40,32 @@ class Supir extends CI_Controller
         $namaSupir = $_POST['namaSupir'];
 
 
-
+        $query = $this->db->query("SELECT AUTO_INCREMENT
+        FROM information_schema.TABLES
+        WHERE TABLE_SCHEMA = 'itjticom_input_cust'
+        AND TABLE_NAME = 'supir'");
+       $hasil = $query->result();
+       $k_supir = "";
+       $kodeSupir = $hasil[0]->AUTO_INCREMENT;
+       if ($kodeSupir > 0 && $kodeSupir < 10) {
+        $k_supir =  "0000" . $kodeSupir;
+    } else if ($kodeSupir >= 10 && $kodeSupir < 100) {
+        $k_supir =   "000" . $kodeSupir;
+    } else if ($kodeSupir >= 100 && $kodeSupir < 1000) {
+        $k_supir =   "00" . $kodeSupir;
+    } else if ($kodeSupir >= 1000 && $kodeSupir < 10000) {
+        $k_supir = "0" . $kodeSupir;
+    } else if ($kodeSupir >= 10000 && $kodeSupir < 100000) {
+        $k_supir =  $kodeSupir;
+    }
 
 
 
         $data = array(
-            'k_sales' => "23",
+            'k_sales' => $k_supir,
             'n_sales' => $namaSupir,
-            'kd_unit' => $namaUnit
+            'kd_unit' => $namaUnit,
+            'supir_unik' => $namaUnit . $namaSupir
 
 
         );

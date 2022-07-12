@@ -161,17 +161,11 @@ $(document).on("click", ".deleteSupir", function (event) {
   event.preventDefault();
   var id = $(this).data("id");
 
-  Swal.fire({
-    title: "Apakah anda yakin ingin menghapus supir ini ? ",
-    text: "Supir tidak dapat dikembalikan setelah dihapus!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    cancelButtonText: "cancel",
-    confirmButtonText: "Yes, delete it!",
-  }).then((result) => {
-    if (result.dismiss !== "cancel") {
+  $('#modal_konfirmasi').modal('show');
+    $(document).on("click", "#btn_konfirmasi", function (event) {
+    
+      $('#modal_konfirmasi').modal('hide');
+    
       $.ajax({
         url: "supir/hapus-supir",
         data: {
@@ -195,11 +189,8 @@ $(document).on("click", ".deleteSupir", function (event) {
         },
       });
       Swal.fire("Berhasil!", "Supir berhasil dihapus!", "success");
-    } else {
-      return null;
-      // Swal.fire("Berhasil!", "Barang berhasil dihapus!", "success");
-    }
-  });
+   
+});
 });
 
 $(document).on("submit", "#edit_supir", function (e) {

@@ -44,7 +44,7 @@ class Mobil extends CI_Controller
         $tanggalKirim = $_POST['tanggalKirim'];
 
 
-
+        $mobil_unik = $platNomor ."_". $namaUnit;
 
 
         $data = array(
@@ -53,15 +53,25 @@ class Mobil extends CI_Controller
             'k_cabang' => $namaUnit,
             'tahun' => $tahun,
             'stnk' => $tanggalStnk,
-            'kir_mobil' => $tanggalKirim
+            'kir_mobil' => $tanggalKirim,
+            'mobil_unik' => $mobil_unik
 
 
         );
+
+        if ($this->Mobil_model->check($mobil_unik)) {
+            $data = array(
+                'status' => 'false',
+
+            );
+            echo json_encode($data);
+        }else{
+            
         $this->Mobil_model->tambah_mobil('mobil', $data);
         $query = $this->db->affected_rows();
 
 
-        if ($query) {
+        // if ($query) {
 
             $data = array(
                 'status' => 'true',
@@ -69,14 +79,15 @@ class Mobil extends CI_Controller
             );
 
             echo json_encode($data);
-        } else {
-            $data = array(
-                'status' => 'false',
+        // } else {
+        //     $data = array(
+        //         'status' => 'false',
 
-            );
+        //     );
 
-            echo json_encode($data);
-        }
+        //     echo json_encode($data);
+        // }
+    }
     }
 
     function get_unit_mobil()
@@ -139,7 +150,7 @@ class Mobil extends CI_Controller
 
 
             // $row[] = '<a href="javascript:void(0);" class="fas fa-edit" onclick="get_data_po('.$p->id.')" title="Ubah data PO" style="color:black;"></a> | <a href="javascript:void(0);" class="fas fa-trash" onclick="hapus_po('.$p->id.')" title="Hapus data PO" style="color:black;"></a>';
-            $row[] = '<a href="#!" class="fas fa-edit edit_mobil" data-id="' . $p->k_mobil . '"  title="Ubah data PO" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteMobil" data-id="' . $p->k_mobil . '" title="Hapus data PO" style="color:black;"></a>';
+            $row[] = '<a href="#!" class="fas fa-edit edit_mobil" data-id="' . $p->mobil_unik . '"  title="Ubah data PO" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteMobil" data-id="' . $p->mobil_unik . '" title="Hapus data PO" style="color:black;"></a>';
 
 
 
@@ -160,7 +171,7 @@ class Mobil extends CI_Controller
 
     function hapus_mobil()
     {
-        $id = $_POST['id'];
+        $id = $_POST['idDelete'];
 
         $this->Mobil_model->hapus_mobil($id);
         $query = $this->db->affected_rows();
@@ -190,7 +201,7 @@ class Mobil extends CI_Controller
         $tahun = $_POST['tahun2'];
         $tanggalStnk = $_POST['tanggalStnk2'];
         $tanggalKirim = $_POST['tanggalKirim2'];
-
+        
 
 
 
@@ -201,7 +212,8 @@ class Mobil extends CI_Controller
             'k_cabang' => $namaUnit,
             'tahun' => $tahun,
             'stnk' => $tanggalStnk,
-            'kir_mobil' => $tanggalKirim
+            'kir_mobil' => $tanggalKirim,
+            'k_mobil' => $platNomor
 
 
         );

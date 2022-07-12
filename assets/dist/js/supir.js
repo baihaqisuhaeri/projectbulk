@@ -257,7 +257,7 @@ function cekEdit(){
         // $("#unitBarang").val("Pilih Unit");
         // $("#tabel_barang").DataTable().ajax.reload();
       } else {
-        Swal.fire("Berhasil", "Tidak ada perubahan!", "success");
+        Swal.fire("Gagal!", "Tidak ada perubahan atau Supir sudah ada di unit yang sama", "error");
         $("#bagian_2_edit").hide();
       }
     },

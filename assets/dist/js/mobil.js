@@ -151,83 +151,104 @@ $(document).on("submit", "#tambahMobil", function (e) {
 
 
   if (err == 0) {
-    $.ajax({
-      url: "mobil/tambah-mobil",
-      type: "post",
-      data: {
-        namaUnit: namaUnit,
-        namaMobil: namaMobil,
-        platNomor: platNomor,
-        tahun: tahun,
-        tanggalStnk: tanggalStnk,
-        tanggalKirim: tanggalKirim,
-      },
-      success: function (data) {
-        var json = JSON.parse(data);
-        var status = json.status;
-        if (status == "true") {
-          mytable = $("#tabel_mobil").DataTable();
-          mytable.draw();
-          Swal.fire("Berhasil!", "Mobil berhasil ditambahkan!", "success");
-          $("#unitMobil").val("").change();
-          $("#nama_mobil").val("");
-          $("#plat_nomor").val("");
-          $("#tahun").val("");
-          $("#tanggal_stnk").val("");
-          $("#tanggal_kirim").val("");
-        } else {
-          alert("failed");
-        }
-      },
-    });
+    $('#modal_konfirmasi_tambah').modal('show');
   } 
 });
-//}
-$(document).on("click", ".deleteMobil", function (event) {
-  var table = $("#tabel_mobil").DataTable();
-  event.preventDefault();
-  var id = $(this).data("id");
 
-  Swal.fire({
-    title: "Apakah anda yakin ingin menghapus mobil ini ? ",
-    text: "Mobil tidak dapat dikembalikan setelah dihapus!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    cancelButtonText: "cancel",
-    confirmButtonText: "Yes, delete it!",
-  }).then((result) => {
-    if (result.dismiss !== "cancel") {
-      $.ajax({
-        url: "mobil/hapus-mobil",
-        data: {
-          id: id,
-        },
-        type: "post",
-        success: function (data) {
-          var json = JSON.parse(data);
-          status = json.status;
-          if (status == "success") {
-            mytable = $("#tabel_mobil").DataTable();
-            mytable.draw();
+function tambah(){
+  $('#modal_konfirmasi_tambah').modal('hide');
 
-            $("#" + id)
-              .closest("tr")
-              .remove();
-          } else {
-            alert("Failed");
-            return;
-          }
-        },
-      });
-      Swal.fire("Berhasil!", "Mobil berhasil dihapus!", "success");
-    } else {
-      return null;
-      // Swal.fire("Berhasil!", "Barang berhasil dihapus!", "success");
-    }
+  var namaUnit = $("#unitMobil").val();
+  var namaMobil = $("#nama_mobil").val();
+  var platNomor = $("#plat_nomor").val();
+  var tahun = $("#tahun").val();
+  var tanggalStnk = $("#tanggal_stnk").val();
+  var tanggalKirim = $("#tanggal_kirim").val();
+
+  $.ajax({
+    url: "mobil/tambah-mobil",
+    type: "post",
+    data: {
+      namaUnit: namaUnit,
+      namaMobil: namaMobil,
+      platNomor: platNomor,
+      tahun: tahun,
+      tanggalStnk: tanggalStnk,
+      tanggalKirim: tanggalKirim,
+    },
+    success: function (data) {
+      var json = JSON.parse(data);
+      var status = json.status;
+      if (status == "true") {
+        mytable = $("#tabel_mobil").DataTable();
+        mytable.draw();
+        Swal.fire("Berhasil!", "Mobil berhasil ditambahkan!", "success");
+        $("#unitMobil").val("").change();
+        $("#nama_mobil").val("");
+        $("#plat_nomor").val("");
+        $("#tahun").val("");
+        $("#tanggal_stnk").val("");
+        $("#tanggal_kirim").val("");
+      } else {
+        Swal.fire("Gagal!", "Mobil sudah ada di unit yang sama", "error");
+      }
+    },
   });
+}
+//}
+var idDelete = "";
+$(document).on("click", ".deleteMobil", function (event) {
+  $('#modal_konfirmasi_hapus').modal('show');
+  idDelete = $(this).data("id");
+
+  // Swal.fire({
+  //   title: "Apakah anda yakin ingin menghapus mobil ini ? ",
+  //   text: "Mobil tidak dapat dikembalikan setelah dihapus!",
+  //   icon: "warning",
+  //   showCancelButton: true,
+  //   confirmButtonColor: "#3085d6",
+  //   cancelButtonColor: "#d33",
+  //   cancelButtonText: "cancel",
+  //   confirmButtonText: "Yes, delete it!",
+  // }).then((result) => {
+  //   if (result.dismiss !== "cancel") {
+      
+      
+  //  } 
+  //});
 });
+
+function hapus(){
+
+  $('#modal_konfirmasi_hapus').modal('hide');
+
+  $.ajax({
+    url: "mobil/hapus-mobil",
+    data: {
+      idDelete: idDelete,
+    },
+    type: "post",
+    success: function (data) {
+      var json = JSON.parse(data);
+      status = json.status;
+      if (status == "success") {
+        mytable = $("#tabel_mobil").DataTable();
+        mytable.draw();
+
+        $("#" + idDelete)
+          .closest("tr")
+          .remove();
+          Swal.fire("Berhasil!", "Mobil berhasil dihapus!", "success");
+      } else {
+        Swal.fire("Gagal!", "Mobil gagal dihapus!", "error");
+        return;
+      }
+    },
+  });
+}
+
+
+
 
 $(document).on("submit", "#edit_mobil", function (e) {
   e.preventDefault();
@@ -280,43 +301,57 @@ $(document).on("submit", "#edit_mobil", function (e) {
   }
 
   if (err == 0) {
-    $.ajax({
-      url: "mobil/edit-mobil",
-      type: "post",
-      data: {
-        id: id,
-        namaUnit2: namaUnit2,
-        namaMobil2: namaMobil2,
-        platNomor2: platNomor2,
-        tahun2: tahun2,
-        tanggalStnk2: tanggalStnk2,
-        tanggalKirim2: tanggalKirim2,
-      },
-      success: function (data) {
-        var json = JSON.parse(data);
-        var status = json.status;
-        if (status == "true") {
-          mytable = $("#tabel_mobil").DataTable();
-          mytable.draw();
-          Swal.fire("Berhasil!", "Mobil berhasil diubah!", "success");
-          $("#unitMobil2").val("").change();
-          $("#nama_mobil2").val("");
-          $("#plat_nomor2").val("");
-          $("#tahun2").val("");
-          $("#tanggal_stnk2").val("");
-          $("#tanggal_kirim2").val("");
-          $("#bagian_2_edit").hide();
-          // $("#unitBarang").val("Pilih Unit");
-          // $("#tabel_barang").DataTable().ajax.reload();
-        } else {
-          Swal.fire("Gagal", "Tidak ada perubahan data mobil!", "error");
-          
-          $("#bagian_2_edit").hide();
-        }
-      },
-    });
+    $('#modal_konfirmasi_hapus').modal('show');
   } 
 });
+
+function edit(){
+  $('#modal_konfirmasi_hapus').modal('hide');
+
+  var id = $("#btn_edit").val();
+  var namaUnit2 = $("#unitMobil2").val();
+  var namaMobil2 = $("#nama_mobil2").val();
+  var platNomor2 = $("#plat_nomor2").val();
+  var tahun2 = $("#tahun2").val();
+  var tanggalStnk2 = $("#tanggal_stnk2").val();
+  var tanggalKirim2 = $("#tanggal_kirim2").val();
+
+  $.ajax({
+    url: "mobil/edit-mobil",
+    type: "post",
+    data: {
+      id: id,
+      namaUnit2: namaUnit2,
+      namaMobil2: namaMobil2,
+      platNomor2: platNomor2,
+      tahun2: tahun2,
+      tanggalStnk2: tanggalStnk2,
+      tanggalKirim2: tanggalKirim2,
+    },
+    success: function (data) {
+      var json = JSON.parse(data);
+      var status = json.status;
+      if (status == "true") {
+        mytable = $("#tabel_mobil").DataTable();
+        mytable.draw();
+        Swal.fire("Berhasil!", "Mobil berhasil diubah!", "success");
+        $("#unitMobil2").val("").change();
+        $("#nama_mobil2").val("");
+        $("#plat_nomor2").val("");
+        $("#tahun2").val("");
+        $("#tanggal_stnk2").val("");
+        $("#tanggal_kirim2").val("");
+        $("#bagian_2_edit").hide();
+        // $("#unitBarang").val("Pilih Unit");
+        // $("#tabel_barang").DataTable().ajax.reload();
+      } else {
+        Swal.fire("Berhasil", "Tidak ada perubahan data mobil!", "success");
+        
+        $("#bagian_2_edit").hide();
+      }
+    },
+  });
+}
 
 // $("#unitMobil").on("change", function () {
 //   get_supir();

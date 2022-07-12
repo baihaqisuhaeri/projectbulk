@@ -49,7 +49,7 @@
                                 <div class="card-header p-0 pt-1">
                                     <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#satu" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Tambah Barang</a>
+                                            <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#satu" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Tambah Mobil</a>
                                         </li>
 
                                         <!--<li class="nav-item">
@@ -144,7 +144,55 @@
                                             </form>
 
 
+                                            <div class="modal fade" id="modal_konfirmasi_tambah">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <h5>Apa Anda sudah yakin?</h5>
+                                                    <div class="form-group text-right">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" onclick="tambah()" >Ya</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
 
+
+                                    <div class="modal fade" id="modal_konfirmasi_hapus">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <h5>Apa Anda sudah yakin?</h5>
+                                                    <div class="form-group text-right">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded"  onclick="hapus()">Ya</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+
+
+                                    <div class="modal fade" id="modal_konfirmasi_edit">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <h5>Apa Anda sudah yakin?</h5>
+                                                    <div class="form-group text-right">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded"  onclick="edit()">Ya</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
 
 
 

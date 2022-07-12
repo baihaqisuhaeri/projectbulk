@@ -77,13 +77,30 @@ class Mobil_model extends CI_Model
 
     public function hapus_mobil($platNomor)
     {
-        $this->db->where('k_mobil', $platNomor);
+        $this->db->where('mobil_unik', $platNomor);
         $this->db->delete($this->table);
     }
 
     public function edit_mobil($platNomor, $data)
     {
-        $this->db->where('k_mobil', $platNomor);
+        $this->db->where('mobil_unik', $platNomor);
         $this->db->update('mobil', $data);
     }
+
+    function check($mobil_unik){
+
+        $this->db->select();
+        $query = $this->db->get_where('mobil', array('mobil_unik' => $mobil_unik));
+        $result = $query->result_array();
+        
+        $count = count($result);
+        
+        if(empty($count)){
+        return false;
+        }
+        else{
+        return true;
+        }
+        }
+
 }

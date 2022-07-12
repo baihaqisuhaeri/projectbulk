@@ -59,7 +59,7 @@ class Supir extends CI_Controller
         $k_supir =  $kodeSupir;
     }
 
-        $supir_unik = $namaUnit . $namaSupir;
+        $supir_unik = $namaSupir ."_". $namaUnit;
 
         $data = array(
             'k_sales' => $k_supir,
@@ -211,16 +211,27 @@ class Supir extends CI_Controller
         $id = $_POST['id'];
         $namaUnit2 = $_POST['namaUnit2'];
         $namaSupir2 = $_POST['namaSupir2'];
-        
+        $supir_unik = $namaSupir2 ."_". $namaUnit2;
         
 
         $data = array(
            
             'n_sales' => $namaSupir2,
             'kd_unit' => $namaUnit2,
+            'supir_unik' => $supir_unik
             
 
         );
+        if ($this->Supir_model->check($supir_unik)) {
+            $data = array(
+                'status' => 'false',
+
+            );
+            echo json_encode($data);
+        }
+        else{
+
+        
         $this->Supir_model->edit_supir($id, $data);
         $query = $this->db->affected_rows();
 
@@ -243,6 +254,7 @@ class Supir extends CI_Controller
 
             echo json_encode($data);
         }
+    }
     }
 
 

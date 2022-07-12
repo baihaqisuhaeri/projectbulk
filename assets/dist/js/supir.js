@@ -123,11 +123,16 @@ $(document).on("submit", "#tambahSupir", function (e) {
 
   if (err == 0) {
     $('#modal_konfirmasi').modal('show');
-    $(document).on("click", "#btn_konfirmasi", function (event) {
-    
-      $('#modal_konfirmasi').modal('hide');
-    
 
+  } 
+
+});
+
+function cekTambah(){
+  $('#modal_konfirmasi').modal('hide');
+    
+  var namaUnit = $("#unitSupir").val();
+  var namaSupir = $("#nama_supir").val();
     
     $.ajax({
       url: "supir/tambah-supir",
@@ -146,30 +151,34 @@ $(document).on("submit", "#tambahSupir", function (e) {
           $("#unitSupir").val("").change();
           $("#nama_supir").val("");
         } else {
-          alert("failed");
+         // alert("a");
+          Swal.fire("Gagal!", "Supir sudah ada di unit yang sama!", "error");
         }
       },
     });
-  });
+  
+}
 
-  } 
-
-});
 //}
+var idDelete = "";
 $(document).on("click", ".deleteSupir", function (event) {
-  var table = $("#tabel_supir").DataTable();
-  event.preventDefault();
-  var id = $(this).data("id");
+  idDelete = $(this).data("id");
 
-  $('#modal_konfirmasi').modal('show');
-    $(document).on("click", "#btn_konfirmasi", function (event) {
+  $('#modal_konfirmasi_delete').modal('show');
     
-      $('#modal_konfirmasi').modal('hide');
+});
+
+function cekDelete(){
+   
+  $('#modal_konfirmasi_delete').modal('hide');
+  var table = $("#tabel_supir").DataTable();
+  
+  
     
       $.ajax({
         url: "supir/hapus-supir",
         data: {
-          id: id,
+          id: idDelete,
         },
         type: "post",
         success: function (data) {
@@ -179,19 +188,19 @@ $(document).on("click", ".deleteSupir", function (event) {
             mytable = $("#tabel_supir").DataTable();
             mytable.draw();
 
-            $("#" + id)
+            $("#" + idDelete)
               .closest("tr")
               .remove();
+              Swal.fire("Berhasil!", "Supir berhasil dihapus!", "success");
           } else {
-            alert("Failed");
+           // alert("Failed");
+            Swal.fire("Gagal!", "Supir berhasil dihapus!", "error");
             return;
           }
         },
       });
-      Swal.fire("Berhasil!", "Supir berhasil dihapus!", "success");
-   
-});
-});
+      
+}
 
 $(document).on("submit", "#edit_supir", function (e) {
   e.preventDefault();
@@ -218,32 +227,42 @@ $(document).on("submit", "#edit_supir", function (e) {
   }
 
   if (err == 0) {
-    $.ajax({
-      url: "supir/edit-supir",
-      type: "post",
-      data: {
-        id: id,
-        namaUnit2: namaUnit2,
-        namaSupir2: namaSupir2,
-      },
-      success: function (data) {
-        var json = JSON.parse(data);
-        var status = json.status;
-        if (status == "true") {
-          mytable = $("#tabel_supir").DataTable();
-          mytable.draw();
-          Swal.fire("Berhasil!", "Supir berhasil diubah!", "success");
-          $("#bagian_2_edit").hide();
-          // $("#unitBarang").val("Pilih Unit");
-          // $("#tabel_barang").DataTable().ajax.reload();
-        } else {
-          Swal.fire("Gagal", "Supir gagal diubah, mohon coba kembali", "error");
-          $("#bagian_2_edit").hide();
-        }
-      },
-    });
+    $('#modal_konfirmasi_edit').modal('show');
   } 
 });
+
+function cekEdit(){
+  $('#modal_konfirmasi_edit').modal('hide');
+  
+  var id = $("#btn_edit").val();
+  var namaUnit2 = $("#unitSupir2").val();
+  var namaSupir2 = $("#nama_supir2").val();
+
+  $.ajax({
+    url: "supir/edit-supir",
+    type: "post",
+    data: {
+      id: id,
+      namaUnit2: namaUnit2,
+      namaSupir2: namaSupir2,
+    },
+    success: function (data) {
+      var json = JSON.parse(data);
+      var status = json.status;
+      if (status == "true") {
+        mytable = $("#tabel_supir").DataTable();
+        mytable.draw();
+        Swal.fire("Berhasil!", "Supir berhasil diubah!", "success");
+        $("#bagian_2_edit").hide();
+        // $("#unitBarang").val("Pilih Unit");
+        // $("#tabel_barang").DataTable().ajax.reload();
+      } else {
+        Swal.fire("Berhasil", "Tidak ada perubahan!", "success");
+        $("#bagian_2_edit").hide();
+      }
+    },
+  });
+}
 
 $(".select2").select2({ width: "100%" });
 

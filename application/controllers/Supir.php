@@ -59,21 +59,34 @@ class Supir extends CI_Controller
         $k_supir =  $kodeSupir;
     }
 
-
+        $supir_unik = $namaUnit . $namaSupir;
 
         $data = array(
             'k_sales' => $k_supir,
             'n_sales' => $namaSupir,
             'kd_unit' => $namaUnit,
-            'supir_unik' => $namaUnit . $namaSupir
+            'supir_unik' => $supir_unik
 
 
         );
-        $this->Supir_model->tambah_supir('supir', $data);
+
+        if ($this->Supir_model->check($supir_unik)) {
+            $data = array(
+                'status' => 'false',
+
+            );
+            echo json_encode($data);
+        }else{
+
+        
+
+        $insert = $this->Supir_model->tambah_supir('supir', $data);
         $query = $this->db->affected_rows();
 
+        
 
-        if ($query) {
+
+        //if ($query) {
 
             $data = array(
                 'status' => 'true',
@@ -81,14 +94,16 @@ class Supir extends CI_Controller
             );
 
             echo json_encode($data);
-        } else {
-            $data = array(
-                'status' => 'false',
+      //  } 
+        // else {
+        //     $data = array(
+        //         'status' => 'false',
 
-            );
+        //     );
 
-            echo json_encode($data);
-        }
+        //     echo json_encode($data);
+        // }
+    }
     }
 
     function get_unit_supir()

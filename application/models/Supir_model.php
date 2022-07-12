@@ -4,7 +4,9 @@ class Supir_model extends CI_Model
 {
     public function tambah_supir($table, $data)
     {
-        $this->db->insert($table, $data);
+       $insert = $this->db->insert($table, $data);
+        
+        
     }
 
     var $table = 'supir';
@@ -87,4 +89,21 @@ class Supir_model extends CI_Model
         $this->db->where('id', $id);
         $this->db->update('supir', $data);
     }
+
+    function check($supir_unik){
+
+        $this->db->select();
+        $query = $this->db->get_where('supir', array('supir_unik' => $supir_unik));
+        $result = $query->result_array();
+        
+        $count = count($result);
+        
+        if(empty($count)){
+        return false;
+        }
+        else{
+        return true;
+        }
+        }
+
 }

@@ -263,7 +263,7 @@ $(document).on("submit", "#edit_mobil", function (e) {
 
 
 
-  var id = $("#btn_edit").val();
+  var no = $("#btn_edit").val();
   var namaUnit2 = $("#unitMobil2").val();
   var namaMobil2 = $("#nama_mobil2").val();
   var platNomor2 = $("#plat_nomor2").val();
@@ -301,14 +301,14 @@ $(document).on("submit", "#edit_mobil", function (e) {
   }
 
   if (err == 0) {
-    $('#modal_konfirmasi_hapus').modal('show');
+    $('#modal_konfirmasi_edit').modal('show');
   } 
 });
 
 function edit(){
-  $('#modal_konfirmasi_hapus').modal('hide');
+  $('#modal_konfirmasi_edit').modal('hide');
 
-  var id = $("#btn_edit").val();
+  var no = $("#btn_edit").val();
   var namaUnit2 = $("#unitMobil2").val();
   var namaMobil2 = $("#nama_mobil2").val();
   var platNomor2 = $("#plat_nomor2").val();
@@ -320,7 +320,7 @@ function edit(){
     url: "mobil/edit-mobil",
     type: "post",
     data: {
-      id: id,
+      no: no,
       namaUnit2: namaUnit2,
       namaMobil2: namaMobil2,
       platNomor2: platNomor2,
@@ -345,7 +345,7 @@ function edit(){
         // $("#unitBarang").val("Pilih Unit");
         // $("#tabel_barang").DataTable().ajax.reload();
       } else {
-        Swal.fire("Berhasil", "Tidak ada perubahan data mobil!", "success");
+        Swal.fire("Gagal!", "Tidak ada perubahan atau Mobil sudah ada di unit yang sama", "error");
         
         $("#bagian_2_edit").hide();
       }

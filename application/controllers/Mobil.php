@@ -150,7 +150,7 @@ class Mobil extends CI_Controller
 
 
             // $row[] = '<a href="javascript:void(0);" class="fas fa-edit" onclick="get_data_po('.$p->id.')" title="Ubah data PO" style="color:black;"></a> | <a href="javascript:void(0);" class="fas fa-trash" onclick="hapus_po('.$p->id.')" title="Hapus data PO" style="color:black;"></a>';
-            $row[] = '<a href="#!" class="fas fa-edit edit_mobil" data-id="' . $p->mobil_unik . '"  title="Ubah data PO" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteMobil" data-id="' . $p->mobil_unik . '" title="Hapus data PO" style="color:black;"></a>';
+            $row[] = '<a href="#!" class="fas fa-edit edit_mobil" data-id="' . $p->no . '"  title="Ubah data PO" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteMobil" data-id="' . $p->no . '" title="Hapus data PO" style="color:black;"></a>';
 
 
 
@@ -195,12 +195,15 @@ class Mobil extends CI_Controller
 
     function edit_mobil()
     {
+        $no = $_POST['no'];
         $namaUnit = $_POST['namaUnit2'];
         $namaMobil = $_POST['namaMobil2'];
         $platNomor = $_POST['platNomor2'];
         $tahun = $_POST['tahun2'];
         $tanggalStnk = $_POST['tanggalStnk2'];
         $tanggalKirim = $_POST['tanggalKirim2'];
+
+        $mobil_unik = $platNomor ."_". $namaUnit;
         
 
 
@@ -213,16 +216,33 @@ class Mobil extends CI_Controller
             'tahun' => $tahun,
             'stnk' => $tanggalStnk,
             'kir_mobil' => $tanggalKirim,
-            'k_mobil' => $platNomor
+            'k_mobil' => $platNomor,
+            'mobil_unik' => $mobil_unik
 
 
         );
-        $this->Mobil_model->edit_mobil($platNomor, $data);
+        // echo "<pre>";
+        // print_r($data);
+        //die();
+        
+        // var_dump($this->Mobil_model->check($mobil_unik));
+        // die();
+        if ($this->Mobil_model->check($mobil_unik, $no)) {
+            $data = array(
+                'status' => 'false',
+
+            );
+            echo json_encode($data);
+            
+        }
+        else{
+
+        $this->Mobil_model->edit_mobil($no, $data);
         $query = $this->db->affected_rows();
 
 
 
-
+            
         if ($query) {
 
             $data = array(
@@ -239,6 +259,7 @@ class Mobil extends CI_Controller
 
             echo json_encode($data);
         }
+    }
     }
 
 

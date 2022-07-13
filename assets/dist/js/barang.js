@@ -148,52 +148,71 @@ $(document).on("submit", "#tambahBarang", function (e) {
   }
 
   if (err == 0) {
-    $.ajax({
-      url: "barang/tambah-barang",
-      type: "post",
-      data: {
-        namaBarang: namaBarang,
-        hargaPokok: hargaPokok,
-        hargaJual: hargaJual,
-        kodeDiv: kodeDiv,
-        kodeBerat: kodeBerat,
-        jumlahKg: jumlahKg,
-        kodeJual: kodeJual,
-        kodeTim: kodeTim,
-        kodeUnit: kodeUnit,
-      },
-      success: function (data) {
-        var json = JSON.parse(data);
-        var status = json.status;
-        if (status == "true") {
-          mytable = $("#tabel_barang").DataTable();
-          mytable.draw();
-          //  alert("Barang berhasil ditambahkan");
-          Swal.fire("Berhasil!", "Barang berhasil ditambahkan!", "success");
-          $("#unitBarang").val("").change();
-          $("#nama_barang").val("");
-          $("#harga_pokok").val("");
-          $("#harga_jual").val("");
-          $("#kode_div").val("");
-          $("#kode_berat").val("");
-          $("#jumlah_kg").val("");
-          $("#kode_jual").val("");
-          $("#kode_tim").val("");
-          // $("#unitBarang").val("Pilih Unit");
-          // $("#tabel_barang").DataTable().ajax.reload();
-        } else {
-          // alert("failed");
-          Swal.fire(
-            "Gagal",
-            "Barang gagal ditambah, mohon coba kembali",
-            "error"
-          );
-        }
-      },
-    });
+    $('#modal_konfirmasi_tambah').modal('show');
+
+
+    
   }
 });
 //}
+
+function tambah(){
+  $('#modal_konfirmasi_tambah').modal('hide');
+
+  var kodeUnit = $("#unitBarang").val();
+  //var unitBarang = $("unitBarang").val();
+  var namaBarang = $("#nama_barang").val();
+  var hargaPokok = $("#harga_pokok").val();
+  var hargaJual = $("#harga_jual").val();
+  var kodeDiv = $("#kode_div").val();
+  var kodeBerat = $("#kode_berat").val();
+  var jumlahKg = $("#jumlah_kg").val();
+  var kodeJual = $("#kode_jual").val();
+  var kodeTim = $("#kode_tim").val();
+  $.ajax({
+    url: "barang/tambah-barang",
+    type: "post",
+    data: {
+      namaBarang: namaBarang,
+      hargaPokok: hargaPokok,
+      hargaJual: hargaJual,
+      kodeDiv: kodeDiv,
+      kodeBerat: kodeBerat,
+      jumlahKg: jumlahKg,
+      kodeJual: kodeJual,
+      kodeTim: kodeTim,
+      kodeUnit: kodeUnit,
+    },
+    success: function (data) {
+      var json = JSON.parse(data);
+      var status = json.status;
+      if (status == "true") {
+        mytable = $("#tabel_barang").DataTable();
+        mytable.draw();
+        //  alert("Barang berhasil ditambahkan");
+        Swal.fire("Berhasil!", "Barang berhasil ditambahkan!", "success");
+        $("#unitBarang").val("").change();
+        $("#nama_barang").val("");
+        $("#harga_pokok").val("");
+        $("#harga_jual").val("");
+        $("#kode_div").val("");
+        $("#kode_berat").val("");
+        $("#jumlah_kg").val("");
+        $("#kode_jual").val("");
+        $("#kode_tim").val("");
+        // $("#unitBarang").val("Pilih Unit");
+        // $("#tabel_barang").DataTable().ajax.reload();
+      } else {
+        // alert("failed");
+        Swal.fire(
+          "Gagal",
+          "Barang gagal ditambah, mohon coba kembali",
+          "error"
+        );
+      }
+    },
+  });
+}
 
 get_unit_barang();
 
@@ -293,57 +312,42 @@ $(document).on("change", "#bulan_aktif", function () {
   $("#bagian_2_edit").hide();
 });
 
+var id = $(this).data("id");
 $(document).on("click", ".deleteBarang", function (event) {
   var table = $("#tabel_barang").DataTable();
   event.preventDefault();
-  var id = $(this).data("id");
-  Swal.fire({
-    title: "Apakah anda yakin ingin menghapus barang ini ? ",
-    text: "Barang tidak dapat dikembalikan setelah dihapus!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    cancelButtonText: "cancel",
-    confirmButtonText: "Yes, delete it!",
-  }).then((result) => {
-    if (result.dismiss !== "cancel") {
-      $.ajax({
-        url: "barang/hapus-barang",
-        data: {
-          id: id,
-        },
-        type: "post",
-        success: function (data) {
-          var json = JSON.parse(data);
-          status = json.status;
-          if (status == "success") {
-            mytable = $("#tabel_barang").DataTable();
-            mytable.draw();
-            //alert("Barang berhasil dihapus");
-            // Swal.fire("Berhasil!", "Barang berhasil dihapus!", "success");
-            $("#" + id)
-              .closest("tr")
-              .remove();
-          } else {
-            //alert("Failed");
-            Swal.fire("Gagal", "Barang berhasil diubah!", "error");
-            return;
-          }
-        },
-      });
-      Swal.fire("Berhasil!", "Barang berhasil dihapus!", "success");
-    } else {
-      return null;
-      // Swal.fire("Berhasil!", "Barang berhasil dihapus!", "success");
-    }
-  });
-
-  // if (confirm("Apakah anda yakin ingin menghapus barang ini ? ")) {
-  // } else {
-  //   return null;
-  // }
+  $('#modal_konfirmasi_hapus').modal('show');
+   id = $(this).data("id");
+  
 });
+
+function hapus(){
+  $('#modal_konfirmasi_hapus').modal('hide');
+  $.ajax({
+    url: "barang/hapus-barang",
+    data: {
+      id: id,
+    },
+    type: "post",
+    success: function (data) {
+      var json = JSON.parse(data);
+      status = json.status;
+      if (status == "success") {
+        mytable = $("#tabel_barang").DataTable();
+        mytable.draw();
+        //alert("Barang berhasil dihapus");
+        Swal.fire("Berhasil!", "Barang berhasil dihapus!", "success");
+        $("#" + id)
+          .closest("tr")
+          .remove();
+      } else {
+        //alert("Failed");
+        Swal.fire("Gagal", "Barang berhasil diubah!", "error");
+        return;
+      }
+    },
+  });
+}
 
 $(document).on("submit", "#edit_barang", function (e) {
   e.preventDefault();
@@ -416,46 +420,64 @@ $(document).on("submit", "#edit_barang", function (e) {
     err += 1;
   }
   if (err == 0) {
-    $.ajax({
-      url: "barang/edit-barang",
-      type: "post",
-      data: {
-        kodeBarang2: kodeBarang2,
-        namaBarang2: namaBarang2,
-        hargaPokok2: hargaPokok2,
-        hargaJual2: hargaJual2,
-        kodeDiv2: kodeDiv2,
-        kodeBerat2: kodeBerat2,
-        jumlahKg2: jumlahKg2,
-        kodeJual2: kodeJual2,
-        kodeTim2: kodeTim2,
-        kodeUnit2: kodeUnit2,
-        id: id,
-      },
-      success: function (data) {
-        var json = JSON.parse(data);
-        var status = json.status;
-        if (status == "true") {
-          mytable = $("#tabel_barang").DataTable();
-          mytable.draw();
-          // alert("Barang berhasil diubah");
-          Swal.fire("Berhasil!", "Barang berhasil diubah!", "success");
-          $("#bagian_2_edit").hide();
-          // $("#unitBarang").val("Pilih Unit");
-          // $("#tabel_barang").DataTable().ajax.reload();
-        } else {
-          // alert("Barang gagal diubah");
-          Swal.fire(
-            "Gagal",
-            "Tidak ada perubahan data!",
-            "error"
-          );
-          $("#bagian_2_edit").hide();
-        }
-      },
-    });
+    $('#modal_konfirmasi_edit').modal('show');
   }
 });
+
+function edit(){
+
+  var id = $("#btn_edit").val();
+  var kodeBarang2 = $("#kode_barang2").val();
+  var namaBarang2 = $("#nama_barang2").val();
+  var hargaPokok2 = $("#harga_pokok2").val();
+  var hargaJual2 = $("#harga_jual2").val();
+  var kodeDiv2 = $("#kode_div2").val();
+  var kodeBerat2 = $("#kode_berat2").val();
+  var jumlahKg2 = $("#jumlah_kg2").val();
+  var kodeJual2 = $("#kode_jual2").val();
+  var kodeTim2 = $("#kode_tim2").val();
+  var kodeUnit2 = $("#unitBarang2").val();
+
+  $('#modal_konfirmasi_edit').modal('hide');
+  $.ajax({
+    url: "barang/edit-barang",
+    type: "post",
+    data: {
+      kodeBarang2: kodeBarang2,
+      namaBarang2: namaBarang2,
+      hargaPokok2: hargaPokok2,
+      hargaJual2: hargaJual2,
+      kodeDiv2: kodeDiv2,
+      kodeBerat2: kodeBerat2,
+      jumlahKg2: jumlahKg2,
+      kodeJual2: kodeJual2,
+      kodeTim2: kodeTim2,
+      kodeUnit2: kodeUnit2,
+      id: id,
+    },
+    success: function (data) {
+      var json = JSON.parse(data);
+      var status = json.status;
+      if (status == "true") {
+        mytable = $("#tabel_barang").DataTable();
+        mytable.draw();
+        // alert("Barang berhasil diubah");
+        Swal.fire("Berhasil!", "Barang berhasil diubah!", "success");
+        $("#bagian_2_edit").hide();
+        // $("#unitBarang").val("Pilih Unit");
+        // $("#tabel_barang").DataTable().ajax.reload();
+      } else {
+        // alert("Barang gagal diubah");
+        Swal.fire(
+          "Berhasil",
+          "Tidak ada perubahan data!",
+          "success"
+        );
+        $("#bagian_2_edit").hide();
+      }
+    },
+  });
+}
 
 // $(document).ready(function () {
 //   table = $("#tabel_barang").DataTable({

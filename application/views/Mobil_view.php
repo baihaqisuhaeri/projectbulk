@@ -144,7 +144,7 @@
                                             </form>
 
 
-                                            <div class="modal fade" id="modal_konfirmasi_tambah">
+                                    <div class="modal fade" id="modal_konfirmasi_tambah">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-body">

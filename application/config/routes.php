@@ -105,3 +105,11 @@ $route['supir/hapus-supir'] = 'Supir/hapus_supir';
 $route['supir/edit-supir'] = 'Supir/edit_supir';
 $route['supir/unit-supir'] = 'Supir/get_unit_supir';
 
+
+
+$route['cabang'] = 'Cabang';
+$route['cabang/tambah-cabang'] = 'Cabang/tambahCabang';
+$route['cabang/tabel-cabang'] = 'Cabang/ajax_list';
+$route['cabang/hapus-cabang'] = 'Cabang/hapus_cabang';
+$route['cabang/edit-cabang'] = 'Cabang/edit_cabang';
+

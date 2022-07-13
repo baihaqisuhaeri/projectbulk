@@ -179,6 +179,27 @@
                             }
                             ?>
                         </li>
+
+                        <li class="nav-item">
+                            <?php
+                            if ($this->uri->segment(1) == "cabang") {
+                                echo '<a href="cabang" class="nav-link active">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>
+                                    Cabang
+                                </p>
+                            </a>';
+                            } else {
+                                echo '<a href="cabang" class="nav-link">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>
+                                    Cabang
+                                </p>
+                            </a>';
+                            }
+                            ?>
+                        </li>
+
                     </ul>
                 </li>
             </ul>

@@ -511,8 +511,7 @@
         <!-- jQuery -->
         <?php $this->load->view('material/Jquery_view'); ?>
 
-        <script src="<?php echo base_url(); ?>assets/dist/js/pros.js"></script>
-        <script src="<?php echo base_url(); ?>assets/dist/js/tb_app.js"></script>
+  
 
         <script src="<?php echo base_url(); ?>assets/dist/js/cabang.js"></script>
 

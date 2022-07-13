@@ -122,28 +122,78 @@ $(document).on("submit", "#tambahCabang", function (e) {
   var kodeSpm = $("#kode_spm").val();
   var plafonUnit = $("#plaf_unit").val();
 
-  if (
-    namaCabang != "" &&
-    alamat1Cabang != "" &&
-    alamat2Cabang != "" &&
-    alamat3Cabang != "" &&
-    nomorTelepon != "" &&
-    namaKontak != "" &&
-    namaKepalaCabang != "" &&
-    jabatan != "" &&
-    npwp != "" &&
-    sk != "" &&
-    tanggalSk != "" &&
-    namaFp != "" &&
-    lokasi != "" &&
-    kodeNomor != "" &&
-    tanggalAktif != "" &&
-    namaPt != "" &&
-    alamatPjk1 != "" &&
-    alamatPjk2 != "" &&
-    kodeSpm != "" &&
-    plafonUnit != ""
-  ) {
+  var err = 0;
+
+  if(namaCabang == "") {
+    $("#error_nama_cabang").html("Namssssa cabang atau unit tidak boleh kosong!");
+    err += 1;
+  }  if(alamat1Cabang == "") {
+    $("#error_alamat1_cabang").html("Alamat 1 cabang atau unit tidak boleh kosong!");
+    err += 1;
+  }  if(alamat2Cabang == "") {
+    $("#error_alamat2_cabang").html("Alamat 2 cabang atau unit tidak boleh kosong!");
+    err += 1;
+  }  if(alamat3Cabang == "") {
+    $("#error_alamat3_cabang").html("Alamat 3 cabang atau unit tidak boleh kosong!");
+    err += 1;
+  } if(nomorTelepon == "") {
+    $("#error_nomor_telepon").html("Nomor telepon tidak boleh kosong!");
+    err += 1;
+  } if(namaKontak == "") {
+    $("#error_nama_kontak").html("Nama kontak tidak boleh kosong!");
+    err += 1;
+  }  if(namaKepalaCabang == "") {
+    $("#error_nama_kepala_cabang").html("Nama kepala cabang tidak boleh kosong!");
+    err += 1;
+  }  if(jabatan == "") {
+    $("#error_jabatan").html("Jabatan tidak boleh kosong!");
+    err += 1;
+  }  if(npwp == "") {
+    $("#error_npwp").html("NPWP tidak boleh kosong!");
+    err += 1;
+  }  if(sk == "") {
+    $("#error_sk").html("SK tidak boleh kosong!");
+    err += 1;
+  }  if(tanggalSk == "") {
+    $("#error_tanggal_sk").html("Tanggal SK tidak boleh kosong!");
+    err += 1;
+  }  if(namaFp == "") {
+    $("#error_nama_fp").html("Nama faktur pajak tidak boleh kosong!");
+    err += 1;
+  }  if(namaFp == "") {
+    $("#error_nama_fp").html("Nama faktur pajak tidak boleh kosong!");
+    err += 1;
+  }  if(lokasi == "") {
+    $("#error_lokasi").html("Lokasi tidak boleh kosong!");
+    err += 1;
+  }  if(namaFp == "") {
+    $("#error_nama_fp").html("Nama faktur pajak tidak boleh kosong!");
+    err += 1;
+  }  if(kodeNomor == "") {
+    $("#error_kode_nomor").html("Kode nomor tidak boleh kosong!");
+    err += 1;
+  }  if(tanggalAktif == "") {
+    $("#error_tanggal_aktif").html("Tanggal aktif tidak boleh kosong!");
+    err += 1;
+  }  if(namaPt == "") {
+    $("#error_nama_pt").html("Nama PT tidak boleh kosong!");
+    err += 1;
+  }  if(alamatPjk1 == "") {
+    $("#error_alamat_pjk1").html("Alamat pajak 1 tidak boleh kosong!");
+    err += 1;
+  }  if(alamatPjk2 == "") {
+    $("#error_alamat_pjk2").html("Alamat pajak 2 tidak boleh kosong!");
+    err += 1;
+  }  if(kodeSpm == "") {
+    $("#error_kode_spm").html("Kode SPM tidak boleh kosong!");
+    err += 1;
+  }  if(plafonUnit == "") {
+    $("#error_plaf_unit").html("Plafon unit tidak boleh kosong!");
+    err += 1;
+  }
+  
+
+  if (err == 0  ) {
     $.ajax({
       url: "cabang/tambah-cabang",
       type: "post",
@@ -205,7 +255,7 @@ $(document).on("submit", "#tambahCabang", function (e) {
       },
     });
   } else {
-    alert("Ada data yang masih kosong");
+    //alert("Ada data yang masih kosong");
   }
 });
 //}

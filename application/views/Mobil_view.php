@@ -216,7 +216,7 @@
                                                         <td>No. Kendaraan</td>
                                                         <td>Nama Kendaraan</td>
                                                         <td>Tahun Kendaraan</td>
-                                                        <td>Cabang</td>
+                                                        <td>Unit</td>
                                                         <td>Tanggal STNK</td>
                                                         <td>Tanggal Kirim</td>
 

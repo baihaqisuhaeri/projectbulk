@@ -8,15 +8,15 @@ class Mobil_model extends CI_Model
     }
 
     var $table = 'mobil';
-    var $column_order = array(null, 'k_mobil', 'n_mobil', 'k_cabang', 'tahun', 'stnk', 'kir_mobil'); //set column field database for datatable orderable
-    var $column_search = array('k_mobil', 'n_mobil', 'k_cabang', 'tahun', 'stnk', 'kir_mobil'); //set column field database for datatable searchable
+    var $column_order = array(null, 'k_mobil', 'n_mobil', 'kd_unit', 'tahun', 'stnk', 'kir_mobil'); //set column field database for datatable orderable
+    var $column_search = array('k_mobil', 'n_mobil', 'kd_unit', 'tahun', 'stnk', 'kir_mobil'); //set column field database for datatable searchable
     var $order = array('n_mobil' => 'desc'); // default order
     public function get_data_tabel_mobil()
     {
         $nama = $_SESSION['nama'];
 
         $this->db->select('*');
-        $this->db->join('hak_akses', 'mobil.k_cabang = hak_akses.kode_unit');
+        $this->db->join('hak_akses', 'mobil.kd_unit = hak_akses.kode_unit');
         $this->db->where('hak_akses.nama_user', $nama);
         $this->db->order_by('n_mobil asc');
 

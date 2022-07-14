@@ -36,6 +36,7 @@ class Cabang extends CI_Controller
 
     public function tambahCabang(){
         $namaCabang = $_POST['namaCabang'];
+        $kodeCabang = $_POST['kodeCabang'];
         $alamat1Cabang = $_POST['alamat1Cabang'];
         $alamat2Cabang = $_POST['alamat2Cabang'];
         $alamat3Cabang = $_POST['alamat3Cabang'];
@@ -62,7 +63,8 @@ class Cabang extends CI_Controller
         
 
         $data = array(
-            'n_cabang' => $namaCabang,
+            'nm_unit' => $namaCabang,
+            'kd_unit' => $kodeCabang,
             'al1_cab' => $alamat1Cabang,
             'al2_cab' => $alamat2Cabang,
             'al3_cab' => $alamat3Cabang,
@@ -86,7 +88,7 @@ class Cabang extends CI_Controller
             'plaf_unit' => $plafonUnit 
             
     );
-     $this->Cabang_model->tambah_cabang('dbm003', $data);
+     $this->Cabang_model->tambah_cabang('tb_unit', $data);
      $query = $this->db->affected_rows();
 
 
@@ -133,7 +135,8 @@ else
 
             $row[] = $no;
            // $row[] = $p->k_cabang;
-            $row[] = $p->n_cabang;
+            $row[] = $p->nm_unit;
+            $row[] = $p->kd_unit;
             $row[] = $p->al1_cab;
             $row[] = $p->al2_cab;
             $row[] = $p->al3_cab;
@@ -209,6 +212,7 @@ else
     function edit_cabang(){
         $id = $_POST['id'];
         $namaCabang2 = $_POST['namaCabang2'];
+        $kodeCabang2 = $_POST['kodeCabang2'];
         $alamat1Cabang2 = $_POST['alamat1Cabang2'];
         $alamat2Cabang2 = $_POST['alamat2Cabang2'];
         $alamat3Cabang2 = $_POST['alamat3Cabang2'];
@@ -232,7 +236,8 @@ else
         $plafonUnit2 = $_POST['plafonUnit2'];
 
         $data = array(
-            'n_cabang' => $namaCabang2,
+            'nm_unit' => $namaCabang2,
+            'kd_unit' => $kodeCabang2,
             'al1_cab' => $alamat1Cabang2,
             'al2_cab' => $alamat2Cabang2,
             'al3_cab' => $alamat3Cabang2,

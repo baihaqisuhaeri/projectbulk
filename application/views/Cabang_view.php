@@ -17,7 +17,7 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1 class="m-0 text-dark">Surat Perintah Muat - Bulk | Cabang</h1>
+                                <h1 class="m-0 text-dark">Surat Perintah Muat - Bulk | Unit</h1>
                                 
                             </div><!-- /.col -->
                             <div class="col-sm-6">
@@ -44,7 +44,7 @@
                                     <div class="card-header p-0 pt-1">
                                         <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
                                             <li class="nav-item">
-                                                <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#satu" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Tambah Cabang</a>
+                                                <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#satu" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Tambah Unit</a>
                                             </li>
 
                                             <!--<li class="nav-item">
@@ -74,30 +74,41 @@
                                                         <!-- CAF0F8 F9DFDC -->
                                                         <div class="row">
                                                             <div class="form-group col-lg-4">
-                                                                    <label>Nama Cabang<span style="color: red;">*</span></label>
-                                                                    <input class="form-control" type="text" name="nama_cabang" id="nama_cabang" placeholder="Nama Cabang">
+                                                                    <label>Nama Unit<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="nama_cabang" id="nama_cabang" placeholder="Nama Unit">
                                                                     <span class="text-danger" id="error_nama_cabang"></span>
                                                             
-                                                             </div>
+                                                            </div>
+
                                                             <div class="form-group col-lg-4">
-                                                                    <label>Alamat 1 Cabang<span style="color: red;">*</span></label>
-                                                                    <input class="form-control" type="text" name="alamat1_cabang" id="alamat1_cabang" placeholder="Alamat 1 Cabang">
+                                                                    <label>Kode Unit<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="kode_cabang" id="kode_cabang" placeholder="Kode Unit">
+                                                                    <span class="text-danger" id="error_kode_cabang"></span>
+                                                            
+                                                            </div>
+
+                                                            <div class="form-group col-lg-4">
+                                                                    <label>Alamat 1 Unit<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="alamat1_cabang" id="alamat1_cabang" placeholder="Alamat 1 Unit">
                                                                     <span class="text-danger" id="error_alamat1_cabang"></span>
                                                             </div>
-                                                            <div class="form-group col-lg-4">
-                                                                    <label>Alamat 2 Cabang<span style="color: red;">*</span></label>
-                                                                    <input class="form-control" type="text" name="alamat2_cabang" id="alamat2_cabang" placeholder="Alamat 2 Cabang">
-                                                                    <span class="text-danger" id="error_alamat2_cabang"></span>
-                                                            </div>
+                                                            
                                                             
                                                            
                                                             
                                                         </div>
                                                         
                                                     <div class="row">
+
                                                         <div class="form-group col-lg-4">
-                                                                    <label>Alamat 3 Cabang<span style="color: red;">*</span></label>
-                                                                    <input class="form-control" type="text" name="alamat3_cabang" id="alamat3_cabang" placeholder="Alamat 3 Cabang">
+                                                                    <label>Alamat 2 Unit<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="alamat2_cabang" id="alamat2_cabang" placeholder="Alamat 2 Unit">
+                                                                    <span class="text-danger" id="error_alamat2_cabang"></span>
+                                                        </div>
+
+                                                        <div class="form-group col-lg-4">
+                                                                    <label>Alamat 3 Unit<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="alamat3_cabang" id="alamat3_cabang" placeholder="Alamat 3 Unit">
                                                                     <span class="text-danger" id="error_alamat3_cabang"></span>
                                                         </div>
                                                             <div class="form-group col-lg-4">
@@ -105,20 +116,23 @@
                                                                     <input class="form-control" type="text" name="nomor_telepon" id="nomor_telepon" placeholder="Nomor Telepon">
                                                                     <span class="text-danger" id="error_nomor_telepon"></span>
                                                             </div>
-                                                            <div class="form-group col-lg-4">
-                                                                    <label>Nama Kontak<span style="color: red;">*</span></label>
-                                                                    <input class="form-control" type="text" name="nama_kontak" id="nama_kontak" placeholder="Nama Kontak">
-                                                                    <span class="text-danger" id="error_nama_kontak"></span>
-                                                            </div>
+                                                            
                                                           
                                                     </div>
 
                                                     
 
                                                     <div class="row">
+
                                                         <div class="form-group col-lg-4">
-                                                                    <label>Nama Kepala Cabang<span style="color: red;">*</span></label>
-                                                                    <input class="form-control" type="text" name="nama_kepala_cabang" id="nama_kepala_cabang" placeholder="Nama Kepala Cabang">
+                                                                    <label>Nama Kontak<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="nama_kontak" id="nama_kontak" placeholder="Nama Kontak">
+                                                                    <span class="text-danger" id="error_nama_kontak"></span>
+                                                        </div>
+
+                                                        <div class="form-group col-lg-4">
+                                                                    <label>Nama Kepala Unit<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="nama_kepala_cabang" id="nama_kepala_cabang" placeholder="Nama Kepala Unit">
                                                                     <span class="text-danger" id="error_nama_kepala_cabang"></span>
                                                         </div>
 
@@ -128,16 +142,19 @@
                                                                     <span class="text-danger" id="error_jabatan"></span>
                                                         </div>
                                                          
+                                                        
+
+                                                    </div>
+
+
+                                                    <div class="row">
+
                                                         <div class="form-group col-lg-4">
                                                                     <label>NPWP<span style="color: red;">*</span></label>
                                                                     <input class="form-control" type="text" name="npwp" id="npwp" placeholder="npwp">
                                                                     <span class="text-danger" id="error_npwp"></span>
                                                         </div>
 
-                                                    </div>
-
-
-                                                    <div class="row">
                                                         <div class="form-group col-lg-4">
                                                                     <label>SK<span style="color: red;">*</span></label>
                                                                     <input class="form-control" type="text" name="sk" id="sk" placeholder="SK">
@@ -150,15 +167,18 @@
                                                                     <span class="text-danger" id="error_tanggal_sk"></span>
                                                         </div>
                                                          
+                                                        
+
+                                                    </div>
+
+                                                    <div class="row">
+
                                                         <div class="form-group col-lg-4">
                                                                     <label>Nama FP<span style="color: red;">*</span></label>
                                                                     <input class="form-control" type="text" name="nama_fp" id="nama_fp" placeholder="Nama FP">
                                                                     <span class="text-danger" id="error_nama_fp"></span>
                                                         </div>
-
-                                                    </div>
-
-                                                    <div class="row">
+                                                        
                                                         <div class="form-group col-lg-4">
                                                                     <label>Lokasi<span style="color: red;">*</span></label>
                                                                     <input class="form-control" type="text" name="lokasi" id="lokasi" placeholder="lokasi">
@@ -171,20 +191,17 @@
                                                                     <span class="text-danger" id="error_kode_nomor"></span>
                                                         </div>
                                                          
+                                                        
+
+                                                    </div>
+
+                                                    <div class="row">
+                                                    
                                                         <div class="form-group col-lg-2">
                                                                     <label>Tanggal Aktif<span style="color: red;">*</span></label>
                                                                     <input class="form-control" type="date" name="tanggal_aktif" id="tanggal_aktif" placeholder="Tanggal Aktif">
                                                                     <span class="text-danger" id="error_tanggal_aktif"></span>
                                                         </div>
-
-                                                    </div>
-
-                                                    <div class="row">
-                                                        
-
-                                                        
-
-                                                        
                                                          
                                                         <div class="form-group col-lg-4">
                                                                     <label>Nama PT<span style="color: red;">*</span></label>
@@ -198,15 +215,17 @@
                                                                     <span class="text-danger" id="error_alamat_pjk1"></span>
                                                         </div>
 
-                                                        <div class="form-group col-lg-4">
-                                                                    <label>Alamat Pjk 2<span style="color: red;">*</span></label>
-                                                                    <input class="form-control" type="text" name="alamat_pjk2" id="alamat_pjk2" placeholder="Alamat Pjk 2">
-                                                                    <span class="text-danger" id="error_alamat_pjk2"></span>
-                                                        </div>
+                                                        
 
                                                     </div>
 
                                                     <div class="row">
+
+                                                    <div class="form-group col-lg-4">
+                                                                    <label>Alamat Pjk 2<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="alamat_pjk2" id="alamat_pjk2" placeholder="Alamat Pjk 2">
+                                                                    <span class="text-danger" id="error_alamat_pjk2"></span>
+                                                    </div>
                                    
                                                          
                                                         <div class="form-group col-lg-4">
@@ -301,20 +320,21 @@
 
                                         <!--<button type="button" class="btn btn-primary mb-2" id="btn_modal_pengguna"><i class="fas fa-plus-circle"></i></button>-->
                                         <div class="callout callout-warning" style="background-color: #FFF8E5;" id="bagian_3">
-                                                <h5>Daftar Cabang</h5>
+                                                <h5>Daftar Unit</h5>
                                                 
                                                 
                                                 <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_cabang">
                                                     <thead>
                                                         <tr>
                                                             <td>No</td>
-                                                            <td>Nama Cabang</td>
-                                                            <td>Alamat 1 Cabang</td>
-                                                            <td>Alamat 2 Cabang</td>
-                                                            <td>Alamat 3 Cabang</td>
+                                                            <td>Nama Unit</td>
+                                                            <td>Kode Unit</td>
+                                                            <td>Alamat 1 Unit</td>
+                                                            <td>Alamat 2 Unit</td>
+                                                            <td>Alamat 3 Unit</td>
                                                             <td>Nomor Telepon</td>
                                                             <td>Nama Kontak</td>
-                                                            <td>Nama Kepala Cabang</td>
+                                                            <td>Nama Kepala Unit</td>
                                                             <td>Jabatan</td>
                                                             <td>NPWP</td>
                                                             <td>SK</td>
@@ -347,30 +367,41 @@
                                                     
                                                         <div class="row">
                                                             <div class="form-group col-lg-4">
-                                                                    <label>Nama Cabang<span style="color: red;">*</span></label>
-                                                                    <input class="form-control" type="text" name="nama_cabang2" id="nama_cabang2" placeholder="Nama Cabang">
+                                                                    <label>Nama Unit<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="nama_cabang2" id="nama_cabang2" placeholder="Nama Unit">
                                                                     <span class="text-danger" id="error_nama_cabang2"></span>
                                                             
                                                              </div>
+
+                                                             <div class="form-group col-lg-4">
+                                                                    <label>Kode Unit<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="kode_cabang2" id="kode_cabang2" placeholder="Kode Unit">
+                                                                    <span class="text-danger" id="error_kode_cabang2"></span>
+                                                            
+                                                             </div>
+
                                                             <div class="form-group col-lg-4">
-                                                                    <label>Alamat 1 Cabang<span style="color: red;">*</span></label>
-                                                                    <input class="form-control" type="text" name="alamat1_cabang2" id="alamat1_cabang2" placeholder="Alamat 1 Cabang">
+                                                                    <label>Alamat 1 Unit<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="alamat1_cabang2" id="alamat1_cabang2" placeholder="Alamat 1 Unit">
                                                                     <span class="text-danger" id="error_alamat1_cabang2"></span>
                                                             </div>
-                                                            <div class="form-group col-lg-4">
-                                                                    <label>Alamat 2 Cabang<span style="color: red;">*</span></label>
-                                                                    <input class="form-control" type="text" name="alamat2_cabang2" id="alamat2_cabang2" placeholder="Alamat 2 Cabang">
-                                                                    <span class="text-danger" id="error_alamat2_cabang2"></span>
-                                                            </div>
+                                                            
                                                             
                                                            
                                                             
                                                         </div>
                                                         
                                                     <div class="row">
+
                                                         <div class="form-group col-lg-4">
-                                                                    <label>Alamat 3 Cabang<span style="color: red;">*</span></label>
-                                                                    <input class="form-control" type="text" name="alamat3_cabang2" id="alamat3_cabang2" placeholder="Alamat 3 Cabang">
+                                                                    <label>Alamat 2 Unit<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="alamat2_cabang2" id="alamat2_cabang2" placeholder="Alamat 2 Unit">
+                                                                    <span class="text-danger" id="error_alamat2_cabang2"></span>
+                                                        </div>
+
+                                                        <div class="form-group col-lg-4">
+                                                                    <label>Alamat 3 Unit<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="alamat3_cabang2" id="alamat3_cabang2" placeholder="Alamat 3 Unit">
                                                                     <span class="text-danger" id="error_alamat3_cabang2"></span>
                                                         </div>
                                                             <div class="form-group col-lg-4">
@@ -378,20 +409,23 @@
                                                                     <input class="form-control" type="text" name="nomor_telepon2" id="nomor_telepon2" placeholder="Nomor Telepon">
                                                                     <span class="text-danger" id="error_nomor_telepon2"></span>
                                                             </div>
-                                                            <div class="form-group col-lg-4">
-                                                                    <label>Nama Kontak<span style="color: red;">*</span></label>
-                                                                    <input class="form-control" type="text" name="nama_kontak2" id="nama_kontak2" placeholder="Nama Kontak">
-                                                                    <span class="text-danger" id="error_nama_kontak2"></span>
-                                                            </div>
+                                                            
                                                           
                                                     </div>
 
                                                     
 
                                                     <div class="row">
+
                                                         <div class="form-group col-lg-4">
-                                                                    <label>Nama Kepala Cabang<span style="color: red;">*</span></label>
-                                                                    <input class="form-control" type="text" name="nama_kepala_cabang2" id="nama_kepala_cabang2" placeholder="Nama Kepala Cabang">
+                                                                    <label>Nama Kontak<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="nama_kontak2" id="nama_kontak2" placeholder="Nama Kontak">
+                                                                    <span class="text-danger" id="error_nama_kontak2"></span>
+                                                        </div>
+
+                                                        <div class="form-group col-lg-4">
+                                                                    <label>Nama Kepala Unit<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="nama_kepala_cabang2" id="nama_kepala_cabang2" placeholder="Nama Kepala Unit">
                                                                     <span class="text-danger" id="error_nama_kepala_cabang2"></span>
                                                         </div>
 
@@ -401,16 +435,19 @@
                                                                     <span class="text-danger" id="error_jabatan2"></span>
                                                         </div>
                                                          
+                                                        
+
+                                                    </div>
+
+
+                                                    <div class="row">
+
                                                         <div class="form-group col-lg-4">
                                                                     <label>NPWP<span style="color: red;">*</span></label>
                                                                     <input class="form-control" type="text" name="npwp2" id="npwp2" placeholder="npwp">
                                                                     <span class="text-danger" id="error_npwp2"></span>
                                                         </div>
 
-                                                    </div>
-
-
-                                                    <div class="row">
                                                         <div class="form-group col-lg-4">
                                                                     <label>SK<span style="color: red;">*</span></label>
                                                                     <input class="form-control" type="text" name="sk2" id="sk2" placeholder="SK">
@@ -423,15 +460,18 @@
                                                                     <span class="text-danger" id="error_tanggal_sk2"></span>
                                                         </div>
                                                          
+                                                        
+
+                                                    </div>
+
+                                                    <div class="row">
+
                                                         <div class="form-group col-lg-4">
                                                                     <label>Nama FP<span style="color: red;">*</span></label>
                                                                     <input class="form-control" type="text" name="nama_fp2" id="nama_fp2" placeholder="Nama FP">
                                                                     <span class="text-danger" id="error_nama_fp2"></span>
                                                         </div>
 
-                                                    </div>
-
-                                                    <div class="row">
                                                         <div class="form-group col-lg-4">
                                                                     <label>Lokasi<span style="color: red;">*</span></label>
                                                                     <input class="form-control" type="text" name="lokasi2" id="lokasi2" placeholder="lokasi">
@@ -444,16 +484,18 @@
                                                                     <span class="text-danger" id="error_kode_nomor2"></span>
                                                         </div>
                                                          
-                                                        <div class="form-group col-lg-2">
-                                                                    <label>Tanggal Aktif<span style="color: red;">*</span></label>
-                                                                    <input class="form-control" type="date" name="tanggal_aktif2" id="tanggal_aktif2" placeholder="Tanggal Aktif">
-                                                                    <span class="text-danger" id="error_tanggal_aktif2"></span>
-                                                        </div>
+                                                        
                                                         
 
                                                     </div>
 
                                                     <div class="row">
+
+                                                        <div class="form-group col-lg-2">
+                                                                    <label>Tanggal Aktif<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="date" name="tanggal_aktif2" id="tanggal_aktif2" placeholder="Tanggal Aktif">
+                                                                    <span class="text-danger" id="error_tanggal_aktif2"></span>
+                                                        </div>
                                                      
                                                         <div class="form-group col-lg-4">
                                                                     <label>Nama PT<span style="color: red;">*</span></label>
@@ -467,15 +509,17 @@
                                                                     <span class="text-danger" id="error_alamat_pjk12"></span>
                                                         </div>
 
+                                                        
+
+                                                    </div>
+
+                                                    <div class="row">
+
                                                         <div class="form-group col-lg-4">
                                                                     <label>Alamat Pjk 2<span style="color: red;">*</span></label>
                                                                     <input class="form-control" type="text" name="alamat_pjk22" id="alamat_pjk22" placeholder="Alamat Pjk 2">
                                                                     <span class="text-danger" id="error_alamat_pjk22"></span>
                                                         </div>
-
-                                                    </div>
-
-                                                    <div class="row">
                                                          
                                                         <div class="form-group col-lg-4">
                                                                     <label>Kode SPM<span style="color: red;">*</span></label>

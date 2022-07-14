@@ -6,15 +6,15 @@ class Cabang_model extends CI_Model
         $this->db->insert($table, $data);
     }
 
-    var $table = 'dbm003';    
-    var $column_order = array(null,'id','k_cabang','n_cabang','al1_cab','al2_cab','al3_cab','telp','kontak','n_kacab','j_kacab','npwp','sk','tgl_sk','nama_fp','lokasi','kode_nomor','tgl_aktif','ttpbln','n_pt','al_pjk','al_pjk2','kode_spm','plaf_unit'); //set column field database for datatable orderable
-    var $column_search = array('id','k_cabang','n_cabang','al1_cab','al2_cab','al3_cab','telp','kontak','n_kacab','j_kacab','npwp','sk','tgl_sk','nama_fp','lokasi','kode_nomor','tgl_aktif','ttpbln','n_pt','al_pjk','al_pjk2','kode_spm','plaf_unit'); //set column field database for datatable searchable
-    var $order = array('k_cabang' => 'desc'); // default order
+    var $table = 'tb_unit';    
+    var $column_order = array(null,'id','kd_unit','nm_unit','al1_cab','al2_cab','al3_cab','telp','kontak','n_kacab','j_kacab','npwp','sk','tgl_sk','nama_fp','lokasi','kode_nomor','tgl_aktif','ttpbln','n_pt','al_pjk','al_pjk2','kode_spm','plaf_unit'); //set column field database for datatable orderable
+    var $column_search = array('id','kd_unit','nm_unit','al1_cab','al2_cab','al3_cab','telp','kontak','n_kacab','j_kacab','npwp','sk','tgl_sk','nama_fp','lokasi','kode_nomor','tgl_aktif','ttpbln','n_pt','al_pjk','al_pjk2','kode_spm','plaf_unit'); //set column field database for datatable searchable
+    var $order = array('kd_unit' => 'desc'); // default order
     public function get_data_tabel_barang(){
         
         
         $this->db->select('*');      
-        $this->db->order_by('k_cabang asc');
+        $this->db->order_by('kd_unit asc');
         
         $this->db->from($this->table);
         
@@ -83,7 +83,7 @@ class Cabang_model extends CI_Model
 
     public function edit_cabang($id, $data){
         $this->db->where('id', $id);
-$this->db->update('dbm003', $data);
+$this->db->update('tb_unit', $data);
     }
 
 }

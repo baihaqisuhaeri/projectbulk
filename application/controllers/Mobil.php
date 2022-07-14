@@ -50,7 +50,7 @@ class Mobil extends CI_Controller
         $data = array(
             'k_mobil' => $platNomor,
             'n_mobil' => $namaMobil,
-            'k_cabang' => $namaUnit,
+            'kd_unit' => $namaUnit,
             'tahun' => $tahun,
             'stnk' => $tanggalStnk,
             'kir_mobil' => $tanggalKirim,
@@ -139,7 +139,7 @@ class Mobil extends CI_Controller
             $row[] = $p->k_mobil;
             $row[] = $p->n_mobil;
             $row[] = $p->tahun;
-            $row[] = $p->k_cabang;
+            $row[] = $p->kd_unit;
             $row[] = $p->stnk;
             $row[] = $p->kir_mobil;
       
@@ -212,7 +212,7 @@ class Mobil extends CI_Controller
         $data = array(
             
             'n_mobil' => $namaMobil,
-            'k_cabang' => $namaUnit,
+            'kd_unit' => $namaUnit,
             'tahun' => $tahun,
             'stnk' => $tanggalStnk,
             'kir_mobil' => $tanggalKirim,

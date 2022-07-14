@@ -181,7 +181,7 @@ else
    
 
     function hapus_cabang(){
-        $id = $_POST['id'];
+        $id = $_POST['idDelete'];
         
         $this->Cabang_model->hapus_cabang($id);
         $query = $this->db->affected_rows();

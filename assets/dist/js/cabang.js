@@ -98,6 +98,30 @@ $(document).ready(function () {
 // function tambahBarang() {
 $(document).on("submit", "#tambahCabang", function (e) {
   e.preventDefault();
+  
+    $("#error_nama_cabang").html("");
+    $("#error_alamat1_cabang").html("");
+    $("#error_alamat2_cabang").html("");
+    $("#error_alamat3_cabang").html("");
+    $("#error_nomor_telepon").html("");
+    $("#error_nama_kontak").html("");
+    $("#error_nama_kepala_cabang").html("");
+    $("#error_jabatan").html("");
+    $("#error_npwp").html("");
+    $("#error_sk").html("");
+    $("#error_tanggal_sk").html("");
+    $("#error_nama_fp").html("");
+    $("#error_nama_fp").html("");
+    $("#error_lokasi").html("");
+    $("#error_nama_fp").html("");
+    $("#error_kode_nomor").html("");
+    $("#error_tanggal_aktif").html("");
+    $("#error_nama_pt").html("");
+    $("#error_alamat_pjk1").html("");
+    $("#error_alamat_pjk2").html("");
+    $("#error_kode_spm").html("");
+    $("#error_plaf_unit").html("");
+   
 
   var namaCabang = $("#nama_cabang").val();
   var alamat1Cabang = $("#alamat1_cabang").val();
@@ -194,116 +218,138 @@ $(document).on("submit", "#tambahCabang", function (e) {
   
 
   if (err == 0  ) {
-    $.ajax({
-      url: "cabang/tambah-cabang",
-      type: "post",
-      data: {
-        namaCabang: namaCabang,
-        alamat1Cabang: alamat1Cabang,
-        alamat2Cabang: alamat2Cabang,
-        alamat3Cabang: alamat3Cabang,
-        nomorTelepon: nomorTelepon,
-        namaKontak: namaKontak,
-        namaKepalaCabang: namaKepalaCabang,
-        jabatan: jabatan,
-        npwp: npwp,
-        sk: sk,
-        tanggalSk: tanggalSk,
-        namaFp: namaFp,
-        lokasi: lokasi,
-        kodeNomor: kodeNomor,
-
-        tanggalAktif: tanggalAktif,
-
-        namaPt: namaPt,
-        alamatPjk1: alamatPjk1,
-        alamatPjk2: alamatPjk2,
-        kodeSpm: kodeSpm,
-        plafonUnit: plafonUnit,
-      },
-      success: function (data) {
-        var json = JSON.parse(data);
-        var status = json.status;
-        if (status == "true") {
-          mytable = $("#tabel_cabang").DataTable();
-          mytable.draw();
-          Swal.fire("Berhasil!", "Cabang berhasil ditambahkan!", "success");
-          $("#nama_cabang").val("");
-          $("#alamat1_cabang").val("");
-          $("#alamat2_cabang").val("");
-          $("#alamat3_cabang").val("");
-          $("#nomor_telepon").val("");
-          $("#nama_kontak").val("");
-          $("#nama_kepala_cabang").val("");
-          $("#jabatan").val("");
-          $("#npwp").val("");
-          $("#sk").val("");
-          $("#tanggal_sk").val("");
-          $("#nama_fp").val("");
-          $("#lokasi").val("");
-          $("#kode_nomor").val("");
-          $("#tanggal_aktif").val("");
-
-          $("#nama_pt").val("");
-          $("#alamat_pjk1").val("");
-          $("#alamat_pjk2").val("");
-          $("#kode_spm").val("");
-          $("#plaf_unit").val("");
-        } else {
-          alert("failed");
-        }
-      },
-    });
-  } else {
-    //alert("Ada data yang masih kosong");
-  }
+    $('#modal_konfirmasi_tambah').modal('show');
+  } 
 });
 //}
+
+function tambah(){
+  $('#modal_konfirmasi_tambah').modal('hide');
+
+  var namaCabang = $("#nama_cabang").val();
+  var alamat1Cabang = $("#alamat1_cabang").val();
+  var alamat2Cabang = $("#alamat2_cabang").val();
+  var alamat3Cabang = $("#alamat3_cabang").val();
+  var nomorTelepon = $("#nomor_telepon").val();
+  var namaKontak = $("#nama_kontak").val();
+  var namaKepalaCabang = $("#nama_kepala_cabang").val();
+  var jabatan = $("#jabatan").val();
+  var npwp = $("#npwp").val();
+  var sk = $("#sk").val();
+  var tanggalSk = $("#tanggal_sk").val();
+  var namaFp = $("#nama_fp").val();
+  var lokasi = $("#lokasi").val();
+  var kodeNomor = $("#kode_nomor").val();
+
+  var tanggalAktif = $("#tanggal_aktif").val();
+
+  var namaPt = $("#nama_pt").val();
+  var alamatPjk1 = $("#alamat_pjk1").val();
+  var alamatPjk2 = $("#alamat_pjk2").val();
+  var kodeSpm = $("#kode_spm").val();
+  var plafonUnit = $("#plaf_unit").val();
+
+  $.ajax({
+    url: "cabang/tambah-cabang",
+    type: "post",
+    data: {
+      namaCabang: namaCabang,
+      alamat1Cabang: alamat1Cabang,
+      alamat2Cabang: alamat2Cabang,
+      alamat3Cabang: alamat3Cabang,
+      nomorTelepon: nomorTelepon,
+      namaKontak: namaKontak,
+      namaKepalaCabang: namaKepalaCabang,
+      jabatan: jabatan,
+      npwp: npwp,
+      sk: sk,
+      tanggalSk: tanggalSk,
+      namaFp: namaFp,
+      lokasi: lokasi,
+      kodeNomor: kodeNomor,
+
+      tanggalAktif: tanggalAktif,
+
+      namaPt: namaPt,
+      alamatPjk1: alamatPjk1,
+      alamatPjk2: alamatPjk2,
+      kodeSpm: kodeSpm,
+      plafonUnit: plafonUnit,
+    },
+    success: function (data) {
+      var json = JSON.parse(data);
+      var status = json.status;
+      if (status == "true") {
+        mytable = $("#tabel_cabang").DataTable();
+        mytable.draw();
+        Swal.fire("Berhasil!", "Cabang berhasil ditambahkan!", "success");
+        $("#nama_cabang").val("");
+        $("#alamat1_cabang").val("");
+        $("#alamat2_cabang").val("");
+        $("#alamat3_cabang").val("");
+        $("#nomor_telepon").val("");
+        $("#nama_kontak").val("");
+        $("#nama_kepala_cabang").val("");
+        $("#jabatan").val("");
+        $("#npwp").val("");
+        $("#sk").val("");
+        $("#tanggal_sk").val("");
+        $("#nama_fp").val("");
+        $("#lokasi").val("");
+        $("#kode_nomor").val("");
+        $("#tanggal_aktif").val("");
+
+        $("#nama_pt").val("");
+        $("#alamat_pjk1").val("");
+        $("#alamat_pjk2").val("");
+        $("#kode_spm").val("");
+        $("#plaf_unit").val("");
+      } else {
+        Swal.fire("Gagal!", "Cabang sudah ada!", "error");
+      }
+    },
+  });
+}
+
+var idDelete = "";
 $(document).on("click", ".deleteCabang", function (event) {
   var table = $("#tabel_cabang").DataTable();
   event.preventDefault();
-  var id = $(this).data("id");
+  
 
-  Swal.fire({
-    title: "Apakah anda yakin ingin menghapus cabang ini ? ",
-    text: "Barang tidak dapat dikembalikan setelah dihapus!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    cancelButtonText: "cancel",
-    confirmButtonText: "Yes, delete it!",
-  }).then((result) => {
-    if (result.dismiss !== "cancel") {
-      $.ajax({
-        url: "cabang/hapus-cabang",
-        data: {
-          id: id,
-        },
-        type: "post",
-        success: function (data) {
-          var json = JSON.parse(data);
-          status = json.status;
-          if (status == "success") {
-            mytable = $("#tabel_cabang").DataTable();
-            mytable.draw();
-
-            $("#" + id)
-              .closest("tr")
-              .remove();
-          } else {
-            alert("Failed");
-            return;
-          }
-        },
-      });
-      Swal.fire("Berhasil!", "Cabang berhasil dihapus!", "success");
-    } else {
-      return null;
-      // Swal.fire("Berhasil!", "Barang berhasil dihapus!", "success");
-    }
-  });
+  $('#modal_konfirmasi_hapus').modal('show');
+  idDelete = $(this).data("id");
+    
 });
+
+function hapus(){
+  $('#modal_konfirmasi_hapus').modal('hide');
+
+  $.ajax({
+    url: "cabang/hapus-cabang",
+    data: {
+      idDelete: idDelete,
+    },
+    type: "post",
+    success: function (data) {
+      var json = JSON.parse(data);
+      status = json.status;
+      if (status == "success") {
+        mytable = $("#tabel_cabang").DataTable();
+        mytable.draw();
+
+        $("#" + idDelete)
+          .closest("tr")
+          .remove();
+          Swal.fire("Berhasil!", "Cabang berhasil dihapus!", "success");
+      } else {
+        alert("Failed");
+        return;
+      }
+    },
+  });
+  
+}
 
 $(document).on("submit", "#edit_cabang", function (e) {
   e.preventDefault();

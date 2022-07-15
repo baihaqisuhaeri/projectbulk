@@ -113,3 +113,9 @@ $route['cabang/tabel-cabang'] = 'Cabang/ajax_list';
 $route['cabang/hapus-cabang'] = 'Cabang/hapus_cabang';
 $route['cabang/edit-cabang'] = 'Cabang/edit_cabang';
 
+$route['input-sj'] = 'Input_sj';
+$route['input-sj/tambah-cabang'] = 'Cabang/tambahCabang';
+$route['input-sj/tabel-cabang'] = 'Cabang/ajax_list';
+$route['input-sj/hapus-cabang'] = 'Cabang/hapus_cabang';
+$route['input-sj/edit-cabang'] = 'Cabang/edit_cabang';
+

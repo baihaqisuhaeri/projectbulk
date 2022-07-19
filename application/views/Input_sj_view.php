@@ -89,8 +89,40 @@
 
                                                         <div class="form-group col-lg-4">
                                                             <label>Alamat 1<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="nama_supir" id="nama_supir" placeholder="Nama Supir">
-                                                            <span class="text-danger" id="error_nama_supir"></span>
+                                                            <input class="form-control" type="text" name="alamat1" id="alamat1" placeholder="Alamat 1">
+                                                            <span class="text-danger" id="error_alamat1"></span>
+
+                                                        </div>
+
+                                                        <div class="form-group col-lg-4">
+                                                            <label>Alamat 2<span style="color: red;">*</span></label>
+                                                            <input class="form-control" type="text" name="alamat1" id="alamat1" placeholder="Alamat 1">
+                                                            <span class="text-danger" id="error_alamat1"></span>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="form-group col-lg-4">
+                                                            <label>Alamat 3<span style="color: red;">*</span></label>
+                                                            <select class="form-control select2" id="nama_customer" name="nama_customer">
+                                                            </select>
+                                                            <span class="text-danger" id="error_nama_customer"></span>
+
+                                                        </div>
+
+                                                        <div class="form-group col-lg-4">
+                                                            <label>Kode <span style="color: red;">*</span></label>
+                                                            <input class="form-control" type="text" name="alamat1" id="alamat1" placeholder="Alamat 1">
+                                                            <span class="text-danger" id="error_alamat1"></span>
+
+                                                        </div>
+
+                                                        <div class="form-group col-lg-4">
+                                                            <label>Alamat 2<span style="color: red;">*</span></label>
+                                                            <input class="form-control" type="text" name="alamat1" id="alamat1" placeholder="Alamat 1">
+                                                            <span class="text-danger" id="error_alamat1"></span>
 
                                                         </div>
 

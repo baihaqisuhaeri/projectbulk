@@ -106,7 +106,7 @@ class Input_sj extends CI_Controller
     }
     }
 
-    function get_unit_supir()
+    function get_unit_sj()
     {
 
         $daftar_unit = "";
@@ -258,7 +258,25 @@ class Input_sj extends CI_Controller
     }
 
 
-
+    function get_customer(){
+        
+        $unit = $this->input->post("unitSj");
+        
+      
+        $customer = $this->db->query("select * from customer where unit = '$unit' and flag_aktif = '' order by n_cus asc")->result();
+       
+        
+        if(empty($customer)){
+            echo '<option value="">Belum ada data</option>';
+        }else{
+            echo '<option value="">Nama Customer (NPWP)(Kode Customer)</option>';
+        }
+        
+        foreach ($customer as $u){
+            echo '<option value="'.$u->id.'">'.$u->n_cus.' ('.$u->npwp.')('.$u->k_Cus.')</option>';
+        }
+        
+    }
     
 
 

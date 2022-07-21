@@ -114,8 +114,11 @@ $route['cabang/hapus-cabang'] = 'Cabang/hapus_cabang';
 $route['cabang/edit-cabang'] = 'Cabang/edit_cabang';
 
 $route['input-sj'] = 'Input_sj';
-$route['input-sj/tambah-cabang'] = 'Cabang/tambahCabang';
-$route['input-sj/tabel-cabang'] = 'Cabang/ajax_list';
-$route['input-sj/hapus-cabang'] = 'Cabang/hapus_cabang';
-$route['input-sj/edit-cabang'] = 'Cabang/edit_cabang';
+$route['input-sj/tambah-sj'] = 'Input_sj/tambahSj';
+$route['input-sj/tabel-sj'] = 'Input_sj/ajax_list';
+$route['input-sj/hapus-sj'] = 'Input_sj/hapus_sj';
+$route['input-sj/edit-sj'] = 'Input_sj/edit_sj';
+$route['input-sj/unit-sj'] = 'Input_sj/get_unit_sj';
+$route['input-sj/customer'] = 'Input_sj/get_customer';
+
 

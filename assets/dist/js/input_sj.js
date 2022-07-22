@@ -1,3 +1,35 @@
+var table_alamat;
+$(document).ready(function () {
+  //datatables
+  table_alamat = $("#tabel_alamat_kirim").DataTable({
+    scrollX: true,
+    processing: true, //Feature control the processing indicator.
+    serverSide: true, //Feature control DataTables' server-side processing mode.
+    order: [], //Initial no order.
+
+    // Load data for the table's content from an Ajax source
+    ajax: {
+      url: "input-sj/tabel-alamat-kirim",
+      type: "POST",
+    },
+  });
+
+  $("#tabel_alamat_kirim tbody").on("click", ".pilih_alamat_kirim", function () {
+    var data = table_alamat.row($(this).parents("tr")).data();
+   // var id = $(this).data("id");
+    
+
+
+    $("#nama_supir2").val(data[1]);
+
+    $("#btn_edit").val(id);
+  });
+  $("#bagian_2_edit").hide();
+});
+
+
+
+
 $(".select2").select2({ width: "100%" });
 
 $(".select2bs4").select2({
@@ -21,8 +53,13 @@ $("#unitSj").on("change", function () {
   
     var unit = $("#unitSj").val();
     get_customer();
-    $('#modal_alamat').modal('show');
+   
   });
+
+$(document).on("click","#btnAlamatKirim",function() {
+  $('#modal_alamat').modal('show');
+});
+  
 
 function get_customer() {
     var unitSj = $("#unitSj").val();

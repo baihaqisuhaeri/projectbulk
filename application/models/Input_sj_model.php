@@ -9,19 +9,26 @@ class Input_sj_model extends CI_Model
         
     }
 
+    
     var $table = 'supir';
     var $column_order = array(null, 'id', 'k_sales', 'n_sales', 'kd_unit'); //set column field database for datatable orderable
     var $column_search = array('id', 'k_sales', 'n_sales', 'kd_unit'); //set column field database for datatable searchable
     var $order = array('k_sales' => 'desc'); // default order
-    public function get_data_tabel_barang()
+
+    //untuk alamat kirim
+    var $table = 'almt_krm';
+    var $column_order_alamat_kirim = array(null, 'id', 'k_cus','n_cus','nmcab','npwp','al1_cus','al2_cus','al3_cus','k_altk','alk_cus1','alk_cus2','alk_cus3','flag_aktif','tgl_input','pc_input','tgl_edit'); 
+    var $column_search_alamat_kirim = array('id', 'k_cus','n_cus','nmcab','npwp','al1_cus','al2_cus','al3_cus','k_altk','alk_cus1','alk_cus2','alk_cus3','flag_aktif','tgl_input','pc_input','tgl_edit'); 
+    var $order_alamat_kirim = array('k_cus' => 'desc'); // default order
+    public function get_data_tabel_alamat_kirim()
     {
 
 
-        $nama = $_SESSION['nama'];
+        
         $this->db->select('*, supir.id as id');
         $this->db->join('hak_akses', 'supir.kd_unit = hak_akses.kode_unit');
         $this->db->where('hak_akses.nama_user', $nama);
-        $this->db->order_by('k_sales asc');
+        $this->db->order_by('k_cus asc');
 
         $this->db->from($this->table);
 
@@ -55,15 +62,15 @@ class Input_sj_model extends CI_Model
         }
     }
 
-    public function get_datatables()
+    public function get_datatables_alamat_kirim()
     {
-        $this->get_data_tabel_barang();
+        $this->get_data_tabel_alamat_kirim();
         if ($_POST['length'] != -1)
             $this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
         return $query->result();
     }
-
+    
     public function count_filtered()
     {
         $this->get_data_tabel_barang();
@@ -73,6 +80,20 @@ class Input_sj_model extends CI_Model
 
 
     public function count_all()
+    {
+        $this->db->from($this->table);
+        return $this->db->count_all_results();
+    }
+
+    public function count_filtered_alamat_kirim()
+    {
+        $this->get_data_tabel_alamat_kirim();
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+
+    public function count_all_alamat_kirim()
     {
         $this->db->from($this->table);
         return $this->db->count_all_results();

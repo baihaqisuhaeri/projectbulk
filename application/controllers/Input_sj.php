@@ -277,6 +277,44 @@ class Input_sj extends CI_Controller
         }
         
     }
+
+
+    public function get_alamat_kirim()
+    {
+
+        
+        $list = $this->Input_sj_model->get_datatables_alamat_kirim();
+        $data = array();
+        $total = 0;
+        $no = $_POST['start'];
+        foreach ($list as $p) {
+            $no++;
+            $row = array();
+
+            $row[] = $no;
+           
+            $row[] = $p->nmcab;
+            $row[] = $p->npwp;
+            $row[] = $p->k_altk;
+            $row[] = $p->alk_cus1;
+            $row[] = $p->alk_cus2;
+            $row[] = $p->alk_cus3;
+      
+            // $row[] = '<a href="javascript:void(0);" class="fas fa-edit" onclick="get_data_po('.$p->id.')" title="Ubah data PO" style="color:black;"></a> | <a href="javascript:void(0);" class="fas fa-trash" onclick="hapus_po('.$p->id.')" title="Hapus data PO" style="color:black;"></a>';
+            $row[] = '<a href="#!" class="fas fa-edit edit_supir" data-id="' . $p->id . '"  title="Ubah alamat kirim" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteSupir" data-id="' . $p->id . '" title="Hapus alamat kirim" style="color:black;"></a>';
+
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->Input_sj_model->count_all_alamat_kirim(),
+            "recordsFiltered" => $this->Input_sj_model->count_filtered_alamat_kirim(),
+            "data" => $data,
+        );
+        //output to json format
+        echo json_encode($output);
+    }
     
 
 

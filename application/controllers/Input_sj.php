@@ -263,7 +263,7 @@ class Input_sj extends CI_Controller
         $unit = $this->input->post("unitSj");
         
       
-        $customer = $this->db->query("select * from customer where unit = '$unit' and flag_aktif = '' order by n_cus asc")->result();
+        $customer = $this->db->query("select DISTINCT * from customer where unit = '$unit' and flag_aktif = '' order by n_cus asc")->result();
        
         
         if(empty($customer)){
@@ -273,17 +273,18 @@ class Input_sj extends CI_Controller
         }
         
         foreach ($customer as $u){
-            echo '<option value="'.$u->id.'">'.$u->n_cus.' ('.$u->npwp.')('.$u->k_Cus.')</option>';
+            echo '<option value="'.$u->k_Cus."|".$u->n_cus.'">'.$u->n_cus.' ('.$u->npwp.')('.$u->k_Cus.')</option>';
+          
         }
-        
+
     }
 
 
     public function get_alamat_kirim()
     {
 
-        
-        $list = $this->Input_sj_model->get_datatables_alamat_kirim();
+        $k_cus = $this->input->post("k_cus");
+        $list = $this->Input_sj_model->get_datatables_alamat_kirim($k_cus);
         $data = array();
         $total = 0;
         $no = $_POST['start'];
@@ -301,15 +302,15 @@ class Input_sj extends CI_Controller
             $row[] = $p->alk_cus3;
       
             // $row[] = '<a href="javascript:void(0);" class="fas fa-edit" onclick="get_data_po('.$p->id.')" title="Ubah data PO" style="color:black;"></a> | <a href="javascript:void(0);" class="fas fa-trash" onclick="hapus_po('.$p->id.')" title="Hapus data PO" style="color:black;"></a>';
-            $row[] = '<a href="#!" class="fas fa-edit edit_supir" data-id="' . $p->id . '"  title="Ubah alamat kirim" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteSupir" data-id="' . $p->id . '" title="Hapus alamat kirim" style="color:black;"></a>';
-
+           // $row[] = '<a href="#!" class="fas fa-edit edit_supir" data-id="' . $p->id . '"  title="Ubah alamat kirim" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteSupir" data-id="' . $p->id . '" title="Hapus alamat kirim" style="color:black;"></a>';
+            $row[] = '<button type="button" id="pilih_alamat_kirim_modal"  class="btn btn-info">Pilih</button>';
             $data[] = $row;
         }
 
         $output = array(
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->Input_sj_model->count_all_alamat_kirim(),
-            "recordsFiltered" => $this->Input_sj_model->count_filtered_alamat_kirim(),
+            "recordsFiltered" => $this->Input_sj_model->count_filtered_alamat_kirim($k_cus),
             "data" => $data,
         );
         //output to json format

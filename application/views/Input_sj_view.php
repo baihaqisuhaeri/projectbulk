@@ -50,7 +50,7 @@
                                 <div class="card-header p-0 pt-1">
                                     <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#satu" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Tambah Supir</a>
+                                            <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#satu" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Tambah Surat Jalan</a>
                                         </li>
 
                                         <!--<li class="nav-item">
@@ -75,7 +75,7 @@
                                         <!--tab1-->
 
                                         <div class="tab-pane fade show active" id="satu" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
-                                            <form class="form-horizontal" id="tambahSupir">
+                                            <form class="form-horizontal" id="tambahSuratJalan">
                                                 <div class="callout callout-info" style="background-color: #EDEEF7;" id="bagian_1">
                                                     <!-- CAF0F8 F9DFDC -->
                                                     <div class="row">

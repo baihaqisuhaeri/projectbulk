@@ -10,31 +10,30 @@ class Input_sj_model extends CI_Model
     }
 
     
-    var $table = 'supir';
-    var $column_order = array(null, 'id', 'k_sales', 'n_sales', 'kd_unit'); //set column field database for datatable orderable
-    var $column_search = array('id', 'k_sales', 'n_sales', 'kd_unit'); //set column field database for datatable searchable
-    var $order = array('k_sales' => 'desc'); // default order
+    // var $table = 'supir';
+    // var $column_order = array(null, 'id', 'k_sales', 'n_sales', 'kd_unit'); //set column field database for datatable orderable
+    // var $column_search = array('id', 'k_sales', 'n_sales', 'kd_unit'); //set column field database for datatable searchable
+    // var $order = array('k_sales' => 'desc'); // default order
 
     //untuk alamat kirim
-    var $table = 'almt_krm';
+    var $tableAlamat = 'almt_krm';
     var $column_order_alamat_kirim = array(null, 'id', 'k_cus','n_cus','nmcab','npwp','al1_cus','al2_cus','al3_cus','k_altk','alk_cus1','alk_cus2','alk_cus3','flag_aktif','tgl_input','pc_input','tgl_edit'); 
     var $column_search_alamat_kirim = array('id', 'k_cus','n_cus','nmcab','npwp','al1_cus','al2_cus','al3_cus','k_altk','alk_cus1','alk_cus2','alk_cus3','flag_aktif','tgl_input','pc_input','tgl_edit'); 
     var $order_alamat_kirim = array('k_cus' => 'desc'); // default order
-    public function get_data_tabel_alamat_kirim()
+    public function get_data_tabel_alamat_kirim($k_cus)
     {
 
 
         
-        $this->db->select('*, supir.id as id');
-        $this->db->join('hak_akses', 'supir.kd_unit = hak_akses.kode_unit');
-        $this->db->where('hak_akses.nama_user', $nama);
+        $this->db->select('*');
+        $this->db->where('k_cus', $k_cus);
         $this->db->order_by('k_cus asc');
 
-        $this->db->from($this->table);
+        $this->db->from($this->tableAlamat);
 
         $i = 0;
 
-        foreach ($this->column_search as $item) // loop column 
+        foreach ($this->column_search_alamat_kirim as $item) // loop column 
         {
             if ($_POST['search']['value']) // if datatable send POST for search
             {
@@ -47,7 +46,7 @@ class Input_sj_model extends CI_Model
                     $this->db->or_like($item, $_POST['search']['value']);
                 }
 
-                if (count($this->column_search) - 1 == $i) //last loop
+                if (count($this->column_search_alamat_kirim) - 1 == $i) //last loop
                     $this->db->group_end(); //close bracket
             }
             $i++;
@@ -55,16 +54,16 @@ class Input_sj_model extends CI_Model
 
         if (isset($_POST['order'])) // here order processing
         {
-            $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+            $this->db->order_by($this->column_order_alamat_kirim[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else if (isset($this->order)) {
-            $order = $this->order;
-            $this->db->order_by(key($order), $order[key($order)]);
+            $order_alamat_kirim = $this->order_alamat_kirim;
+            $this->db->order_by(key($order_alamat_kirim), $order_alamat_kirim[key($order_alamat_kirim)]);
         }
     }
 
-    public function get_datatables_alamat_kirim()
+    public function get_datatables_alamat_kirim($k_cus)
     {
-        $this->get_data_tabel_alamat_kirim();
+        $this->get_data_tabel_alamat_kirim($k_cus);
         if ($_POST['length'] != -1)
             $this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
@@ -81,13 +80,13 @@ class Input_sj_model extends CI_Model
 
     public function count_all()
     {
-        $this->db->from($this->table);
+        $this->db->from($this->tableAlamat);
         return $this->db->count_all_results();
     }
 
-    public function count_filtered_alamat_kirim()
+    public function count_filtered_alamat_kirim($k_cus)
     {
-        $this->get_data_tabel_alamat_kirim();
+        $this->get_data_tabel_alamat_kirim($k_cus);
         $query = $this->db->get();
         return $query->num_rows();
     }
@@ -95,14 +94,14 @@ class Input_sj_model extends CI_Model
 
     public function count_all_alamat_kirim()
     {
-        $this->db->from($this->table);
+        $this->db->from($this->tableAlamat);
         return $this->db->count_all_results();
     }
 
     public function hapus_supir($id)
     {
         $this->db->where('id', $id);
-        $this->db->delete($this->table);
+        $this->db->delete($this->tableAlamat);
     }
 
     public function edit_supir($id, $data)

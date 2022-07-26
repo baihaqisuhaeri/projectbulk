@@ -27,7 +27,7 @@ class Input_sj_model extends CI_Model
         
         $this->db->select('*');
         $this->db->where('k_cus', $k_cus);
-        $this->db->order_by('k_cus asc');
+        $this->db->order_by('k_altk asc');
 
         $this->db->from($this->tableAlamat);
 

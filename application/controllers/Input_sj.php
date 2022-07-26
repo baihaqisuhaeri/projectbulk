@@ -300,6 +300,10 @@ class Input_sj extends CI_Controller
             $row[] = $p->alk_cus1;
             $row[] = $p->alk_cus2;
             $row[] = $p->alk_cus3;
+            $row[] = $p->al1_cus;
+            $row[] = $p->al2_cus;
+            $row[] = $p->al3_cus;
+            
       
             // $row[] = '<a href="javascript:void(0);" class="fas fa-edit" onclick="get_data_po('.$p->id.')" title="Ubah data PO" style="color:black;"></a> | <a href="javascript:void(0);" class="fas fa-trash" onclick="hapus_po('.$p->id.')" title="Hapus data PO" style="color:black;"></a>';
            // $row[] = '<a href="#!" class="fas fa-edit edit_supir" data-id="' . $p->id . '"  title="Ubah alamat kirim" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteSupir" data-id="' . $p->id . '" title="Hapus alamat kirim" style="color:black;"></a>';

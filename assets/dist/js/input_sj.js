@@ -46,6 +46,14 @@ $(document).on("click","#btnAlamatKirim",function() {
       processing: true, //Feature control the processing indicator.
       serverSide: true, //Feature control DataTables' server-side processing mode.
       order: [], //Initial no order.
+      "columnDefs": [
+        {
+            "targets": [7,8,9],
+            "visible": false,
+            "searchable": false
+        }
+    ],
+      
       
   
       // Load data for the table's content from an Ajax source
@@ -57,6 +65,7 @@ $(document).on("click","#btnAlamatKirim",function() {
         },
       },
     });
+    
   
     $("#tabel_alamat_kirim tbody").on("click", "#pilih_alamat_kirim_modal", function () {
       var data = table_alamat.row($(this).parents("tr")).data();
@@ -66,23 +75,26 @@ $(document).on("click","#btnAlamatKirim",function() {
   
       $("#npwp_modal").val(data[2]);
       $("#alamat_kirim_ke_modal").val(data[3]);
-      $("#alamat1_modal").val(data[4]);
-      $("#alamat2_modal").val(data[5]);
-      $("#alamat3_modal").val(data[6]);
+      $("#alamat_kirim1_modal").val(data[4]);
+      $("#alamat_kirim2_modal").val(data[5]);
+      $("#alamat_kirim3_modal").val(data[6]);
       
       
-  
+      
       $("#btn_edit").val(id);
+      
     });
     $("#npwp_modal").val("");
       $("#alamat_kirim_ke_modal").val("");
-      $("#alamat1_modal").val("");
-      $("#alamat2_modal").val("");
-      $("#alamat3_modal").val("");
+      $("#alamat_kirim1_modal").val("");
+      $("#alamat_kirim2_modal").val("");
+      $("#alamat_kirim3_modal").val("");
+      
     
   });
-});
   
+});
+
 
 function get_customer() {
     var unitSj = $("#unitSj").val();
@@ -96,3 +108,24 @@ function get_customer() {
       },
     });
   }
+
+ 
+  $(document).on("click","#btn_tambah_alamat",function() {
+    $('#modal_tambah_alamat').modal('show');
+    $('#modal_alamat').modal('hide');
+    //alert( table_alamat.row( ':last', { order: 'applied' } ).data() );
+    var dataTablesAlamat = table_alamat.row( ':last-child' ).data();
+    
+    alamatBaru = parseInt(dataTablesAlamat[3]);
+    alamatBaru+=1;
+    if(alamatBaru<10){
+      alamatBaru = "0" +alamatBaru;
+    }
+      $("#alamat_kirim_ke_baru").val(alamatBaru);
+      $("#nama_faktur_pajak_baru").val(dataTablesAlamat[1]);
+      
+      
+   
+    
+    
+  });

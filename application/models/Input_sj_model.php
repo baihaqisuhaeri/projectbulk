@@ -128,4 +128,27 @@ class Input_sj_model extends CI_Model
 
       //  function get_customer
 
+    //   function tambah_alamat_baru($unitSj, $k_cus){
+    //     $this->db->insert("almt_krm", $data);
+    //   }
+
+      function get_nama_customer($unit, $k_cus){
+        $this->db->select('*');
+
+        $this->db->from('almt_krm');
+
+        $this->db->where('unit', $unit );
+        $this->db->where('k_Cus', $k_cus );
+        $this->db->where('flag_aktif', '' );
+
+
+    $query = $this->db->get();
+
+    if ( $query->num_rows() > 0 )
+    {
+        $row = $query->row_array();
+        return $row;
+    }
+      }
+
 }

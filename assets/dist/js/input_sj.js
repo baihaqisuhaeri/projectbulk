@@ -29,13 +29,14 @@ $("#unitSj").on("change", function () {
     get_customer();
    
   });
-
+var k_cus;
 $(document).on("click","#btnAlamatKirim",function() {
   $('#modal_alamat').modal('show');
-  var k_cus = $("#nama_customer").val().split("|");
+  k_cus = $("#nama_customer").val().split("|");
   $("#no_customer_modal").val(k_cus[0]);
   $("#nama_customer_modal").val(k_cus[1]);
   k_cus = k_cus[0];
+  
   
 
   $(document).ready(function () {
@@ -46,13 +47,13 @@ $(document).on("click","#btnAlamatKirim",function() {
       processing: true, //Feature control the processing indicator.
       serverSide: true, //Feature control DataTables' server-side processing mode.
       order: [], //Initial no order.
-      "columnDefs": [
-        {
-            "targets": [7,8,9],
-            "visible": false,
-            "searchable": false
-        }
-    ],
+    //   "columnDefs": [
+    //     {
+    //         "targets": [7,8,9],
+    //         "visible": false,
+    //         "searchable": false
+    //     }
+    // ],
       
       
   
@@ -95,9 +96,9 @@ $(document).on("click","#btnAlamatKirim",function() {
   
 });
 
-
+var unitSj;
 function get_customer() {
-    var unitSj = $("#unitSj").val();
+     unitSj = $("#unitSj").val();
   
     $.ajax({
       url: "input-sj/customer",
@@ -113,14 +114,30 @@ function get_customer() {
   $(document).on("click","#btn_tambah_alamat",function() {
     $('#modal_tambah_alamat').modal('show');
     $('#modal_alamat').modal('hide');
+   
     //alert( table_alamat.row( ':last', { order: 'applied' } ).data() );
     var dataTablesAlamat = table_alamat.row( ':last-child' ).data();
-    
+    if(dataTablesAlamat == null){
+      alamatBaru = "00";
+    }else{    
     alamatBaru = parseInt(dataTablesAlamat[3]);
     alamatBaru+=1;
     if(alamatBaru<10){
       alamatBaru = "0" +alamatBaru;
     }
+  }
+  $.ajax({
+    url: "input-sj/tambah-alamat-baru",
+    type: "post",
+    data: { unitSj: unitSj,
+            k_cus: k_cus
+             },
+    success: function (data) {
+      //$("#nama_customer").html(data);
+      //alert(data);
+    },
+  });
+
       $("#alamat_kirim_ke_baru").val(alamatBaru);
       $("#nama_faktur_pajak_baru").val(dataTablesAlamat[1]);
       

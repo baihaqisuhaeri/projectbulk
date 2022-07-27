@@ -300,9 +300,7 @@ class Input_sj extends CI_Controller
             $row[] = $p->alk_cus1;
             $row[] = $p->alk_cus2;
             $row[] = $p->alk_cus3;
-            $row[] = $p->al1_cus;
-            $row[] = $p->al2_cus;
-            $row[] = $p->al3_cus;
+            
             
       
             // $row[] = '<a href="javascript:void(0);" class="fas fa-edit" onclick="get_data_po('.$p->id.')" title="Ubah data PO" style="color:black;"></a> | <a href="javascript:void(0);" class="fas fa-trash" onclick="hapus_po('.$p->id.')" title="Hapus data PO" style="color:black;"></a>';
@@ -319,6 +317,23 @@ class Input_sj extends CI_Controller
         );
         //output to json format
         echo json_encode($output);
+    }
+
+
+
+    function get_nama_customer(){
+        $k_cus = $this->input->post("k_cus");
+        $unit = $this->input->post("unitSj");
+        $data = $this->Input_sj_model->get_nama_customer($unit, $k_cus);
+
+        // $output = array(
+        //     "draw" => $_POST['draw'],
+        //     "recordsTotal" => $this->Mobil_model->count_all(),
+        //     "recordsFiltered" => $this->Mobil_model->count_filtered(),
+        //     "data" => $data,
+        // );
+        //output to json format
+        //echo json_encode($data);
     }
     
 

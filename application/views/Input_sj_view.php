@@ -409,9 +409,7 @@
                                                         <th>Alamat 1</th>
                                                         <th>Alamat 2</th>
                                                         <th>Alamat 3</th>
-                                                        <th>Alamat Customer 1</th>
-                                                        <th>Alamat Customer 2</th>
-                                                        <th>Alamat Customer 3</th>
+                    
                                                         <th>Aksi</th>
                                                         </tr>
                                                     </thead>
@@ -429,19 +427,36 @@
                                                     <div class="modal-dialog modal-xl">
                                                         
                                                         <div class="modal-content" style="padding: 10px" >
-                                                        <div class="form-group text-right" style="float: right;">
-                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_simpan_alamast" style="margin-right: 941px">+ Tambah Alamat Baru</button>
+                                                        
+                                                    
+                                                    <div class="row">
+                                                        <div class="form-group col-lg-4">
+                                                            <label>Nomor Customer<span style="color: red;">*</span></label>
+                                                            <input class="form-control" type="text" name="nomor_customer_baru" id="nomor_customer_baru" placeholder="Nomor Customer" disabled>
+                                                            <span class="text-danger" id="error_nomor_customer_baru"></span>
 
                                                         </div>
-                                                        
-                                                    <div class="row">
-                                                            
+
+                                                        <div class="form-group col-lg-4">
+                                                            <label>Nama Customer<span style="color: red;">*</span></label>
+                                                            <input class="form-control" type="text" name="nama_customer_baru" id="nama_customer_baru" placeholder="Nama Customer" disabled>
+                                                            <span class="text-danger" id="error_nama_customer_baru"></span>
+
+                                                        </div>
+
                                                         <div class="form-group col-lg-4">
                                                             <label>Alamat kirim ke-<span style="color: red;">*</span></label>
                                                             <input class="form-control" type="text" name="alamat_kirim_ke_baru" id="alamat_kirim_ke_baru" placeholder="Alamat kirim ke-" disabled>
                                                             <span class="text-danger" id="error_alamat_kirim_ke_baru"></span>
 
                                                         </div>
+
+                                                        
+                                                    </div>
+
+                                                    <div class="row">
+                                                            
+                                                        
                                                  
                                                         <div class="form-group col-lg-4">
                                                             <label>Nama Faktur Pajak<span style="color: red;">*</span></label>
@@ -482,6 +497,20 @@
                                                             <span class="text-danger" id="error_alamat3_customer_hidden"></span>
 
                                                         </div>
+
+                                                        <div class="form-group col-lg-4">
+                                                            
+                                                            <input hidden class="form-control" type="text" name="no_customer_hidden" id="no_customer_hidden" placeholder="" disabled>
+                                                            <span class="text-danger" id="error_no_customer_hidden"></span>
+
+                                                        </div>
+                                                        
+                                                        <div class="form-group col-lg-4">
+                                                            
+                                                            <input hidden class="form-control" type="text" name="nama_customer_hidden" id="nama_customer_hidden" placeholder="" disabled>
+                                                            <span class="text-danger" id="error_nama_customer_hidden"></span>
+
+                                                        </div>
                                                     
                                                         
 
@@ -514,6 +543,12 @@
                                                         
 
                                                     </div>
+
+
+                                                    <div class="form-group text-right" style="float: right;">
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_simpan_alamast" style="margin-right: 0px">Simpan</button>
+
+                                                        </div>
 
 
                                                         </div>

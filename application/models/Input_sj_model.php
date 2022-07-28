@@ -2,12 +2,7 @@
 
 class Input_sj_model extends CI_Model
 {
-    public function tambah_supir($table, $data)
-    {
-       $insert = $this->db->insert($table, $data);
-        
-        
-    }
+    
 
     
     // var $table = 'supir';
@@ -135,7 +130,7 @@ class Input_sj_model extends CI_Model
       function get_nama_customer($unit, $k_cus){
         $this->db->select('*');
 
-        $this->db->from('almt_krm');
+        $this->db->from('customer');
 
         $this->db->where('unit', $unit );
         $this->db->where('k_Cus', $k_cus );
@@ -150,5 +145,12 @@ class Input_sj_model extends CI_Model
         return $row;
     }
       }
+
+      public function tambah_alamat_baru($data)
+    {
+       $insert = $this->db->insert("almt_krm", $data);
+        
+        
+    }
 
 }

@@ -326,16 +326,55 @@ class Input_sj extends CI_Controller
         $unit = $this->input->post("unitSj");
         $data = $this->Input_sj_model->get_nama_customer($unit, $k_cus);
 
-        // $output = array(
-        //     "draw" => $_POST['draw'],
-        //     "recordsTotal" => $this->Mobil_model->count_all(),
-        //     "recordsFiltered" => $this->Mobil_model->count_filtered(),
-        //     "data" => $data,
-        // );
+        $output = array(
+           
+            "data" => $data,
+        );
         //output to json format
-        //echo json_encode($data);
+        echo json_encode($data);
     }
     
+    function tambah_alamat_baru(){
+        
+        $kodeCustomerBaru = $_POST['kodeCustomerBaru'];
+        $namaCustomerBaru = $_POST['namaCustomerBaru'];
+        $alamatKirimKeBaru = $_POST['alamatKirimKeBaru'];
+        $namaCabangBaru = $_POST['namaCabangBaru'];
+        $npwpBaru  = $_POST['npwpBaru'];
+        $alamat1CustomerBaru = $_POST['alamat1CustomerBaru'];
+        $alamat2CustomerBaru = $_POST['alamat2CustomerBaru'];
+        $alamat3CustomerBaru = $_POST['alamat3CustomerBaru'];
+        $alamatKirim1 = $_POST['alamatKirim1'];
+        $alamatKirim2 = $_POST['alamatKirim2'];
+        $alamatKirim3 = $_POST['alamatKirim3'];
+        date_default_timezone_set('Asia/Jakarta');
+        $tgl_input = date("Y-m-d h:i:s");
+        
+        $data = array(
+            'k_cus'  =>  $kodeCustomerBaru,
+            'n_cus'  =>  $namaCustomerBaru,
+            'k_altk' => $alamatKirimKeBaru,
+            'nmcab'  =>  $namaCabangBaru,
+            'npwp'   =>   $npwpBaru,
+            'al1_cus'   => $alamat1CustomerBaru,
+            'al2_cus'   => $alamat2CustomerBaru,
+            'al3_cus'   => $alamat3CustomerBaru,
+            'alk_cus1'  => $alamatKirim1,
+            'alk_cus2'  => $alamatKirim2,
+            'alk_cus3'  => $alamatKirim3,
+            'tgl_input' => $tgl_input
+        );
+ 
+        $this->Input_sj_model->tambah_alamat_baru($data);
+        $query = $this->db->affected_rows();
 
+            $data = array(
+                'status' => 'true',
+            );
+
+            echo json_encode($data);
+        
+    
+    }
 
 }

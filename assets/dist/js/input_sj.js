@@ -127,22 +127,129 @@ function get_customer() {
     }
   }
   $.ajax({
-    url: "input-sj/tambah-alamat-baru",
+    url: "input-sj/get-nama-customer",
     type: "post",
     data: { unitSj: unitSj,
             k_cus: k_cus
              },
     success: function (data) {
       //$("#nama_customer").html(data);
-      //alert(data);
+       data = JSON.parse(data);
+       $("#nomor_customer_baru").val(data.k_Cus);
+       $("#nama_customer_baru").val(data.n_cus);
+       $("#nama_faktur_pajak_baru").val(data.nmcab);
+       $("#alamat1_customer_baru_hidden").val(data.al1_cus);
+       $("#alamat2_customer_baru_hidden").val(data.al2_cus);
+       $("#alamat3_customer_baru_hidden").val(data.al3_cus);
+       
+       //console.log( $("#alamat1_customer_baru_hidden").val());
+      
     },
   });
 
       $("#alamat_kirim_ke_baru").val(alamatBaru);
-      $("#nama_faktur_pajak_baru").val(dataTablesAlamat[1]);
+      //$("#nama_faktur_pajak_baru").val(dataTablesAlamat[1]);
       
       
    
     
     
   });
+
+  $(document).on("click","#btn_simpan_alamat_baru",function() {
+
+    $("#error_alamat_kirim1_baru").html("");
+    $("#error_alamat_kirim2_baru").html("");
+    $("#error_alamat_kirim3_baru").html("");
+
+  
+    var kodeCustomerBaru = $("#nomor_customer_baru").val();
+    var namaCustomerBaru = $("#nama_customer_baru").val();
+    var alamatKirimKeBaru = $("#alamat_kirim_ke_baru").val();
+    var namaCabangBaru = $("#nama_faktur_pajak_baru").val();
+    var npwpBaru  = $("#npwp_baru").val();
+    var alamatKirim1 = $("#alamat_kirim1_baru").val();
+    var alamatKirim2 = $("#alamat_kirim1_baru").val();
+    var alamatKirim3 = $("#alamat_kirim1_baru").val();
+    var alamat1CustomerBaru = $("#alamat1_customer_baru_hidden").val();
+    var alamat2CustomerBaru = $("#alamat2_customer_baru_hidden").val();
+    var alamat3CustomerBaru = $("#alamat3_customer_baru_hidden").val();
+    
+  
+    var err = 0;
+  
+    if ( alamatKirim1 == "") {
+      $("#error_alamat_kirim1_baru").html("Alamat kirim 1 tidak boleh kosong!");
+      err += 1;
+    }
+    if ( alamatKirim2 == "") {
+      $("#error_alamat_kirim2_baru").html("Alamat kirim 2 tidak boleh kosong!");
+      err += 1;
+    }
+    if ( alamatKirim3 == "") {
+      $("#error_alamat_kirim3_baru").html("Alamat kirim 3 tidak boleh kosong!");
+      err += 1;
+    }
+    
+
+  
+    if (err == 0) {
+      $('#modal_konfirmasi_tambah_alamat').modal('show');
+  
+    } 
+
+  });
+
+  function tambahAlamat(){
+    $('#modal_konfirmasi_tambah_alamat').modal('hide');
+      
+    var kodeCustomerBaru = $("#nomor_customer_baru").val();
+    var namaCustomerBaru = $("#nama_customer_baru").val();
+    var alamatKirimKeBaru = $("#alamat_kirim_ke_baru").val();
+    var namaCabangBaru = $("#nama_faktur_pajak_baru").val();
+    var npwpBaru  = $("#npwp_baru").val();
+    var alamatKirim1 = $("#alamat_kirim1_baru").val();
+    var alamatKirim2 = $("#alamat_kirim1_baru").val();
+    var alamatKirim3 = $("#alamat_kirim1_baru").val();
+    var alamat1CustomerBaru = $("#alamat1_customer_baru_hidden").val();
+    var alamat2CustomerBaru = $("#alamat2_customer_baru_hidden").val();
+    var alamat3CustomerBaru = $("#alamat3_customer_baru_hidden").val();
+
+    
+      
+      $.ajax({
+        url: "input-sj/tambah-alamat-baru",
+        type: "post",
+        data: {
+          kodeCustomerBaru: kodeCustomerBaru,
+          namaCustomerBaru: namaCustomerBaru,
+          alamatKirimKeBaru: alamatKirimKeBaru,
+          namaCabangBaru: namaCabangBaru,
+          npwpBaru: npwpBaru,
+          alamatKirim1: alamatKirim1,
+          alamatKirim2: alamatKirim2,
+          alamatKirim3: alamatKirim3,
+          alamat1CustomerBaru: alamat1CustomerBaru,
+          alamat2CustomerBaru: alamat2CustomerBaru,
+          alamat3CustomerBaru: alamat3CustomerBaru,
+        },
+        success: function (data) {
+          var json = JSON.parse(data);
+          var status = json.status;
+          if (status == "true") {
+            mytable = $("#tabel_alamat_kirim").DataTable();
+            mytable.draw();
+            Swal.fire("Berhasil!", "Alamat baru berhasil ditambahkan!", "success");
+            $("#unitSupir").val("").change();
+            $("#nama_supir").val("");
+          } else {
+           // alert("a");
+            Swal.fire("Gagal!", "Supir sudah ada di unit yang sama!", "error");
+          }
+        },
+      });
+
+      $('#modal_alamat').modal('show');
+      
+    
+  }

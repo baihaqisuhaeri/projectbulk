@@ -479,39 +479,24 @@
                                                             
                                                         <div class="form-group col-lg-4">
                                                             
-                                                            <input hidden class="form-control" type="text" name="alamat1_customer_hidden" id="alamat1_customer_hidden" placeholder="" disabled>
-                                                            <span class="text-danger" id="error_alamat1_customer_hidden"></span>
+                                                            <input hidden class="form-control" type="text" name="alamat1_customer_baru_hidden" id="alamat1_customer_baru_hidden" placeholder="" disabled>
+                                                            <span class="text-danger" id="error_alamat1_customer_baru_hidden"></span>
 
                                                         </div>
                                                  
                                                         <div class="form-group col-lg-4">
                                                           
-                                                            <input hidden class="form-control" type="text" name="alamat2_customer_hidden" id="alamat2_customer_hidden" placeholder="" disabled>
-                                                            <span class="text-danger" id="error_alamat2_customer_hidden"></span>
+                                                            <input hidden class="form-control" type="text" name="alamat2_customer_baru_hidden" id="alamat2_customer_baru_hidden" placeholder="" disabled>
+                                                            <span class="text-danger" id="error_alamat2_customer_baru_hidden"></span>
 
                                                         </div>
 
                                                         <div class="form-group col-lg-4">
                                                             
-                                                            <input hidden class="form-control" type="text" name="alamat3_customer_hidden" id="alamat3_customer_hidden" placeholder="" disabled>
-                                                            <span class="text-danger" id="error_alamat3_customer_hidden"></span>
+                                                            <input hidden class="form-control" type="text" name="alamat3_customer_baru_hidden" id="alamat3_customer_baru_hidden" placeholder="" disabled>
+                                                            <span class="text-danger" id="error_alamat3_customer_baru_hidden"></span>
 
                                                         </div>
-
-                                                        <div class="form-group col-lg-4">
-                                                            
-                                                            <input hidden class="form-control" type="text" name="no_customer_hidden" id="no_customer_hidden" placeholder="" disabled>
-                                                            <span class="text-danger" id="error_no_customer_hidden"></span>
-
-                                                        </div>
-                                                        
-                                                        <div class="form-group col-lg-4">
-                                                            
-                                                            <input hidden class="form-control" type="text" name="nama_customer_hidden" id="nama_customer_hidden" placeholder="" disabled>
-                                                            <span class="text-danger" id="error_nama_customer_hidden"></span>
-
-                                                        </div>
-                                                    
                                                         
 
                                                     </div>
@@ -546,7 +531,7 @@
 
 
                                                     <div class="form-group text-right" style="float: right;">
-                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_simpan_alamast" style="margin-right: 0px">Simpan</button>
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_simpan_alamat_baru" style="margin-right: 0px">Simpan</button>
 
                                                         </div>
 
@@ -637,14 +622,14 @@
                                     </div>
                                     </form>
 
-                                    <div class="modal fade" id="modal_konfirmasi">
+                                    <div class="modal fade" id="modal_konfirmasi_tambah_alamat">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-body">
                                                     <h5>Apa Anda sudah yakin?</h5>
                                                     <div class="form-group text-right">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" onclick="cekTambah()" >Ya</button>
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" onclick="tambahAlamat()" >Ya</button>
                                                     </div>
                                                 </div>
                                             </div>

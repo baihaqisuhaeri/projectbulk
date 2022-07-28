@@ -121,7 +121,8 @@ $route['input-sj/edit-sj'] = 'Input_sj/edit_sj';
 $route['input-sj/unit-sj'] = 'Input_sj/get_unit_sj';
 $route['input-sj/customer'] = 'Input_sj/get_customer';
 $route['input-sj/tabel-alamat-kirim'] = 'Input_sj/get_alamat_kirim';
-$route['input-sj/tambah-alamat-baru'] = 'Input_sj/get_nama_customer';
+$route['input-sj/get-nama-customer'] = 'Input_sj/get_nama_customer';
+$route['input-sj/tambah-alamat-baru'] = 'Input_sj/tambah_alamat_baru';
 
 
 

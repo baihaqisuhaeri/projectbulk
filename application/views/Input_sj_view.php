@@ -134,14 +134,14 @@
                                                     <div class="row">
                                                         <div class="form-group col-lg-4">
                                                             <label>Kode Alamat <span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="kode_alamat" id="kode_alamat" placeholder="Kode Alamat">
+                                                            <input class="form-control" type="text" name="kode_alamat" id="kode_alamat" placeholder="Kode Alamat" disabled>
                                                             <span class="text-danger" id="error_kode_alamat"></span>
 
                                                         </div>
 
                                                         <div class="form-group col-lg-4">
                                                             <label>NPWP<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="npwp" id="npwp" placeholder="NPWP">
+                                                            <input class="form-control" type="text" name="npwp" id="npwp" placeholder="NPWP" disabled>
                                                             <span class="text-danger" id="error_npwp"></span>
 
                                                         </div>
@@ -392,7 +392,7 @@
                                                     </div>
 
                                                     <div class="form-group text-right">
-                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_simpan_alamast">Simpan</button>
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_simpan_alamat">Simpan</button>
 
                                                     </div>
 
@@ -531,6 +531,7 @@
 
 
                                                     <div class="form-group text-right" style="float: right;">
+                                                    <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_kembali" style="margin-right: 0px">Kembali</button>
                                                         <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_simpan_alamat_baru" style="margin-right: 0px">Simpan</button>
 
                                                         </div>

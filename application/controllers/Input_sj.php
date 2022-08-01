@@ -374,7 +374,25 @@ class Input_sj extends CI_Controller
 
             echo json_encode($data);
         
-    
     }
+
+    function get_no_spm()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $tgl_sekarang = date("Y-m-d");
+        $kodeCustomer = $this->input->post("kodeCustomer");
+        $spm = $this->db->query("SELECT * FROM tb_spm WHERE k_cus = '$kodeCustomer'  and spm_brlk = '2022-07-01' ")->result();
+
+        if (empty($spm)) {
+            echo '<option value="kosong">Belum ada data</option>';
+        } else {
+            echo '<option value="">Pilih No SPM</option>';
+        }
+
+        foreach ($spm as $sp) {
+            echo '<option value="' . $sp->no_urutspm . '">' . $sp->no_spm . '</option>';
+        }
+    }
+
 
 }

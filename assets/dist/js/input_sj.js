@@ -10,6 +10,28 @@ $(".select2bs4").select2({
   theme: "bootstrap4",
 });
 
+$("#nama_customer").on("change", function () {
+
+  get_no_spm();
+ 
+});
+
+
+function get_no_spm() {
+  var kodeCustomer = $("#nama_customer").val().split("|");
+  kodeCustomer = kodeCustomer[0];
+  $.ajax({
+    url: "input-sj/get-no-spm",
+    type: "post",
+    data: { kodeCustomer: kodeCustomer
+             },
+    success: function (data) {
+      $("#no_spm").html(data);
+      //$("#unit_spm").html(data);
+    },
+  });
+}
+
 get_unit_sj();
 
 function get_unit_sj() {
@@ -31,6 +53,19 @@ $("#unitSj").on("change", function () {
   });
 var k_cus;
 $(document).on("click","#btnAlamatKirim",function() {
+  $("#error_nama_customer").html("");
+
+  var namaCustomer = $("#nama_customer").val();
+  
+  var err = 0;
+  
+    if ( namaCustomer == null || namaCustomer == "") {
+      $("#error_nama_customer").html("Nama customer harus dipilih terlebih dahulu!");
+      err += 1;
+    }
+
+    if (err == 0) {
+  
   $('#modal_alamat').modal('show');
   k_cus = $("#nama_customer").val().split("|");
   $("#no_customer_modal").val(k_cus[0]);
@@ -43,6 +78,7 @@ $(document).on("click","#btnAlamatKirim",function() {
     //datatables
     $("#tabel_alamat_kirim").dataTable().fnDestroy();
     table_alamat = $("#tabel_alamat_kirim").DataTable({
+      
       
       processing: true, //Feature control the processing indicator.
       serverSide: true, //Feature control DataTables' server-side processing mode.
@@ -93,8 +129,9 @@ $(document).on("click","#btnAlamatKirim",function() {
       
     
   });
-  
+}
 });
+
 
 var unitSj;
 function get_customer() {
@@ -141,7 +178,19 @@ function get_customer() {
        $("#alamat1_customer_baru_hidden").val(data.al1_cus);
        $("#alamat2_customer_baru_hidden").val(data.al2_cus);
        $("#alamat3_customer_baru_hidden").val(data.al3_cus);
+
        
+
+       $("#error_alamat_kirim1_baru").html("");
+       $("#error_alamat_kirim2_baru").html("");
+       $("#error_alamat_kirim3_baru").html("");
+       $("#error_npwp_baru").html("");
+
+       $("#alamat_kirim1_baru").val("");
+       $("#alamat_kirim2_baru").val("");
+       $("#alamat_kirim3_baru").val("");
+       $("#npwp_baru").val("");
+        
        //console.log( $("#alamat1_customer_baru_hidden").val());
       
     },
@@ -156,12 +205,18 @@ function get_customer() {
     
   });
 
+  $(document).on("click","#btn_kembali",function() {
+    $('#modal_tambah_alamat').modal('hide');
+    $('#modal_alamat').modal('show');
+  });
+
   $(document).on("click","#btn_simpan_alamat_baru",function() {
+    
 
     $("#error_alamat_kirim1_baru").html("");
     $("#error_alamat_kirim2_baru").html("");
     $("#error_alamat_kirim3_baru").html("");
-
+    $("#error_npwp_baru").html("");
   
     var kodeCustomerBaru = $("#nomor_customer_baru").val();
     var namaCustomerBaru = $("#nama_customer_baru").val();
@@ -169,8 +224,8 @@ function get_customer() {
     var namaCabangBaru = $("#nama_faktur_pajak_baru").val();
     var npwpBaru  = $("#npwp_baru").val();
     var alamatKirim1 = $("#alamat_kirim1_baru").val();
-    var alamatKirim2 = $("#alamat_kirim1_baru").val();
-    var alamatKirim3 = $("#alamat_kirim1_baru").val();
+    var alamatKirim2 = $("#alamat_kirim2_baru").val();
+    var alamatKirim3 = $("#alamat_kirim3_baru").val();
     var alamat1CustomerBaru = $("#alamat1_customer_baru_hidden").val();
     var alamat2CustomerBaru = $("#alamat2_customer_baru_hidden").val();
     var alamat3CustomerBaru = $("#alamat3_customer_baru_hidden").val();
@@ -182,12 +237,19 @@ function get_customer() {
       $("#error_alamat_kirim1_baru").html("Alamat kirim 1 tidak boleh kosong!");
       err += 1;
     }
+
     if ( alamatKirim2 == "") {
       $("#error_alamat_kirim2_baru").html("Alamat kirim 2 tidak boleh kosong!");
       err += 1;
     }
+
     if ( alamatKirim3 == "") {
       $("#error_alamat_kirim3_baru").html("Alamat kirim 3 tidak boleh kosong!");
+      err += 1;
+    }
+
+    if ( npwpBaru == "") {
+      $("#error_npwp_baru").html("NPWP tidak boleh kosong!");
       err += 1;
     }
     
@@ -240,16 +302,70 @@ function get_customer() {
             mytable = $("#tabel_alamat_kirim").DataTable();
             mytable.draw();
             Swal.fire("Berhasil!", "Alamat baru berhasil ditambahkan!", "success");
-            $("#unitSupir").val("").change();
-            $("#nama_supir").val("");
+            $('#modal_tambah_alamat').modal('hide');
+            $('#modal_alamat').modal('hide');
           } else {
            // alert("a");
             Swal.fire("Gagal!", "Supir sudah ada di unit yang sama!", "error");
           }
         },
       });
-
-      $('#modal_alamat').modal('show');
-      
     
   }
+
+  $(document).on("click","#btn_simpan_alamat",function() {
+    
+    $("#error_alamat_kirim_ke_modal").html("");
+    $("#error_alamat_kirim1_modal").html("");
+    $("#error_alamat_kirim2_modal").html("");
+    $("#error_alamat_kirim3_modal").html("");
+    $("#error_npwp_modal").html("");
+    
+
+    var alamatKirimKeModal = $("#alamat_kirim_ke_modal").val();
+    var alamatKirim1Modal = $("#alamat_kirim1_modal").val();
+    var alamatKirim2Modal = $("#alamat_kirim2_modal").val();
+    var alamatKirim3Modal = $("#alamat_kirim3_modal").val();
+    var npwpModal = $("#npwp_modal").val();
+
+    var err = 0;
+
+    if ( alamatKirimKeModal == "") {
+      $("#error_alamat_kirim_ke_modal").html("Alamat kirim ke- tidak boleh kosong!");
+      err += 1;
+    }
+
+    if ( alamatKirim1Modal == "") {
+      $("#error_alamat_kirim1_modal").html("Alamat kirim 1 tidak boleh kosong!");
+      err += 1;
+    }
+
+    if ( alamatKirim2Modal == "") {
+      $("#error_alamat_kirim2_modal").html("Alamat kirim 2 tidak boleh kosong!");
+      err += 1;
+    }
+
+    if ( alamatKirim3Modal == "") {
+      $("#error_alamat_kirim3_modal").html("Alamat kirim 3 tidak boleh kosong!");
+      err += 1;
+    }
+
+    if ( npwpModal == "") {
+      $("#error_npwp_modal").html("NPWP tidak boleh kosong!");
+      err += 1;
+    }
+
+    if (err == 0) {
+      $('#modal_alamat').modal('hide');
+      
+      $("#alamat1").val(alamatKirim1Modal);
+      $("#alamat2").val(alamatKirim2Modal);
+      $("#alamat3").val(alamatKirim3Modal);
+      $("#kode_alamat").val(alamatKirimKeModal);
+      $("#npwp").val(npwpModal);
+
+
+  
+    } 
+
+  });

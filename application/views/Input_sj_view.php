@@ -397,10 +397,10 @@
                                                     </div>
 
                                                     
-
+                                                    <div class="callout callout-warning table-responsive" width="100%" style="background-color: #FFF8E5;" id="bagian_3">
 
                                                     <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_alamat_kirim">
-                                                    <thead>
+                                                        <thead>
                                                         <tr>
                                                         <th>No</th>
                                                         <th>Nama Faktur Pajak</th>
@@ -412,11 +412,12 @@
                     
                                                         <th>Aksi</th>
                                                         </tr>
-                                                    </thead>
-                                                    <tbody>
+                                                        </thead>
+                                                        <tbody>
                                                     
-                                                    </tbody>
+                                                        </tbody>
                                                     </table>
+                                    </div>
 
                                                         </div>
                                                     </div>

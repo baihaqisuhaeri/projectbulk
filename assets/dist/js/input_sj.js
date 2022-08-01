@@ -79,7 +79,7 @@ $(document).on("click","#btnAlamatKirim",function() {
     $("#tabel_alamat_kirim").dataTable().fnDestroy();
     table_alamat = $("#tabel_alamat_kirim").DataTable({
       
-      
+      // scrollX: true,
       processing: true, //Feature control the processing indicator.
       serverSide: true, //Feature control DataTables' server-side processing mode.
       order: [], //Initial no order.

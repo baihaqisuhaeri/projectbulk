@@ -381,7 +381,11 @@ class Input_sj extends CI_Controller
         date_default_timezone_set('Asia/Jakarta');
         $tgl_sekarang = date("Y-m-d");
         $kodeCustomer = $this->input->post("kodeCustomer");
-        $spm = $this->db->query("SELECT * FROM tb_spm WHERE k_cus = '$kodeCustomer'  and spm_brlk = '2022-07-01' ")->result();
+        $spm = $this->db->query("SELECT * FROM tb_spm WHERE k_cus = '$kodeCustomer'  and spm_brlk >= '2022-07-01' ")->result();
+
+        // echo "<pre>";
+        // print_r($spm);
+        // die();
 
         if (empty($spm)) {
             echo '<option value="kosong">Belum ada data</option>';
@@ -390,6 +394,9 @@ class Input_sj extends CI_Controller
         }
 
         foreach ($spm as $sp) {
+            $spmVol = $this->db->query("SELECT * FROM `dbt002` WHERE no_urutspm = '$sp->no_urutspm'")->result();
+            echo "<pre>";
+            print_r($spmVol);
             echo '<option value="' . $sp->no_urutspm . '">' . $sp->no_spm . '</option>';
         }
     }

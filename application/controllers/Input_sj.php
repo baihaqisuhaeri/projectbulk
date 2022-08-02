@@ -392,13 +392,50 @@ class Input_sj extends CI_Controller
         } else {
             echo '<option value="">Pilih No SPM</option>';
         }
-
+        $vol_kirim_spm = 0;
         foreach ($spm as $sp) {
             $spmVol = $this->db->query("SELECT * FROM `dbt002` WHERE no_urutspm = '$sp->no_urutspm'")->result();
-            echo "<pre>";
-            print_r($spmVol);
-            echo '<option value="' . $sp->no_urutspm . '">' . $sp->no_spm . '</option>';
+            $vol_kirim_spm = $sp->volume_krm;
+            foreach($spmVol as $spVol){
+                if($sp->no_urutspm == $spVol->no_urutspm){
+                    //echo $vol_kirim_spm . " | ".$spVol->kg_kirim.". ";
+                    $vol_kirim_spm = $vol_kirim_spm - $spVol->kg_kirim;
+                }
+            }
+            if($vol_kirim_spm>0){
+                echo '<option value="' . $sp->no_urutspm . '">' . $sp->no_spm . '</option>';
+          
+            }
+           
+            
         }
+    }
+
+    function get_volume_spm(){
+        $noUrutSpm = $this->input->post("noUrutSpm");
+        //$data = $this->Input_sj_model->get_volume_spm($noUrutSpm);
+        $data =  $this->db->query("SELECT * FROM `tb_spm` WHERE no_urutspm = '$noUrutSpm'")->result();
+        $dataSj = $this->db->query("SELECT * FROM `dbt002` WHERE no_urutspm = '$noUrutSpm'")->result();;
+
+        // echo "<pre>";
+        // print_r($data);
+        // die();
+        
+        $volume_spm = 0;
+        foreach($data as $d){
+            $volume_spm = $d->volume_krm;
+        }
+        foreach($dataSj as $dsj){
+            $volume_spm -= $dsj->kg_kirim;
+        }
+        
+        $output = array(
+           
+            "volume_spm" => $volume_spm,
+        );
+        //output to json format
+        echo json_encode($output);
+        
     }
 
 

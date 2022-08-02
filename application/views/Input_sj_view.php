@@ -254,8 +254,8 @@
 
                                                         <div class="form-group col-lg-4">
                                                                     <label>Kilogram<span style="color: red;">*</span></label>
-                                                                    <input class="form-control autonumber" type="text" name="kilogram" id="kilogram" placeholder="kg">
-                                                                    <span class="text-danger" id="error_jumlah"></span>
+                                                                    <input class="form-control " type="number" name="kilogram" id="kilogram" placeholder="kg">
+                                                                    <span class="text-danger" id="error_kilogram"></span>
                                                         </div>
                                                     </div>
 
@@ -325,7 +325,7 @@
 
 
                                                     <div class="form-group text-right">
-                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="submit" id="btn_next">Tambah</button>
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_tambah_sj">Tambah</button>
 
                                                     </div>
 
@@ -715,6 +715,7 @@
         <!-- /.content-wrapper -->
 
         <!-- Control Sidebar -->
+        
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
         </aside>

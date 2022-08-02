@@ -153,4 +153,43 @@ class Input_sj_model extends CI_Model
         
     }
 
+    public function get_volume_spm($noUrutSpm){
+        $this->db->select('*');
+
+        $this->db->from('tb_spm');
+
+        $this->db->where('no_urutspm', $noUrutSpm );
+        
+
+
+    $query = $this->db->get();
+
+    if ( $query->num_rows() > 0 )
+    {
+        $row = $query->row_array();
+        return $row;
+    }
+
+    }
+
+
+    public function get_volume_spm_sj($noUrutSpm){
+        $this->db->select('*');
+
+        $this->db->from('dbt002');
+
+        $this->db->where('no_urutspm', $noUrutSpm );
+        
+
+
+    $query = $this->db->get();
+
+    if ( $query->num_rows() > 0 )
+    {
+        $row = $query->row_array();
+        return $row;
+    }
+
+    }
+
 }

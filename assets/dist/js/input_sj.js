@@ -1,6 +1,6 @@
 var table_alamat;
-
-
+$('.modal').css('overflow-y', 'auto');
+var volume_spm="kosong";
 
 
 
@@ -67,6 +67,7 @@ $(document).on("click","#btnAlamatKirim",function() {
     if (err == 0) {
   
   $('#modal_alamat').modal('show');
+  
   k_cus = $("#nama_customer").val().split("|");
   $("#no_customer_modal").val(k_cus[0]);
   $("#nama_customer_modal").val(k_cus[1]);
@@ -150,6 +151,7 @@ function get_customer() {
  
   $(document).on("click","#btn_tambah_alamat",function() {
     $('#modal_tambah_alamat').modal('show');
+    //$('.modal').css('overflow-y', 'auto');
     $('#modal_alamat').modal('hide');
    
     //alert( table_alamat.row( ':last', { order: 'applied' } ).data() );
@@ -208,6 +210,7 @@ function get_customer() {
   $(document).on("click","#btn_kembali",function() {
     $('#modal_tambah_alamat').modal('hide');
     $('#modal_alamat').modal('show');
+    //$('.modal').css('overflow-y', 'auto');
   });
 
   $(document).on("click","#btn_simpan_alamat_baru",function() {
@@ -257,6 +260,7 @@ function get_customer() {
   
     if (err == 0) {
       $('#modal_konfirmasi_tambah_alamat').modal('show');
+      //$('.modal').css('overflow-y', 'auto');
   
     } 
 
@@ -367,5 +371,43 @@ function get_customer() {
 
   
     } 
+
+  });
+
+
+  // $("#no_spm").on("change", function () {
+  //  // console.log($("#no_spm").val());
+  //   var noUrutSpm = $("#no_spm").val();
+  //   $.ajax({
+  //     url: "input-sj/get-volume-spm",
+  //     type: "post",
+  //     data: { noUrutSpm: noUrutSpm
+  //            },
+  //     success: function (data) {
+  //       data = JSON.parse(data);
+  //       volume_spm = data.volume_krm;
+       
+  //     },
+  //   });
+  // });
+
+
+  $(document).on("click","#btn_tambah_sj",function() {
+    var kg_kirim = $("#kilogram").val();
+    var noUrutSpm = $("#no_spm").val();
+    $.ajax({
+      url: "input-sj/get-volume-spm",
+      type: "post",
+      data: { noUrutSpm: noUrutSpm
+             },
+      success: function (data) {
+         data = JSON.parse(data);
+        console.log(parseFloat(kg_kirim)> data.volume_spm);
+        if(parseFloat(kg_kirim)> data.volume_spm){
+          $("#error_kilogram").html("Maaf maksimal volume yang bisa diisi adalah " +parseInt(data.volume_spm));
+        }
+       
+      },
+    });
 
   });

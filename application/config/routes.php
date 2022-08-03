@@ -125,6 +125,16 @@ $route['input-sj/get-nama-customer'] = 'Input_sj/get_nama_customer';
 $route['input-sj/tambah-alamat-baru'] = 'Input_sj/tambah_alamat_baru';
 $route['input-sj/get-no-spm'] = 'Input_sj/get_no_spm';
 $route['input-sj/get-volume-spm'] = 'Input_sj/get_volume_spm';
+$route['input-sj/get-mobil-sj'] = 'Input_sj/get_mobil_sj';
+$route['input-sj/get-supir-sj'] = 'Input_sj/get_supir_sj';
+$route['input-sj/get-barang-sj'] = 'Input_sj/get_barang_sj';
+$route['input-sj/get-unit-marketing'] = 'Input_sj/get_unit_marketing';
+$route['input-sj/get-kg-barang'] = 'Input_sj/get_kg_barang';
+$route['input-sj/get-suplier'] = 'Input_sj/get_suplier';
+$route['input-sj/get-ppn'] = 'Input_sj/get_ppn';
+
+
+
 
 
 

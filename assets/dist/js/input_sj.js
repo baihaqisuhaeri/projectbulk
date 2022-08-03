@@ -2,6 +2,9 @@ var table_alamat;
 $('.modal').css('overflow-y', 'auto');
 var volume_spm="kosong";
 
+get_unit_marketing();
+get_suplier();
+get_ppn();
 
 
 $(".select2").select2({ width: "100%" });
@@ -44,11 +47,99 @@ function get_unit_sj() {
   });
 }
 
+function get_mobil_sj() {
+  var unitSj = $("#unitSj").val();
+  $.ajax({
+    url: "input-sj/get-mobil-sj",
+    type: "POST",
+        data: {
+          unitSj: unitSj
+        },
+    success: function (data) {
+      $("#no_kendaraan").html(data);
+      //$("#unit_spm").html(data);
+    },
+  });
+}
+
+function get_supir_sj() {
+  var unitSj = $("#unitSj").val();
+  $.ajax({
+    url: "input-sj/get-supir-sj",
+    type: "POST",
+        data: {
+          unitSj: unitSj
+        },
+    success: function (data) {
+      $("#nama_supir").html(data);
+      //$("#unit_spm").html(data);
+    },
+  });
+}
+
+function get_barang_sj() {
+  var unitSj = $("#unitSj").val();
+  $.ajax({
+    url: "input-sj/get-barang-sj",
+    type: "POST",
+        data: {
+          unitSj: unitSj
+        },
+    success: function (data) {
+      $("#kode_barang").html(data);
+      //$("#unit_spm").html(data);
+    },
+  });
+}
+
+function get_unit_marketing() {
+ 
+  $.ajax({
+    url: "input-sj/get-unit-marketing",
+    
+    success: function (data) {
+      $("#unit_marketing").html(data);
+      //$("#unit_spm").html(data);
+    },
+  });
+}
+
+function get_suplier() {
+ 
+  $.ajax({
+    url: "input-sj/get-suplier",
+    
+    success: function (data) {
+      $("#suplier").html(data);
+      //$("#unit_spm").html(data);
+    },
+  });
+}
+
+function get_ppn() {
+ 
+  $.ajax({
+    url: "input-sj/get-ppn",
+    
+    success: function (data) {
+      data = JSON.parse(data);
+      $("#ppn").val(data[0].ppn_persen+" %");
+      //$("#unit_spm").html(data);
+    },
+  });
+}
+
+
+
 $("#unitSj").on("change", function () {
     //$("#data_plafon").slideUp("slow");
   
-    var unit = $("#unitSj").val();
+    
     get_customer();
+    get_mobil_sj();
+    get_supir_sj();
+    get_barang_sj();
+    
    
   });
 var k_cus;
@@ -404,10 +495,37 @@ function get_customer() {
          data = JSON.parse(data);
         console.log(parseFloat(kg_kirim)> data.volume_spm);
         if(parseFloat(kg_kirim)> data.volume_spm){
-          $("#error_kilogram").html("Maaf maksimal volume yang bisa diisi adalah " +parseInt(data.volume_spm));
+          $("#error_kilogram").html("Maaf maksimal volume yang bisa diisi adalah " +parseInt(data.volume_spm)+" kg");
         }
        
       },
     });
 
   });
+
+
+  $('input[name=jumlah]').on('change', function(){
+
+    var kode_barang = $("#kode_barang").val();
+    var jumlah = $("#jumlah").val();
+
+    $.ajax({
+      url: "input-sj/get-kg-barang",
+      type: "post",
+      data: { kode_barang: kode_barang
+             },
+      success: function (data) {
+        data = JSON.parse(data);
+        if(kode_barang!="" ){
+         console.log(data[0].jml_kg);
+         var jumlah_kg = jumlah*data[0].jml_kg;
+         $("#kilogram").val(jumlah_kg+" kg");
+        }
+
+        
+      },
+    });
+    
+  });0
+
+  

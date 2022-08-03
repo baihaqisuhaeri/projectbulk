@@ -439,4 +439,128 @@ class Input_sj extends CI_Controller
     }
 
 
+
+
+    function get_mobil_sj(){
+        
+        $unit = $this->input->post("unitSj");
+        
+      
+        $mobil = $this->Input_sj_model->get_mobil_sj($unit);
+       
+        
+        if(empty($mobil)){
+            echo '<option value="">Belum ada data</option>';
+        }else{
+            echo '<option value="">Nama Mobil (Kode Mobil)</option>';
+        }
+        
+        foreach ($mobil as $m){
+            echo '<option value="'.$m->mobil_unik.'">'.$m->n_mobil." (".$m->k_mobil.')</option>';
+          
+        }
+
+    }
+
+    function get_supir_sj(){
+        
+        $unit = $this->input->post("unitSj");
+        
+      
+        $supir = $this->Input_sj_model->get_supir_sj($unit);
+       
+        
+        if(empty($supir)){
+            echo '<option value="">Belum ada data</option>';
+        }else{
+            echo '<option value="">Nama Supir</option>';
+        }
+        
+        foreach ($supir as $s){
+            echo '<option value="'.$s->supir_unik.'">'.$s->n_sales.'</option>';
+          
+        }
+
+    }
+
+    function get_barang_sj(){
+        
+        $unit = $this->input->post("unitSj");
+        
+      
+        $barang = $this->Input_sj_model->get_barang_sj($unit);
+       
+        
+        if(empty($barang)){
+            echo '<option value="">Belum ada data</option>';
+        }else{
+            echo '<option value="">Nama Barang (Kode Barang)</option>';
+        }
+        
+        foreach ($barang as $b){
+            echo '<option value="'.$b->k_barang.'">'.$b->n_barang." (".$b->k_barang.')</option>';
+          
+        }
+
+    }
+
+
+    function get_unit_marketing(){
+        
+        
+        
+      
+        $unit_marketing = $this->Input_sj_model->get_unit_marketing();
+       
+        
+        if(empty($unit_marketing)){
+            echo '<option value="">Belum ada data</option>';
+        }else{
+            echo '<option value="">Nama Unit Marketing </option>';
+        }
+        
+        foreach ($unit_marketing as $u){
+            echo '<option value="'.$u->nourut.'">'.$u->unit_mkt.'</option>';
+          
+        }
+
+    }
+
+    function get_kg_barang(){
+        $kode_barang = $this->input->post('kode_barang');
+
+        $query = $this->Input_sj_model->get_kg_barang($kode_barang);
+
+        
+        echo json_encode($query);
+        
+    }
+
+    
+    function get_suplier(){
+        $suplier = $this->Input_sj_model->get_suplier();
+       
+        
+        if(empty($suplier)){
+            echo '<option value="">Belum ada data</option>';
+        }else{
+            echo '<option value="">Nama Suplier </option>';
+        }
+        
+        foreach ($suplier as $s){
+            echo '<option value="'.$s->k_supl.'">'.$s->n_supl.'</option>';
+          
+        }
+    }
+
+    function get_ppn(){
+        
+
+        $query = $this->Input_sj_model->get_ppn();
+
+        
+        echo json_encode($query);
+        
+    }
+
 }

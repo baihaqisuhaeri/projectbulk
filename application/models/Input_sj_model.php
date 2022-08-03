@@ -192,4 +192,52 @@ class Input_sj_model extends CI_Model
 
     }
 
+
+    public function get_mobil_sj($unitSj){
+        $row = $this->db->query("select * from mobil where kd_unit = '$unitSj'  order by n_mobil asc")->result();
+        return $row;
+    }
+
+    public function get_supir_sj($unitSj){
+        $row = $this->db->query("select * from supir where kd_unit = '$unitSj'  order by n_sales asc")->result();
+        return $row;
+    }
+
+    public function get_barang_sj($unitSj){
+        $row = $this->db->query("select * from dbm002 where kd_unit = '$unitSj'  order by n_barang asc")->result();
+        return $row;
+    }
+
+    public function get_unit_marketing(){
+        $row = $this->db->query("select * from unit_mkt order by unit_mkt asc")->result();
+        return $row;
+    }
+
+    
+
+    public function get_kg_barang($kode_barang){
+        $this->db->select('*');
+        $this->db->from('dbm002');
+        $this->db->where('k_barang', $kode_barang);
+        $query=$this->db->get();
+
+        return $query->result();
+    }
+
+    public function get_suplier(){
+        $this->db->select('*');
+        $this->db->from('tb_suplier');
+        $query=$this->db->get();
+
+        return $query->result();
+    }
+
+    public function get_ppn(){
+        $this->db->select('*');
+        $this->db->from('tb_ppn');
+        $query=$this->db->get();
+
+        return $query->result();
+    }
+
 }

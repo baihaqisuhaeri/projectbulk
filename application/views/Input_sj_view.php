@@ -171,8 +171,8 @@
                                                         </div>
 
                                                         <div class="form-group col-lg-4">
-                                                            <label>PPN %<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="ppn" id="ppn" placeholder="PPN">
+                                                            <label>PPN<span style="color: red;">*</span></label>
+                                                            <input class="form-control" type="text" name="ppn" id="ppn" placeholder="PPN" disabled>
                                                             <span class="text-danger" id="error_ppn"></span>
                                                         </div>
 
@@ -248,13 +248,13 @@
 
                                                         <div class="form-group col-lg-4">
                                                                     <label>Jumlah<span style="color: red;">*</span></label>
-                                                                    <input class="form-control autonumber" type="text" name="jumlah" id="jumlah" placeholder="jumlah">Ton / Tabung
+                                                                    <input class="form-control" type="number" name="jumlah" id="jumlah" placeholder="jumlah">Ton / Tabung
                                                                     <span class="text-danger" id="error_jumlah"></span>
                                                         </div>
 
                                                         <div class="form-group col-lg-4">
-                                                                    <label>Kilogram<span style="color: red;">*</span></label>
-                                                                    <input class="form-control " type="number" name="kilogram" id="kilogram" placeholder="kg">
+                                                                    
+                                                                    <input class="form-control " type="text" name="kilogram" id="kilogram" placeholder="kg" disabled>
                                                                     <span class="text-danger" id="error_kilogram"></span>
                                                         </div>
                                                     </div>

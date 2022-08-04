@@ -394,7 +394,7 @@ class Input_sj extends CI_Controller
         }
         $vol_kirim_spm = 0;
         foreach ($spm as $sp) {
-            $spmVol = $this->db->query("SELECT * FROM `dbt002` WHERE no_urutspm = '$sp->no_urutspm'")->result();
+            $spmVol = $this->db->query("SELECT * FROM `tb_sj` WHERE no_urutspm = '$sp->no_urutspm'")->result();
             $vol_kirim_spm = $sp->volume_krm;
             foreach($spmVol as $spVol){
                 if($sp->no_urutspm == $spVol->no_urutspm){
@@ -415,7 +415,7 @@ class Input_sj extends CI_Controller
         $noUrutSpm = $this->input->post("noUrutSpm");
         //$data = $this->Input_sj_model->get_volume_spm($noUrutSpm);
         $data =  $this->db->query("SELECT * FROM `tb_spm` WHERE no_urutspm = '$noUrutSpm'")->result();
-        $dataSj = $this->db->query("SELECT * FROM `dbt002` WHERE no_urutspm = '$noUrutSpm'")->result();;
+        $dataSj = $this->db->query("SELECT * FROM `tb_sj` WHERE no_urutspm = '$noUrutSpm'")->result();;
 
         // echo "<pre>";
         // print_r($data);
@@ -434,6 +434,8 @@ class Input_sj extends CI_Controller
             "volume_spm" => $volume_spm,
         );
         //output to json format
+        //echo($volume_spm);
+        
         echo json_encode($output);
         
     }
@@ -561,6 +563,55 @@ class Input_sj extends CI_Controller
         
         echo json_encode($query);
         
+    }
+
+    function get_data_spm(){
+        $noUrutSpm = $this->input->post("noUrutSpm");
+
+        $query = $this->Input_sj_model->get_data_spm($noUrutSpm);
+
+        echo json_encode($query);
+
+    }
+
+
+    public function tambah_sj()
+    {
+        
+          $uniSj = $_POST['unitSj'];
+          $unitSj = $_POST['unitSj'];
+          $nama_customer = $_POST['nama_customer'];
+          $kode_customer = $_POST['kode_customer'];
+          var_dump($kode_customer);
+          die();
+          $no_spm = $_POST['no_spm'];
+          $no_surat_jalan = $_POST['no_surat_jalan'];
+          $tanggal_surat_jalan = $_POST['tanggal_surat_jalan'];
+          $no_kendaraan = $_POST['no_kendaraan'];
+          $unit_marketing = $_POST['unit_marketing'];
+          $nama_supir = $_POST['nama_supir'];
+          $kode_barang = $_POST['kode_barang'];
+          $jumlah = $_POST['jumlah'];
+          $keterangan = $_POST['keterangan'];
+          $suplier = $_POST['suplier'];
+          $no_faktur = $_POST['no_faktur'];
+          $no_segel = $_POST['no_segel'];
+          $pressure = $_POST['pressure'];
+          $temperatur = $_POST['temperatur'];
+          $nilai_persen_pengambilan = $_POST['nilai_persen_pengambilan'];
+          $nilai_persen_berangkat = $_POST['nilai_persen_berangkat'];
+        // $data = array(
+        //     '' => $,
+        // );
+            
+        $this->Input_sj_model->tambah_surat_sj('tb_sj', $data);
+        $query = $this->db->affected_rows();
+
+            $data = array(
+                'status' => 'true',
+            );
+
+            echo json_encode($data);
     }
 
 }

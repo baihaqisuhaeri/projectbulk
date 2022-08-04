@@ -159,14 +159,14 @@
                                                     <div class="row">
                                                         <div class="form-group col-lg-4">
                                                             <label>Nomor PO <span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="nomor_po" id="nomor_po" placeholder="Nomor PO">
+                                                            <input class="form-control" type="text" name="nomor_po" id="nomor_po" placeholder="Nomor PO" disabled>
                                                             <span class="text-danger" id="error_nomor_po"></span>
 
                                                         </div>
 
                                                         <div class="form-group col-lg-2">
                                                             <label>Tanggal PO<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="date" name="tanggal_po" id="tanggal_po" placeholder="Tanggal PO">
+                                                            <input class="form-control" type="date" name="tanggal_po" id="tanggal_po" placeholder="Tanggal PO" disabled>
                                                             <span class="text-danger" id="error_tanggal_po"></span>
                                                         </div>
 
@@ -253,7 +253,7 @@
                                                         </div>
 
                                                         <div class="form-group col-lg-4">
-                                                                    
+                                                                    <label>Kilogram<span style="color: red;">*</span></label>
                                                                     <input class="form-control " type="text" name="kilogram" id="kilogram" placeholder="kg" disabled>
                                                                     <span class="text-danger" id="error_kilogram"></span>
                                                         </div>
@@ -564,7 +564,7 @@
                                             <h5>Daftar Supir</h5>
 
 
-                                            <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_supir">
+                                            <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_sj">
                                                 <thead>
                                                     <tr>
                                                         <td>No</td>
@@ -666,6 +666,24 @@
                                                     <div class="form-group text-right">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                                                         <button class="btn btn-primary btn-small btn-primary btn-rounded"  onclick="cekEdit()">Ya</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+
+
+
+                                    <div class="modal fade" id="modal_konfirmasi_tambah_sj">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <h5>Apa Anda sudah yakin?</h5>
+                                                    <div class="form-group text-right">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" onclick="tambahSj()" >Ya</button>
                                                     </div>
                                                 </div>
                                             </div>

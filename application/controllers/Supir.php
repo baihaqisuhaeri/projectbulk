@@ -56,10 +56,10 @@ class Supir extends CI_Controller
     } else if ($kodeSupir >= 1000 && $kodeSupir < 10000) {
         $k_supir = "0" . $kodeSupir;
     } else if ($kodeSupir >= 10000 && $kodeSupir < 100000) {
-        $k_supir =  $kodeSupir;
+        $k_supir =  $kodeSupir; //fix
     }
 
-        $supir_unik = $namaSupir ."_". $namaUnit;
+        $supir_unik = $k_supir ."_". $namaUnit;
 
         $data = array(
             'k_sales' => $k_supir,

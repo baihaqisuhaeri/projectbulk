@@ -325,7 +325,7 @@
 
 
                                                     <div class="form-group text-right">
-                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_tambah_sj">Tambah</button>
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="submit" id="btn_tambah_sj">Tambah</button>
 
                                                     </div>
 
@@ -333,7 +333,7 @@
 
                                                 
                                                 <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" id="modal_alamat" aria-hidden="true">
-                                                    <div class="modal-dialog modal-xl">
+                                                <div class="modal-dialog modal-xl">
                                                         
                                                         <div class="modal-content" style="padding: 10px" >
                                                         <div class="form-group text-right" style="float: right;">
@@ -341,14 +341,14 @@
 
                                                         </div>
                                                         
-                                                        <div class="row">
+                                                    <div class="row">
                                                             
                                                         <div class="form-group col-lg-4">
                                                             <label>No. Customer<span style="color: red;">*</span></label>
                                                             <input class="form-control" type="text" name="no_customer_modal" id="no_customer_modal" placeholder="Nomor Customer" disabled>
                                                             <span class="text-danger" id="error_no_customer_modal"></span>
 
-                                                        </div>
+                                                    </div>
                                                  
                                                         <div class="form-group col-lg-4">
                                                             <label>Nama Customer<span style="color: red;">*</span></label>
@@ -365,7 +365,7 @@
                                                     
                                                         
 
-                                                    </div>
+                                                </div>
 
 
                                                     <div class="row">
@@ -399,25 +399,25 @@
                                                     
                                                     <div class="callout callout-warning table-responsive" width="100%" style="background-color: #FFF8E5;" id="bagian_3">
 
-                                                    <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_alamat_kirim">
-                                                        <thead>
-                                                        <tr>
-                                                        <th>No</th>
-                                                        <th>Nama Faktur Pajak</th>
-                                                        <th>NPWP</th>
-                                                        <th>Kode Alamat</th>
-                                                        <th>Alamat 1</th>
-                                                        <th>Alamat 2</th>
-                                                        <th>Alamat 3</th>
-                    
-                                                        <th>Aksi</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                    
-                                                        </tbody>
-                                                    </table>
-                                    </div>
+                                                        <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_alamat_kirim">
+                                                            <thead>
+                                                            <tr>
+                                                            <th>No</th>
+                                                            <th>Nama Faktur Pajak</th>
+                                                            <th>NPWP</th>
+                                                            <th>Kode Alamat</th>
+                                                            <th>Alamat 1</th>
+                                                            <th>Alamat 2</th>
+                                                            <th>Alamat 3</th>
+                        
+                                                            <th>Aksi</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                        
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
 
                                                         </div>
                                                     </div>

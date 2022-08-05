@@ -1,7 +1,9 @@
 var table_alamat;
+var harga_po="";
+var spm_brlk="";
 $('.modal').css('overflow-y', 'auto');
 var volume_spm="kosong";
-
+var tk_sj = "";
 get_unit_marketing();
 get_suplier();
 get_ppn();
@@ -21,7 +23,7 @@ $("#nama_customer").on("change", function () {
 
 
 function get_no_spm() {
-  var kodeCustomer = $("#nama_customer").val().split("|");
+  var kodeCustomer = $("#nama_customer").val().split("_");
   kodeCustomer = kodeCustomer[0];
   $.ajax({
     url: "input-sj/get-no-spm",
@@ -159,7 +161,7 @@ $(document).on("click","#btnAlamatKirim",function() {
   
   $('#modal_alamat').modal('show');
   
-  k_cus = $("#nama_customer").val().split("|");
+  k_cus = $("#nama_customer").val().split("_");
   $("#no_customer_modal").val(k_cus[0]);
   $("#nama_customer_modal").val(k_cus[1]);
   k_cus = k_cus[0];
@@ -481,10 +483,14 @@ function get_customer() {
         //console.log(data[0].tgl_po);
         $("#nomor_po").val(data[0].no_po);
         $("#tanggal_po").val(data[0].tgl_po);
+        spm_brlk = data[0].spm_brlk;
+        harga_po = data[0].harga_po;
         if(data[0].tk=="T"){
           $("#rd_tunai").prop("checked", true);
+          tk_sj = data[0].tk;
         }else if(data[0].tk=="K"){
           $("#rd_kredit").prop("checked", true);
+          tk_sj = data[0].tk;
         }
        
       },
@@ -493,8 +499,9 @@ function get_customer() {
   
 
 
-  $(document).on("click","#btn_tambah_sj",function() {
+  $(document).on("submit", "#tambahSuratJalan", function (e) {
    // console.log(k_cus);
+   e.preventDefault();
 
     $("#error_unitSj").html("");
     $("#error_nama_customer").html("");
@@ -647,53 +654,89 @@ function get_customer() {
     $('#modal_konfirmasi_tambah_sj').modal('hide');
       
     var unitSj = $("#unitSj").val();
-    var customer = $("#nama_customer").val().split("|");
+    var customer = $("#nama_customer").val().split("_");
+    var alamat_kirim1 = $("#alamat1").val();
+    var alamat_kirim2 = $("#alamat2").val();
+    var alamat_kirim3 = $("#alamat3").val();
+    var k_altk = $("#kode_alamat").val();
+    var npwp = $("#npwp").val();
+
+    var no_po = $("#nomor_po").val();
+    var tgl_po = $("#tanggal_po").val();
+    var ppn = $("#ppn").val();
+    
     var no_spm = $("#no_spm").val();
     var no_surat_jalan = $("#no_surat_jalan").val();
     var tanggal_surat_jalan = $("#tanggal_surat_jalan").val();
     var no_kendaraan = $("#no_kendaraan").val();
     var unit_marketing = $("#unit_marketing").val();
-    var nama_supir = $("#nama_supir").val();
-    var kode_barang = $("#kode_barang").val();
+    var supir = $("#nama_supir").val().split("_");
+    var barang = $("#kode_barang").val().split("_");
     var jumlah = $("#jumlah").val();
+    var kg_kirim = $("#kilogram").val();
     var keterangan = $("#keterangan").val();
-    var suplier = $("#suplier").val();
+    var suplier = $("#suplier").val().split("_");
     var no_faktur = $("#no_faktur").val();
     var no_segel = $("#no_segel").val();
     var pressure = $("#pressure").val();
     var temperatur = $("#temperatur").val();
     var nilai_persen_pengambilan = $("#nilai_persen_pengambilan").val();
     var nilai_persen_berangkat = $("#nilai_persen_berangkat").val();
+    
       
       $.ajax({
         url: "input-sj/tambah-sj",
         type: "post",
-        dataType: "JSON",
+        dataType: 'text',
         
         data: {
           unitSj: unitSj,
           kode_customer: customer[0],
           nama_customer: customer[1],
+          al1_cus: customer[2],
+          al2_cus: customer[3],
+          al3_cus: customer[4],
+          k_wilayah: customer[5],
+          npwp: customer[6],
+          alamat_kirim1: alamat_kirim1,
+          alamat_kirim2: alamat_kirim2,
+          alamat_kirim3: alamat_kirim3,
+          k_altk: k_altk,
+          npwp_krm: npwp,
+          no_po: no_po,
+          tgl_po: tgl_po,
+          ppn: ppn,
           no_spm: no_spm,
+          spm_brlk: spm_brlk,
           no_surat_jalan: no_surat_jalan,
           tanggal_surat_jalan: tanggal_surat_jalan,
           no_kendaraan: no_kendaraan,
           unit_marketing: unit_marketing,
-          nama_supir: nama_supir,
-          kode_barang: kode_barang,
+          nama_supir: supir[2],
+          kode_supir: supir[0],
+          kode_barang: barang[0],
+          k_div: barang[1],
+          kode_berat: barang[2],
+          h_jual: barang[3],
+          kode_tim: barang[4],
           jumlah: jumlah,
+          kg_kirim: kg_kirim,
           keterangan: keterangan,
-          suplier: suplier,
+          k_supl: suplier[0],
+          n_supl: suplier[1],
           no_faktur: no_faktur,
           no_segel: no_segel,
           pressure: pressure,
           temperatur: temperatur,
           nilai_persen_pengambilan: nilai_persen_pengambilan,
           nilai_persen_berangkat: nilai_persen_berangkat,
+
+          tk: tk_sj,
         },
         success: function (data) {
-          var json = JSON.parse(data);
-          var status = json.status;
+          console.log(data);
+         // var json = JSON.parse(data);
+          var status = data.status;
           if (status == "true") {
            // mytable = $("#tabel_sj").DataTable();
            // mytable.draw();
@@ -703,6 +746,7 @@ function get_customer() {
            // alert("a");
             Swal.fire("Gagal!", "Surat Jalan sudah ada di unit yang sama!", "error");
           }
+          Swal.fire("Berhasil!", "Surat jalan berhasil ditambahkan!", "success");
         },
       });
     
@@ -711,20 +755,23 @@ function get_customer() {
 
   $('input[name=jumlah]').on('change', function(){
 
-    var kode_barang = $("#kode_barang").val();
+    var kode_barang = $("#kode_barang").val().split("_");
+    kode_barang = kode_barang[0];
     var jumlah = $("#jumlah").val();
-
+    //console.log(kode_barang);
     $.ajax({
       url: "input-sj/get-kg-barang",
       type: "post",
+      dataType: "JSON",
       data: { kode_barang: kode_barang
              },
       success: function (data) {
-        data = JSON.parse(data);
+        //data = JSON.parse(data);
+       // console.log(data);
         if(kode_barang!="" ){
-        // console.log(data[0].jml_kg);
+        // console.log(data);
          var jumlah_kg = jumlah*data[0].jml_kg;
-         $("#kilogram").val(jumlah_kg+" kg");
+         $("#kilogram").val(jumlah_kg);
         }
 
         

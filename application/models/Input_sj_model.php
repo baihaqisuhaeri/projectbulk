@@ -250,4 +250,8 @@ class Input_sj_model extends CI_Model
 
     }
 
+    public function tambah_surat_sj($data){
+       $this->db->insert('tb_sj', $data);
+    }
+
 }

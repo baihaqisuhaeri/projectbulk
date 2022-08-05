@@ -273,7 +273,7 @@ class Input_sj extends CI_Controller
         }
         
         foreach ($customer as $u){
-            echo '<option value="'.$u->k_Cus."|".$u->n_cus.'">'.$u->n_cus.' ('.$u->npwp.')('.$u->k_Cus.')</option>';
+            echo '<option value="'.$u->k_Cus."_".$u->n_cus."_".$u->al1_cus."_".$u->al2_cus."_".$u->al3_cus."_".$u->k_wilayah."_".$u->npwp.'">'.$u->n_cus.' ('.$u->npwp.')('.$u->k_Cus.')</option>';
           
         }
 
@@ -403,7 +403,7 @@ class Input_sj extends CI_Controller
                 }
             }
             if($vol_kirim_spm>0){
-                echo '<option value="' . $sp->no_urutspm . '">' . $sp->no_spm . '</option>';
+                echo '<option value="' . $sp->no_urutspm .'">' . $sp->no_spm . '</option>';
           
             }
            
@@ -479,7 +479,7 @@ class Input_sj extends CI_Controller
         }
         
         foreach ($supir as $s){
-            echo '<option value="'.$s->supir_unik.'">'.$s->n_sales.'</option>';
+            echo '<option value="'.$s->supir_unik."_".$s->n_sales.'">'.$s->n_sales.'</option>';
           
         }
 
@@ -500,7 +500,7 @@ class Input_sj extends CI_Controller
         }
         
         foreach ($barang as $b){
-            echo '<option value="'.$b->k_barang.'">'.$b->n_barang." (".$b->k_barang.')</option>';
+            echo '<option value="'.$b->k_barang."_".$b->k_div."_".$b->kode_berat."_".$b->h_jual."_".$b->kode_tim.'">'.$b->n_barang." (".$b->k_barang.')</option>';
           
         }
 
@@ -534,6 +534,7 @@ class Input_sj extends CI_Controller
         $query = $this->Input_sj_model->get_kg_barang($kode_barang);
 
         
+        
         echo json_encode($query);
         
     }
@@ -550,7 +551,8 @@ class Input_sj extends CI_Controller
         }
         
         foreach ($suplier as $s){
-            echo '<option value="'.$s->k_supl.'">'.$s->n_supl.'</option>';
+            
+            echo '<option value="'.$s->k_supl."_".$s->n_supl.'">'.$s->n_supl.'</option>';
           
         }
     }
@@ -578,40 +580,118 @@ class Input_sj extends CI_Controller
     public function tambah_sj()
     {
         
-          $uniSj = $_POST['unitSj'];
-          $unitSj = $_POST['unitSj'];
-          $nama_customer = $_POST['nama_customer'];
-          $kode_customer = $_POST['kode_customer'];
-          var_dump($kode_customer);
-          die();
-          $no_spm = $_POST['no_spm'];
-          $no_surat_jalan = $_POST['no_surat_jalan'];
-          $tanggal_surat_jalan = $_POST['tanggal_surat_jalan'];
-          $no_kendaraan = $_POST['no_kendaraan'];
-          $unit_marketing = $_POST['unit_marketing'];
-          $nama_supir = $_POST['nama_supir'];
-          $kode_barang = $_POST['kode_barang'];
-          $jumlah = $_POST['jumlah'];
-          $keterangan = $_POST['keterangan'];
-          $suplier = $_POST['suplier'];
-          $no_faktur = $_POST['no_faktur'];
-          $no_segel = $_POST['no_segel'];
-          $pressure = $_POST['pressure'];
-          $temperatur = $_POST['temperatur'];
-          $nilai_persen_pengambilan = $_POST['nilai_persen_pengambilan'];
-          $nilai_persen_berangkat = $_POST['nilai_persen_berangkat'];
-        // $data = array(
-        //     '' => $,
-        // );
+         date_default_timezone_set('Asia/Jakarta');
+         $tgl_io = date("Y-m-d"); 
+
+        $unitSj = $_POST['unitSj'];
+        $nama_customer = $_POST['nama_customer'];
+        $kode_customer = $_POST['kode_customer'];
+        $al1_cus = $_POST['al1_cus'];
+        $al2_cus = $_POST['al2_cus'];
+        $al3_cus = $_POST['al3_cus'];
+        $alamat_kirim1 = $_POST['alamat_kirim1'];
+        $alamat_kirim2 = $_POST['alamat_kirim2'];
+        $alamat_kirim3 = $_POST['alamat_kirim3'];
+        $k_wilayah = $_POST['k_wilayah'];
+        // echo $alamat_kirim1;
+        // echo $al1_cus;
+        // echo $al2_cus;
+        // die();
+        $k_altk = $_POST['k_altk'];
+        $npwp = $_POST['npwp'];
+        $npwp_krm = $_POST['npwp_krm'];
+        
+
+        $no_po = $_POST['no_po'];
+        $tgl_po = $_POST['tgl_po'];
+        $ppn = $_POST['ppn'];
+
+        $no_spm = $_POST['no_spm'];
+        $spm_brlk = $_POST['spm_brlk'];
+        $no_surat_jalan = $_POST['no_surat_jalan'];
+        $tanggal_surat_jalan = $_POST['tanggal_surat_jalan'];
+        $tk = $_POST['tk'];
+        $no_kendaraan = $_POST['no_kendaraan'];
+        $unit_marketing = $_POST['unit_marketing'];
+        $nama_supir = $_POST['nama_supir'];
+        $kode_supir = $_POST['kode_supir'];
+        $kode_barang = $_POST['kode_barang'];
+        $jumlah = $_POST['jumlah'];
+        $kg_kirim = $_POST['kg_kirim'];
+        $keterangan = $_POST['keterangan'];
+        $k_supl = $_POST['k_supl'];
+        $n_supl = $_POST['n_supl'];
+        $no_faktur = $_POST['no_faktur'];
+        $no_segel = $_POST['no_segel'];
+        $pressure = $_POST['pressure'];
+        $temperatur = $_POST['temperatur'];
+        $nilai_persen_pengambilan = $_POST['nilai_persen_pengambilan'];
+        $nilai_persen_berangkat = $_POST['nilai_persen_berangkat'];
+        $data = array(
+            'no_sj' => $no_surat_jalan,
+            'kd_unit' => $unitSj,
+            'n_cus' => $nama_customer,
+            'k_cus' => $kode_customer,
+            'al1_cus' => $al1_cus,
+            'al2_cus' => $al2_cus,
+            'al3_cus' => $al3_cus,
+
+            'alk_cus1' => $alamat_kirim1,
+            'alk_cus2' => $alamat_kirim2,
+            'alk_cus3' => $alamat_kirim3,
+            'k_wil' => $k_wilayah,        
+            'k_altk' => $k_altk,
+            'npwp_krm' => $npwp_krm,
+            'npwp' => $npwp,
+
+            'no_po' => $no_po,
+            // 'tgl_po' => $tgl_po,
+            'ppn_persen' => $ppn,
+
+            'no_urutspm' => $no_spm,
+            'spm_brlk' => $spm_brlk,
+            'no_urut' => $no_spm,
+            'tgl_sj' => $tanggal_surat_jalan,
+            'tk' => $tk,
+            'no_mobil' => $no_kendaraan,
+            'unit_mkt' => $unit_marketing,
+            'n_sales' => $nama_supir,
+            'k_sales' => $kode_barang,
+            'qty_kirim' => $jumlah,
+            'kg_kirim' => $kg_kirim,
+            'ket' => $keterangan,
+            'k_supl' => $k_supl,
+            'n_supl' => $n_supl,
+            'no_faktur' => $no_faktur,
+            'no_segel' => $no_segel,
+            'awl_presur' => $pressure,
+            'awl_suhu' => $temperatur,
+            'awal' => $nilai_persen_pengambilan,
+            'akhir' => $nilai_persen_berangkat,
+
+            'tgl_io' => $tgl_io,
             
-        $this->Input_sj_model->tambah_surat_sj('tb_sj', $data);
+        );
+            
+        $this->Input_sj_model->tambah_surat_sj($data);
         $query = $this->db->affected_rows();
 
+        var_dump($query);
+        if($query)
+        {
             $data = array(
-                'status' => 'true',
+                'status'=>'true',
             );
-
             echo json_encode($data);
+        }
+        else
+        {
+             $data = array(
+                'status'=>'false',
+            );
+            echo json_encode($data);
+        } 
+        //var_dump($data);
     }
 
 }

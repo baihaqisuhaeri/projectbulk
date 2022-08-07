@@ -2,9 +2,9 @@
 
 class Input_sj_model extends CI_Model
 {
-    
 
-    
+
+
     // var $table = 'supir';
     // var $column_order = array(null, 'id', 'k_sales', 'n_sales', 'kd_unit'); //set column field database for datatable orderable
     // var $column_search = array('id', 'k_sales', 'n_sales', 'kd_unit'); //set column field database for datatable searchable
@@ -12,14 +12,14 @@ class Input_sj_model extends CI_Model
 
     //untuk alamat kirim
     var $tableAlamat = 'almt_krm';
-    var $column_order_alamat_kirim = array(null, 'id', 'k_cus','n_cus','nmcab','npwp','al1_cus','al2_cus','al3_cus','k_altk','alk_cus1','alk_cus2','alk_cus3','flag_aktif','tgl_input','pc_input','tgl_edit'); 
-    var $column_search_alamat_kirim = array('id', 'k_cus','n_cus','nmcab','npwp','al1_cus','al2_cus','al3_cus','k_altk','alk_cus1','alk_cus2','alk_cus3','flag_aktif','tgl_input','pc_input','tgl_edit'); 
+    var $column_order_alamat_kirim = array(null, 'id', 'k_cus', 'n_cus', 'nmcab', 'npwp', 'al1_cus', 'al2_cus', 'al3_cus', 'k_altk', 'alk_cus1', 'alk_cus2', 'alk_cus3', 'flag_aktif', 'tgl_input', 'pc_input', 'tgl_edit');
+    var $column_search_alamat_kirim = array('id', 'k_cus', 'n_cus', 'nmcab', 'npwp', 'al1_cus', 'al2_cus', 'al3_cus', 'k_altk', 'alk_cus1', 'alk_cus2', 'alk_cus3', 'flag_aktif', 'tgl_input', 'pc_input', 'tgl_edit');
     var $order_alamat_kirim = array('k_cus' => 'desc'); // default order
     public function get_data_tabel_alamat_kirim($k_cus)
     {
 
 
-        
+
         $this->db->select('*');
         $this->db->where('k_cus', $k_cus);
         $this->db->order_by('k_altk asc');
@@ -64,7 +64,7 @@ class Input_sj_model extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
-    
+
     public function count_filtered()
     {
         $this->get_data_tabel_barang();
@@ -105,153 +105,179 @@ class Input_sj_model extends CI_Model
         $this->db->update('supir', $data);
     }
 
-    function check($supir_unik){
+    function check($supir_unik)
+    {
 
         $this->db->select();
         $query = $this->db->get_where('supir', array('supir_unik' => $supir_unik));
         $result = $query->result_array();
-        
-        $count = count($result);
-        
-        if(empty($count)){
-        return false;
-        }
-        else{
-        return true;
-        }
-        }
 
-      //  function get_customer
+        $count = count($result);
+
+        if (empty($count)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //  function get_customer
 
     //   function tambah_alamat_baru($unitSj, $k_cus){
     //     $this->db->insert("almt_krm", $data);
     //   }
 
-      function get_nama_customer($unit, $k_cus){
+    function get_nama_customer($unit, $k_cus)
+    {
         $this->db->select('*');
 
         $this->db->from('customer');
 
-        $this->db->where('unit', $unit );
-        $this->db->where('k_Cus', $k_cus );
-        $this->db->where('flag_aktif', '' );
+        $this->db->where('unit', $unit);
+        $this->db->where('k_Cus', $k_cus);
+        $this->db->where('flag_aktif', '');
 
 
-    $query = $this->db->get();
+        $query = $this->db->get();
 
-    if ( $query->num_rows() > 0 )
-    {
-        $row = $query->row_array();
-        return $row;
-    }
-      }
-
-      public function tambah_alamat_baru($data)
-    {
-       $insert = $this->db->insert("almt_krm", $data);
-        
-        
+        if ($query->num_rows() > 0) {
+            $row = $query->row_array();
+            return $row;
+        }
     }
 
-    public function get_volume_spm($noUrutSpm){
+    public function tambah_alamat_baru($data)
+    {
+        $insert = $this->db->insert("almt_krm", $data);
+    }
+
+    public function get_volume_spm($noUrutSpm)
+    {
         $this->db->select('*');
 
         $this->db->from('tb_spm');
 
-        $this->db->where('no_urutspm', $noUrutSpm );
-        
+        $this->db->where('no_urutspm', $noUrutSpm);
 
 
-    $query = $this->db->get();
 
-    if ( $query->num_rows() > 0 )
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            $row = $query->row_array();
+            return $row;
+        }
+    }
+
+
+    public function get_volume_spm_sj($noUrutSpm)
     {
-        $row = $query->row_array();
-        return $row;
-    }
-
-    }
-
-
-    public function get_volume_spm_sj($noUrutSpm){
         $this->db->select('*');
 
         $this->db->from('tb_sj');
 
-        $this->db->where('no_urutspm', $noUrutSpm );
-        
+        $this->db->where('no_urutspm', $noUrutSpm);
 
 
-    $query = $this->db->get();
 
-    if ( $query->num_rows() > 0 )
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            $row = $query->row_array();
+            return $row;
+        }
+    }
+
+
+    public function get_mobil_sj($unitSj)
     {
-        $row = $query->row_array();
-        return $row;
-    }
-
-    }
-
-
-    public function get_mobil_sj($unitSj){
         $row = $this->db->query("select * from mobil where kd_unit = '$unitSj'  order by n_mobil asc")->result();
         return $row;
     }
 
-    public function get_supir_sj($unitSj){
+    public function get_supir_sj($unitSj)
+    {
         $row = $this->db->query("select * from supir where kd_unit = '$unitSj'  order by n_sales asc")->result();
         return $row;
     }
 
-    public function get_barang_sj($unitSj){
+    public function get_barang_sj($unitSj)
+    {
         $row = $this->db->query("select * from dbm002 where kd_unit = '$unitSj'  order by n_barang asc")->result();
         return $row;
     }
 
-    public function get_unit_marketing(){
+    public function get_unit_marketing()
+    {
         $row = $this->db->query("select * from unit_mkt order by unit_mkt asc")->result();
         return $row;
     }
 
-    
 
-    public function get_kg_barang($kode_barang){
+
+    public function get_kg_barang($kode_barang)
+    {
         $this->db->select('*');
         $this->db->from('dbm002');
         $this->db->where('k_barang', $kode_barang);
-        $query=$this->db->get();
+        $query = $this->db->get();
 
         return $query->result();
     }
 
-    public function get_suplier(){
+    public function get_suplier()
+    {
         $this->db->select('*');
         $this->db->from('tb_suplier');
-        $query=$this->db->get();
+        $query = $this->db->get();
 
         return $query->result();
     }
 
-    public function get_ppn(){
+    public function get_ppn()
+    {
         $this->db->select('*');
         $this->db->from('tb_ppn');
-        $query=$this->db->get();
+        $query = $this->db->get();
 
         return $query->result();
     }
 
-    public function get_data_spm($noUrutSpm){
+    public function get_data_spm($noUrutSpm)
+    {
         $this->db->select('*');
         $this->db->from('tb_spm');
         $this->db->where('no_urutspm', $noUrutSpm);
-        $query=$this->db->get();
+        $query = $this->db->get();
 
         return $query->result();
-
     }
 
-    public function tambah_surat_sj($data){
-       $this->db->insert('tb_sj', $data);
+    public function tambah_surat_sj($data)
+    {
+        $this->db->insert('tb_sj', $data);
     }
 
+    public function get_kode_nomor($unit)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_unit');
+        $this->db->where('kd_unit', $unit);
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+
+    public function get_last_sj($no_sj)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_sj');
+        $this->db->like('no_sj', $no_sj);
+        $this->db->order_by('no_sj', 'DESC');
+        $this->db->limit(1);
+        $query = $this->db->get();
+
+        return $query->result();
+    }
 }

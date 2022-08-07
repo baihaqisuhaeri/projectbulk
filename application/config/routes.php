@@ -134,11 +134,3 @@ $route['input-sj/get-suplier'] = 'Input_sj/get_suplier';
 $route['input-sj/get-ppn'] = 'Input_sj/get_ppn';
 $route['input-sj/get-data-spm'] = 'Input_sj/get_data_spm';
 $route['input-sj/tambah-sj'] = 'Input_sj/tambah_sj';
-
-
-
-
-
-
-
-

@@ -93,17 +93,17 @@
                                                             <span class="text-danger" id="error_nama_customer"></span>
 
                                                         </div>
-                                                        
+
                                                         <div class="form-group col-lg-4">
-                                                       
-                                                        <br>
-                                                        <button type="button" class="btn btn-secondary btn-lg" id="btnAlamatKirim">Pilih Alamat Kirim</button>
-                                                        
+
+                                                            <br>
+                                                            <button type="button" class="btn btn-secondary btn-lg" id="btnAlamatKirim">Pilih Alamat Kirim</button>
+
                                                         </div>
 
-                                                       
 
-                                                        
+
+
 
                                                     </div>
 
@@ -145,7 +145,7 @@
                                                             <span class="text-danger" id="error_npwp"></span>
 
                                                         </div>
-                                                 
+
                                                         <div class="form-group col-lg-4">
                                                             <label>No SPM<span style="color: red;">*</span></label>
                                                             <select class="form-control select2" id="no_spm" name="no_spm">
@@ -181,7 +181,7 @@
                                                     <div class="row">
                                                         <div class="form-group col-lg-4">
                                                             <label>No. Surat Jalan<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="no_surat_jalan" id="no_surat_jalan" placeholder="Nomor Surat Jalan">
+                                                            <input class="form-control" type="text" name="no_surat_jalan" id="no_surat_jalan" placeholder="Nomor Surat Jalan" disabled>
                                                             <span class="text-danger" id="error_no_surat_jalan"></span>
                                                         </div>
 
@@ -191,18 +191,18 @@
                                                             <span class="text-danger" id="error_tanggal_surat_jalan"></span>
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="row">
-                                                       
+
                                                         <label style="margin-left: 7">Cara Pembayaran<span style="color: red;">*</span></label>
-                                                        
+
                                                     </div>
                                                     <div class="row" style="margin-left: 7">
                                                         <div class="custom-control custom-radio">
                                                             <input class="custom-control-input" type="radio" id="rd_tunai" name="rd_tunai" disabled>
                                                             <label for="customRadio3" class="custom-control-label">Tunai</label>
                                                         </div>
-                                                        
+
                                                     </div>
 
                                                     <div class="row" style="margin-left: 7">
@@ -247,15 +247,15 @@
                                                         </div>
 
                                                         <div class="form-group col-lg-4">
-                                                                    <label>Jumlah<span style="color: red;">*</span></label>
-                                                                    <input class="form-control" type="number" name="jumlah" id="jumlah" placeholder="jumlah">Ton / Tabung
-                                                                    <span class="text-danger" id="error_jumlah"></span>
+                                                            <label>Jumlah<span style="color: red;">*</span></label>
+                                                            <input class="form-control" type="number" name="jumlah" id="jumlah" placeholder="jumlah">Ton / Tabung
+                                                            <span class="text-danger" id="error_jumlah"></span>
                                                         </div>
 
                                                         <div class="form-group col-lg-4">
-                                                                    <label>Kilogram<span style="color: red;">*</span></label>
-                                                                    <input class="form-control " type="text" name="kilogram" id="kilogram" placeholder="kg" disabled>
-                                                                    <span class="text-danger" id="error_kilogram"></span>
+                                                            <label>Kilogram<span style="color: red;">*</span></label>
+                                                            <input class="form-control " type="text" name="kilogram" id="kilogram" placeholder="kg" disabled>
+                                                            <span class="text-danger" id="error_kilogram"></span>
                                                         </div>
                                                     </div>
 
@@ -279,7 +279,7 @@
                                                             <span class="text-danger" id="error_keterangan"></span>
                                                         </div>
                                                     </div>
-                                                   <br>
+                                                    <br>
                                                     <label> POSISI ROTOGAGE / LEVEL CONTROL </label>
                                                     <hr>
                                                     <div class="row">
@@ -307,7 +307,7 @@
                                                             <label>Nilai Persen<span style="color: red;">*</span></label>
                                                             <input class="form-control" type="number" name="nilai_persen_pengambilan" id="nilai_persen_pengambilan" placeholder="Nilai Persen">%
                                                             <span class="text-danger" id="error_nilai_persen_pengambilan"></span>
-                                                        </div>  
+                                                        </div>
 
                                                     </div>
 
@@ -317,7 +317,7 @@
                                                             <label>Nilai Persen<span style="color: red;">*</span></label>
                                                             <input class="form-control" type="number" name="nilai_persen_berangkat" id="nilai_persen_berangkat" placeholder="Nilai Persen">%
                                                             <span class="text-danger" id="error_nilai_persen_berangkat"></span>
-                                                        </div>  
+                                                        </div>
 
                                                     </div>
 
@@ -331,218 +331,218 @@
 
                                                 </div>
 
-                                                
+
                                                 <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" id="modal_alamat" aria-hidden="true">
-                                                <div class="modal-dialog modal-xl">
-                                                        
-                                                        <div class="modal-content" style="padding: 10px" >
-                                                        <div class="form-group text-right" style="float: right;">
-                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_tambah_alamat" style="margin-right: 941px">+ Tambah Alamat Baru</button>
+                                                    <div class="modal-dialog modal-xl">
+
+                                                        <div class="modal-content" style="padding: 10px">
+                                                            <div class="form-group text-right" style="float: right;">
+                                                                <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_tambah_alamat" style="margin-right: 941px">+ Tambah Alamat Baru</button>
+
+                                                            </div>
+
+                                                            <div class="row">
+
+                                                                <div class="form-group col-lg-4">
+                                                                    <label>No. Customer<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="no_customer_modal" id="no_customer_modal" placeholder="Nomor Customer" disabled>
+                                                                    <span class="text-danger" id="error_no_customer_modal"></span>
+
+                                                                </div>
+
+                                                                <div class="form-group col-lg-4">
+                                                                    <label>Nama Customer<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="nama_customer_modal" id="nama_customer_modal" placeholder="Nama Customer" disabled>
+                                                                    <span class="text-danger" id="error_nama_customer_modal"></span>
+                                                                </div>
+
+                                                                <div class="form-group col-lg-4">
+                                                                    <label>NPWP <span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="npwp_modal" id="npwp_modal" placeholder="NPWP" disabled>
+                                                                    <span class="text-danger" id="error_npwp_modal"></span>
+
+                                                                </div>
+
+
+
+                                                            </div>
+
+
+                                                            <div class="row">
+                                                                <div class="form-group col-lg-2">
+                                                                    <label>Alamat kirim ke-<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="alamat_kirim_ke_modal" id="alamat_kirim_ke_modal" placeholder="Alamat Kirim ke-" disabled>
+                                                                    <span class="text-danger" id="error_alamat_kirim_ke_modal"></span>
+                                                                </div>
+
+                                                                <div class="form-group col-lg-4">
+                                                                    <label style="margin-top:40px;">Alamat Pengiriman<span style="color: red;">*</span></label>
+
+                                                                </div>
+
+                                                                <div class="form-group col-lg-4" style="margin-left:-190px;">
+                                                                    <input class="form-control" type="text" name="alamat_kirim1_modal" id="alamat_kirim1_modal" placeholder="Alamat Kirim 1" disabled>
+                                                                    <span class="text-danger" id="error_alamat_kirim1_modal"></span>
+                                                                    <input class="form-control" type="text" name="alamat_kirim2_modal" id="alamat_kirim2_modal" placeholder="Alamat Kirim 2" disabled>
+                                                                    <span class="text-danger" id="error_alamat_kirim2_modal"></span>
+                                                                    <input class="form-control" type="text" name="alamat_kirim3_modal" id="alamat_kirim3_modal" placeholder="Alamat Kirim 3" disabled>
+                                                                    <span class="text-danger" id="error_alamat_kirim3_modal"></span>
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="form-group text-right">
+                                                                <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_simpan_alamat">Simpan</button>
+
+                                                            </div>
+
+
+                                                            <div class="callout callout-warning table-responsive" width="100%" style="background-color: #FFF8E5;" id="bagian_3">
+
+                                                                <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_alamat_kirim">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>No</th>
+                                                                            <th>Nama Faktur Pajak</th>
+                                                                            <th>NPWP</th>
+                                                                            <th>Kode Alamat</th>
+                                                                            <th>Alamat 1</th>
+                                                                            <th>Alamat 2</th>
+                                                                            <th>Alamat 3</th>
+
+                                                                            <th>Aksi</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
 
                                                         </div>
-                                                        
-                                                    <div class="row">
-                                                            
-                                                        <div class="form-group col-lg-4">
-                                                            <label>No. Customer<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="no_customer_modal" id="no_customer_modal" placeholder="Nomor Customer" disabled>
-                                                            <span class="text-danger" id="error_no_customer_modal"></span>
-
                                                     </div>
-                                                 
-                                                        <div class="form-group col-lg-4">
-                                                            <label>Nama Customer<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="nama_customer_modal" id="nama_customer_modal" placeholder="Nama Customer" disabled>
-                                                            <span class="text-danger" id="error_nama_customer_modal"></span>
-                                                        </div>
-
-                                                        <div class="form-group col-lg-4">
-                                                            <label>NPWP <span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="npwp_modal" id="npwp_modal" placeholder="NPWP" disabled>
-                                                            <span class="text-danger" id="error_npwp_modal"></span>
-
-                                                        </div>
-                                                    
-                                                        
-
                                                 </div>
 
 
-                                                    <div class="row">
-                                                        <div class="form-group col-lg-2">
-                                                            <label>Alamat kirim ke-<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="alamat_kirim_ke_modal" id="alamat_kirim_ke_modal" placeholder="Alamat Kirim ke-" disabled>
-                                                            <span class="text-danger" id="error_alamat_kirim_ke_modal"></span>
-                                                        </div>
-
-                                                        <div class="form-group col-lg-4">
-                                                            <label style="margin-top:40px;">Alamat Pengiriman<span style="color: red;">*</span></label>
-                                                            
-                                                        </div>
-
-                                                        <div class="form-group col-lg-4" style="margin-left:-190px;">
-                                                            <input class="form-control" type="text" name="alamat_kirim1_modal" id="alamat_kirim1_modal" placeholder="Alamat Kirim 1" disabled>
-                                                            <span class="text-danger" id="error_alamat_kirim1_modal"></span>
-                                                            <input class="form-control" type="text" name="alamat_kirim2_modal" id="alamat_kirim2_modal" placeholder="Alamat Kirim 2"disabled>
-                                                            <span class="text-danger" id="error_alamat_kirim2_modal"></span>
-                                                            <input class="form-control" type="text" name="alamat_kirim3_modal" id="alamat_kirim3_modal" placeholder="Alamat Kirim 3"disabled>
-                                                            <span class="text-danger" id="error_alamat_kirim3_modal"></span>
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="form-group text-right">
-                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_simpan_alamat">Simpan</button>
-
-                                                    </div>
-
-                                                    
-                                                    <div class="callout callout-warning table-responsive" width="100%" style="background-color: #FFF8E5;" id="bagian_3">
-
-                                                        <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_alamat_kirim">
-                                                            <thead>
-                                                            <tr>
-                                                            <th>No</th>
-                                                            <th>Nama Faktur Pajak</th>
-                                                            <th>NPWP</th>
-                                                            <th>Kode Alamat</th>
-                                                            <th>Alamat 1</th>
-                                                            <th>Alamat 2</th>
-                                                            <th>Alamat 3</th>
-                        
-                                                            <th>Aksi</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                        
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                
                                                 <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" id="modal_tambah_alamat" aria-hidden="true">
                                                     <div class="modal-dialog modal-xl">
-                                                        
-                                                        <div class="modal-content" style="padding: 10px" >
-                                                        
-                                                    
-                                                    <div class="row">
-                                                        <div class="form-group col-lg-4">
-                                                            <label>Nomor Customer<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="nomor_customer_baru" id="nomor_customer_baru" placeholder="Nomor Customer" disabled>
-                                                            <span class="text-danger" id="error_nomor_customer_baru"></span>
 
-                                                        </div>
-
-                                                        <div class="form-group col-lg-4">
-                                                            <label>Nama Customer<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="nama_customer_baru" id="nama_customer_baru" placeholder="Nama Customer" disabled>
-                                                            <span class="text-danger" id="error_nama_customer_baru"></span>
-
-                                                        </div>
-
-                                                        <div class="form-group col-lg-4">
-                                                            <label>Alamat kirim ke-<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="alamat_kirim_ke_baru" id="alamat_kirim_ke_baru" placeholder="Alamat kirim ke-" disabled>
-                                                            <span class="text-danger" id="error_alamat_kirim_ke_baru"></span>
-
-                                                        </div>
-
-                                                        
-                                                    </div>
-
-                                                    <div class="row">
-                                                            
-                                                        
-                                                 
-                                                        <div class="form-group col-lg-4">
-                                                            <label>Nama Faktur Pajak<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="nama_faktur_pajak_baru" id="nama_faktur_pajak_baru" placeholder="" disabled>
-                                                            <span class="text-danger" id="error_nama_faktur_pajak_baru"></span>
-                                                        </div>
-
-                                                        <div class="form-group col-lg-4">
-                                                            <label>NPWP <span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="npwp_baru" id="npwp_baru" placeholder="NPWP">
-                                                            <span class="text-danger" id="error_npwp_baru"></span>
-
-                                                        </div>
-                                                    
-                                                        
-
-                                                    </div>
-
-                                                    <div class="row">
-                                                            
-                                                        <div class="form-group col-lg-4">
-                                                            
-                                                            <input hidden class="form-control" type="text" name="alamat1_customer_baru_hidden" id="alamat1_customer_baru_hidden" placeholder="" disabled>
-                                                            <span class="text-danger" id="error_alamat1_customer_baru_hidden"></span>
-
-                                                        </div>
-                                                 
-                                                        <div class="form-group col-lg-4">
-                                                          
-                                                            <input hidden class="form-control" type="text" name="alamat2_customer_baru_hidden" id="alamat2_customer_baru_hidden" placeholder="" disabled>
-                                                            <span class="text-danger" id="error_alamat2_customer_baru_hidden"></span>
-
-                                                        </div>
-
-                                                        <div class="form-group col-lg-4">
-                                                            
-                                                            <input hidden class="form-control" type="text" name="alamat3_customer_baru_hidden" id="alamat3_customer_baru_hidden" placeholder="" disabled>
-                                                            <span class="text-danger" id="error_alamat3_customer_baru_hidden"></span>
-
-                                                        </div>
-                                                        
-
-                                                    </div>
+                                                        <div class="modal-content" style="padding: 10px">
 
 
-                                                    <div class="row">
-                                                            
-                                                        <div class="form-group col-lg-4">
-                                                            <label>Alamat kirim 1<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="alamat_kirim1_baru" id="alamat_kirim1_baru" placeholder="Alamat kirim 1">
-                                                            <span class="text-danger" id="error_alamat_kirim1_baru"></span>
+                                                            <div class="row">
+                                                                <div class="form-group col-lg-4">
+                                                                    <label>Nomor Customer<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="nomor_customer_baru" id="nomor_customer_baru" placeholder="Nomor Customer" disabled>
+                                                                    <span class="text-danger" id="error_nomor_customer_baru"></span>
 
-                                                        </div>
-                                                 
-                                                        <div class="form-group col-lg-4">
-                                                            <label>Alamat kirim 2<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="alamat_kirim2_baru" id="alamat_kirim2_baru" placeholder="Alamat kirim 2">
-                                                            <span class="text-danger" id="error_alamat_kirim2_baru"></span>
+                                                                </div>
 
-                                                        </div>
+                                                                <div class="form-group col-lg-4">
+                                                                    <label>Nama Customer<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="nama_customer_baru" id="nama_customer_baru" placeholder="Nama Customer" disabled>
+                                                                    <span class="text-danger" id="error_nama_customer_baru"></span>
 
-                                                        <div class="form-group col-lg-4">
-                                                            <label>Alamat kirim 3<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="alamat_kirim3_baru" id="alamat_kirim3_baru" placeholder="Alamat kirim 3">
-                                                            <span class="text-danger" id="error_alamat_kirim3_baru"></span>
+                                                                </div>
 
-                                                        </div>
-                                                    
-                                                        
+                                                                <div class="form-group col-lg-4">
+                                                                    <label>Alamat kirim ke-<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="alamat_kirim_ke_baru" id="alamat_kirim_ke_baru" placeholder="Alamat kirim ke-" disabled>
+                                                                    <span class="text-danger" id="error_alamat_kirim_ke_baru"></span>
 
-                                                    </div>
+                                                                </div>
 
 
-                                                    <div class="form-group text-right" style="float: right;">
-                                                    <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_kembali" style="margin-right: 0px">Kembali</button>
-                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_simpan_alamat_baru" style="margin-right: 0px">Simpan</button>
+                                                            </div>
 
-                                                        </div>
+                                                            <div class="row">
+
+
+
+                                                                <div class="form-group col-lg-4">
+                                                                    <label>Nama Faktur Pajak<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="nama_faktur_pajak_baru" id="nama_faktur_pajak_baru" placeholder="" disabled>
+                                                                    <span class="text-danger" id="error_nama_faktur_pajak_baru"></span>
+                                                                </div>
+
+                                                                <div class="form-group col-lg-4">
+                                                                    <label>NPWP <span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="npwp_baru" id="npwp_baru" placeholder="NPWP">
+                                                                    <span class="text-danger" id="error_npwp_baru"></span>
+
+                                                                </div>
+
+
+
+                                                            </div>
+
+                                                            <div class="row">
+
+                                                                <div class="form-group col-lg-4">
+
+                                                                    <input hidden class="form-control" type="text" name="alamat1_customer_baru_hidden" id="alamat1_customer_baru_hidden" placeholder="" disabled>
+                                                                    <span class="text-danger" id="error_alamat1_customer_baru_hidden"></span>
+
+                                                                </div>
+
+                                                                <div class="form-group col-lg-4">
+
+                                                                    <input hidden class="form-control" type="text" name="alamat2_customer_baru_hidden" id="alamat2_customer_baru_hidden" placeholder="" disabled>
+                                                                    <span class="text-danger" id="error_alamat2_customer_baru_hidden"></span>
+
+                                                                </div>
+
+                                                                <div class="form-group col-lg-4">
+
+                                                                    <input hidden class="form-control" type="text" name="alamat3_customer_baru_hidden" id="alamat3_customer_baru_hidden" placeholder="" disabled>
+                                                                    <span class="text-danger" id="error_alamat3_customer_baru_hidden"></span>
+
+                                                                </div>
+
+
+                                                            </div>
+
+
+                                                            <div class="row">
+
+                                                                <div class="form-group col-lg-4">
+                                                                    <label>Alamat kirim 1<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="alamat_kirim1_baru" id="alamat_kirim1_baru" placeholder="Alamat kirim 1">
+                                                                    <span class="text-danger" id="error_alamat_kirim1_baru"></span>
+
+                                                                </div>
+
+                                                                <div class="form-group col-lg-4">
+                                                                    <label>Alamat kirim 2<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="alamat_kirim2_baru" id="alamat_kirim2_baru" placeholder="Alamat kirim 2">
+                                                                    <span class="text-danger" id="error_alamat_kirim2_baru"></span>
+
+                                                                </div>
+
+                                                                <div class="form-group col-lg-4">
+                                                                    <label>Alamat kirim 3<span style="color: red;">*</span></label>
+                                                                    <input class="form-control" type="text" name="alamat_kirim3_baru" id="alamat_kirim3_baru" placeholder="Alamat kirim 3">
+                                                                    <span class="text-danger" id="error_alamat_kirim3_baru"></span>
+
+                                                                </div>
+
+
+
+                                                            </div>
+
+
+                                                            <div class="form-group text-right" style="float: right;">
+                                                                <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_kembali" style="margin-right: 0px">Kembali</button>
+                                                                <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_simpan_alamat_baru" style="margin-right: 0px">Simpan</button>
+
+                                                            </div>
 
 
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                
+
 
                                             </form>
 
@@ -631,7 +631,7 @@
                                                     <h5>Apa Anda sudah yakin?</h5>
                                                     <div class="form-group text-right">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" onclick="tambahAlamat()" >Ya</button>
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" onclick="tambahAlamat()">Ya</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -648,7 +648,7 @@
                                                     <h5>Apa Anda sudah yakin?</h5>
                                                     <div class="form-group text-right">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded"  onclick="cekDelete()">Ya</button>
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" onclick="cekDelete()">Ya</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -665,7 +665,7 @@
                                                     <h5>Apa Anda sudah yakin?</h5>
                                                     <div class="form-group text-right">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded"  onclick="cekEdit()">Ya</button>
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" onclick="cekEdit()">Ya</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -683,7 +683,7 @@
                                                     <h5>Apa Anda sudah yakin?</h5>
                                                     <div class="form-group text-right">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" onclick="tambahSj()" >Ya</button>
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" onclick="tambahSj()">Ya</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -733,7 +733,7 @@
         <!-- /.content-wrapper -->
 
         <!-- Control Sidebar -->
-        
+
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
         </aside>

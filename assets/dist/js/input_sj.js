@@ -756,6 +756,102 @@ function get_customer() {
       },
     });
     
-  });0
+  });
 
   
+
+
+
+
+  $(document).ready(function () {
+    //datatables
+    table = $("#tabel_sj").DataTable({
+      scrollX: true,
+      processing: true, //Feature control the processing indicator.
+      serverSide: true, //Feature control DataTables' server-side processing mode.
+      order: [], //Initial no order.
+  
+      // Load data for the table's content from an Ajax source
+      ajax: {
+        url: "input-sj/tabel-sj",
+        type: "POST",
+      },
+  
+      //Set column definition initialisation properties.
+      columnDefs: [
+        {
+          targets: "_all", //first column / numbering column
+          orderable: false, //set not orderable
+        },
+      ],
+      
+      
+    });
+    
+    $("#tabel_sj tbody").on("click", ".edit_sj", function () {
+      var data = table.row($(this).parents("tr")).data();
+      var id = $(this).data("id");
+      //var unitBarang = $("#unitBarang :selected").text();
+  
+      $("html, body").animate(
+        {
+          scrollTop: 1300,
+        },
+        500
+      );
+  
+      $("#bagian_2_edit").slideDown("slow");
+      get_unit_supir2();
+      //$("#unitSupir2").val(data[1]);
+      kode_supir2 = data[2]; // revisi
+      $("#nama_supir2").val(data[1]);
+  
+      $("#btn_edit").val(id);
+    });
+    //$("#bagian_2_edit").hide();
+  });
+
+
+
+
+  var nomor_sj = "";
+$(document).on("click", ".deleteSj", function (event) {
+  nomor_sj = $(this).data("no_sj");
+
+  $('#modal_konfirmasi_delete').modal('show');
+    
+});
+
+function deleteSj(){
+   
+  $('#modal_konfirmasi_delete').modal('hide');
+  var table = $("#tabel_sj").DataTable();
+  
+  
+    
+      $.ajax({
+        url: "input-sj/hapus-sj",
+        data: {
+          no_sj: nomor_sj,
+        },
+        type: "post",
+        success: function (data) {
+          var json = JSON.parse(data);
+          status = json.status;
+          if (status == "success") {
+            mytable = $("#tabel_sj").DataTable();
+            mytable.draw();
+
+            $("#" + nomor_sj)
+              .closest("tr")
+              .remove();
+              Swal.fire("Berhasil!", "Surat Jalan berhasil dihapus!", "success");
+          } else {
+           // alert("Failed");
+            Swal.fire("Gagal!", "Surat Jalan berhasil dihapus!", "error");
+            return;
+          }
+        },
+      });
+      
+}

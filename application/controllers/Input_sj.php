@@ -34,77 +34,7 @@ class Input_sj extends CI_Controller
         $this->load->view("Input_sj_view");
     }
 
-    public function tambahSupir()
-    {
-        $namaUnit = $_POST['namaUnit'];
-        $namaSupir = $_POST['namaSupir'];
-
-
-        $query = $this->db->query("SELECT AUTO_INCREMENT
-        FROM information_schema.TABLES
-        WHERE TABLE_SCHEMA = 'itjticom_input_cust'
-        AND TABLE_NAME = 'supir'");
-        $hasil = $query->result();
-        $k_supir = "";
-        $kodeSupir = $hasil[0]->AUTO_INCREMENT;
-        if ($kodeSupir > 0 && $kodeSupir < 10) {
-            $k_supir =  "0000" . $kodeSupir;
-        } else if ($kodeSupir >= 10 && $kodeSupir < 100) {
-            $k_supir =   "000" . $kodeSupir;
-        } else if ($kodeSupir >= 100 && $kodeSupir < 1000) {
-            $k_supir =   "00" . $kodeSupir;
-        } else if ($kodeSupir >= 1000 && $kodeSupir < 10000) {
-            $k_supir = "0" . $kodeSupir;
-        } else if ($kodeSupir >= 10000 && $kodeSupir < 100000) {
-            $k_supir =  $kodeSupir;
-        }
-
-        $supir_unik = $namaSupir . "_" . $namaUnit;
-
-        $data = array(
-            'k_sales' => $k_supir,
-            'n_sales' => $namaSupir,
-            'kd_unit' => $namaUnit,
-            'supir_unik' => $supir_unik
-
-
-        );
-
-        if ($this->Supir_model->check($supir_unik)) {
-            $data = array(
-                'status' => 'false',
-
-            );
-            echo json_encode($data);
-        } else {
-
-
-
-            $insert = $this->Supir_model->tambah_supir('supir', $data);
-            $query = $this->db->affected_rows();
-
-
-
-
-            //if ($query) {
-
-            $data = array(
-                'status' => 'true',
-
-            );
-
-            echo json_encode($data);
-            //  } 
-            // else {
-            //     $data = array(
-            //         'status' => 'false',
-
-            //     );
-
-            //     echo json_encode($data);
-            // }
-        }
-    }
+    
 
     function get_unit_sj()
     {
@@ -133,16 +63,8 @@ class Input_sj extends CI_Controller
     public function ajax_list()
     {
 
-        date_default_timezone_set('Asia/Jakarta');
-        $bulanAktifSekarang = date("Ym");
-        if (isset($_POST['bulanAktif'])) {
-
-
-            $_SESSION['bulanAktif'] = $_POST['bulanAktif'];
-            // var_dump($_SESSION['bulanAktif']);
-            // die();
-        }
-        $list = $this->Supir_model->get_datatables();
+        
+        $list = $this->Input_sj_model->get_datatables();
         $data = array();
         $total = 0;
         $no = $_POST['start'];
@@ -152,28 +74,49 @@ class Input_sj extends CI_Controller
 
             $row[] = $no;
 
-            $row[] = $p->n_sales;
-            $row[] = $p->k_sales;
+            $row[] = $p->no_sj;
+            $row[] = $p->n_cus;
+            $row[] = $p->alk_cus1;
+            $row[] = $p->alk_cus2;
+            $row[] = $p->alk_cus3;
+            $row[] = $p->npwp;
             $row[] = $p->kd_unit;
+            $row[] = $p->no_urutspm;
+            $row[] = $p->tgl_sj;
+            if( $p->tk == "T"){
+                $row[] = "Tunai";
+            }else if( $p->tk =="K"){
+                $row[] = "Kredit";
+            }
+            $row[] = $p->no_mobil;
+            $row[] = $p->n_sales;
+            $row[] = $p->unit_mkt;
+            $row[] = $p->k_barang;
+            $row[] = $p->qty_kirim;
+            $row[] = $p->kg_kirim."kg";
+            $row[] = $p->ket;
+            $row[] = $p->n_supl;
+            $row[] = $p->no_faktur;
+            $row[] = $p->no_segel;
+            $row[] = $p->awl_presur;
+            $row[] = $p->awl_suhu;
+            $row[] = $p->awal;
+            $row[] = $p->akhir;
 
 
 
+            
+            
 
-
-
-
-            // $row[] = '<a href="javascript:void(0);" class="fas fa-edit" onclick="get_data_po('.$p->id.')" title="Ubah data PO" style="color:black;"></a> | <a href="javascript:void(0);" class="fas fa-trash" onclick="hapus_po('.$p->id.')" title="Hapus data PO" style="color:black;"></a>';
-            $row[] = '<a href="#!" class="fas fa-edit edit_supir" data-id="' . $p->id . '"  title="Ubah data PO" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteSupir" data-id="' . $p->id . '" title="Hapus data PO" style="color:black;"></a>';
-
-
-
+            
+            $row[] = '<a href="#!" class="fas fa-edit edit_sj" data-no_sj="' . $p->no_sj . '"  title="Ubah Surat Jalan" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteSj" data-no_sj="' . $p->no_sj . '" title="Hapus Surat Jalan" style="color:black;"></a>';
             $data[] = $row;
         }
 
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->Supir_model->count_all(),
-            "recordsFiltered" => $this->Supir_model->count_filtered(),
+            "recordsTotal" => $this->Input_sj_model->count_all(),
+            "recordsFiltered" => $this->Input_sj_model->count_filtered(),
             "data" => $data,
         );
         //output to json format
@@ -182,11 +125,11 @@ class Input_sj extends CI_Controller
 
 
 
-    function hapus_supir()
+    function hapus_sj()
     {
-        $id = $_POST['id'];
+        $no_sj = $_POST['no_sj'];
 
-        $this->Supir_model->hapus_supir($id);
+        $this->Input_sj_model->hapus_sj($no_sj);
         $query = $this->db->affected_rows();
         if ($query == true) {
             $data = array(
@@ -222,7 +165,7 @@ class Input_sj extends CI_Controller
 
 
         );
-        if ($this->Supir_model->check($supir_unik)) {
+        if ($this->Input_sj_model->check($supir_unik)) {
             $data = array(
                 'status' => 'false',
 
@@ -231,7 +174,7 @@ class Input_sj extends CI_Controller
         } else {
 
 
-            $this->Supir_model->edit_supir($id, $data);
+            $this->Input_sj_model->edit_supir($id, $data);
             $query = $this->db->affected_rows();
 
 
@@ -721,3 +664,4 @@ class Input_sj extends CI_Controller
         //var_dump($data);
     }
 }
+

@@ -13,7 +13,7 @@ class Supir_model extends CI_Model
     var $column_order = array(null, 'id', 'k_sales', 'n_sales', 'kd_unit'); //set column field database for datatable orderable
     var $column_search = array('id', 'k_sales', 'n_sales', 'kd_unit'); //set column field database for datatable searchable
     var $order = array('k_sales' => 'desc'); // default order
-    public function get_data_tabel_barang()
+    public function get_data_tabel_supir()
     {
 
 
@@ -57,7 +57,7 @@ class Supir_model extends CI_Model
 
     public function get_datatables()
     {
-        $this->get_data_tabel_barang();
+        $this->get_data_tabel_supir();
         if ($_POST['length'] != -1)
             $this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
@@ -66,7 +66,7 @@ class Supir_model extends CI_Model
 
     public function count_filtered()
     {
-        $this->get_data_tabel_barang();
+        $this->get_data_tabel_supir();
         $query = $this->db->get();
         return $query->num_rows();
     }

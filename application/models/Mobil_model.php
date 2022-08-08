@@ -87,10 +87,10 @@ class Mobil_model extends CI_Model
         $this->db->update('mobil', $data);
     }
 
-    function check($mobil_unik, $no){
+    function check($mobil_unik){
 
         $this->db->select();
-        $query = $this->db->get_where('mobil', array('mobil_unik' => $mobil_unik, 'no !=' => $no ));
+        $query = $this->db->get_where('mobil', array('mobil_unik' => $mobil_unik));
         $result = $query->result_array();
         
         $count = count($result);

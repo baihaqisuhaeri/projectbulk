@@ -210,8 +210,9 @@ class Supir extends CI_Controller
     {
         $id = $_POST['id'];
         $namaUnit2 = $_POST['namaUnit2'];
+        $kode_supir2 = $_POST['kode_supir2'];
         $namaSupir2 = $_POST['namaSupir2'];
-        $supir_unik = $namaSupir2 ."_". $namaUnit2;
+        $supir_unik = $kode_supir2 ."_". $namaUnit2;
         
 
         $data = array(

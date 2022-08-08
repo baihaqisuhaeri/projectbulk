@@ -1,5 +1,6 @@
 $("#bagian_2_edit").hide();
 var table;
+var kode_supir2 = ""; //revisi
 $(document).ready(function () {
   //datatables
   table = $("#tabel_supir").DataTable({
@@ -53,7 +54,7 @@ $(document).ready(function () {
       "colvis",
     ],
   });
-
+  
   $("#tabel_supir tbody").on("click", ".edit_supir", function () {
     var data = table.row($(this).parents("tr")).data();
     var id = $(this).data("id");
@@ -69,6 +70,7 @@ $(document).ready(function () {
     $("#bagian_2_edit").slideDown("slow");
     get_unit_supir2();
     //$("#unitSupir2").val(data[1]);
+    kode_supir2 = data[2]; // revisi
     $("#nama_supir2").val(data[1]);
 
     $("#btn_edit").val(id);
@@ -245,6 +247,7 @@ function cekEdit(){
       id: id,
       namaUnit2: namaUnit2,
       namaSupir2: namaSupir2,
+      kode_supir2: kode_supir2,
     },
     success: function (data) {
       var json = JSON.parse(data);

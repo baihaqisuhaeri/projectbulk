@@ -335,15 +335,9 @@ function get_customer() {
       err += 1;
     }
 
-    if ( alamatKirim2 == "") {
-      $("#error_alamat_kirim2_baru").html("Alamat kirim 2 tidak boleh kosong!");
-      err += 1;
-    }
+   
 
-    if ( alamatKirim3 == "") {
-      $("#error_alamat_kirim3_baru").html("Alamat kirim 3 tidak boleh kosong!");
-      err += 1;
-    }
+    
 
     if ( npwpBaru == "") {
       $("#error_npwp_baru").html("NPWP tidak boleh kosong!");
@@ -433,20 +427,7 @@ function get_customer() {
       err += 1;
     }
 
-    if ( alamatKirim1Modal == "") {
-      $("#error_alamat_kirim1_modal").html("Alamat kirim 1 tidak boleh kosong!");
-      err += 1;
-    }
-
-    if ( alamatKirim2Modal == "") {
-      $("#error_alamat_kirim2_modal").html("Alamat kirim 2 tidak boleh kosong!");
-      err += 1;
-    }
-
-    if ( alamatKirim3Modal == "") {
-      $("#error_alamat_kirim3_modal").html("Alamat kirim 3 tidak boleh kosong!");
-      err += 1;
-    }
+    
 
     if ( npwpModal == "") {
       $("#error_npwp_modal").html("NPWP tidak boleh kosong!");
@@ -556,10 +537,7 @@ function get_customer() {
       $("#error_no_spm").html("Nomor SPM harus dipilih!");
       err += 1;
     }
-    if (no_surat_jalan == "") {
-      $("#error_no_surat_jalan").html("Nomor Surat Jalan tidak boleh kosong!");
-      err += 1;
-    }
+    
     if (tanggal_surat_jalan == "") {
       $("#error_tanggal_surat_jalan").html("Tanggal Surat Jalan tidak boleh kosong!");
       err += 1;
@@ -628,7 +606,7 @@ function get_customer() {
         //console.log(data.volume_spm);
         
         if(parseFloat(kg_kirim)> data.volume_spm){
-          $("#error_kilogram").html("Maaf maksimal volume yang bisa diisi adalah " +parseInt(data.volume_spm)+" kg");
+          $("#error_kilogram").html("Maaf maksimal volume yang bisa diisi adalah " +parseFloat(data.volume_spm)+" kg");
         }else{
           $("#error_kilogram").html("");
           $('#modal_konfirmasi_tambah_sj').modal('show');

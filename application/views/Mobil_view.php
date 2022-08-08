@@ -136,7 +136,7 @@
 
                                                     <div class="form-group text-right">
                                                         <button class="btn btn-primary btn-small btn-primary btn-rounded" type="submit" id="btn_next">Tambah</button>
-                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="submit" id="btn_next">Tambahhhhhhh</button>
+                                                        
                                                     </div>
 
                                                 </div>

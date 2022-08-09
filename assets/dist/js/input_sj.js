@@ -808,7 +808,7 @@ function get_customer() {
   
       $("#btn_edit").val(id);
     });
-    //$("#bagian_2_edit").hide();
+    $("#bagian_2_edit").hide();
   });
 
 

@@ -39,6 +39,9 @@ class Input_sj extends CI_Controller
     function get_unit_sj()
     {
 
+        $unit_edit = $this->input->post("unit");
+        // var_dump($unit_edit);
+        // die();
         $daftar_unit = "";
         $unit_akses = $this->db->query("select * from hak_akses where nama_user = '" . $_SESSION['nama'] . "' ")->result();
         foreach ($unit_akses as $unit) {
@@ -56,7 +59,18 @@ class Input_sj extends CI_Controller
         }
 
         foreach ($unit_akses as $u) {
+            if($unit_edit == null){
+
+            
             echo '<option value="' . $u->kode_unit . '">' . $u->nama_unit . '</option>';
+            }
+            else{
+                if($unit_edit == $u->kode_unit){
+                    echo '<option selected value="' . $u->kode_unit . '">' . $u->nama_unit . '</option>';
+                }else{
+                    echo '<option value="' . $u->kode_unit . '">' . $u->nama_unit . '</option>';
+                }
+            }
         }
     }
 
@@ -76,6 +90,7 @@ class Input_sj extends CI_Controller
 
             $row[] = $p->no_sj;
             $row[] = $p->n_cus;
+            $row[] = $p->k_cus;
             $row[] = $p->alk_cus1;
             $row[] = $p->alk_cus2;
             $row[] = $p->alk_cus3;
@@ -203,11 +218,17 @@ class Input_sj extends CI_Controller
     function get_customer()
     {
 
+        $kode_cus_edit = $this->input->post("kode_cus");
+        $unit_edit = $this->input->post("unit_edit");
+       
         $unit = $this->input->post("unitSj");
 
-
-        $customer = $this->db->query("select DISTINCT * from customer where unit = '$unit' and flag_aktif = '' order by n_cus asc")->result();
-
+        if($kode_cus_edit==null){
+            $customer = $this->db->query("select DISTINCT * from customer where unit = '$unit' and flag_aktif = '' order by n_cus asc")->result();
+        }else{
+            $customer = $this->db->query("select DISTINCT * from customer where unit = '$unit_edit' and flag_aktif = '' order by n_cus asc")->result();
+        }
+        
 
         if (empty($customer)) {
             echo '<option value="">Belum ada data</option>';
@@ -216,7 +237,17 @@ class Input_sj extends CI_Controller
         }
 
         foreach ($customer as $u) {
+            if($kode_cus_edit==null){
+
+            
             echo '<option value="' . $u->k_Cus . "_" . $u->n_cus . "_" . $u->al1_cus . "_" . $u->al2_cus . "_" . $u->al3_cus . "_" . $u->k_wilayah . "_" . $u->npwp . '">' . $u->n_cus . ' (' . $u->npwp . ')(' . $u->k_Cus . ')</option>';
+            }else{
+                if($kode_cus_edit == $u->k_Cus){
+                    echo '<option selected value="' . $u->k_Cus . "_" . $u->n_cus . "_" . $u->al1_cus . "_" . $u->al2_cus . "_" . $u->al3_cus . "_" . $u->k_wilayah . "_" . $u->npwp . '">' . $u->n_cus . ' (' . $u->npwp . ')(' . $u->k_Cus . ')</option>';
+                }else{
+                    echo '<option value="' . $u->k_Cus . "_" . $u->n_cus . "_" . $u->al1_cus . "_" . $u->al2_cus . "_" . $u->al3_cus . "_" . $u->k_wilayah . "_" . $u->npwp . '">' . $u->n_cus . ' (' . $u->npwp . ')(' . $u->k_Cus . ')</option>';
+                }
+            }
         }
     }
 
@@ -225,6 +256,7 @@ class Input_sj extends CI_Controller
     {
 
         $k_cus = $this->input->post("k_cus");
+        $status_edit = $this->input->post("status_edit");
         $list = $this->Input_sj_model->get_datatables_alamat_kirim($k_cus);
         $data = array();
         $total = 0;
@@ -246,7 +278,13 @@ class Input_sj extends CI_Controller
 
             // $row[] = '<a href="javascript:void(0);" class="fas fa-edit" onclick="get_data_po('.$p->id.')" title="Ubah data PO" style="color:black;"></a> | <a href="javascript:void(0);" class="fas fa-trash" onclick="hapus_po('.$p->id.')" title="Hapus data PO" style="color:black;"></a>';
             // $row[] = '<a href="#!" class="fas fa-edit edit_supir" data-id="' . $p->id . '"  title="Ubah alamat kirim" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteSupir" data-id="' . $p->id . '" title="Hapus alamat kirim" style="color:black;"></a>';
+            if($status_edit==null){
+
+            
             $row[] = '<button type="button" id="pilih_alamat_kirim_modal"  class="btn btn-info">Pilih</button>';
+            }else{
+                $row[] = '<button type="button" id="pilih_alamat_kirim_modal_2"  class="btn btn-info">Pilih</button>';   
+            }
             $data[] = $row;
         }
 
@@ -323,8 +361,11 @@ class Input_sj extends CI_Controller
         date_default_timezone_set('Asia/Jakarta');
         $tgl_sekarang = date("Y-m-d");
         $kodeCustomer = $this->input->post("kodeCustomer");
+        $no_spm = $this->input->post("no_spm");
+        //var_dump($kodeCustomer);
+       // die();
         $spm = $this->db->query("SELECT * FROM tb_spm WHERE k_cus = '$kodeCustomer'  and spm_brlk >= '2022-07-01' ")->result();
-
+        
         // echo "<pre>";
         // print_r($spm);
         // die();
@@ -345,6 +386,9 @@ class Input_sj extends CI_Controller
                 }
             }
             if ($vol_kirim_spm > 0) {
+                if($sp->no_urutspm == $no_spm){
+                    echo '<option selected value="' . $sp->no_urutspm . '">' . $sp->no_spm . '</option>';
+                }
                 echo '<option value="' . $sp->no_urutspm . '">' . $sp->no_spm . '</option>';
             }
         }
@@ -662,6 +706,11 @@ class Input_sj extends CI_Controller
             echo json_encode($data);
         }
         //var_dump($data);
+ 
     }
+
+    
+        
+
 }
 

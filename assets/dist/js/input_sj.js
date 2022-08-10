@@ -712,7 +712,7 @@ function get_customer() {
           tk: tk_sj,
         },
         success: function (data) {
-          console.log(data);
+         // console.log(data);
          // var json = JSON.parse(data);
           var status = data.status;
           if (status == "true") {
@@ -791,20 +791,31 @@ function get_customer() {
     $("#tabel_sj tbody").on("click", ".edit_sj", function () {
       var data = table.row($(this).parents("tr")).data();
       var id = $(this).data("id");
+      $('#unitSj_2').val("cekedit");
+      $('#unitSj_2').select2().trigger('change');
       //var unitBarang = $("#unitBarang :selected").text();
   
       $("html, body").animate(
         {
-          scrollTop: 1300,
+          scrollTop: 3300,
         },
         500
       );
-  
+        
       $("#bagian_2_edit").slideDown("slow");
-      get_unit_supir2();
+      //get_unit_supir2();
       //$("#unitSupir2").val(data[1]);
       kode_supir2 = data[2]; // revisi
+      var kode_cus = data[3];
+      var unit = data[8];
+      var no_spm = data[9];
+      get_no_spm_edit(kode_cus,no_spm);
+      get_unit_sj_edit(unit);
+      get_customer_edit(kode_cus, unit);
+      
       $("#nama_supir2").val(data[1]);
+
+      
   
       $("#btn_edit").val(id);
     });
@@ -854,4 +865,181 @@ function deleteSj(){
         },
       });
       
+}
+
+function get_unit_sj_edit(unit) {
+  
+  $.ajax({
+    url: "input-sj/unit-sj",
+    type: "post",
+    data: { unit: unit
+             },
+    success: function (data) {
+      $("#unitSj_2").html(data);
+      //$("#unit_spm").html(data);
+    },
+  });
+}
+
+function get_customer_edit(kode_cus, unit_edit) {
+
+ $.ajax({
+   url: "input-sj/customer",
+   type: "post",
+   data: { kode_cus: kode_cus,
+           unit_edit: unit_edit },
+   success: function (data) {
+     $("#nama_customer_2").html(data);
+   },
+ });
+}
+
+
+
+
+
+$(document).on("click","#btnAlamatKirim_2",function() {
+  $("#error_nama_customer_2").html("");
+
+  var namaCustomer = $("#nama_customer_2").val();
+  
+  var err = 0;
+  
+    if ( namaCustomer == null || namaCustomer == "") {
+      $("#error_nama_customer_2").html("Nama customer harus dipilih terlebih dahulu!");
+      err += 1;
+    }
+
+    if (err == 0) {
+  
+  $('#modal_alamat_2').modal('show');
+  
+  k_cus = $("#nama_customer_2").val().split("_");
+  $("#no_customer_modal_2").val(k_cus[0]);
+  $("#nama_customer_modal_2").val(k_cus[1]);
+  k_cus = k_cus[0];
+  
+  
+
+  $(document).ready(function () {
+    //datatables
+    $("#tabel_alamat_kirim_2").dataTable().fnDestroy();
+    table_alamat = $("#tabel_alamat_kirim_2").DataTable({
+      
+      // scrollX: true,
+      processing: true, //Feature control the processing indicator.
+      serverSide: true, //Feature control DataTables' server-side processing mode.
+      order: [], //Initial no order.
+    //   "columnDefs": [
+    //     {
+    //         "targets": [7,8,9],
+    //         "visible": false,
+    //         "searchable": false
+    //     }
+    // ],
+      
+      
+  
+      // Load data for the table's content from an Ajax source
+      ajax: {
+        url: "input-sj/tabel-alamat-kirim",
+        type: "POST",
+        data: {
+          k_cus: k_cus,
+          status_edit: "aktif"
+        },
+      },
+    });
+    
+  
+    $("#tabel_alamat_kirim_2 tbody").on("click", "#pilih_alamat_kirim_modal_2", function () {
+      var data = table_alamat.row($(this).parents("tr")).data();
+      var id = $(this).data("id");
+     // var id = $(this).data("id");
+      
+  
+  
+      $("#npwp_modal_2").val(data[2]);
+      $("#alamat_kirim_ke_modal_2").val(data[3]);
+      $("#alamat_kirim1_modal_2").val(data[4]);
+      $("#alamat_kirim2_modal_2").val(data[5]);
+      $("#alamat_kirim3_modal_2").val(data[6]);
+      
+      
+      
+      $("#btn_edit_2").val(id);
+      
+    });
+    $("#npwp_modal_2").val("");
+      $("#alamat_kirim_ke_modal_2").val("");
+      $("#alamat_kirim1_modal_2").val("");
+      $("#alamat_kirim2_modal_2").val("");
+      $("#alamat_kirim3_modal_2").val("");
+      
+    
+  });
+}
+});
+
+
+
+$(document).on("click","#btn_simpan_alamat_2",function() {
+    
+  $("#error_alamat_kirim_ke_modal_2").html("");
+  $("#error_alamat_kirim1_modal_2").html("");
+  $("#error_alamat_kirim2_modal_2").html("");
+  $("#error_alamat_kirim3_modal_2").html("");
+  $("#error_npwp_modal_2").html("");
+  
+
+  var alamatKirimKeModal = $("#alamat_kirim_ke_modal_2").val();
+  var alamatKirim1Modal = $("#alamat_kirim1_modal_2").val();
+  var alamatKirim2Modal = $("#alamat_kirim2_modal_2").val();
+  var alamatKirim3Modal = $("#alamat_kirim3_modal_2").val();
+  var npwpModal = $("#npwp_modal_2").val();
+
+  var err = 0;
+
+  if ( alamatKirimKeModal == "") {
+    $("#error_alamat_kirim_ke_modal_2").html("Alamat kirim ke- tidak boleh kosong!");
+    err += 1;
+  }
+
+  
+
+  if ( npwpModal == "") {
+    $("#error_npwp_modal_2").html("NPWP tidak boleh kosong!");
+    err += 1;
+  }
+
+  if (err == 0) {
+    $('#modal_alamat_2').modal('hide');
+    
+    $("#alamat1_2").val(alamatKirim1Modal);
+    $("#alamat2_2").val(alamatKirim2Modal);
+    $("#alamat3_2").val(alamatKirim3Modal);
+    $("#kode_alamat_2").val(alamatKirimKeModal);
+    $("#npwp_2").val(npwpModal);
+
+
+
+  } 
+
+});
+
+
+function get_no_spm_edit(kode_cus, no_spm) {
+  //var kodeCustomer = $("#nama_customer_2").val().split("_");
+  //kodeCustomer = kodeCustomer[0];
+  //console.log(kode_cus);
+  $.ajax({
+    url: "input-sj/get-no-spm",
+    type: "post",
+    data: { kodeCustomer: kode_cus,
+            no_spm: no_spm },
+    success: function (data) {
+      $("#no_spm_2").html(data);
+      //$("#unit_spm").html(data);
+    },
+  });
 }

@@ -336,4 +336,17 @@ class Input_sj_model extends CI_Model
 
         return $query->result();
     }
+
+
+    public function get_unit($unit)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_unit');
+        $this->db->where('kd_unit', $unit);
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+
 }

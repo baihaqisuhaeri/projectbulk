@@ -570,6 +570,7 @@
                                                         <td>No</td>
                                                         <td>Nomor Surat Jualan</td>
                                                         <td>Nama Customer</td>
+                                                        <td>Kode Customer</td>
                                                         <td>Alamat kirim 1 Customer</td>
                                                         <td>Alamat kirim 2 Customer</td>
                                                         <td>Alamat kirim 3 Customer</td>
@@ -869,10 +870,7 @@
                                                     <div class="modal-dialog modal-xl">
 
                                                         <div class="modal-content" style="padding: 10px">
-                                                            <div class="form-group text-right" style="float: right;">
-                                                                <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_tambah_alamat_2" style="margin-right: 941px">+ Tambah Alamat Baru</button>
-
-                                                            </div>
+                                                            
 
                                                             <div class="row">
 

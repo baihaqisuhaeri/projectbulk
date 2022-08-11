@@ -348,5 +348,15 @@ class Input_sj_model extends CI_Model
         return $query->result();
     }
 
+    public function get_sj($no_sj)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_sj');
+        $this->db->where('no_sj', $no_sj);
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
 
 }

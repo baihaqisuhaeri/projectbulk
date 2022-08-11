@@ -98,13 +98,18 @@ class Input_sj extends CI_Controller
             $row[] = $p->kd_unit;
             $row[] = $p->no_urutspm;
             $row[] = $p->tgl_sj;
+            $row[] = $p->no_po;
+            $row[] = $p->tgl_po;
+            $row[] = $p->ppn_persen;
             if( $p->tk == "T"){
                 $row[] = "Tunai";
             }else if( $p->tk =="K"){
                 $row[] = "Kredit";
             }
-            $row[] = $p->no_mobil;
+            $no_mobil = explode("_",$p->no_mobil);
+            $row[] = $no_mobil[0];
             $row[] = $p->n_sales;
+            $row[] = $p->k_sales;
             $row[] = $p->unit_mkt;
             $row[] = $p->k_barang;
             $row[] = $p->qty_kirim;
@@ -117,6 +122,7 @@ class Input_sj extends CI_Controller
             $row[] = $p->awl_suhu;
             $row[] = $p->awal;
             $row[] = $p->akhir;
+            $row[] = $p->k_supl;
 
 
 
@@ -388,8 +394,11 @@ class Input_sj extends CI_Controller
             if ($vol_kirim_spm > 0) {
                 if($sp->no_urutspm == $no_spm){
                     echo '<option selected value="' . $sp->no_urutspm . '">' . $sp->no_spm . '</option>';
-                }
+                }else{
+
+                
                 echo '<option value="' . $sp->no_urutspm . '">' . $sp->no_spm . '</option>';
+                }
             }
         }
     }
@@ -429,11 +438,25 @@ class Input_sj extends CI_Controller
     function get_mobil_sj()
     {
 
+        
+        $m_unik = $this->input->post("mobil_unik");
+        $status_edit = $this->input->post("status_edit");
+        $unit_edit = explode("_",$m_unik);
+        $unit_edit = $unit_edit[1];
+        
+
         $unit = $this->input->post("unitSj");
-
-
-        $mobil = $this->Input_sj_model->get_mobil_sj($unit);
-
+        
+        
+        if($status_edit == null){
+            $mobil = $this->Input_sj_model->get_mobil_sj($unit);
+        }else{
+           
+            $mobil = $this->Input_sj_model->get_mobil_sj($unit_edit);
+        }
+        
+        
+       // die();
 
         if (empty($mobil)) {
             echo '<option value="">Belum ada data</option>';
@@ -442,12 +465,24 @@ class Input_sj extends CI_Controller
         }
 
         foreach ($mobil as $m) {
-            echo '<option value="' . $m->mobil_unik . '">' . $m->n_mobil . " (" . $m->k_mobil . ')</option>';
+            if($status_edit == null){
+                echo '<option value="' . $m->mobil_unik . '">' . $m->n_mobil . " (" . $m->k_mobil . ')</option>';
+            }else{
+                var_dump($m_unik);
+                if($m->mobil_unik == $m_unik ){
+                    echo '<option selected value="' . $m->mobil_unik . '">' . $m->n_mobil . " (" . $m->k_mobil . ')</option>';
+                }else{
+                    echo '<option value="' . $m->mobil_unik . '">' . $m->n_mobil . " (" . $m->k_mobil . ')</option>';
+                }
+        }
+            
         }
     }
 
     function get_supir_sj()
     {
+        $k_sales = $this->input->post("k_sales");
+        $status_edit = $this->input->post("status_edit");
 
         $unit = $this->input->post("unitSj");
 
@@ -462,12 +497,24 @@ class Input_sj extends CI_Controller
         }
 
         foreach ($supir as $s) {
-            echo '<option value="' . $s->supir_unik . "_" . $s->n_sales . '">' . $s->n_sales . '</option>';
+
+            if($status_edit == null){
+                echo '<option value="' . $s->supir_unik . "_" . $s->n_sales . '">' . $s->n_sales . '</option>';
+            }else{
+                if($s->supir_unik == ($k_sales."_".$unit)){
+                    echo '<option selected value="' . $s->supir_unik . "_" . $s->n_sales . '">' . $s->n_sales . '</option>';
+                }else{
+                    echo '<option value="' . $s->supir_unik . "_" . $s->n_sales . '">' . $s->n_sales . '</option>';
+                }
+            }
+            
         }
     }
 
     function get_barang_sj()
     {
+        $k_barang = $this->input->post("k_barang");
+        $status_edit = $this->input->post("status_edit");
 
         $unit = $this->input->post("unitSj");
 
@@ -482,7 +529,16 @@ class Input_sj extends CI_Controller
         }
 
         foreach ($barang as $b) {
-            echo '<option value="' . $b->k_barang . "_" . $b->k_div . "_" . $b->kode_berat . "_" . $b->h_jual . "_" . $b->kode_tim . '">' . $b->n_barang . " (" . $b->k_barang . ')</option>';
+            if($status_edit == null){
+                echo '<option value="' . $b->k_barang . "_" . $b->k_div . "_" . $b->kode_berat . "_" . $b->h_jual . "_" . $b->kode_tim . '">' . $b->n_barang . " (" . $b->k_barang . ')</option>';
+            }else{
+                if($b->k_barang==$k_barang){
+                    echo '<option selected value="' . $b->k_barang . "_" . $b->k_div . "_" . $b->kode_berat . "_" . $b->h_jual . "_" . $b->kode_tim . '">' . $b->n_barang . " (" . $b->k_barang . ')</option>';
+                }else{
+                    echo '<option value="' . $b->k_barang . "_" . $b->k_div . "_" . $b->kode_berat . "_" . $b->h_jual . "_" . $b->kode_tim . '">' . $b->n_barang . " (" . $b->k_barang . ')</option>';
+                }
+            }
+            
         }
     }
 
@@ -490,7 +546,8 @@ class Input_sj extends CI_Controller
     function get_unit_marketing()
     {
 
-
+        $unit_mkt = $this->input->post('unit_mkt');
+        $status_edit = $this->input->post('status_edit');
 
 
         $unit_marketing = $this->Input_sj_model->get_unit_marketing();
@@ -503,7 +560,16 @@ class Input_sj extends CI_Controller
         }
 
         foreach ($unit_marketing as $u) {
-            echo '<option value="' . $u->nourut . '">' . $u->unit_mkt . '</option>';
+            if($status_edit==null){
+                echo '<option value="' . $u->unit_mkt . '">' . $u->unit_mkt . '</option>';
+            }else{
+                if($u->unit_mkt == $unit_mkt){
+                    echo '<option selected value="' . $u->unit_mkt . '">' . $u->unit_mkt . '</option>';
+                }else{
+                    echo '<option value="' . $u->unit_mkt . '">' . $u->unit_mkt . '</option>';
+                }
+        }
+            
         }
     }
 
@@ -662,7 +728,7 @@ class Input_sj extends CI_Controller
             'npwp' => $npwp,
 
             'no_po' => $no_po,
-            // 'tgl_po' => $tgl_po,
+             'tgl_po' => $tgl_po,
             'ppn_persen' => $ppn,
 
             'no_urutspm' => $no_spm,
@@ -673,7 +739,8 @@ class Input_sj extends CI_Controller
             'no_mobil' => $no_kendaraan,
             'unit_mkt' => $unit_marketing,
             'n_sales' => $nama_supir,
-            'k_sales' => $kode_barang,
+            'k_sales' => $kode_supir,
+            'k_barang' => $kode_barang,
             'qty_kirim' => $jumlah,
             'kg_kirim' => $kg_kirim,
             'ket' => $keterangan,
@@ -709,7 +776,22 @@ class Input_sj extends CI_Controller
  
     }
 
+
+   
     
+   function get_sj()
+    {
+        $no_sj = $this->input->post('no_sj');
+        $data = $this->Input_sj_model->get_sj($no_sj);
+       
+
+        $output = array(
+
+            "data" => $data,
+        );
+        //output to json format
+        echo json_encode($data);
+    }
         
 
 }

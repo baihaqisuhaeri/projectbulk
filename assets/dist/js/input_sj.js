@@ -791,6 +791,7 @@ function get_customer() {
     $("#tabel_sj tbody").on("click", ".edit_sj", function () {
       var data = table.row($(this).parents("tr")).data();
       var id = $(this).data("id");
+      var no_sj = data[1];
       $('#unitSj_2').val("cekedit");
       $('#unitSj_2').select2().trigger('change');
       //var unitBarang = $("#unitBarang :selected").text();
@@ -809,11 +810,35 @@ function get_customer() {
       var kode_cus = data[3];
       var unit = data[8];
       var no_spm = data[9];
+      var k_sales = data[17];
+      var k_barang = data[19];
       get_no_spm_edit(kode_cus,no_spm);
       get_unit_sj_edit(unit);
       get_customer_edit(kode_cus, unit);
       
-      $("#nama_supir2").val(data[1]);
+      $("#alamat1_2").val(data[4]);
+      $("#alamat2_2").val(data[5]);
+      $("#alamat3_2").val(data[6]);
+      $("#npwp_2").val(data[7]);
+      $("#nomor_po_2").val(data[11]);
+      $("#tanggal_po_2").val(data[12]);
+      $("#ppn_2").val(data[13]);
+      $("#no_surat_jalan_2").val(data[1]);
+      $("#tanggal_surat_jalan_2").val(data[10]);
+
+      if(data[14]=="Tunai"){
+        $("#rd_tunai_2").prop("checked", true);
+        
+      }else if(data[14]=="Kredit"){
+        $("#rd_kredit_2").prop("checked", true);
+        
+      }
+
+      get_mobil_sj_edit(data[15]+"_"+data[8]);
+      get_unit_marketing_edit(data[18]);
+      get_supir_sj_edit(unit, k_sales);
+      get_barang_sj_edit(unit, data[19]);
+      get_no_segel_edit(no_sj);
 
       
   
@@ -1039,6 +1064,158 @@ function get_no_spm_edit(kode_cus, no_spm) {
             no_spm: no_spm },
     success: function (data) {
       $("#no_spm_2").html(data);
+      //$("#unit_spm").html(data);
+    },
+  });
+}
+
+
+$("#no_spm_2").on("change", function () {
+  // console.log($("#no_spm").val());
+   var noUrutSpm = $("#no_spm_2").val();
+   $.ajax({
+     url: "input-sj/get-data-spm",
+     type: "post",
+     dataType: "JSON",
+     data: { noUrutSpm: noUrutSpm
+            },
+     success: function (data) {
+     //  data = JSON.parse(data);
+       //console.log(data[0].tgl_po);
+       $("#nomor_po_2").val(data[0].no_po);
+       $("#tanggal_po_2").val(data[0].tgl_po);
+       spm_brlk = data[0].spm_brlk;
+       harga_po = data[0].harga_po;
+       if(data[0].tk=="T"){
+         $("#rd_tunai_2").prop("checked", true);
+         tk_sj = data[0].tk;
+       }else if(data[0].tk=="K"){
+         $("#rd_kredit_2").prop("checked", true);
+         tk_sj = data[0].tk;
+       }
+      
+     },
+   });
+ });
+ 
+
+
+ function get_mobil_sj_edit(mobil_unik) {
+  var unitSj = $("#unitSj_2").val();
+  $.ajax({
+    url: "input-sj/get-mobil-sj",
+    type: "POST",
+        data: {
+          mobil_unik: mobil_unik,
+          unitSj: unitSj,
+          status_edit: "aktif"
+        },
+    success: function (data) {
+      $("#no_kendaraan_2").html(data);
+      //$("#unit_spm").html(data);
+    },
+  });
+}
+
+function get_unit_marketing_edit(unit_mkt) {
+ 
+  $.ajax({
+    url: "input-sj/get-unit-marketing",
+    type: "POST",
+        data: {
+          unit_mkt: unit_mkt,
+          status_edit: "aktif"
+        },
+    
+    success: function (data) {
+      $("#unit_marketing_2").html(data);
+      //$("#unit_spm").html(data);
+    },
+  });
+}
+
+function get_supir_sj_edit(unitSj, k_sales) {
+  
+  $.ajax({
+    url: "input-sj/get-supir-sj",
+    type: "POST",
+        data: {
+          unitSj: unitSj,
+          k_sales: k_sales,
+          status_edit: "aktif"
+        },
+    success: function (data) {
+      $("#nama_supir_2").html(data);
+      //$("#unit_spm").html(data);
+    },
+  });
+}
+
+function get_barang_sj_edit(unitSj, k_barang) {
+
+  $.ajax({
+    url: "input-sj/get-barang-sj",
+    type: "POST",
+        data: {
+          unitSj: unitSj,
+          k_barang: k_barang,
+          status_edit: "aktif"
+        },
+    success: function (data) {
+      $("#kode_barang_2").html(data);
+      //$("#unit_spm").html(data);
+    },
+  });
+}
+
+function get_no_segel_edit(no_sj) {
+
+  $.ajax({
+    url: "input-sj/get-sj",
+    type: "POST",
+        data: {
+          no_sj: no_sj
+        },
+    success: function (data) {
+      data = JSON.parse(data);
+      console.log(data[0].qty_kirim);
+      $("#jumlah_2").val(parseInt(data[0].qty_kirim));
+      $("#kilogram_2").val(parseInt(data[0].kg_kirim));
+      
+    },
+  });
+}
+
+
+function get_no_segel_edit(no_sj) {
+
+  $.ajax({
+    url: "input-sj/get-sj",
+    type: "POST",
+        data: {
+          no_sj: no_sj
+        },
+    success: function (data) {
+      data = JSON.parse(data);
+      console.log(data[0].qty_kirim);
+      $("#jumlah_2").val(parseInt(data[0].qty_kirim));
+      $("#kilogram_2").val(parseInt(data[0].kg_kirim));
+      
+    },
+  });
+}
+
+
+function get_suplier_edit(k_supply) {
+ 
+  $.ajax({
+    url: "input-sj/get-suplier",
+    type: "POST",
+        data: {
+          k_supply: k_supply
+        },
+    success: function (data) {
+      $("#suplier_2").html(data);
       //$("#unit_spm").html(data);
     },
   });

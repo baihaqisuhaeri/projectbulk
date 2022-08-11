@@ -186,13 +186,7 @@
                                                         </div>
 
                                                         <div class="form-group col-lg-2">
-                                                            <label>Tanggal Surat Jalan<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="date" name="tanggal_surat_jalan" id="tanggal_surat_jalan" placeholder="Tanggal Surat Jalan">
-                                                            <span class="text-danger" id="error_tanggal_surat_jalan"></span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row">
+                                                            <div class="row">
 
                                                         <label style="margin-left: 7">Cara Pembayaran<span style="color: red;">*</span></label>
 
@@ -211,6 +205,16 @@
                                                             <label for="customRadio3" class="custom-control-label">Kredit</label>
                                                         </div>
                                                     </div>
+                                                        </div>
+
+                                                        <div class="form-group col-lg-2">
+                                                            <label>Tanggal Surat Jalan<span style="color: red;">*</span></label>
+                                                            <input class="form-control" type="date" name="tanggal_surat_jalan" id="tanggal_surat_jalan" placeholder="Tanggal Surat Jalan">
+                                                            <span class="text-danger" id="error_tanggal_surat_jalan"></span>
+                                                        </div>
+                                                    </div>
+
+                                                    
 
                                                     <div class="row">
 
@@ -301,27 +305,23 @@
                                                             <span class="text-danger" id="error_temperatur"></span>
                                                         </div>
                                                     </div>
-                                                    <label>Posisi Pengambilan :</label>
+                                                    
                                                     <div class="row">
                                                         <div class="form-group col-lg-4">
+                                                        <label>Posisi Pengambilan :</label>
                                                             <label>Nilai Persen<span style="color: red;">*</span></label>
                                                             <input class="form-control" type="number" name="nilai_persen_pengambilan" id="nilai_persen_pengambilan" placeholder="Nilai Persen">%
                                                             <span class="text-danger" id="error_nilai_persen_pengambilan"></span>
                                                         </div>
 
-                                                    </div>
-
-                                                    <label>Posisi Berangkat :</label>
-                                                    <div class="row">
                                                         <div class="form-group col-lg-4">
+                                                        <label>Posisi Berangkat :</label>
                                                             <label>Nilai Persen<span style="color: red;">*</span></label>
                                                             <input class="form-control" type="number" name="nilai_persen_berangkat" id="nilai_persen_berangkat" placeholder="Nilai Persen">%
                                                             <span class="text-danger" id="error_nilai_persen_berangkat"></span>
                                                         </div>
 
                                                     </div>
-
-
 
 
                                                     <div class="form-group text-right">
@@ -561,7 +561,7 @@
 
                                         <!--<button type="button" class="btn btn-primary mb-2" id="btn_modal_pengguna"><i class="fas fa-plus-circle"></i></button>-->
                                         <div class="callout callout-warning" style="background-color: #FFF8E5;" id="bagian_3">
-                                            <h5>Daftar Supir</h5>
+                                            <h5>Daftar Surat Jalan</h5>
 
 
                                             <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_sj">
@@ -578,9 +578,13 @@
                                                         <td>Unit</td>
                                                         <td>Nomor Urut SPM</td>
                                                         <td>Tanggal Surat Jalan</td>
+                                                        <td>Nomor PO</td>
+                                                        <td>Tanggal PO</td>
+                                                        <td>PPN</td>
                                                         <td>Pembayaran</td>
                                                         <td>Kode Mobil</td>
                                                         <td>Nama Supir</td>
+                                                        <td>Kode Supir</td>
                                                         <td>Unit Marketing</td>
                                                         <td>Kode Barang</td>
                                                         <td>Jumlah Barang</td>
@@ -593,6 +597,8 @@
                                                         <td>Temperatur</td>
                                                         <td>Pengambilan Awal</td>
                                                         <td>Pengambilan Akhir</td>
+                                                        <td>Kode Supplier</td>
+                                                        
                                                         
 
                                                        

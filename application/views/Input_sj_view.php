@@ -865,7 +865,7 @@
 
 
                                                     <div class="form-group text-right">
-                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="submit" id="btn_tambah_sj_2">Tambah</button>
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="submit" id="btn_tambah_sj_2">Simpan</button>
 
                                                     </div>
 
@@ -1157,6 +1157,22 @@
                                                     <div class="form-group text-right">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                                                         <button class="btn btn-primary btn-small btn-primary btn-rounded" onclick="tambahSj()">Ya</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+
+                                    <div class="modal fade" id="modal_konfirmasi_edit_sj">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <h5>Apa Anda sudah yakin?</h5>
+                                                    <div class="form-group text-right">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" onclick="editSj()">Ya</button>
                                                     </div>
                                                 </div>
                                             </div>

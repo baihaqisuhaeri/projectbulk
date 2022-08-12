@@ -8,6 +8,8 @@ get_unit_marketing();
 get_suplier();
 get_ppn();
 
+var no_sj_edit = "";
+var sukses_tambah = null;
 
 $(".select2").select2({ width: "100%" });
 
@@ -452,6 +454,9 @@ function get_customer() {
 
   $("#no_spm").on("change", function () {
    // console.log($("#no_spm").val());
+   if(sukses_tambah==null){
+
+  
     var noUrutSpm = $("#no_spm").val();
     $.ajax({
       url: "input-sj/get-data-spm",
@@ -476,6 +481,9 @@ function get_customer() {
        
       },
     });
+  }else{
+    sukses_tambah = null;
+  }
   });
   
 
@@ -716,8 +724,8 @@ function get_customer() {
          // var json = JSON.parse(data);
           var status = data.status;
           if (status == "true") {
-           // mytable = $("#tabel_sj").DataTable();
-           // mytable.draw();
+           mytable = $("#tabel_sj").DataTable();
+           mytable.draw();
             Swal.fire("Berhasil!", "Surat jalan berhasil ditambahkan!", "success");
            
           } else {
@@ -725,6 +733,40 @@ function get_customer() {
             Swal.fire("Gagal!", "Surat Jalan sudah ada di unit yang sama!", "error");
           }
           Swal.fire("Berhasil!", "Surat jalan berhasil ditambahkan!", "success");
+          // $("#unitSupir").val("").change();
+          // $("#nama_supir").val("");
+          sukses_tambah = "yes";
+          $("#unitSj").val("").change();
+          $("#nama_customer").val("").change();
+          $("#alamat1").val("");
+          $("#alamat2").val("");
+          $("#alamat3").val("");
+          $("#kode_alamat").val("");
+          $("#npwp").val("");
+
+          $("#nomor_po").val("");
+          $("#tanggal_po").val("");
+          $("#ppn").val("");
+          
+          $("#no_spm").val("").change();
+          $("#no_surat_jalan").val("");
+          $("#tanggal_surat_jalan").val("");
+          $("#no_kendaraan").val("");
+          $("#unit_marketing").val("").change();
+          $("#nama_supir").val("").change("");
+          $("#kode_barang").val("").change("");
+          $("#jumlah").val("");
+          $("#kilogram").val("");
+          $("#keterangan").val("");
+          $("#suplier").val("").change();
+          $("#no_faktur").val("");
+          $("#no_segel").val("");
+          $("#pressure").val("");
+          $("#temperatur").val("");
+          $("#nilai_persen_pengambilan").val("");
+          $("#nilai_persen_berangkat").val("");
+          $("#rd_tunai").prop("checked", false);
+          $("#rd_kredit").prop("checked", false);
         },
       });
     
@@ -792,6 +834,7 @@ function get_customer() {
       var data = table.row($(this).parents("tr")).data();
       var id = $(this).data("id");
       var no_sj = data[1];
+      no_sj_edit = no_sj;
       $('#unitSj_2').val("cekedit");
       $('#unitSj_2').select2().trigger('change');
       //var unitBarang = $("#unitBarang :selected").text();
@@ -812,6 +855,7 @@ function get_customer() {
       var no_spm = data[9];
       var k_sales = data[17];
       var k_barang = data[19];
+      var k_supl = data[30];
       get_no_spm_edit(kode_cus,no_spm);
       get_unit_sj_edit(unit);
       get_customer_edit(kode_cus, unit);
@@ -825,13 +869,14 @@ function get_customer() {
       $("#ppn_2").val(data[13]);
       $("#no_surat_jalan_2").val(data[1]);
       $("#tanggal_surat_jalan_2").val(data[10]);
+      
 
       if(data[14]=="Tunai"){
         $("#rd_tunai_2").prop("checked", true);
-        
+        tk_sj = "T";
       }else if(data[14]=="Kredit"){
         $("#rd_kredit_2").prop("checked", true);
-        
+        tk_sj = "K";
       }
 
       get_mobil_sj_edit(data[15]+"_"+data[8]);
@@ -839,6 +884,8 @@ function get_customer() {
       get_supir_sj_edit(unit, k_sales);
       get_barang_sj_edit(unit, data[19]);
       get_no_segel_edit(no_sj);
+      console.log(k_supl);
+      get_suplier_edit(k_supl);
 
       
   
@@ -1200,19 +1247,27 @@ function get_no_segel_edit(no_sj) {
       console.log(data[0].qty_kirim);
       $("#jumlah_2").val(parseInt(data[0].qty_kirim));
       $("#kilogram_2").val(parseInt(data[0].kg_kirim));
-      
+      $("#keterangan_2").val(data[0].ket);
+      $("#no_faktur_2").val(data[0].no_faktur);
+      $("#no_segel_2").val(parseInt(data[0].no_segel));
+      $("#pressure_2").val(parseInt(data[0].awl_presur));
+      $("#temperatur_2").val(parseInt(data[0].awl_suhu));
+      $("#nilai_persen_pengambilan_2").val(parseInt(data[0].awal));
+      $("#nilai_persen_berangkat_2").val(parseInt(data[0].akhir));
+
     },
   });
 }
 
 
-function get_suplier_edit(k_supply) {
+function get_suplier_edit(k_supl) {
  
   $.ajax({
     url: "input-sj/get-suplier",
     type: "POST",
         data: {
-          k_supply: k_supply
+          k_supl: k_supl,
+          status_edit: "aktif"
         },
     success: function (data) {
       $("#suplier_2").html(data);
@@ -1220,3 +1275,288 @@ function get_suplier_edit(k_supply) {
     },
   });
 }
+
+
+$('input[name=jumlah_2]').on('change', function(){
+
+  var kode_barang = $("#kode_barang_2").val().split("_");
+  kode_barang = kode_barang[0];
+  var jumlah = $("#jumlah_2").val();
+  //console.log(kode_barang);
+  $.ajax({
+    url: "input-sj/get-kg-barang",
+    type: "post",
+    dataType: "JSON",
+    data: { kode_barang: kode_barang
+           },
+    success: function (data) {
+      //data = JSON.parse(data);
+     // console.log(data);
+      if(kode_barang!="" ){
+      // console.log(data);
+       var jumlah_kg = jumlah*data[0].jml_kg;
+       $("#kilogram_2").val(jumlah_kg);
+      }
+
+      
+    },
+  });
+  
+});
+
+
+
+$(document).on("submit", "#edit_sj", function (e) {
+  // console.log(k_cus);
+  e.preventDefault();
+
+   $("#error_unitSj_2").html("");
+   $("#error_nama_customer_2").html("");
+   $("#error_no_spm_2").html("");
+   $("#error_no_surat_jalan_2").html("");
+   $("#error_tanggal_surat_jalan_2").html("");
+   $("#error_no_kendaraan_2").html("");
+   $("#error_unit_marketing_2").html("");
+   $("#error_nama_supir_2").html("");
+   $("#error_kode_barang_2").html("");
+   $("#error_jumlah_2").html("");
+   $("#error_keterangan_2").html("");
+   $("#error_suplier_2").html("");
+  
+   $("#error_no_segel_2").html("");
+   $("#error_pressure_2").html("");
+   $("#error_temperatur_2").html("");
+   $("#error_nilai_persen_pengambilan_2").html("");
+   $("#error_nilai_persen_berangkat_2").html("");
+
+   var err = 0;
+
+   var unitSj = $("#unitSj_2").val();
+   var nama_customer = $("#nama_customer_2").val();
+   var no_spm = $("#no_spm_2").val();
+   var no_surat_jalan = $("#no_surat_jalan_2").val();
+   var tanggal_surat_jalan = $("#tanggal_surat_jalan_2").val();
+   var no_kendaraan = $("#no_kendaraan_2").val();
+   var unit_marketing = $("#unit_marketing_2").val();
+   var nama_supir = $("#nama_supir_2").val();
+   var kode_barang = $("#kode_barang_2").val();
+   var jumlah = $("#jumlah_2").val();
+   var keterangan = $("#keterangan_2").val();
+   var suplier = $("#suplier_2").val();
+   var no_faktur = $("#no_faktur_2").val();
+   var no_segel = $("#no_segel_2").val();
+   var pressure = $("#pressure_2").val();
+   var temperatur = $("#temperatur_2").val();
+   var nilai_persen_pengambilan = $("#nilai_persen_pengambilan_2").val();
+   var nilai_persen_berangkat = $("#nilai_persen_berangkat_2").val();
+   
+
+   if (unitSj == "") {
+     $("#error_unitSj_2").html("Unit tidak boleh kosong!");
+     err += 1;
+   }
+   if (nama_customer == "") {
+     $("#error_nama_customer_2").html("Nama Customer harus dipilih!");
+     err += 1;
+   }
+   if (no_spm == "") {
+     $("#error_no_spm_2").html("Nomor SPM harus dipilih!");
+     err += 1;
+   }
+   
+   if (tanggal_surat_jalan == "") {
+     $("#error_tanggal_surat_jalan_2").html("Tanggal Surat Jalan tidak boleh kosong!");
+     err += 1;
+   }
+   if (no_kendaraan == "") {
+     $("#error_no_kendaraan_2").html("Kendaraan harus dipilih!");
+     err += 1;
+   }
+   if (unit_marketing == "") {
+     $("#error_unit_marketing_2").html("Unit marketing tidak boleh kosong!");
+     err += 1;
+   }
+   if (nama_supir == "") {
+     $("#error_nama_supir_2").html("Nama Supir harus dipilih!");
+     err += 1;
+   }
+   if (kode_barang == "") {
+     $("#error_kode_barang_2").html("Barang harus dipilih!");
+     err += 1;
+   }
+   if (jumlah == "") {
+     $("#error_jumlah_2").html("Jumlah tidak boleh kosong!");
+     err += 1;
+   }
+   if (keterangan == "") {
+     $("#error_keterangan_2").html("Keterangan tidak boleh kosong!");
+     err += 1;
+   }
+   if (suplier == "") {
+     $("#error_suplier_2").html("Suplier tidak boleh kosong!");
+     err += 1;
+   }
+   
+   if (no_segel == "") {
+     $("#error_no_segel_2").html("Nomor Segel tidak boleh kosong!");
+     err += 1;
+   }
+   if (pressure == "") {
+     $("#error_pressure_2").html("Pressure tidak boleh kosong!");
+     err += 1;
+   }
+   if (temperatur == "") {
+     $("#error_temperatur_2").html("Temperatur tidak boleh kosong!");
+     err += 1;
+   }
+   if (nilai_persen_pengambilan == "") {
+     $("#error_nilai_persen_pengambilan_2").html("Nilai pengambilan tidak boleh kosong!");
+     err += 1;
+   }
+   if (nilai_persen_berangkat == "") {
+     $("#error_nilai_persen_berangkat_2").html("Nilai berangkat tidak boleh kosong!");
+     err += 1;
+   }
+   if (err == 0) {
+     
+     var kg_kirim = $("#kilogram_2").val();
+   var noUrutSpm = $("#no_spm_2").val();
+   $.ajax({
+     url: "input-sj/get-volume-spm",
+     type: "post",
+     dataType: "JSON",
+     data: { noUrutSpm: noUrutSpm,
+             no_surat_jalan: no_surat_jalan,
+             status_edit: "aktif"
+            },
+     success: function (data) {
+        
+       //console.log(data.volume_spm);
+       
+       if(parseFloat(kg_kirim)> data.volume_spm){
+         $("#error_kilogram_2").html("Maaf maksimal volume yang bisa diisi adalah " +parseFloat(data.volume_spm)+" kg");
+       }else{
+         $("#error_kilogram_2").html("");
+         $('#modal_konfirmasi_edit_sj').modal('show');
+       }
+
+       
+      
+     },
+   });
+ 
+   } 
+
+
+
+
+
+
+
+
+   
+
+ });
+
+ function editSj(){
+   $('#modal_konfirmasi_edit_sj').modal('hide');
+     
+   var unitSj = $("#unitSj_2").val();
+   var customer = $("#nama_customer_2").val().split("_");
+   var alamat_kirim1 = $("#alamat1_2").val();
+   var alamat_kirim2 = $("#alamat2_2").val();
+   var alamat_kirim3 = $("#alamat3_2").val();
+   var k_altk = $("#kode_alamat_2").val();
+   var npwp = $("#npwp_2").val();
+
+   var no_po = $("#nomor_po_2").val();
+   var tgl_po = $("#tanggal_po_2").val();
+   var ppn = $("#ppn_2").val();
+   
+   var no_spm = $("#no_spm_2").val();
+   var no_sj = no_sj_edit;
+   var tanggal_surat_jalan = $("#tanggal_surat_jalan_2").val();
+   var no_kendaraan = $("#no_kendaraan_2").val();
+   var unit_marketing = $("#unit_marketing_2").val();
+   var supir = $("#nama_supir_2").val().split("_");
+   var barang = $("#kode_barang_2").val().split("_");
+   var jumlah = $("#jumlah_2").val();
+   var kg_kirim = $("#kilogram_2").val();
+   var keterangan = $("#keterangan_2").val();
+   var suplier = $("#suplier_2").val().split("_");
+   var no_faktur = $("#no_faktur_2").val();
+   var no_segel = $("#no_segel_2").val();
+   var pressure = $("#pressure_2").val();
+   var temperatur = $("#temperatur_2").val();
+   var nilai_persen_pengambilan = $("#nilai_persen_pengambilan_2").val();
+   var nilai_persen_berangkat = $("#nilai_persen_berangkat_2").val();
+   
+     
+     $.ajax({
+       url: "input-sj/edit-sj",
+       type: "post",
+       dataType: 'text',
+       
+       data: {
+         unitSj: unitSj,
+         kode_customer: customer[0],
+         nama_customer: customer[1],
+         al1_cus: customer[2],
+         al2_cus: customer[3],
+         al3_cus: customer[4],
+         k_wilayah: customer[5],
+         npwp: customer[6],
+         alamat_kirim1: alamat_kirim1,
+         alamat_kirim2: alamat_kirim2,
+         alamat_kirim3: alamat_kirim3,
+         k_altk: k_altk,
+         npwp_krm: npwp,
+         no_po: no_po,
+         tgl_po: tgl_po,
+         ppn: ppn,
+         no_spm: no_spm,
+         spm_brlk: spm_brlk,
+         no_sj: no_sj,
+         tanggal_surat_jalan: tanggal_surat_jalan,
+         no_kendaraan: no_kendaraan,
+         unit_marketing: unit_marketing,
+         nama_supir: supir[2],
+         kode_supir: supir[0],
+         kode_barang: barang[0],
+         k_div: barang[1],
+         kode_berat: barang[2],
+         h_jual: barang[3],
+         kode_tim: barang[4],
+         jumlah: jumlah,
+         kg_kirim: kg_kirim,
+         keterangan: keterangan,
+         k_supl: suplier[0],
+         n_supl: suplier[1],
+         no_faktur: no_faktur,
+         no_segel: no_segel,
+         pressure: pressure,
+         temperatur: temperatur,
+         nilai_persen_pengambilan: nilai_persen_pengambilan,
+         nilai_persen_berangkat: nilai_persen_berangkat,
+
+         tk: tk_sj,
+       },
+       success: function (data) {
+        // console.log(data);
+        // var json = JSON.parse(data);
+         var status = data.status;
+         if (status == "true") {
+          // mytable = $("#tabel_sj").DataTable();
+          // mytable.draw();
+           Swal.fire("Berhasil!", "Surat jalan berhasil ditambahkan!", "success");
+          
+         } else {
+          // alert("a");
+           Swal.fire("Gagal!", "Surat Jalan sudah ada di unit yang sama!", "error");
+         }
+         Swal.fire("Berhasil!", "Surat jalan berhasil ditambahkan!", "success");
+         $("#bagian_2_edit").hide();
+       },
+     });
+   
+ }

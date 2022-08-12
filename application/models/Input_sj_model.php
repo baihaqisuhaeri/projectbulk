@@ -358,5 +358,11 @@ class Input_sj_model extends CI_Model
         return $query->result();
     }
 
+    public function edit_sj($no_sj, $data)
+    {
+        $this->db->where('no_sj', $no_sj);
+        $this->db->update('tb_sj', $data);
+    }
+
 
 }

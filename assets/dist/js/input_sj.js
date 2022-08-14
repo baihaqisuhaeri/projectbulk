@@ -11,6 +11,9 @@ get_ppn();
 var no_sj_edit = "";
 var sukses_tambah = null;
 
+
+var id_alamat_edit = "";
+
 $(".select2").select2({ width: "100%" });
 
 $(".select2bs4").select2({
@@ -169,7 +172,7 @@ $(document).on("click","#btnAlamatKirim",function() {
   k_cus = k_cus[0];
   
   
-
+  
   $(document).ready(function () {
     //datatables
     $("#tabel_alamat_kirim").dataTable().fnDestroy();
@@ -224,6 +227,23 @@ $(document).on("click","#btnAlamatKirim",function() {
       $("#alamat_kirim2_modal").val("");
       $("#alamat_kirim3_modal").val("");
       
+      $("#tabel_alamat_kirim tbody").on("click", ".editAlamatKirim", function () {
+       
+        id_alamat_edit = $(this).data("id");
+        $('#modal_alamat').modal('hide');
+        $('#modal_tambah_alamat_edit').modal('show');
+        var data = table_alamat.row($(this).parents("tr")).data();
+        var id = $(this).data("id");
+        var kode_customer_edit = $("#no_customer_modal").val();
+       //console.log(data[4]);
+        $("#npwp_baru_edit").val(data[2]);
+        $("#alamat_kirim1_baru_edit").val(data[4]);
+        $("#alamat_kirim2_baru_edit").val(data[5]);
+        $("#alamat_kirim3_baru_edit").val(data[6]);
+        
+        alamat_kirim1_baru
+        $("#editAlamatKirim").val(id);
+      });
     
   });
 }
@@ -397,7 +417,7 @@ function get_customer() {
             mytable.draw();
             Swal.fire("Berhasil!", "Alamat baru berhasil ditambahkan!", "success");
             $('#modal_tambah_alamat').modal('hide');
-            $('#modal_alamat').modal('hide');
+            $('#modal_alamat').modal('show');
           } else {
            // alert("a");
             Swal.fire("Gagal!", "Supir sudah ada di unit yang sama!", "error");
@@ -884,7 +904,7 @@ function get_customer() {
       get_supir_sj_edit(unit, k_sales);
       get_barang_sj_edit(unit, data[19]);
       get_no_segel_edit(no_sj);
-      console.log(k_supl);
+      //console.log(k_supl);
       get_suplier_edit(k_supl);
 
       
@@ -1225,7 +1245,7 @@ function get_no_segel_edit(no_sj) {
         },
     success: function (data) {
       data = JSON.parse(data);
-      console.log(data[0].qty_kirim);
+      //console.log(data[0].qty_kirim);
       $("#jumlah_2").val(parseInt(data[0].qty_kirim));
       $("#kilogram_2").val(parseInt(data[0].kg_kirim));
       
@@ -1244,7 +1264,7 @@ function get_no_segel_edit(no_sj) {
         },
     success: function (data) {
       data = JSON.parse(data);
-      console.log(data[0].qty_kirim);
+      //console.log(data[0].qty_kirim);
       $("#jumlah_2").val(parseInt(data[0].qty_kirim));
       $("#kilogram_2").val(parseInt(data[0].kg_kirim));
       $("#keterangan_2").val(data[0].ket);
@@ -1543,19 +1563,165 @@ $(document).on("submit", "#edit_sj", function (e) {
        },
        success: function (data) {
         // console.log(data);
-        // var json = JSON.parse(data);
+         var data = JSON.parse(data);
          var status = data.status;
+         console.log(status);
          if (status == "true") {
-          // mytable = $("#tabel_sj").DataTable();
-          // mytable.draw();
-           Swal.fire("Berhasil!", "Surat jalan berhasil ditambahkan!", "success");
-          
+          mytable = $("#tabel_sj").DataTable();
+          mytable.draw();
+           Swal.fire("Berhasil!", "Surat jalan berhasil diubah!", "success");
+           $("#bagian_2_edit").hide();
          } else {
           // alert("a");
-           Swal.fire("Gagal!", "Surat Jalan sudah ada di unit yang sama!", "error");
+          Swal.fire("Berhasil!", "Tidak ada perubahan!", "success");
+          $("#bagian_2_edit").hide();
          }
-         Swal.fire("Berhasil!", "Surat jalan berhasil ditambahkan!", "success");
-         $("#bagian_2_edit").hide();
+        //  Swal.fire("Berhasil!", "Surat jalan berhasil diubah!", "success");
+        //  $("#bagian_2_edit").hide();
+       },
+     });
+   
+ }
+
+
+
+ var id_alamat = "";
+$(document).on("click", ".deleteAlamatKirim", function (event) {
+  id_alamat = $(this).data("id");
+id_alamat
+  $('#modal_konfirmasi_delete_alamat_kirim').modal('show');
+    
+});
+
+function deleteAlamatKirim(){
+   
+  $('#modal_konfirmasi_delete_alamat_kirim').modal('hide');
+  var table = $("#tabel_alamat_kirim").DataTable();
+  
+  
+    
+      $.ajax({
+        url: "input-sj/hapus-alamat-kirim",
+        data: {
+          id: id_alamat,
+        },
+        type: "post",
+        success: function (data) {
+          var json = JSON.parse(data);
+          status = json.status;
+          if (status == "success") {
+            mytable = $("#tabel_alamat_kirim").DataTable();
+            mytable.draw();
+
+            $("#" + id_alamat)
+              .closest("tr")
+              .remove();
+              Swal.fire("Berhasil!", "Alamat kirim berhasil dihapus!", "success");
+          } else {
+           // alert("Failed");
+            Swal.fire("Gagal!", "Alamat kirim berhasil dihapus!", "error");
+            return;
+          }
+        },
+      });
+      
+}
+
+
+
+
+
+$(document).on("submit", "#edit_alamat_kirim", function (e) {
+  
+  // console.log(k_cus);
+  e.preventDefault();
+
+   $("#error_npwp_baru_edit").html("");
+   $("#error_alamat_kirim1_baru_edit").html("");
+   $("#error_alamat_kirim2_baru_edit").html("");
+   $("#error_alamat_kirim3_baru_edit").html("");
+   
+
+   var err = 0;
+
+   var npwp_edit = $("#npwp_baru_edit").val();
+   var alamat_kirim1_edit = $("#alamat_kirim1_baru_edit").val();
+   var alamat_kirim2_edit = $("#alamat_kirim2_baru_edit").val();
+   var alamat_kirim3_edit = $("#alamat_kirim3_baru_edit").val();
+   
+   
+
+   if (npwp_edit == "") {
+     $("#error_npwp_baru_edit").html("Npwp tidak boleh kosong!");
+     err += 1;
+   }
+   if (alamat_kirim1_edit == "") {
+    $("#error_alamat_kirim1_baru_edit").html("Alamat kirim 1 tidak boleh kosong!");
+    err += 1;
+  }
+  if (alamat_kirim2_edit == "") {
+    $("#error_alamat_kirim2_baru_edit").html("Alamat kirim 2 tidak boleh kosong!");
+    err += 1;
+  }
+  if (alamat_kirim3_edit == "") {
+    $("#error_alamat_kirim3_baru_edit").html("Alamat kirim 3 tidak boleh kosong!");
+    err += 1;
+  }
+   
+   if (err == 0) {
+     
+    
+   $('#modal_konfirmasi_edit_alamat_kirim').modal('show');
+   
+ 
+   } 
+
+ });
+
+ function editAlamatKirim(){
+  $('#modal_konfirmasi_edit_alamat_kirim').modal('hide');
+     
+  
+  var npwp_edit = $("#npwp_baru_edit").val();
+  var alamat_kirim1_edit = $("#alamat_kirim1_baru_edit").val();
+  var alamat_kirim2_edit = $("#alamat_kirim2_baru_edit").val();
+  var alamat_kirim3_edit = $("#alamat_kirim3_baru_edit").val();
+   
+   
+     console.log(id_alamat_edit);
+     $.ajax({
+       url: "input-sj/edit-alamat-kirim",
+       type: "post",
+       dataType: "JSON",
+       
+       data: {
+        id_alamat_edit: id_alamat_edit,
+        npwp_edit: npwp_edit,
+        alamat_kirim1_edit: alamat_kirim1_edit,
+        alamat_kirim2_edit: alamat_kirim2_edit,
+        alamat_kirim3_edit: alamat_kirim3_edit
+         
+       },
+       success: function (data) {
+        // console.log(data);
+         //var data = JSON.parse(data);
+         var status = data.status;
+         
+         console.log(status);
+         if (status == "true") {
+          mytable = $("#tabel_alamat_kirim").DataTable();
+          mytable.draw();
+           Swal.fire("Berhasil!", "Alamat kirim berhasil diubah!", "success");
+           $('#modal_tambah_alamat_edit').modal('hide');
+           $('#modal_alamat').modal('show');
+         } else {
+          // alert("a");
+          Swal.fire("Berhasil!", "Tidak ada perubahan!", "success");
+          $('#modal_tambah_alamat_edit').modal('hide');
+           $('#modal_alamat').modal('show');
+         }
+        //  Swal.fire("Berhasil!", "Surat jalan berhasil diubah!", "success");
+        //  $("#bagian_2_edit").hide();
        },
      });
    

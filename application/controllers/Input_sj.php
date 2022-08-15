@@ -130,6 +130,7 @@ class Input_sj extends CI_Controller
 
 
             $row[] = '<a href="#!" class="fas fa-edit edit_sj" data-no_sj="' . $p->no_sj . '"  title="Ubah Surat Jalan" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteSj" data-no_sj="' . $p->no_sj . '" title="Hapus Surat Jalan" style="color:black;"></a>';
+            $row[] = '<button class="btn btn-primary btn-small btn-primary btn-rounded cetak_sj" type="button">Cetak</button>';
             $data[] = $row;
         }
 

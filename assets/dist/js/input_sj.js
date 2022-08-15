@@ -913,61 +913,56 @@ function get_customer() {
     });
 
     $("#tabel_sj tbody").on("click", ".cetak_sj", function () {
-      alert("bisa");
+      
       var data = table.row($(this).parents("tr")).data();
-      var id = $(this).data("id");
-      var no_sj = data[1];
-      no_sj_edit = no_sj;
-      $('#unitSj_2').val("cekedit");
-      $('#unitSj_2').select2().trigger('change');
-      //var unitBarang = $("#unitBarang :selected").text();
-  
-      
-        
-      $("#bagian_2_edit").slideDown("slow");
-      //get_unit_supir2();
-      //$("#unitSupir2").val(data[1]);
-      kode_supir2 = data[2]; // revisi
-      var kode_cus = data[3];
-      var unit = data[8];
-      var no_spm = data[9];
-      var k_sales = data[17];
-      var k_barang = data[19];
-      var k_supl = data[30];
-      get_no_spm_edit(kode_cus,no_spm);
-      get_unit_sj_edit(unit);
-      get_customer_edit(kode_cus, unit);
-      
-      $("#alamat1_2").val(data[4]);
-      $("#alamat2_2").val(data[5]);
-      $("#alamat3_2").val(data[6]);
-      $("#npwp_2").val(data[7]);
-      $("#nomor_po_2").val(data[11]);
-      $("#tanggal_po_2").val(data[12]);
-      $("#ppn_2").val(data[13]);
-      $("#no_surat_jalan_2").val(data[1]);
-      $("#tanggal_surat_jalan_2").val(data[10]);
+     
+      var cetak_no_sj = data[1];
+      var cetak_nama_customer = data[2];
+      var cetak_alamat_kirim1 = data[4];
+      var cetak_alamat_kirim2 = data[5];
+      var cetak_alamat_kirim3 = data[6];
+      var cetak_tanggal_surat_jalan = data[10];
+      var cetak_kode_mobil = data[15];
+      var cetak_kode_supir = data[17];
+      var cetak_no_segel = data[25];
+      var cetak_no_po = data[11];
+      // var cetak_ = data[];
+      // var cetak_ = data[];
+      // var cetak_ = data[];
+      // var cetak_ = data[];
+      // var cetak_ = data[];
+      // var cetak_ = data[];
+      // var cetak_ = data[];
+      // var cetak_ = data[];
+      // var cetak_ = data[];
+
+
+      $.ajax({
+        url: "input-sj/cetak",
+        type: "post",
+        data: { cetak_no_sj: cetak_no_sj,
+                cetak_nama_customer: cetak_nama_customer,
+                cetak_alamat_kirim1: cetak_alamat_kirim1,
+                cetak_alamat_kirim2: cetak_alamat_kirim2,
+                cetak_alamat_kirim3: cetak_alamat_kirim3,
+                cetak_tanggal_surat_jalan: cetak_tanggal_surat_jalan,
+                cetak_kode_mobil: cetak_kode_mobil,
+                cetak_kode_supir: cetak_kode_supir,
+                cetak_no_segel: cetak_no_segel,
+                cetak_no_po: cetak_no_po
+
+         },
+        success: function (data) {
+          //$("#nama_customer_2").html(data);
+        },
+      });
+
       
 
-      if(data[14]=="Tunai"){
-        $("#rd_tunai_2").prop("checked", true);
-        tk_sj = "T";
-      }else if(data[14]=="Kredit"){
-        $("#rd_kredit_2").prop("checked", true);
-        tk_sj = "K";
-      }
-
-      get_mobil_sj_edit(data[15]+"_"+data[8]);
-      get_unit_marketing_edit(data[18]);
-      get_supir_sj_edit(unit, k_sales);
-      get_barang_sj_edit(unit, data[19]);
-      get_no_segel_edit(no_sj);
-      //console.log(k_supl);
-      get_suplier_edit(k_supl);
 
       
   
-      $("#btn_edit").val(id);
+      //$("#btn_edit").val(id);
     });
     $("#bagian_2_edit").hide();
   });

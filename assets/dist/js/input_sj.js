@@ -832,6 +832,7 @@ function get_customer() {
       processing: true, //Feature control the processing indicator.
       serverSide: true, //Feature control DataTables' server-side processing mode.
       order: [], //Initial no order.
+      
   
       // Load data for the table's content from an Ajax source
       ajax: {
@@ -840,15 +841,17 @@ function get_customer() {
       },
   
       //Set column definition initialisation properties.
-      columnDefs: [
-        {
-          targets: "_all", //first column / numbering column
-          orderable: false, //set not orderable
-        },
-      ],
       
+      // columnDefs: [
+      //   {
+      //     targets: "_all", //first column / numbering column
+      //     orderable: false, //set not orderable
+      //   },
+      // ],
+      //"aoColumnDefs": [{ "bVisible": false, "aTargets": [33] }]
       
     });
+   // fnSetColumnVis( 1, false );
     
     $("#tabel_sj tbody").on("click", ".edit_sj", function () {
       var data = table.row($(this).parents("tr")).data();
@@ -912,7 +915,7 @@ function get_customer() {
       $("#btn_edit").val(id);
     });
 
-    $("#tabel_sj tbody").on("click", ".cetak_sj", function () {
+    $("#tabel_sj tbody").on("click", ".cetak_sjss", function () {
       
       var data = table.row($(this).parents("tr")).data();
      
@@ -1779,3 +1782,24 @@ $(document).on("submit", "#edit_alamat_kirim", function (e) {
      });
    
  }
+
+
+ function hasilPdf(){
+  
+  var win = window.open('input-sj/cetak', '_blank');
+  $.ajax({
+    url: "input-sj/cetak",
+    type: "post",
+    data: { cetak_no_sj: "coba aja"
+             },
+    success: function (data) {
+    //  $("#no_spm").html(data);
+      //$("#unit_spm").html(data);
+    },
+  });
+  win.focus();
+
+  
+ }
+
+ 

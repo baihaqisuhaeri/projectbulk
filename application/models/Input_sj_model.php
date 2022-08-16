@@ -375,4 +375,13 @@ class Input_sj_model extends CI_Model
         $this->db->where('id', $id);
         $this->db->update('almt_krm', $data);
     }
+
+    public function get_barang($k_barang){
+        $this->db->select('*');
+        $this->db->from('dbm002');
+        $this->db->where('k_barang', $k_barang);
+        $query = $this->db->get();
+
+        return $query->result();
+    }
 }

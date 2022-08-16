@@ -1,5 +1,5 @@
 <?php
-require FCPATH . 'vendor/autoload.php';
+
 class Input_sj extends CI_Controller
 {
 
@@ -124,13 +124,35 @@ class Input_sj extends CI_Controller
             $row[] = $p->k_supl;
 
 
-
+            
 
 
 
 
             $row[] = '<a href="#!" class="fas fa-edit edit_sj" data-no_sj="' . $p->no_sj . '"  title="Ubah Surat Jalan" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteSj" data-no_sj="' . $p->no_sj . '" title="Hapus Surat Jalan" style="color:black;"></a>';
-            $row[] = '<button class="btn btn-primary btn-small btn-primary btn-rounded cetak_sj" type="button">Cetak</button>';
+            $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded cetak_sj" value="'.$p->no_sj.'" name="no_sj" type="submit">Cetak</button>';
+          
+            //$row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
+            //echo '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
+            // $row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
+            // $row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
+            // $row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
+            // $row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
+            // $row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
+            // $row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
+            // $row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
+            // $row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
+            // $row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
+            // $row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
+            // $row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
+            // $row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
+            // $row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
+            // $row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
+            // $row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
+            // $row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
+            // $row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
+            // $row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
+
             $data[] = $row;
         }
 

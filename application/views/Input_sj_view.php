@@ -326,7 +326,7 @@
 
 
                                                     <div class="form-group text-right">
-                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="submit" id="btn_tambah_sj">Tambah</button>
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="submit" id="btn_tambah_sj">Simpan data baru</button>
 
                                                     </div>
 
@@ -684,7 +684,7 @@
                                         <div class="callout callout-warning" style="background-color: #FFF8E5;" id="bagian_3">
                                             <h5>Daftar Surat Jalan</h5>
 
-
+                                        <form class="form-horizontal" action="<?php echo site_url('input-sj/cetak'); ?>" method="post" target="_blank">
                                             <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_sj">
                                                 <thead>
                                                     <tr>
@@ -721,18 +721,16 @@
                                                         <td>Kode Supplier</td>
 
 
-
-
-
-
-
                                                         <td>Aksi</td>
                                                         <td>Cetak Surat Jalan</td>
+
+                                                        
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                 </tbody>
                                             </table>
+                                        </form> 
                                         </div>
 
 

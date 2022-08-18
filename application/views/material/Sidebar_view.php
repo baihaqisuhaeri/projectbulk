@@ -200,6 +200,20 @@
                             ?>
                         </li>
 
+                        
+
+                        <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-circle"></i>
+                        <p>
+                            Transaksi
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+                        
+
                         <li class="nav-item">
                             <?php
                             if ($this->uri->segment(1) == "input-sj") {
@@ -219,6 +233,13 @@
                             }
                             ?>
                         </li>
+
+                       
+
+                        
+
+                    </ul>
+                </li>
 
                     </ul>
                 </li>

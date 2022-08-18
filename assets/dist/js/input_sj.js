@@ -146,9 +146,25 @@ $("#unitSj").on("change", function () {
     get_mobil_sj();
     get_supir_sj();
     get_barang_sj();
-    
+    get_bulan_aktif();
    
   });
+
+  function get_bulan_aktif(){
+    var kd_unit = $("#unitSj").val();
+    $.ajax({
+      url: "input-sj/get-bulan-aktif",
+      type: "POST",
+          data: {
+            kd_unit: kd_unit
+          },
+      success: function (data) {
+        data = JSON.parse(data);
+       console.log(data.tgl_aktif);
+       $("#aktif_unitSj").html("Bulan aktif : "+data.tgl_aktif);
+      },
+    });
+  }
 var k_cus;
 $(document).on("click","#btnAlamatKirim",function() {
   $("#error_nama_customer").html("");

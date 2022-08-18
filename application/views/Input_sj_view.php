@@ -26,7 +26,7 @@
                         <div class="col-sm-6">
 
                             <ol class="breadcrumb float-sm-right">
-                                <h1 class="m-0 text-dark">Bulan Aktif :</h1>
+                                <h1 class="m-0 text-dark">Bulan Berjalan :</h1>
                                 <?php
                                 date_default_timezone_set('Asia/Jakarta');
                                 $bulan = date("Y-m"); ?>
@@ -85,6 +85,7 @@
                                                             <select class="form-control select2" id="unitSj" name="unitSj">
                                                             </select>
                                                             <span class="text-danger" id="error_unitSj"></span>
+                                                            <span class="text-success" id="aktif_unitSj"></span>
                                                         </div>
 
                                                         <div class="form-group col-lg-4">
@@ -838,39 +839,44 @@
 
                                                 </div>
 
-                                                <div class="row">
+                                    <div class="row">
                                                     <div class="form-group col-lg-4">
                                                         <label>No. Surat Jalan<span style="color: red;">*</span></label>
                                                         <input class="form-control" type="text" name="no_surat_jalan_2" id="no_surat_jalan_2" placeholder="Nomor Surat Jalan" disabled>
                                                         <span class="text-danger" id="error_no_surat_jalan_2"></span>
                                                     </div>
 
+                                                    
+
+                                            <div class="form-group col-lg-2">
+                                                    <div class="row">
+
+                                                                        <label style="margin-left: 7">Cara Pembayaran<span style="color: red;">*</span></label>
+
+                                                            </div>
+                                                        <div class="row" style="margin-left: 7">
+                                                            <div class="custom-control custom-radio">
+                                                                <input class="custom-control-input" type="radio" id="rd_tunai_2" name="rd_tunai_2" disabled>
+                                                                <label for="customRadio3" class="custom-control-label">Tunai</label>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="row" style="margin-left: 7">
+                                                            <div class="custom-control custom-radio">
+                                                                <input class="custom-control-input" type="radio" id="rd_kredit_2" name="rd_kredit_2" disabled>
+                                                                <label for="customRadio3" class="custom-control-label">Kredit</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="form-group col-lg-2">
                                                         <label>Tanggal Surat Jalan<span style="color: red;">*</span></label>
                                                         <input class="form-control" type="date" name="tanggal_surat_jalan_2" id="tanggal_surat_jalan_2" placeholder="Tanggal Surat Jalan">
                                                         <span class="text-danger" id="error_tanggal_surat_jalan_2"></span>
                                                     </div>
-                                                </div>
-
-                                                <div class="row">
-
-                                                    <label style="margin-left: 7">Cara Pembayaran<span style="color: red;">*</span></label>
-
-                                                </div>
-                                                <div class="row" style="margin-left: 7">
-                                                    <div class="custom-control custom-radio">
-                                                        <input class="custom-control-input" type="radio" id="rd_tunai_2" name="rd_tunai_2" disabled>
-                                                        <label for="customRadio3" class="custom-control-label">Tunai</label>
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="row" style="margin-left: 7">
-                                                    <div class="custom-control custom-radio">
-                                                        <input class="custom-control-input" type="radio" id="rd_kredit_2" name="rd_kredit_2" disabled>
-                                                        <label for="customRadio3" class="custom-control-label">Kredit</label>
-                                                    </div>
-                                                </div>
+                                            </div>
+                                    
+                                                
 
                                                 <div class="row">
 
@@ -961,25 +967,22 @@
                                                         <span class="text-danger" id="error_temperatur_2"></span>
                                                     </div>
                                                 </div>
-                                                <label>Posisi Pengambilan :</label>
                                                 <div class="row">
-                                                    <div class="form-group col-lg-4">
-                                                        <label>Nilai Persen<span style="color: red;">*</span></label>
-                                                        <input class="form-control" type="number" name="nilai_persen_pengambilan_2" id="nilai_persen_pengambilan_2" placeholder="Nilai Persen">%
-                                                        <span class="text-danger" id="error_nilai_persen_pengambilan_2"></span>
+                                                        <div class="form-group col-lg-4">
+                                                            <label>Posisi Pengambilan :</label>
+                                                            <label>Nilai Persen<span style="color: red;">*</span></label>
+                                                            <input class="form-control" type="number" name="nilai_persen_pengambilan_2" id="nilai_persen_pengambilan_2" placeholder="Nilai Persen">%
+                                                            <span class="text-danger" id="error_nilai_persen_pengambilan_2"></span>
+                                                        </div>
+
+                                                        <div class="form-group col-lg-4">
+                                                            <label>Posisi Berangkat :</label>
+                                                            <label>Nilai Persen<span style="color: red;">*</span></label>
+                                                            <input class="form-control" type="number" name="nilai_persen_berangkat_2" id="nilai_persen_berangkat_2" placeholder="Nilai Persen">%
+                                                            <span class="text-danger" id="error_nilai_persen_berangkat_2"></span>
+                                                        </div>
+
                                                     </div>
-
-                                                </div>
-
-                                                <label>Posisi Berangkat :</label>
-                                                <div class="row">
-                                                    <div class="form-group col-lg-4">
-                                                        <label>Nilai Persen<span style="color: red;">*</span></label>
-                                                        <input class="form-control" type="number" name="nilai_persen_berangkat_2" id="nilai_persen_berangkat_2" placeholder="Nilai Persen">%
-                                                        <span class="text-danger" id="error_nilai_persen_berangkat_2"></span>
-                                                    </div>
-
-                                                </div>
 
 
 

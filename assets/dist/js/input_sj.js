@@ -160,7 +160,7 @@ $("#unitSj").on("change", function () {
           },
       success: function (data) {
         data = JSON.parse(data);
-       console.log(data.tgl_aktif);
+       //console.log(data.tgl_aktif);
        $("#aktif_unitSj").html("Bulan aktif : "+data.tgl_aktif);
       },
     });

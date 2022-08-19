@@ -48,10 +48,14 @@ class Input_sj extends CI_Controller
             $daftar_unit .= " OR kd_unit = '$unit->kode_unit'";
         }
         $daftar_unit = substr($daftar_unit, 4);
-
+        date_default_timezone_set('Asia/Jakarta');
+        $tgl_aktif = date("Y-m-d");
+        
         //$unit = $this->db->query("select * from tb_unit where (".$daftar_unit.") order by nm_unit asc ")->result();        
-        $unit = $this->db->query("select * from tb_unit order by nm_unit desc ")->result();
+        $unit = $this->db->query("select * from tb_unit where tgl_aktif >= '$tgl_aktif' order by nm_unit desc ")->result();
 
+        // var_dump($unit);
+        // die();
         if (empty($unit_akses)) {
             echo '<option value="kosong">Belum ada data</option>';
         } else {
@@ -1041,7 +1045,7 @@ class Input_sj extends CI_Controller
         foreach($query as $q){
             $bln_aktif = $q->tgl_aktif;
         }
-        $bln_aktif = substr($bln_aktif,2,5); 
+        $bln_aktif = substr($bln_aktif,0,7); 
         $data = array (
             'tgl_aktif' => $bln_aktif,
         );

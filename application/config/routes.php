@@ -142,3 +142,4 @@ $route['input-sj/hapus-alamat-kirim'] = 'Input_sj/hapus_alamat_kirim';
 $route['input-sj/edit-alamat-kirim'] = 'Input_sj/edit_alamat_kirim';
 $route['input-sj/cetak'] = 'Cetak/print';
 $route['input-sj/get-bulan-aktif'] = 'Input_sj/get_bulan_aktif';
+$route['input-sj/batal-sj'] = 'Input_sj/batal_sj';

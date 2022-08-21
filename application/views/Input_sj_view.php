@@ -685,53 +685,54 @@
                                         <div class="callout callout-warning" style="background-color: #FFF8E5;" id="bagian_3">
                                             <h5>Daftar Surat Jalan</h5>
 
-                                        <form class="form-horizontal" action="<?php echo site_url('input-sj/cetak'); ?>" method="post" target="_blank">
-                                            <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_sj">
-                                                <thead>
-                                                    <tr>
-                                                        <td>No</td>
-                                                        <td>Nomor Surat Jualan</td>
-                                                        <td>Nama Customer</td>
-                                                        <td>Kode Customer</td>
-                                                        <td>Alamat kirim 1 Customer</td>
-                                                        <td>Alamat kirim 2 Customer</td>
-                                                        <td>Alamat kirim 3 Customer</td>
-                                                        <td>NPWP</td>
-                                                        <td>Unit</td>
-                                                        <td>Nomor Urut SPM</td>
-                                                        <td>Tanggal Surat Jalan</td>
-                                                        <td>Nomor PO</td>
-                                                        <td>Tanggal PO</td>
-                                                        <td>PPN</td>
-                                                        <td>Pembayaran</td>
-                                                        <td>Kode Mobil</td>
-                                                        <td>Nama Supir</td>
-                                                        <td>Kode Supir</td>
-                                                        <td>Unit Marketing</td>
-                                                        <td>Kode Barang</td>
-                                                        <td>Jumlah Barang</td>
-                                                        <td>Jumlah Kilogram Barang</td>
-                                                        <td>Keterangan</td>
-                                                        <td>Nama Suplier</td>
-                                                        <td>Nomor Faktur</td>
-                                                        <td>Nomor Segel</td>
-                                                        <td>Pressure</td>
-                                                        <td>Temperatur</td>
-                                                        <td>Pengambilan Awal</td>
-                                                        <td>Pengambilan Akhir</td>
-                                                        <td>Kode Supplier</td>
+                                            <form class="form-horizontal" action="<?php echo site_url('input-sj/cetak'); ?>" method="post" target="_blank">
+                                                <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_sj">
+                                                    <thead>
+                                                        <tr>
+                                                            <td>No</td>
+                                                            <td>Nomor Surat Jualan</td>
+                                                            <td>Nama Customer</td>
+                                                            <td>Kode Customer</td>
+                                                            <td>Alamat kirim 1 Customer</td>
+                                                            <td>Alamat kirim 2 Customer</td>
+                                                            <td>Alamat kirim 3 Customer</td>
+                                                            <td>NPWP</td>
+                                                            <td>Unit</td>
+                                                            <td>Nomor Urut SPM</td>
+                                                            <td>Tanggal Surat Jalan</td>
+                                                            <td>Nomor PO</td>
+                                                            <td>Tanggal PO</td>
+                                                            <td>PPN</td>
+                                                            <td>Pembayaran</td>
+                                                            <td>Kode Mobil</td>
+                                                            <td>Nama Supir</td>
+                                                            <td>Kode Supir</td>
+                                                            <td>Unit Marketing</td>
+                                                            <td>Kode Barang</td>
+                                                            <td>Jumlah Barang</td>
+                                                            <td>Jumlah Kilogram Barang</td>
+                                                            <td>Keterangan</td>
+                                                            <td>Nama Suplier</td>
+                                                            <td>Nomor Faktur</td>
+                                                            <td>Nomor Segel</td>
+                                                            <td>Pressure</td>
+                                                            <td>Temperatur</td>
+                                                            <td>Pengambilan Awal</td>
+                                                            <td>Pengambilan Akhir</td>
+                                                            <td>Kode Supplier</td>
 
 
-                                                        <td>Aksi</td>
-                                                        <td>Cetak Surat Jalan</td>
+                                                            <td>Aksi</td>
+                                                            <td>Cetak Surat Jalan</td>
+                                                            <td>Batal Surat Jalan</td>
 
-                                                        
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
-                                        </form> 
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </form>
                                         </div>
 
 
@@ -839,21 +840,21 @@
 
                                                 </div>
 
-                                    <div class="row">
+                                                <div class="row">
                                                     <div class="form-group col-lg-4">
                                                         <label>No. Surat Jalan<span style="color: red;">*</span></label>
                                                         <input class="form-control" type="text" name="no_surat_jalan_2" id="no_surat_jalan_2" placeholder="Nomor Surat Jalan" disabled>
                                                         <span class="text-danger" id="error_no_surat_jalan_2"></span>
                                                     </div>
 
-                                                    
 
-                                            <div class="form-group col-lg-2">
-                                                    <div class="row">
 
-                                                                        <label style="margin-left: 7">Cara Pembayaran<span style="color: red;">*</span></label>
+                                                    <div class="form-group col-lg-2">
+                                                        <div class="row">
 
-                                                            </div>
+                                                            <label style="margin-left: 7">Cara Pembayaran<span style="color: red;">*</span></label>
+
+                                                        </div>
                                                         <div class="row" style="margin-left: 7">
                                                             <div class="custom-control custom-radio">
                                                                 <input class="custom-control-input" type="radio" id="rd_tunai_2" name="rd_tunai_2" disabled>
@@ -874,9 +875,9 @@
                                                         <input class="form-control" type="date" name="tanggal_surat_jalan_2" id="tanggal_surat_jalan_2" placeholder="Tanggal Surat Jalan">
                                                         <span class="text-danger" id="error_tanggal_surat_jalan_2"></span>
                                                     </div>
-                                            </div>
-                                    
-                                                
+                                                </div>
+
+
 
                                                 <div class="row">
 
@@ -968,21 +969,21 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                        <div class="form-group col-lg-4">
-                                                            <label>Posisi Pengambilan :</label>
-                                                            <label>Nilai Persen<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="number" name="nilai_persen_pengambilan_2" id="nilai_persen_pengambilan_2" placeholder="Nilai Persen">%
-                                                            <span class="text-danger" id="error_nilai_persen_pengambilan_2"></span>
-                                                        </div>
-
-                                                        <div class="form-group col-lg-4">
-                                                            <label>Posisi Berangkat :</label>
-                                                            <label>Nilai Persen<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="number" name="nilai_persen_berangkat_2" id="nilai_persen_berangkat_2" placeholder="Nilai Persen">%
-                                                            <span class="text-danger" id="error_nilai_persen_berangkat_2"></span>
-                                                        </div>
-
+                                                    <div class="form-group col-lg-4">
+                                                        <label>Posisi Pengambilan :</label>
+                                                        <label>Nilai Persen<span style="color: red;">*</span></label>
+                                                        <input class="form-control" type="number" name="nilai_persen_pengambilan_2" id="nilai_persen_pengambilan_2" placeholder="Nilai Persen">%
+                                                        <span class="text-danger" id="error_nilai_persen_pengambilan_2"></span>
                                                     </div>
+
+                                                    <div class="form-group col-lg-4">
+                                                        <label>Posisi Berangkat :</label>
+                                                        <label>Nilai Persen<span style="color: red;">*</span></label>
+                                                        <input class="form-control" type="number" name="nilai_persen_berangkat_2" id="nilai_persen_berangkat_2" placeholder="Nilai Persen">%
+                                                        <span class="text-danger" id="error_nilai_persen_berangkat_2"></span>
+                                                    </div>
+
+                                                </div>
 
 
 
@@ -1337,6 +1338,27 @@
                                             </div>
                                             <!-- /.modal-dialog -->
                                         </div>
+
+
+
+                                        <div class="modal fade" id="modal_konfirmasi_batal">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <h5>Apa Anda sudah yakin?</h5>
+                                                        <div class="form-group text-right">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                                                            <button class="btn btn-primary btn-small btn-primary btn-rounded" onclick="batalSj()">Ya</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+
+
+
 
 
                                     </div>

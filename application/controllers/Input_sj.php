@@ -50,7 +50,7 @@ class Input_sj extends CI_Controller
         $daftar_unit = substr($daftar_unit, 4);
         date_default_timezone_set('Asia/Jakarta');
         $tgl_aktif = date("Y-m-d");
-        
+
         //$unit = $this->db->query("select * from tb_unit where (".$daftar_unit.") order by nm_unit asc ")->result();        
         $unit = $this->db->query("select * from tb_unit where tgl_aktif >= '$tgl_aktif' order by nm_unit desc ")->result();
 
@@ -128,14 +128,16 @@ class Input_sj extends CI_Controller
             $row[] = $p->k_supl;
 
 
-            
+
 
 
 
 
             $row[] = '<a href="#!" class="fas fa-edit edit_sj" data-no_sj="' . $p->no_sj . '"  title="Ubah Surat Jalan" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteSj" data-no_sj="' . $p->no_sj . '" title="Hapus Surat Jalan" style="color:black;"></a>';
-            $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded cetak_sj" value="'.$p->no_sj.'" name="no_sj" type="submit">Cetak</button>';
-          
+            $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded cetak_sj" value="' . $p->no_sj . '" name="no_sj" type="submit">Cetak</button>';
+            $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" value="' . $p->no_sj . '" name="no_sj" type="button">Batal</button>';
+
+
             //$row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
             //echo '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
             // $row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
@@ -1032,24 +1034,52 @@ class Input_sj extends CI_Controller
         }
     }
 
-    
 
 
-    public function get_bulan_aktif(){
+
+    public function get_bulan_aktif()
+    {
         $kd_unit = $_POST['kd_unit'];
 
-        
+
 
         $query = $this->Input_sj_model->get_bulan_aktif($kd_unit);
 
-        foreach($query as $q){
+        foreach ($query as $q) {
             $bln_aktif = $q->tgl_aktif;
         }
-        $bln_aktif = substr($bln_aktif,0,7); 
-        $data = array (
+        $bln_aktif = substr($bln_aktif, 0, 7);
+        $data = array(
             'tgl_aktif' => $bln_aktif,
         );
         echo json_encode($data);
     }
 
+    public function batal_sj()
+    {
+        $no_sj = $this->input->post('no_sj');
+        $data = array(
+
+            'btl_sj' => "*",
+        );
+        $this->Input_sj_model->batal_sj($no_sj, $data);
+        $query = $this->db->affected_rows();
+
+        if ($query) {
+
+            $data = array(
+                'status' => 'success',
+
+            );
+
+            echo json_encode($data);
+        } else {
+            $data = array(
+                'status' => 'failed',
+
+            );
+
+            echo json_encode($data);
+        }
+    }
 }

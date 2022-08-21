@@ -16,7 +16,7 @@ class Cabang extends CI_Controller
         $this->session->keep_flashdata('error');
         $this->session->keep_flashdata('sukses');
 
-      //  $this->load->library('pdf');
+        //  $this->load->library('pdf');
     }
 
     function index()
@@ -27,14 +27,15 @@ class Cabang extends CI_Controller
         // $data['bulanAktif']  = $bulan->result_array();
         // var_dump($data[0]['blnaktif']);
         // die();
-        
-      //  $data['ini'] = $datai;
+
+        //  $data['ini'] = $datai;
 
         $this->load->view('material/Head_view');
         $this->load->view("Cabang_view");
     }
 
-    public function tambahCabang(){
+    public function tambahCabang()
+    {
         $namaCabang = $_POST['namaCabang'];
         $kodeCabang = $_POST['kodeCabang'];
         $alamat1Cabang = $_POST['alamat1Cabang'];
@@ -50,9 +51,9 @@ class Cabang extends CI_Controller
         $namaFp = $_POST['namaFp'];
         $lokasi = $_POST['lokasi'];
         $kodeNomor = $_POST['kodeNomor'];
-      
+
         $tanggalAktif = $_POST['tanggalAktif'];
-       
+
         $namaPt = $_POST['namaPt'];
         $alamatPjk1 = $_POST['alamatPjk1'];
         $alamatPjk2 = $_POST['alamatPjk2'];
@@ -60,7 +61,7 @@ class Cabang extends CI_Controller
         $plafonUnit = $_POST['plafonUnit'];
 
 
-        
+
 
         $data = array(
             'nm_unit' => $namaCabang,
@@ -78,52 +79,50 @@ class Cabang extends CI_Controller
             'nama_fp' => $namaFp,
             'lokasi' => $lokasi,
             'kode_nomor' => $kodeNomor,
-            
+
             'tgl_aktif' => $tanggalAktif,
             'ttpbln' => 0,
             'n_pt' => $namaPt,
             'al_pjk' => $alamatPjk1,
             'al_pjk2' => $alamatPjk2,
             'kode_spm' => $kodeSpm,
-            'plaf_unit' => $plafonUnit 
-            
-    );
-     $this->Cabang_model->tambah_cabang('tb_unit', $data);
-     $query = $this->db->affected_rows();
+            'plaf_unit' => $plafonUnit
+
+        );
+        $this->Cabang_model->tambah_cabang('tb_unit', $data);
+        $query = $this->db->affected_rows();
 
 
-if($query)
-{
-   
-    $data = array(
-        'status'=>'true',
-       
-    );
+        if ($query) {
 
-    echo json_encode($data);
-}
-else
-{
-     $data = array(
-        'status'=>'false',
-      
-    );
-    
-    echo json_encode($data);
-} 
+            $data = array(
+                'status' => 'true',
+
+            );
+
+            echo json_encode($data);
+        } else {
+            $data = array(
+                'status' => 'false',
+
+            );
+
+            echo json_encode($data);
+        }
     }
 
- 
-    public function ajax_list(){
+
+    public function ajax_list()
+    {
 
         date_default_timezone_set('Asia/Jakarta');
         $bulanAktifSekarang = date("Ym");
-        if(isset($_POST['bulanAktif'])){
+        if (isset($_POST['bulanAktif'])) {
 
-        
-        $_SESSION['bulanAktif'] = $_POST['bulanAktif'];
-        // var_dump($_SESSION['bulanAktif']);
-        // die();
+
+            $_SESSION['bulanAktif'] = $_POST['bulanAktif'];
+            // var_dump($_SESSION['bulanAktif']);
+            // die();
         }
         $list = $this->Cabang_model->get_datatables();
         $data = array();
@@ -134,7 +133,7 @@ else
             $row = array();
 
             $row[] = $no;
-           // $row[] = $p->k_cabang;
+            // $row[] = $p->k_cabang;
             $row[] = $p->nm_unit;
             $row[] = $p->kd_unit;
             $row[] = $p->al1_cab;
@@ -150,7 +149,7 @@ else
             $row[] = $p->nama_fp;
             $row[] = $p->lokasi;
             $row[] = $p->kode_nomor;
-            
+
             $row[] = $p->tgl_aktif;
             $row[] = $p->ttpbln;
             $row[] = $p->n_pt;
@@ -158,58 +157,57 @@ else
             $row[] = $p->al_pjk2;
             $row[] = $p->kode_spm;
             $row[] = $p->plaf_unit;
-           
-            
-            
 
-                
-           // $row[] = '<a href="javascript:void(0);" class="fas fa-edit" onclick="get_data_po('.$p->id.')" title="Ubah data PO" style="color:black;"></a> | <a href="javascript:void(0);" class="fas fa-trash" onclick="hapus_po('.$p->id.')" title="Hapus data PO" style="color:black;"></a>';
+
+
+
+
+            // $row[] = '<a href="javascript:void(0);" class="fas fa-edit" onclick="get_data_po('.$p->id.')" title="Ubah data PO" style="color:black;"></a> | <a href="javascript:void(0);" class="fas fa-trash" onclick="hapus_po('.$p->id.')" title="Hapus data PO" style="color:black;"></a>';
             $row[] = '<a href="#!" class="fas fa-edit edit_cabang" data-id="' . $p->id . '"  title="Ubah data PO" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteCabang" data-id="' . $p->id . '" title="Hapus data PO" style="color:black;"></a>';
-            
-               
-            
+
+
+
             $data[] = $row;
         }
-        
+
         $output = array(
-                        "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->Cabang_model->count_all(),
-                        "recordsFiltered" => $this->Cabang_model->count_filtered(),
-                        "data" => $data,
-                        );
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->Cabang_model->count_all(),
+            "recordsFiltered" => $this->Cabang_model->count_filtered(),
+            "data" => $data,
+        );
         //output to json format
         echo json_encode($output);
     }
 
-   
 
-    function hapus_cabang(){
+
+    function hapus_cabang()
+    {
         $id = $_POST['idDelete'];
-        
+
         $this->Cabang_model->hapus_cabang($id);
         $query = $this->db->affected_rows();
-        if($query==true)
-        {
-	    $data = array(
-        'status'=>'success',
-       
+        if ($query == true) {
+            $data = array(
+                'status' => 'success',
+
             );
 
-         echo json_encode($data);
-        }
-        else
-        {
-         $data = array(
-        'status'=>'failed',
-      
-    );
+            echo json_encode($data);
+        } else {
+            $data = array(
+                'status' => 'failed',
+
+            );
 
             echo json_encode($data);
-    } 
+        }
     }
 
 
-    function edit_cabang(){
+    function edit_cabang()
+    {
         $id = $_POST['id'];
         $namaCabang2 = $_POST['namaCabang2'];
         $kodeCabang2 = $_POST['kodeCabang2'];
@@ -226,9 +224,9 @@ else
         $namaFp2 = $_POST['namaFp2'];
         $lokasi2 = $_POST['lokasi2'];
         $kodeNomor2 = $_POST['kodeNomor2'];
-        
+
         $tanggalAktif2 = $_POST['tanggalAktif2'];
-        
+
         $namaPt2 = $_POST['namaPt2'];
         $alamatPjk12 = $_POST['alamatPjk12'];
         $alamatPjk22 = $_POST['alamatPjk22'];
@@ -251,42 +249,37 @@ else
             'nama_fp' => $namaFp2,
             'lokasi' => $lokasi2,
             'kode_nomor' => $kodeNomor2,
-            
+
             'tgl_aktif' => $tanggalAktif2,
-            
+
             'n_pt' => $namaPt2,
             'al_pjk' => $alamatPjk12,
             'al_pjk2' => $alamatPjk22,
             'kode_spm' => $kodeSpm2,
-            'plaf_unit' => $plafonUnit2 
-            
-    );
-     $this->Cabang_model->edit_cabang($id, $data);
-     $query = $this->db->affected_rows();
+            'plaf_unit' => $plafonUnit2
 
-     
+        );
+        $this->Cabang_model->edit_cabang($id, $data);
+        $query = $this->db->affected_rows();
 
 
-if($query)
-{
-   
-    $data = array(
-        'status'=>'true',
-       
-    );
 
-    echo json_encode($data);
+
+        if ($query) {
+
+            $data = array(
+                'status' => 'true',
+
+            );
+
+            echo json_encode($data);
+        } else {
+            $data = array(
+                'status' => 'false',
+
+            );
+
+            echo json_encode($data);
+        }
+    }
 }
-else
-{
-     $data = array(
-        'status'=>'false',
-      
-    );
-    
-    echo json_encode($data);
-} 
-    }
-
-
-    }

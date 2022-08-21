@@ -26,6 +26,7 @@ class Input_sj_model extends CI_Model
         $this->db->select('*');
         $this->db->join('hak_akses', 'tb_sj.kd_unit = hak_akses.kode_unit');
         $this->db->where('hak_akses.nama_user', $nama);
+        $this->db->where('tb_sj.btl_sj', "");
         $this->db->order_by('no_sj asc');
 
         $this->db->from($this->table);
@@ -155,27 +156,9 @@ class Input_sj_model extends CI_Model
         $this->db->delete($this->table);
     }
 
-    public function edit_supir($id, $data)
-    {
-        $this->db->where('id', $id);
-        $this->db->update('supir', $data);
-    }
 
-    function check($supir_unik)
-    {
 
-        $this->db->select();
-        $query = $this->db->get_where('supir', array('supir_unik' => $supir_unik));
-        $result = $query->result_array();
 
-        $count = count($result);
-
-        if (empty($count)) {
-            return false;
-        } else {
-            return true;
-        }
-    }
 
     //  function get_customer
 
@@ -376,7 +359,8 @@ class Input_sj_model extends CI_Model
         $this->db->update('almt_krm', $data);
     }
 
-    public function get_barang($k_barang){
+    public function get_barang($k_barang)
+    {
         $this->db->select('*');
         $this->db->from('dbm002');
         $this->db->where('k_barang', $k_barang);
@@ -385,12 +369,18 @@ class Input_sj_model extends CI_Model
         return $query->result();
     }
 
-    public function get_bulan_aktif($kd_unit){
+    public function get_bulan_aktif($kd_unit)
+    {
         $this->db->select('*');
         $this->db->from('tb_unit');
         $this->db->where('kd_unit', $kd_unit);
         $query = $this->db->get();
 
         return $query->result();
+    }
+    public function batal_sj($no_sj, $data)
+    {
+        $this->db->where('no_sj', $no_sj);
+        $this->db->update('tb_sj', $data);
     }
 }

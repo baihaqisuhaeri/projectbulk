@@ -134,8 +134,16 @@ class Input_sj extends CI_Controller
 
 
             $row[] = '<a href="#!" class="fas fa-edit edit_sj" data-no_sj="' . $p->no_sj . '"  title="Ubah Surat Jalan" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteSj" data-no_sj="' . $p->no_sj . '" title="Hapus Surat Jalan" style="color:black;"></a>';
-            $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded cetak_sj" value="' . $p->no_sj . '" name="no_sj" type="submit">Cetak</button>';
-            $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" value="' . $p->no_sj . '" name="no_sj" type="button">Batal</button>';
+            
+            if($p->btl_sj == "*"){
+                $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded cetak_sj" value="' . $p->no_sj . '" name="no_sj" type="submit">Cetak</button>';
+                $row[] = "Dibatalkan";
+            }else{
+                $row[] = '<button class="btn btn-primary btn-small btn-primary btn-rounded cetak_sj" value="' . $p->no_sj . '" name="no_sj" type="submit">Cetak</button>';
+                $row[] = "Belum batal";
+            }
+            
+            $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';
 
 
             //$row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
@@ -506,7 +514,7 @@ class Input_sj extends CI_Controller
             if ($status_edit == null) {
                 echo '<option value="' . $m->mobil_unik . '">' . $m->n_mobil . " (" . $m->k_mobil . ')</option>';
             } else {
-                var_dump($m_unik);
+                //var_dump($m_unik);
                 if ($m->mobil_unik == $m_unik) {
                     echo '<option selected value="' . $m->mobil_unik . '">' . $m->n_mobil . " (" . $m->k_mobil . ')</option>';
                 } else {
@@ -705,7 +713,7 @@ class Input_sj extends CI_Controller
                     $urut = $urut + 1;
                 }
             }
-            var_dump($urut);
+            //var_dump($urut);
         }
         $no_sj .= $urut;
 
@@ -814,12 +822,12 @@ class Input_sj extends CI_Controller
         //var_dump($query);
         if ($query) {
             $data = array(
-                'status' => 'true',
+                'status' => 'success',
             );
             echo json_encode($data);
         } else {
-            $data = array(
-                'status' => 'false',
+            $data1 = array(
+                'status' => 'failed',
             );
             echo json_encode($data);
         }

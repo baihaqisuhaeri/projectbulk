@@ -25,7 +25,7 @@
                         <div class="col-sm-6">
 
                             <ol class="breadcrumb float-sm-right">
-                                <h1 class="m-0 text-dark">Bulan Aktif :</h1>
+                                <h1 class="m-0 text-dark">Bulan Berjalan :</h1>
                                 <?php
                                 date_default_timezone_set('Asia/Jakarta');
                                 $bulan = date("Y-m"); ?>

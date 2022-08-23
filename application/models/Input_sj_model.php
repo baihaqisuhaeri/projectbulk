@@ -26,7 +26,7 @@ class Input_sj_model extends CI_Model
         $this->db->select('*');
         $this->db->join('hak_akses', 'tb_sj.kd_unit = hak_akses.kode_unit');
         $this->db->where('hak_akses.nama_user', $nama);
-        $this->db->where('tb_sj.btl_sj', "");
+        //$this->db->where('tb_sj.btl_sj', "");
         $this->db->order_by('no_sj asc');
 
         $this->db->from($this->table);
@@ -153,7 +153,7 @@ class Input_sj_model extends CI_Model
     public function hapus_sj($no_sj)
     {
         $this->db->where('no_sj', $no_sj);
-        $this->db->delete($this->table);
+        $this->db->delete('tb_sj');
     }
 
 

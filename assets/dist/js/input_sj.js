@@ -694,12 +694,16 @@ function tambahSj() {
       tk: tk_sj,
     },
     success: function (data) {
-      // console.log(data);
-      // var json = JSON.parse(data);
+       var data = JSON.parse(data);
+       console.log(data.status);
+       
       var status = data.status;
-      if (status == "true") {
+      // var json = JSON.parse(data);
+     // console.log(data.status);
+      if (status == "success") {
         mytable = $("#tabel_sj").DataTable();
         mytable.draw();
+        $("#aktif_unitSj").html("");
         Swal.fire("Berhasil!", "Surat jalan berhasil ditambahkan!", "success");
       } else {
         // alert("a");
@@ -709,7 +713,7 @@ function tambahSj() {
           "error"
         );
       }
-      Swal.fire("Berhasil!", "Surat jalan berhasil ditambahkan!", "success");
+      //Swal.fire("Berhasil!", "Surat jalan berhasil ditambahkan!", "success");
       // $("#unitSupir").val("").change();
       // $("#nama_supir").val("");
       sukses_tambah = "yes";
@@ -784,6 +788,15 @@ $(document).ready(function () {
       type: "POST",
     },
 
+    "createdRow": function( row, data, dataIndex ) {
+      if ( data[33] == "Dibatalkan" ) {
+          $(row).addClass( 'bg-danger' );
+         // $(row).css("background-color", "red");
+      }else{
+         $(row).css("background-color", "white");
+      }
+  },
+
     //Set column definition initialisation properties.
 
     // columnDefs: [
@@ -792,7 +805,8 @@ $(document).ready(function () {
     //     orderable: false, //set not orderable
     //   },
     // ],
-    //"aoColumnDefs": [{ "bVisible": false, "aTargets": [33] }]
+    //bisa hide column
+    "aoColumnDefs": [{ "bVisible": false, "aTargets": [1] }]
   });
   // fnSetColumnVis( 1, false );
 
@@ -940,9 +954,10 @@ function deleteSj() {
   });
 }
 
-
+var nomor_sj_batal = "";
 $(document).on("click", ".batal_sj", function (event) {
-  nomor_sj = $(".batal_sj").val();
+  nomor_sj_batal = $(this).data("no_sj");
+  //console.log(nomor_sj_batal);
 
   $("#modal_konfirmasi_batal").modal("show");
 });
@@ -954,7 +969,7 @@ function batalSj() {
   $.ajax({
     url: "input-sj/batal-sj",
     data: {
-      no_sj: nomor_sj,
+      no_sj: nomor_sj_batal,
     },
     type: "post",
     success: function (data) {
@@ -964,13 +979,13 @@ function batalSj() {
         mytable = $("#tabel_sj").DataTable();
         mytable.draw();
 
-        $("#" + nomor_sj)
+        $("#" + nomor_sj_batal)
           .closest("tr")
           .remove();
         Swal.fire("Berhasil!", "Surat Jalan berhasil dibatalkan", "success");
       } else {
         // alert("Failed");
-        Swal.fire("Gagal!", "Surat Jalan berhasil dibatalkan", "error");
+        Swal.fire("Information", "Surat Jalan sudah dibatalkan", "warning");
         return;
       }
     },
@@ -1530,7 +1545,7 @@ function editSj() {
       // console.log(data);
       var data = JSON.parse(data);
       var status = data.status;
-      console.log(status);
+      //console.log(status);
       if (status == "true") {
         mytable = $("#tabel_sj").DataTable();
         mytable.draw();
@@ -1636,7 +1651,7 @@ function editAlamatKirim() {
   var alamat_kirim2_edit = $("#alamat_kirim2_baru_edit").val();
   var alamat_kirim3_edit = $("#alamat_kirim3_baru_edit").val();
 
-  console.log(id_alamat_edit);
+  //console.log(id_alamat_edit);
   $.ajax({
     url: "input-sj/edit-alamat-kirim",
     type: "post",
@@ -1654,7 +1669,7 @@ function editAlamatKirim() {
       //var data = JSON.parse(data);
       var status = data.status;
 
-      console.log(status);
+      //console.log(status);
       if (status == "true") {
         mytable = $("#tabel_alamat_kirim").DataTable();
         mytable.draw();

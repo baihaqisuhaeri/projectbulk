@@ -13,6 +13,13 @@ var sukses_tambah = null;
 
 var id_alamat_edit = "";
 
+
+var kode_cus_global = data[3];
+var no_spm_global = data[9];
+var unit_global = data[8];
+
+
+
 $(".select2").select2({ width: "100%" });
 
 $(".select2bs4").select2({
@@ -23,13 +30,21 @@ $("#nama_customer").on("change", function () {
   get_no_spm();
 });
 
+
+
+
+
+
 function get_no_spm() {
   var kodeCustomer = $("#nama_customer").val().split("_");
   kodeCustomer = kodeCustomer[0];
+  var unitSj = $("#unitSj").val();
   $.ajax({
     url: "input-sj/get-no-spm",
     type: "post",
-    data: { kodeCustomer: kodeCustomer },
+    data: { kodeCustomer: kodeCustomer,
+            unitSj: unitSj
+          },
     success: function (data) {
       $("#no_spm").html(data);
       //$("#unit_spm").html(data);
@@ -64,6 +79,21 @@ function get_mobil_sj() {
   });
 }
 
+function get_mobil_sj_2() {
+  var unitSj = $("#unitSj_2").val();
+  $.ajax({
+    url: "input-sj/get-mobil-sj",
+    type: "POST",
+    data: {
+      unitSj: unitSj,
+    },
+    success: function (data) {
+      $("#no_kendaraan_2").html(data);
+      //$("#unit_spm").html(data);
+    },
+  });
+}
+
 function get_supir_sj() {
   var unitSj = $("#unitSj").val();
   $.ajax({
@@ -79,6 +109,21 @@ function get_supir_sj() {
   });
 }
 
+function get_supir_sj_2() {
+  var unitSj = $("#unitSj_2").val();
+  $.ajax({
+    url: "input-sj/get-supir-sj",
+    type: "POST",
+    data: {
+      unitSj: unitSj,
+    },
+    success: function (data) {
+      $("#nama_supir_2").html(data);
+      //$("#unit_spm").html(data);
+    },
+  });
+}
+
 function get_barang_sj() {
   var unitSj = $("#unitSj").val();
   $.ajax({
@@ -89,6 +134,21 @@ function get_barang_sj() {
     },
     success: function (data) {
       $("#kode_barang").html(data);
+      //$("#unit_spm").html(data);
+    },
+  });
+}
+
+function get_barang_sj_2() {
+  var unitSj = $("#unitSj_2").val();
+  $.ajax({
+    url: "input-sj/get-barang-sj",
+    type: "POST",
+    data: {
+      unitSj: unitSj,
+    },
+    success: function (data) {
+      $("#kode_barang_2").html(data);
       //$("#unit_spm").html(data);
     },
   });
@@ -138,6 +198,16 @@ $("#unitSj").on("change", function () {
   get_bulan_aktif();
 });
 
+$("#unitSj_2").on("change", function () {
+  //$("#data_plafon").slideUp("slow");
+
+  get_customer_2();
+   get_mobil_sj_2();
+   get_supir_sj_2();
+   get_barang_sj_2();
+  get_bulan_aktif_2();
+});
+
 function get_bulan_aktif() {
   var kd_unit = $("#unitSj").val();
   $.ajax({
@@ -153,6 +223,24 @@ function get_bulan_aktif() {
     },
   });
 }
+
+function get_bulan_aktif_2() {
+  var kd_unit = $("#unitSj_2").val();
+  $.ajax({
+    url: "input-sj/get-bulan-aktif",
+    type: "POST",
+    data: {
+      kd_unit: kd_unit,
+    },
+    success: function (data) {
+      data = JSON.parse(data);
+      //console.log(data.tgl_aktif);
+      $("#aktif_unitSj_2").html("Bulan aktif : " + data.tgl_aktif);
+    },
+  });
+}
+
+
 var k_cus;
 $(document).on("click", "#btnAlamatKirim", function () {
   $("#error_nama_customer").html("");
@@ -259,6 +347,19 @@ function get_customer() {
     data: { unitSj: unitSj },
     success: function (data) {
       $("#nama_customer").html(data);
+    },
+  });
+}
+
+function get_customer_2() {
+  unitSj = $("#unitSj_2").val();
+
+  $.ajax({
+    url: "input-sj/customer",
+    type: "post",
+    data: { unitSj: unitSj },
+    success: function (data) {
+      $("#nama_customer_2").html(data);
     },
   });
 }
@@ -806,7 +907,7 @@ $(document).ready(function () {
     //   },
     // ],
     //bisa hide column
-    "aoColumnDefs": [{ "bVisible": false, "aTargets": [1] }]
+   // "aoColumnDefs": [{ "bVisible": false, "aTargets": [1] }]
   });
   // fnSetColumnVis( 1, false );
 
@@ -830,13 +931,17 @@ $(document).ready(function () {
     //get_unit_supir2();
     //$("#unitSupir2").val(data[1]);
     kode_supir2 = data[2]; // revisi
+    kode_cus_global = data[3];
+    no_spm_global = data[9];
+    unit_global = data[8];
+    
     var kode_cus = data[3];
-    var unit = data[8];
     var no_spm = data[9];
+    var unit = data[8];
     var k_sales = data[17];
     var k_barang = data[19];
     var k_supl = data[30];
-    get_no_spm_edit(kode_cus, no_spm);
+    get_no_spm_edit(kode_cus_global, no_spm_global ,unit_global);
     get_unit_sj_edit(unit);
     get_customer_edit(kode_cus, unit);
 
@@ -1131,14 +1236,16 @@ $(document).on("click", "#btn_simpan_alamat_2", function () {
   }
 });
 
-function get_no_spm_edit(kode_cus, no_spm) {
+function get_no_spm_edit(kode_cus, no_spm, unitSj) {
   //var kodeCustomer = $("#nama_customer_2").val().split("_");
   //kodeCustomer = kodeCustomer[0];
   //console.log(kode_cus);
   $.ajax({
     url: "input-sj/get-no-spm",
     type: "post",
-    data: { kodeCustomer: kode_cus, no_spm: no_spm },
+    data: { kodeCustomer: kode_cus, no_spm: no_spm,
+            unitSj: unitSj
+          },
     success: function (data) {
       $("#no_spm_2").html(data);
       //$("#unit_spm").html(data);
@@ -1688,16 +1795,32 @@ function editAlamatKirim() {
   });
 }
 
-function hasilPdf() {
-  var win = window.open("input-sj/cetak", "_blank");
-  $.ajax({
-    url: "input-sj/cetak",
-    type: "post",
-    data: { cetak_no_sj: "coba aja" },
-    success: function (data) {
-      //  $("#no_spm").html(data);
-      //$("#unit_spm").html(data);
-    },
-  });
-  win.focus();
-}
+// function hasilPdf() {
+//   var win = window.open("input-sj/cetak", "_blank");
+//   $.ajax({
+//     url: "input-sj/cetak",
+//     type: "post",
+//     data: { cetak_no_sj: "coba aja" },
+//     success: function (data) {
+//       //  $("#no_spm").html(data);
+//       //$("#unit_spm").html(data);
+//     },
+//   });
+//   win.focus();
+// }
+
+$("#nama_customer_2").on("change", function () {
+  var kodeCustomer = $("#nama_customer_2").val().split("_");
+  kodeCustomer = kodeCustomer[0];
+  var unitSj = $("#unitSj_2").val();
+  $("#alamat1_2").val("");
+  $("#alamat2_2").val("");
+  $("#alamat3_2").val("");
+  $("#kode_alamat_2").val("");
+  $("#npwp_2").val("");
+
+  
+  //variable no_spm_global sebenarnya tidak dibutuhkan, hanya untuk mengisi parameter saja
+  get_no_spm_edit(kodeCustomer, no_spm_global , unitSj);
+  
+});

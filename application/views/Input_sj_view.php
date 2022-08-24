@@ -747,6 +747,7 @@
                                                         <select class="form-control select2" id="unitSj_2" name="unitSj_2">
                                                         </select>
                                                         <span class="text-danger" id="error_unitSj_2"></span>
+                                                        <span class="text-success" id="aktif_unitSj_2"></span>
                                                     </div>
 
                                                     <div class="form-group col-lg-4">

@@ -404,10 +404,11 @@ class Input_sj extends CI_Controller
         date_default_timezone_set('Asia/Jakarta');
         $tgl_sekarang = date("Y-m-d");
         $kodeCustomer = $this->input->post("kodeCustomer");
+        $unitSj = $this->input->post("unitSj");
         $no_spm = $this->input->post("no_spm");
         //var_dump($kodeCustomer);
         // die();
-        $spm = $this->db->query("SELECT * FROM tb_spm WHERE k_cus = '$kodeCustomer'  and spm_brlk >= '2022-07-01' ")->result();
+        $spm = $this->db->query("SELECT * FROM tb_spm WHERE k_cus = '$kodeCustomer'  and spm_brlk >= '2022-07-01' and unit = '$unitSj' ")->result();
 
         // echo "<pre>";
         // print_r($spm);

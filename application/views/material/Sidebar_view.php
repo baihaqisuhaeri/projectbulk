@@ -200,6 +200,32 @@
                             ?>
                         </li>
 
+
+
+
+
+                        <li class="nav-item">
+                            <?php
+                            if ($this->uri->segment(1) == "utility") {
+                                echo '<a href="utility" class="nav-link active">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>
+                                    Utility
+                                </p>
+                            </a>';
+                            } else {
+                                echo '<a href="utility" class="nav-link">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>
+                                    Utility
+                                </p>
+                            </a>';
+                            }
+                            ?>
+                        </li>
+
+
+
                         
 
                         <li class="nav-item">

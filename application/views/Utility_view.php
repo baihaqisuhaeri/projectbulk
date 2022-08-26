@@ -25,11 +25,7 @@
                         <div class="col-sm-6">
 
                             <ol class="breadcrumb float-sm-right">
-                                <h1 class="m-0 text-dark">Bulan Berjalan :</h1>
-                                <?php
-                                date_default_timezone_set('Asia/Jakarta');
-                                $bulan = date("Y-m"); ?>
-                                <h1 class="m-0 text-dark"><?= $bulan ?></h1>
+                                
                                 <!--<li class="breadcrumb-item"><a href="pengadaan-aspal">Pengadaan Aspal</a></li>
                                         <li class="breadcrumb-item active">Administrator</li>-->
                             </ol>
@@ -110,16 +106,23 @@
 
 
                                         <!-- Modal -->
-                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal fade" id="modal_tutupBulan" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Tutup Bulan</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
+                                            <div class="form-group col-lg-4">
+                                                            <label>Nama Unit<span style="color: red;">*</span></label>
+                                                            <select width="200%" class="form-control select2" id="unit" name="unit">
+                                                            </select>
+                                                            <span class="text-danger" id="error_unit"></span>
+                                                            <span class="text-success" id="aktif_unit"></span>
+                                                        </div>
                                                 <p>Proses Tutup Bulan akan mengakhiri seluruh transaksi pada bulan <br><span><b>Juni 2022</b></span><br>
                                                 Proses ini mengerjakan perhitungan saldo piutang dan juga backup. Setelah proses
                                                 tutup bulan data bulan ini tidak dapat diubah (edit) lagi dan bulan Transaksi akan berubah menjadi bulan
@@ -129,8 +132,8 @@
                                                 
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                <button type="button" id="btnProses" class="btn btn-primary">Proses</button>
                                             </div>
                                             </div>
                                         </div>
@@ -138,7 +141,21 @@
                                
 
                                     
-
+                                    <div class="modal fade" id="modal_konfirmasi_tutupBulan">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <h5>Apa Anda sudah yakin?</h5>
+                                                    <div class="form-group text-right">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded"  onclick="tutupBulan()">Ya</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
 
                                     
 

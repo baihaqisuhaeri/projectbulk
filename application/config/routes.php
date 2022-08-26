@@ -146,3 +146,7 @@ $route['input-sj/batal-sj'] = 'Input_sj/batal_sj';
 
 
 $route['utility'] = 'Utility';
+$route['utility/unit'] = 'Utility/get_unit';
+$route['utility/get-bulan-aktif'] = 'Utility/get_bulan_aktif';
+$route['utility/tutup-bulan'] = 'Utility/tutup_bulan';
+

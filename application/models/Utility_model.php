@@ -14,5 +14,10 @@ class Utility_model extends CI_Model
         return $query->result();
     }
 
+    public function tutup_bulan($unit, $data)
+    {
+        $this->db->where('kd_unit', $unit);
+        $this->db->update('tb_unit', $data);
+    }
    
 }

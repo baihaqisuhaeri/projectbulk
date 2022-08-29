@@ -6,7 +6,7 @@ class Utility extends CI_Controller
     function __construct()
     {
         parent::__construct();
-
+        date_default_timezone_set('Asia/Jakarta');
         if (!isset($_SESSION['nama'])) {
             redirect('masuk');
         }
@@ -81,6 +81,68 @@ class Utility extends CI_Controller
 
     public function tutup_bulan(){
         
+        $unit = $_POST['unit'];
+        $bulanSekarang = date("Y-m-d");
+        
+        $queryBulanSekarang = $this->Utility_model->get_bulan_aktif($unit);
+        foreach($queryBulanSekarang as $bs){
+            $bulanAktif = $bs->tgl_aktif;
+        }
+        $bulanSekarang = date_create($bulanSekarang);
+        $bulanAktif = date_create($bulanAktif);  
+        $interval = date_diff($bulanSekarang, $bulanAktif); 
+        
+        // //var_dump($interval->m);
+        $selisih = $interval->m;
+
+        if($bulanSekarang> $bulanAktif){
+
+        
+
+        if($selisih==0){
+            $data = array(
+                'status' => "failed",
+            );
+            echo json_encode($data);
+        }else if($selisih==1){
+            $bulanAktif = $bulanAktif->format("Y-m-d");
+            $bulanAktif = date('Y-m-d', strtotime('+'.$selisih.' month', strtotime( $bulanAktif )));
+            $data = array(
+                'tgl_aktif' => $bulanAktif,
+            );
+            $query = $this->Utility_model->tutup_bulan($unit, $data);
+            $data = array(
+                'status' => "success",
+            );
+            echo json_encode($data);
+        }else if($selisih>1){
+            $bulanAktif = $bulanAktif->format("Y-m-d");
+            $selisih = $selisih - ($selisih-1);
+            // var_dump($selisih);
+            // die();
+            $bulanAktif = date('Y-m-d', strtotime('+'.$selisih.' month', strtotime( $bulanAktif )));
+            $data = array(
+                'tgl_aktif' => $bulanAktif,
+            );
+            $query = $this->Utility_model->tutup_bulan($unit, $data);
+            $data = array(
+                'status' => "success",
+            );
+            echo json_encode($data);
+        }
+        
+    }
+    else{
+        $data = array(
+            'status' => "failed",
+        );
+        echo json_encode($data);
+    }
+        
+        
+        
+
+
     }
 
 }

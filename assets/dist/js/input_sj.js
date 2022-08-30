@@ -8,6 +8,15 @@ get_unit_marketing();
 get_suplier();
 get_ppn();
 
+var today = new Date();
+
+
+var todayDate = new Date().toISOString().slice(0, 10);
+
+$("#tanggal_surat_jalan").val(todayDate);
+
+
+
 var no_sj_edit = "";
 var sukses_tambah = null;
 

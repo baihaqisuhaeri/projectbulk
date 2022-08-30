@@ -26,11 +26,7 @@
                         <div class="col-sm-6">
 
                             <ol class="breadcrumb float-sm-right">
-                                <h1 class="m-0 text-dark"> :</h1>
-                                <?php
-                                date_default_timezone_set('Asia/Jakarta');
-                                $bulan = date("Y-m"); ?>
-                                <h1 class="m-0 text-dark"><?= $bulan ?></h1>
+                                
                                 <!--<li class="breadcrumb-item"><a href="pengadaan-aspal">Pengadaan Aspal</a></li>
                                         <li class="breadcrumb-item active">Administrator</li>-->
                             </ol>

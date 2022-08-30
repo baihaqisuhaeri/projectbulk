@@ -81,15 +81,14 @@ function tutupBulan(){
       success: function (data) {
         var json = JSON.parse(data);
         var status = json.status;
-        if (status == "true") {
-          mytable = $("#tabel_supir").DataTable();
-          mytable.draw();
-          Swal.fire("Berhasil!", "Supir berhasil ditambahkan!", "success");
+        if (status == "success") {
+         
+          Swal.fire("Berhasil!", "Tutup bulan berhasil dilakukan!", "success");
           
-          $("#nama_supir").val("");
+         
         } else {
-         // alert("a");
-          Swal.fire("Gagal!", "Supir sudah ada di unit yang sama!", "error");
+         
+          Swal.fire("Gagal!", "Bulan aktif masih sama dengan bulan current", "error");
         }
       },
     });

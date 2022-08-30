@@ -30,6 +30,10 @@ class Utility extends CI_Controller
 
         //  $data['ini'] = $datai;
 
+        
+
+
+
         $this->load->view('material/Head_view');
         $this->load->view("Utility_view");
     }
@@ -94,7 +98,7 @@ class Utility extends CI_Controller
         
         // //var_dump($interval->m);
         $selisih = $interval->m;
-
+        $cek = false;
         if($bulanSekarang> $bulanAktif){
 
         
@@ -104,6 +108,7 @@ class Utility extends CI_Controller
                 'status' => "failed",
             );
             echo json_encode($data);
+            $cek=false;
         }else if($selisih==1){
             $bulanAktif = $bulanAktif->format("Y-m-d");
             $bulanAktif = date('Y-m-d', strtotime('+'.$selisih.' month', strtotime( $bulanAktif )));
@@ -115,6 +120,7 @@ class Utility extends CI_Controller
                 'status' => "success",
             );
             echo json_encode($data);
+            $cek=true;
         }else if($selisih>1){
             $bulanAktif = $bulanAktif->format("Y-m-d");
             $selisih = $selisih - ($selisih-1);
@@ -129,6 +135,7 @@ class Utility extends CI_Controller
                 'status' => "success",
             );
             echo json_encode($data);
+            $cek = true;
         }
         
     }
@@ -139,7 +146,14 @@ class Utility extends CI_Controller
         echo json_encode($data);
     }
         
-        
+        if($cek){
+        // querynya
+        // update tb_sj set blnaktif = CONCAT(SUBSTRING(tgl_sj, 3, 2), SUBSTRING(tgl_sj, 6,2) )
+        // where CONCAT(SUBSTRING(tgl_sj, 3, 2), SUBSTRING(tgl_sj, 6,2) ) = "2205" and blnaktif = ""
+        // ini link ci concatnya
+        // https://stackoverflow.com/questions/44018527/how-to-update-database-column-value-with-concat-function-using-codeigniter
+        }
+
         
 
 

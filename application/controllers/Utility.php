@@ -86,6 +86,8 @@ class Utility extends CI_Controller
     public function tutup_bulan(){
         
         $unit = $_POST['unit'];
+        $bln = $_POST['bln'];
+        $bln = substr($bln,2,2).substr($bln,5,2);
         $bulanSekarang = date("Y-m-d");
         
         $queryBulanSekarang = $this->Utility_model->get_bulan_aktif($unit);
@@ -147,15 +149,10 @@ class Utility extends CI_Controller
     }
         
         if($cek){
-        // querynya
-        // update tb_sj set blnaktif = CONCAT(SUBSTRING(tgl_sj, 3, 2), SUBSTRING(tgl_sj, 6,2) )
-        // where CONCAT(SUBSTRING(tgl_sj, 3, 2), SUBSTRING(tgl_sj, 6,2) ) = "2205" and blnaktif = ""
-        // ini link ci concatnya
-        // https://stackoverflow.com/questions/44018527/how-to-update-database-column-value-with-concat-function-using-codeigniter
-        }
-
+        $query_updateBln = $this->Utility_model->update_blnaktif($bln, $unit);
         
 
+        }
 
     }
 

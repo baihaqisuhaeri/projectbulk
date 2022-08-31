@@ -5,7 +5,7 @@ $(".select2bs4").select2({
   theme: "bootstrap4",
 });
 
-
+var global_bln="";
 
   $(document).on("click", "#btnTutupBulan", function () {
     $("#error_unit").html("");
@@ -44,8 +44,7 @@ function get_unit() {
 }
 
 $(document).on("click", "#btnProses", function (event) {
-  $("#error_unit").html("");
-  $("#aktif_unit").html("");
+  
   var unit = $("#unit").val();
 
   var err = 0;
@@ -65,17 +64,21 @@ $(document).on("click", "#btnProses", function (event) {
 });
 
 function tutupBulan(){
+  $("#error_unit").html("");
+  $("#aktif_unit").html("");
   $('#modal_tutupBulan').modal('hide');
   $('#modal_konfirmasi_tutupBulan').modal('hide');
 
   var unit = $("#unit").val();
   
-    
+    // console.log(global_bln);
+    // console.log(unit);
     $.ajax({
       url: "utility/tutup-bulan",
       type: "post",
       data: {
-        unit: unit
+        unit: unit,
+        bln: global_bln
         
       },
       success: function (data) {
@@ -108,6 +111,7 @@ function get_bulan_aktif() {
       data = JSON.parse(data);
       //console.log(data.tgl_aktif);
       $("#aktif_unit").html("Bulan aktif : " + data.tgl_aktif);
+      global_bln = data.tgl_aktif;
     },
   });
 }

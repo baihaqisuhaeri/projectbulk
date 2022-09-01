@@ -30,8 +30,11 @@ class Input_sj extends CI_Controller
 
         //  $data['ini'] = $datai;
 
+        $bulan = $this->db->query('SELECT DISTINCT blnaktif FROM tb_sj where blnaktif != "" order by blnaktif asc');
+        $data['bulanAktif']  = $bulan->result_array();
+
         $this->load->view('material/Head_view');
-        $this->load->view("Input_sj_view");
+        $this->load->view("Input_sj_view", $data);
     }
 
 
@@ -79,6 +82,12 @@ class Input_sj extends CI_Controller
 
     public function ajax_list()
     {
+
+
+        if(isset($_POST['bulanAktif'])){
+            $_SESSION['bulanAktif'] = $_POST['bulanAktif'];
+            
+        }
 
 
         $list = $this->Input_sj_model->get_datatables();
@@ -133,12 +142,15 @@ class Input_sj extends CI_Controller
 
 
 
-            $row[] = '<a href="#!" class="fas fa-edit edit_sj" data-no_sj="' . $p->no_sj . '"  title="Ubah Surat Jalan" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteSj" data-no_sj="' . $p->no_sj . '" title="Hapus Surat Jalan" style="color:black;"></a>';
             
             if($p->btl_sj == "*"){
+                $row[] = '<a href="#!" style="pointer-events: none;" class="fas fa-edit edit_sj" data-no_sj="' . $p->no_sj . '"  title="Ubah Surat Jalan" style="color:black;"></a> | <a style="pointer-events: none;" href="#!" class="fas fa-trash deleteSj" data-no_sj="' . $p->no_sj . '" title="Hapus Surat Jalan" style="color:black;"></a>';
+            
                 $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded cetak_sj" value="' . $p->no_sj . '" name="no_sj" type="submit">Cetak</button>';
                 $row[] = "Dibatalkan";
             }else{
+                $row[] = '<a href="#!" class="fas fa-edit edit_sj" data-no_sj="' . $p->no_sj . '"  title="Ubah Surat Jalan" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteSj" data-no_sj="' . $p->no_sj . '" title="Hapus Surat Jalan" style="color:black;"></a>';
+            
                 $row[] = '<button class="btn btn-primary btn-small btn-primary btn-rounded cetak_sj" value="' . $p->no_sj . '" name="no_sj" type="submit">Cetak</button>';
                 $row[] = "Belum batal";
             }
@@ -898,7 +910,6 @@ class Input_sj extends CI_Controller
         $nilai_persen_berangkat = $_POST['nilai_persen_berangkat'];
 
         $data = array(
-
             'no_sj' => $no_sj,
             'kd_unit' => $unitSj,
             'n_cus' => $nama_customer,
@@ -906,7 +917,6 @@ class Input_sj extends CI_Controller
             'al1_cus' => $al1_cus,
             'al2_cus' => $al2_cus,
             'al3_cus' => $al3_cus,
-
             'alk_cus1' => $alamat_kirim1,
             'alk_cus2' => $alamat_kirim2,
             'alk_cus3' => $alamat_kirim3,
@@ -914,11 +924,9 @@ class Input_sj extends CI_Controller
             'k_altk' => $k_altk,
             'npwp_krm' => $npwp_krm,
             'npwp' => $npwp,
-
             'no_po' => $no_po,
             'tgl_po' => $tgl_po,
             'ppn_persen' => $ppn,
-
             'no_urutspm' => $no_spm,
             'spm_brlk' => $spm_brlk,
             'no_urut' => $no_spm,
@@ -940,34 +948,21 @@ class Input_sj extends CI_Controller
             'awl_suhu' => $temperatur,
             'awal' => $nilai_persen_pengambilan,
             'akhir' => $nilai_persen_berangkat,
-
             'tgl_update' => $tgl_edit,
-
         );
-
-
-
 
         $this->Input_sj_model->edit_sj($no_sj, $data);
         $query = $this->db->affected_rows();
 
-
-
-
         if ($query) {
-
             $data = array(
                 'status' => 'true',
-
             );
-
             echo json_encode($data);
         } else {
             $data = array(
                 'status' => 'false',
-
             );
-
             echo json_encode($data);
         }
     }
@@ -1060,6 +1055,24 @@ class Input_sj extends CI_Controller
         $bln_aktif = substr($bln_aktif, 0, 7);
         $data = array(
             'tgl_aktif' => $bln_aktif,
+        );
+        echo json_encode($data);
+    }
+
+    public function get_bulan_aktif_sj()
+    {
+        $no_sj = $_POST['no_sj'];
+
+
+
+        $query = $this->Input_sj_model->get_sj($no_sj);
+
+        foreach ($query as $q) {
+            $blnaktif = $q->blnaktif;
+        }
+        //$bln_aktif = substr($bln_aktif, 0, 7);
+        $data = array(
+            'blnaktif' => $blnaktif,
         );
         echo json_encode($data);
     }

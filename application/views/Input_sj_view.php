@@ -681,6 +681,23 @@
                                         <div class="callout callout-warning" style="background-color: #FFF8E5;" id="bagian_3">
                                             <h5>Daftar Surat Jalan</h5>
 
+                                            <h5>Pilih Bulan Aktif :</h5>
+                                                            <select class="form-control select2bln" id="bulan_aktif" name="bulan_aktif">
+                                                            
+                                                            <option value="">Belum Tutup Bulan</option>
+                                                            <?php 
+                                                            
+                                                            
+                                                                foreach($bulanAktif as $bln){
+                                                                    $aktif = $bln['blnaktif'];
+                                                                    
+                                                                    echo '<option value="'."$aktif".'">'."20".substr($aktif,0,2)."-".substr($aktif,2,2).'</option>';
+                                                                }
+                                                            ?>
+                                                           
+                                                            </select>
+                                                            <br>
+                                                            
                                             <form class="form-horizontal" action="<?php echo site_url('input-sj/cetak'); ?>" method="post" target="_blank">
                                                 <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_sj">
                                                     <thead>

@@ -8,6 +8,9 @@ get_unit_marketing();
 get_suplier();
 get_ppn();
 
+
+var blnaktif_sj="";
+
 var today = new Date();
 
 
@@ -30,6 +33,7 @@ var unit_global = data[8];
 
 
 $(".select2").select2({ width: "100%" });
+$(".select2bln").select2({ width: "15%" });
 
 $(".select2bs4").select2({
   theme: "bootstrap4",
@@ -248,6 +252,8 @@ function get_bulan_aktif_2() {
     },
   });
 }
+
+
 
 
 var k_cus;
@@ -944,6 +950,11 @@ $(document).ready(function () {
     no_spm_global = data[9];
     unit_global = data[8];
     
+    
+    get_bulan_aktif_sj(no_sj);
+    
+
+
     var kode_cus = data[3];
     var no_spm = data[9];
     var unit = data[8];
@@ -981,6 +992,7 @@ $(document).ready(function () {
     get_suplier_edit(k_supl);
 
     $("#btn_edit").val(id);
+    console.log(blnaktif_sj);
   });
 
   $("#tabel_sj tbody").on("click", ".cetak_sjss", function () {
@@ -1131,6 +1143,9 @@ function get_customer_edit(kode_cus, unit_edit) {
     },
   });
 }
+
+
+
 
 $(document).on("click", "#btnAlamatKirim_2", function () {
   $("#error_nama_customer_2").html("");
@@ -1353,21 +1368,21 @@ function get_barang_sj_edit(unitSj, k_barang) {
   });
 }
 
-function get_no_segel_edit(no_sj) {
-  $.ajax({
-    url: "input-sj/get-sj",
-    type: "POST",
-    data: {
-      no_sj: no_sj,
-    },
-    success: function (data) {
-      data = JSON.parse(data);
-      //console.log(data[0].qty_kirim);
-      $("#jumlah_2").val(parseInt(data[0].qty_kirim));
-      $("#kilogram_2").val(parseInt(data[0].kg_kirim));
-    },
-  });
-}
+// function get_no_segel_edit(no_sj) {
+//   $.ajax({
+//     url: "input-sj/get-sj",
+//     type: "POST",
+//     data: {
+//       no_sj: no_sj,
+//     },
+//     success: function (data) {
+//       data = JSON.parse(data);
+//       //console.log(data[0].qty_kirim);
+//       $("#jumlah_2").val(parseInt(data[0].qty_kirim));
+//       $("#kilogram_2").val(parseInt(data[0].kg_kirim));
+//     },
+//   });
+// }
 
 function get_no_segel_edit(no_sj) {
   $.ajax({
@@ -1833,3 +1848,55 @@ $("#nama_customer_2").on("change", function () {
   get_no_spm_edit(kodeCustomer, no_spm_global , unitSj);
   
 });
+
+
+$(document).on("change", "#bulan_aktif", function () {
+  var bulanAktif = $("#bulan_aktif").val();
+ 
+  $("#tabel_sj").dataTable().fnDestroy();
+  table = $("#tabel_sj").DataTable({
+    scrollX: true,
+    processing: true, //Feature control the processing indicator.
+    serverSide: true, //Feature control DataTables' server-side processing mode.
+    order: [], 
+
+    // Load data for the table's content from an Ajax source
+    ajax: {
+      url: "input-sj/tabel-sj",
+      type: "POST",
+      data: {
+        bulanAktif: bulanAktif,
+      },
+    },
+
+    //Set column definition initialisation properties.
+    "createdRow": function( row, data, dataIndex ) {
+      if ( data[33] == "Dibatalkan" ) {
+          $(row).addClass( 'bg-danger' );
+      }else{
+         $(row).css("background-color", "white");
+      }
+  },
+    
+  });
+  
+});
+
+
+//1 september 2022
+function get_bulan_aktif_sj(no_sj) {
+  
+  $.ajax({
+    url: "input-sj/get-bulan-aktif-sj",
+    type: "POST",
+    data: {
+      no_sj: no_sj,
+    },
+    success: function (data) {
+      data = JSON.parse(data);
+      
+      blnaktif_sj = data.blnaktif;
+      console.log(blnaktif_sj);
+    },
+  });
+}

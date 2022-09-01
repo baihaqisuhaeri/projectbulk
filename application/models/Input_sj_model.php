@@ -23,6 +23,12 @@ class Input_sj_model extends CI_Model
 
 
         $nama = $_SESSION['nama'];
+        if(isset($_SESSION['bulanAktif'])){
+            $bulanAktif = $_SESSION['bulanAktif'];
+            $this->db->where('blnaktif', $bulanAktif);
+        }else{
+            $this->db->where('blnaktif', "");
+        }
         $this->db->select('*');
         $this->db->join('hak_akses', 'tb_sj.kd_unit = hak_akses.kode_unit');
         $this->db->where('hak_akses.nama_user', $nama);

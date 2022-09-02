@@ -29,7 +29,7 @@ class Input_sj_model extends CI_Model
         }else{
             $this->db->where('blnaktif', "");
         }
-        $this->db->select('*');
+        $this->db->select('*,  tb_sj.id as id');
         $this->db->join('hak_akses', 'tb_sj.kd_unit = hak_akses.kode_unit');
         $this->db->where('hak_akses.nama_user', $nama);
         //$this->db->where('tb_sj.btl_sj', "");
@@ -156,9 +156,9 @@ class Input_sj_model extends CI_Model
         return $this->db->count_all_results();
     }
 
-    public function hapus_sj($no_sj)
+    public function hapus_sj($id)
     {
-        $this->db->where('no_sj', $no_sj);
+        $this->db->where('id', $id);
         $this->db->delete('tb_sj');
     }
 

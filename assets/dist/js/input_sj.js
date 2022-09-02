@@ -239,6 +239,9 @@ function get_bulan_aktif() {
 
 function get_bulan_aktif_2() {
   var kd_unit = $("#unitSj_2").val();
+  if(kd_unit!=null){
+
+  
   $.ajax({
     url: "input-sj/get-bulan-aktif",
     type: "POST",
@@ -246,11 +249,13 @@ function get_bulan_aktif_2() {
       kd_unit: kd_unit,
     },
     success: function (data) {
+      
       data = JSON.parse(data);
       //console.log(data.tgl_aktif);
       $("#aktif_unitSj_2").html("Bulan aktif : " + data.tgl_aktif);
     },
   });
+}
 }
 
 
@@ -922,7 +927,7 @@ $(document).ready(function () {
     //   },
     // ],
     //bisa hide column
-   // "aoColumnDefs": [{ "bVisible": false, "aTargets": [1] }]
+    "aoColumnDefs": [{ "bVisible": false, "aTargets": [35] }]
   });
   // fnSetColumnVis( 1, false );
 
@@ -951,9 +956,8 @@ $(document).ready(function () {
     unit_global = data[8];
     
     
-    get_bulan_aktif_sj(no_sj);
+    //get_bulan_aktif_sj(no_sj);
     
-
 
     var kode_cus = data[3];
     var no_spm = data[9];
@@ -982,7 +986,7 @@ $(document).ready(function () {
       $("#rd_kredit_2").prop("checked", true);
       tk_sj = "K";
     }
-
+    blnaktif_sj = data[35];
     get_mobil_sj_edit(data[15] + "_" + data[8]);
     get_unit_marketing_edit(data[18]);
     get_supir_sj_edit(unit, k_sales);
@@ -992,7 +996,7 @@ $(document).ready(function () {
     get_suplier_edit(k_supl);
 
     $("#btn_edit").val(id);
-    console.log(blnaktif_sj);
+    
   });
 
   $("#tabel_sj tbody").on("click", ".cetak_sjss", function () {
@@ -1043,9 +1047,10 @@ $(document).ready(function () {
   $("#bagian_2_edit").hide();
 });
 
-var nomor_sj = "";
+var id_sj = "";
 $(document).on("click", ".deleteSj", function (event) {
-  nomor_sj = $(this).data("no_sj");
+  id_sj = $(this).data("id");
+  //console.log($(this).data("id"));
 
   $("#modal_konfirmasi_delete").modal("show");
 });
@@ -1057,7 +1062,7 @@ function deleteSj() {
   $.ajax({
     url: "input-sj/hapus-sj",
     data: {
-      no_sj: nomor_sj,
+      id: id_sj,
     },
     type: "post",
     success: function (data) {
@@ -1067,13 +1072,13 @@ function deleteSj() {
         mytable = $("#tabel_sj").DataTable();
         mytable.draw();
 
-        $("#" + nomor_sj)
+        $("#" + id_sj)
           .closest("tr")
           .remove();
         Swal.fire("Berhasil!", "Surat Jalan berhasil dihapus!", "success");
       } else {
         // alert("Failed");
-        Swal.fire("Gagal!", "Surat Jalan berhasil dihapus!", "error");
+        Swal.fire("Gagal!", "Surat Jalan gagal dihapus!", "error");
         return;
       }
     },
@@ -1669,8 +1674,8 @@ function editSj() {
       temperatur: temperatur,
       nilai_persen_pengambilan: nilai_persen_pengambilan,
       nilai_persen_berangkat: nilai_persen_berangkat,
-
       tk: tk_sj,
+      blnaktif: blnaktif_sj
     },
     success: function (data) {
       // console.log(data);
@@ -1868,15 +1873,19 @@ $(document).on("change", "#bulan_aktif", function () {
         bulanAktif: bulanAktif,
       },
     },
-
+    "aoColumnDefs": [{ "bVisible": false, "aTargets": [35] }],
     //Set column definition initialisation properties.
     "createdRow": function( row, data, dataIndex ) {
-      if ( data[33] == "Dibatalkan" ) {
+      if ( data[36] == "*" ) {
           $(row).addClass( 'bg-danger' );
-      }else{
+      }else if(data[36] == "stl"){
+        $(row).css("background-color", "gray");
+      }
+      else{
          $(row).css("background-color", "white");
       }
   },
+  
     
   });
   
@@ -1884,19 +1893,3 @@ $(document).on("change", "#bulan_aktif", function () {
 
 
 //1 september 2022
-function get_bulan_aktif_sj(no_sj) {
-  
-  $.ajax({
-    url: "input-sj/get-bulan-aktif-sj",
-    type: "POST",
-    data: {
-      no_sj: no_sj,
-    },
-    success: function (data) {
-      data = JSON.parse(data);
-      
-      blnaktif_sj = data.blnaktif;
-      console.log(blnaktif_sj);
-    },
-  });
-}

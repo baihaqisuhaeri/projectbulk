@@ -87,6 +87,8 @@ class Input_sj extends CI_Controller
         if(isset($_POST['bulanAktif'])){
             $_SESSION['bulanAktif'] = $_POST['bulanAktif'];
             
+        }else{
+            $_SESSION['bulanAktif'] = "";
         }
 
 
@@ -144,19 +146,21 @@ class Input_sj extends CI_Controller
 
             
             if($p->btl_sj == "*"){
-                $row[] = '<a href="#!" style="pointer-events: none;" class="fas fa-edit edit_sj" data-no_sj="' . $p->no_sj . '"  title="Ubah Surat Jalan" style="color:black;"></a> | <a style="pointer-events: none;" href="#!" class="fas fa-trash deleteSj" data-no_sj="' . $p->no_sj . '" title="Hapus Surat Jalan" style="color:black;"></a>';
+                $row[] = '<a href="#!" style="pointer-events: none;" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> | <a style="pointer-events: none;" href="#!" class="fas fa-trash deleteSj" data-id="' . $p->id . '" title="Hapus Surat Jalan" style="color:black;"></a>';
             
                 $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded cetak_sj" value="' . $p->no_sj . '" name="no_sj" type="submit">Cetak</button>';
                 $row[] = "Dibatalkan";
             }else{
-                $row[] = '<a href="#!" class="fas fa-edit edit_sj" data-no_sj="' . $p->no_sj . '"  title="Ubah Surat Jalan" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteSj" data-no_sj="' . $p->no_sj . '" title="Hapus Surat Jalan" style="color:black;"></a>';
+                $row[] = '<a href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteSj" data-id="' . $p->id . '" title="Hapus Surat Jalan" style="color:black;"></a>';
             
                 $row[] = '<button class="btn btn-primary btn-small btn-primary btn-rounded cetak_sj" value="' . $p->no_sj . '" name="no_sj" type="submit">Cetak</button>';
                 $row[] = "Belum batal";
             }
             
+            
             $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';
-
+            $row[] = $p->blnaktif;
+            $row[] = $p->btl_sj;
 
             //$row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
             //echo '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
@@ -196,9 +200,9 @@ class Input_sj extends CI_Controller
 
     function hapus_sj()
     {
-        $no_sj = $_POST['no_sj'];
+        $id = $_POST['id'];
 
-        $this->Input_sj_model->hapus_sj($no_sj);
+        $this->Input_sj_model->hapus_sj($id);
         $query = $this->db->affected_rows();
         if ($query == true) {
             $data = array(
@@ -869,6 +873,12 @@ class Input_sj extends CI_Controller
 
     function edit_sj()
     {
+        $blnaktif = $_POST['blnaktif'];
+        // var_dump($blnaktif);
+        // die();
+        if($blnaktif==""){
+
+        
         date_default_timezone_set('Asia/Jakarta');
         $tgl_edit = date("Y-m-d");
         $unitSj = $_POST['unitSj'];
@@ -965,6 +975,110 @@ class Input_sj extends CI_Controller
             );
             echo json_encode($data);
         }
+    }
+    else{
+
+        date_default_timezone_set('Asia/Jakarta');
+        $tgl_edit = date("Y-m-d");
+        $unitSj = $_POST['unitSj'];
+        $no_sj = $_POST['no_sj'];
+        $nama_customer = $_POST['nama_customer'];
+        $kode_customer = $_POST['kode_customer'];
+        $al1_cus = $_POST['al1_cus'];
+        $al2_cus = $_POST['al2_cus'];
+        $al3_cus = $_POST['al3_cus'];
+        $alamat_kirim1 = $_POST['alamat_kirim1'];
+        $alamat_kirim2 = $_POST['alamat_kirim2'];
+        $alamat_kirim3 = $_POST['alamat_kirim3'];
+        $k_wilayah = $_POST['k_wilayah'];
+        $k_altk = $_POST['k_altk'];
+        $npwp = $_POST['npwp'];
+        $npwp_krm = $_POST['npwp_krm'];
+        $no_po = $_POST['no_po'];
+        $tgl_po = $_POST['tgl_po'];
+        $ppn = $_POST['ppn'];
+        $no_spm = $_POST['no_spm'];
+        $spm_brlk = $_POST['spm_brlk'];
+        $tanggal_surat_jalan = $_POST['tanggal_surat_jalan'];
+        $tk = $_POST['tk'];
+        $no_kendaraan = $_POST['no_kendaraan'];
+        $unit_marketing = $_POST['unit_marketing'];
+        $nama_supir = $_POST['nama_supir'];
+        $kode_supir = $_POST['kode_supir'];
+        $kode_barang = $_POST['kode_barang'];
+        $jumlah = $_POST['jumlah'];
+        $kg_kirim = $_POST['kg_kirim'];
+        $keterangan = $_POST['keterangan'];
+        $k_supl = $_POST['k_supl'];
+        $n_supl = $_POST['n_supl'];
+        $no_faktur = $_POST['no_faktur'];
+        $no_segel = $_POST['no_segel'];
+        $pressure = $_POST['pressure'];
+        $temperatur = $_POST['temperatur'];
+        $nilai_persen_pengambilan = $_POST['nilai_persen_pengambilan'];
+        $nilai_persen_berangkat = $_POST['nilai_persen_berangkat'];
+
+        $data = array(
+            'no_sj' => $no_sj,
+            'kd_unit' => $unitSj,
+            'n_cus' => $nama_customer,
+            'k_cus' => $kode_customer,
+            'al1_cus' => $al1_cus,
+            'al2_cus' => $al2_cus,
+            'al3_cus' => $al3_cus,
+            'alk_cus1' => $alamat_kirim1,
+            'alk_cus2' => $alamat_kirim2,
+            'alk_cus3' => $alamat_kirim3,
+            'k_wil' => $k_wilayah,
+            'k_altk' => $k_altk,
+            'npwp_krm' => $npwp_krm,
+            'npwp' => $npwp,
+            'no_po' => $no_po,
+            'tgl_po' => $tgl_po,
+            'ppn_persen' => $ppn,
+            'no_urutspm' => $no_spm,
+            'spm_brlk' => $spm_brlk,
+            'no_urut' => $no_spm,
+            'tgl_sj' => $tanggal_surat_jalan,
+            'tk' => $tk,
+            'no_mobil' => $no_kendaraan,
+            'unit_mkt' => $unit_marketing,
+            'n_sales' => $nama_supir,
+            'k_sales' => $kode_supir,
+            'k_barang' => $kode_barang,
+            'qty_kirim' => $jumlah,
+            'kg_kirim' => $kg_kirim,
+            'ket' => $keterangan,
+            'k_supl' => $k_supl,
+            'n_supl' => $n_supl,
+            'no_faktur' => $no_faktur,
+            'no_segel' => $no_segel,
+            'awl_presur' => $pressure,
+            'awl_suhu' => $temperatur,
+            'awal' => $nilai_persen_pengambilan,
+            'akhir' => $nilai_persen_berangkat,
+            'tgl_update' => $tgl_edit,
+            'blnaktif' => "",
+            'btl_sj' => "stl"
+        );
+
+        $this->Input_sj_model->tambah_surat_sj($data);
+        $query = $this->db->affected_rows();
+
+        if ($query) {
+            $data = array(
+                'status' => 'true',
+            );
+            echo json_encode($data);
+        } else {
+            $data = array(
+                'status' => 'false',
+            );
+            echo json_encode($data);
+        }
+
+
+    }
     }
 
     function hapus_alamat_kirim()

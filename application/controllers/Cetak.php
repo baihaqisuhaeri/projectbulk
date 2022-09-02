@@ -65,12 +65,12 @@ class Cetak extends CI_CONTROLLER
 
         
         $mpdf = new \Mpdf\Mpdf();
-        $mpdf->WriteHTML('<p style="margin-left: 580px; padding-top: -30px; line-height: 0.4;font-size: 12px;">31-05-2022</p>');
-        $mpdf->WriteHTML('<p style="margin-left: 580px; line-height: 0.4;font-size: 12px;">' . $no_sj . '</p>');
-        $mpdf->WriteHTML('<p style="margin-left: 580px; line-height: 0.4;font-size: 12px;">' . substr($no_mobil,0, strlen($str)-4) . '</p>');
-        $mpdf->WriteHTML('<p style="margin-left: 580px; line-height: 0.4;font-size: 12px;">' . $k_sales . '</p>');
-        $mpdf->WriteHTML('<p style="margin-left: 580px; line-height: 0.4;font-size: 12px;">' . $no_segel . '</p>');
-        $mpdf->WriteHTML('<p style="margin-left: 580px; line-height: 0.4;font-size: 12px;">' . $no_po . '</p>');
+        $mpdf->WriteHTML('<p style="margin-left: 510px; padding-top: -30px; line-height: 0.4;font-size: 12px;">31-05-2022</p>');
+        $mpdf->WriteHTML('<p style="margin-left: 510px; line-height: 0.4;font-size: 12px;">' . $no_sj . '</p>');
+        $mpdf->WriteHTML('<p style="margin-left: 510px; line-height: 0.4;font-size: 12px;">' . substr($no_mobil,0, strlen($str)-4) . '</p>');
+        $mpdf->WriteHTML('<p style="margin-left: 510px; line-height: 0.4;font-size: 12px;">' . $k_sales . '</p>');
+        $mpdf->WriteHTML('<p style="margin-left: 510px; line-height: 0.4;font-size: 12px;">' . $no_segel . '</p>');
+        $mpdf->WriteHTML('<p style="margin-left: 510px; line-height: 0.4;font-size: 12px;">' . $no_po . '</p>');
 
          $mpdf->WriteHTML('<p style="margin-left: 20px; font-size: 12px;"><b>' . $n_cus . '</b></p>');
          $mpdf->WriteHTML('<p style="margin-left: 20px; font-size: 12px;">' . $alk_cus1 . ' ' . $alk_cus2 . '</p>');

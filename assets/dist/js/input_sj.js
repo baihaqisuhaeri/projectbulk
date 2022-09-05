@@ -8,7 +8,7 @@ get_unit_marketing();
 get_suplier();
 get_ppn();
 
-
+var id_sj_edit = "";
 var blnaktif_sj="";
 
 var today = new Date();
@@ -41,6 +41,11 @@ $(".select2bs4").select2({
 
 $("#nama_customer").on("change", function () {
   get_no_spm();
+  $("#alamat1").val("");
+  $("#alamat2").val("");
+  $("#alamat3").val("");
+  $("#kode_alamat").val("");
+  $("#npwp").val("");
 });
 
 
@@ -209,6 +214,11 @@ $("#unitSj").on("change", function () {
   get_supir_sj();
   get_barang_sj();
   get_bulan_aktif();
+  $("#alamat1").val("");
+  $("#alamat2").val("");
+  $("#alamat3").val("");
+  $("#kode_alamat").val("");
+  $("#npwp").val("");
 });
 
 $("#unitSj_2").on("change", function () {
@@ -910,10 +920,14 @@ $(document).ready(function () {
     },
 
     "createdRow": function( row, data, dataIndex ) {
-      if ( data[33] == "Dibatalkan" ) {
+      if ( data[36] == "*" ) {
           $(row).addClass( 'bg-danger' );
-         // $(row).css("background-color", "red");
-      }else{
+      }else if(data[36] == "stl"){
+        $(row).css("background-color", "gray");
+      }else if(data[36] == "sbl"){
+        $(row).css("background-color", "red");
+      }
+      else{
          $(row).css("background-color", "white");
       }
   },
@@ -927,7 +941,7 @@ $(document).ready(function () {
     //   },
     // ],
     //bisa hide column
-    "aoColumnDefs": [{ "bVisible": false, "aTargets": [35] }]
+    "aoColumnDefs": [{ "bVisible": false, "aTargets": [35,36] }]
   });
   // fnSetColumnVis( 1, false );
 
@@ -935,7 +949,9 @@ $(document).ready(function () {
     var data = table.row($(this).parents("tr")).data();
     var id = $(this).data("id");
     var no_sj = data[1];
+    //$("#jumlah_2").val(parseInt(data[21].qty_kirim));
     no_sj_edit = no_sj;
+    id_sj_edit = $(this).data("id");
     $("#unitSj_2").val("cekedit");
     $("#unitSj_2").select2().trigger("change");
     //var unitBarang = $("#unitBarang :selected").text();
@@ -968,6 +984,16 @@ $(document).ready(function () {
     get_no_spm_edit(kode_cus_global, no_spm_global ,unit_global);
     get_unit_sj_edit(unit);
     get_customer_edit(kode_cus, unit);
+      $("#jumlah_2").val(parseInt(data[20]));
+      $("#kilogram_2").val(parseInt(data[21]));
+      $("#keterangan_2").val(data[22]);
+      $("#no_faktur_2").val(data[24]);
+      $("#no_segel_2").val(parseInt(data[25]));
+      $("#pressure_2").val(parseInt(data[26]));
+      $("#temperatur_2").val(parseInt(data[27]));
+      $("#nilai_persen_pengambilan_2").val(parseInt(data[28]));
+      $("#nilai_persen_berangkat_2").val(parseInt(data[29]));
+
 
     $("#alamat1_2").val(data[4]);
     $("#alamat2_2").val(data[5]);
@@ -1399,15 +1425,15 @@ function get_no_segel_edit(no_sj) {
     success: function (data) {
       data = JSON.parse(data);
       //console.log(data[0].qty_kirim);
-      $("#jumlah_2").val(parseInt(data[0].qty_kirim));
-      $("#kilogram_2").val(parseInt(data[0].kg_kirim));
-      $("#keterangan_2").val(data[0].ket);
-      $("#no_faktur_2").val(data[0].no_faktur);
-      $("#no_segel_2").val(parseInt(data[0].no_segel));
-      $("#pressure_2").val(parseInt(data[0].awl_presur));
-      $("#temperatur_2").val(parseInt(data[0].awl_suhu));
-      $("#nilai_persen_pengambilan_2").val(parseInt(data[0].awal));
-      $("#nilai_persen_berangkat_2").val(parseInt(data[0].akhir));
+      //$("#jumlah_2").val(parseInt(data[0].qty_kirim));
+      // $("#kilogram_2").val(parseInt(data[0].kg_kirim));
+      // $("#keterangan_2").val(data[0].ket);
+      // $("#no_faktur_2").val(data[0].no_faktur);
+      // $("#no_segel_2").val(parseInt(data[0].no_segel));
+      // $("#pressure_2").val(parseInt(data[0].awl_presur));
+      // $("#temperatur_2").val(parseInt(data[0].awl_suhu));
+      // $("#nilai_persen_pengambilan_2").val(parseInt(data[0].awal));
+      // $("#nilai_persen_berangkat_2").val(parseInt(data[0].akhir));
     },
   });
 }
@@ -1449,7 +1475,9 @@ $("input[name=jumlah_2]").on("change", function () {
   });
 });
 
+  
 $(document).on("submit", "#edit_sj", function (e) {
+  
   // console.log(k_cus);
   e.preventDefault();
 
@@ -1634,6 +1662,7 @@ function editSj() {
     dataType: "text",
 
     data: {
+      id: id_sj_edit,
       unitSj: unitSj,
       kode_customer: customer[0],
       nama_customer: customer[1],
@@ -1873,13 +1902,15 @@ $(document).on("change", "#bulan_aktif", function () {
         bulanAktif: bulanAktif,
       },
     },
-    "aoColumnDefs": [{ "bVisible": false, "aTargets": [35] }],
+    "aoColumnDefs": [{ "bVisible": false, "aTargets": [35,36] }],
     //Set column definition initialisation properties.
     "createdRow": function( row, data, dataIndex ) {
       if ( data[36] == "*" ) {
           $(row).addClass( 'bg-danger' );
       }else if(data[36] == "stl"){
         $(row).css("background-color", "gray");
+      }else if(data[36] == "sbl"){
+        $(row).css("background-color", "red");
       }
       else{
          $(row).css("background-color", "white");

@@ -145,7 +145,7 @@ class Input_sj extends CI_Controller
 
 
             
-            if($p->btl_sj == "*"){
+            if($p->btl_sj == "*" || $p->btl_sj == "sbl" || $p->btl_sj == "edited" ){
                 $row[] = '<a href="#!" style="pointer-events: none;" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> | <a style="pointer-events: none;" href="#!" class="fas fa-trash deleteSj" data-id="' . $p->id . '" title="Hapus Surat Jalan" style="color:black;"></a>';
             
                 $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded cetak_sj" value="' . $p->no_sj . '" name="no_sj" type="submit">Cetak</button>';
@@ -437,7 +437,7 @@ class Input_sj extends CI_Controller
         }
         $vol_kirim_spm = 0;
         foreach ($spm as $sp) {
-            $spmVol = $this->db->query("SELECT * FROM `tb_sj` WHERE no_urutspm = '$sp->no_urutspm'")->result();
+            $spmVol = $this->db->query("SELECT * FROM `tb_sj` WHERE no_urutspm = '$sp->no_urutspm' and (btl_sj =''  or btl_sj = 'stl' ) ")->result();
             $vol_kirim_spm = $sp->volume_krm;
             foreach ($spmVol as $spVol) {
                 if ($sp->no_urutspm == $spVol->no_urutspm) {
@@ -467,9 +467,9 @@ class Input_sj extends CI_Controller
         //$data = $this->Input_sj_model->get_volume_spm($noUrutSpm);
         $data =  $this->db->query("SELECT * FROM `tb_spm` WHERE no_urutspm = '$noUrutSpm'")->result();
         if ($status_edit == null) {
-            $dataSj = $this->db->query("SELECT * FROM `tb_sj` WHERE no_urutspm = '$noUrutSpm'")->result();
+            $dataSj = $this->db->query("SELECT * FROM `tb_sj` WHERE no_urutspm = '$noUrutSpm' and (btl_sj=''  or btl_sj != 'edited'  and (btl_sj != 'sbl')) ")->result();
         } else {
-            $dataSj = $this->db->query("SELECT * FROM `tb_sj` WHERE no_urutspm = '$noUrutSpm' and no_sj != '$no_surat_jalan'")->result();
+            $dataSj = $this->db->query("SELECT * FROM `tb_sj` WHERE no_urutspm = '$noUrutSpm' and no_sj != '$no_surat_jalan' and (btl_sj='stl'  or btl_sj = ''  ) ")->result();
         }
 
 
@@ -876,6 +876,7 @@ class Input_sj extends CI_Controller
         $blnaktif = $_POST['blnaktif'];
         // var_dump($blnaktif);
         // die();
+        $id = $_POST['id'];
         if($blnaktif==""){
 
         
@@ -961,7 +962,9 @@ class Input_sj extends CI_Controller
             'tgl_update' => $tgl_edit,
         );
 
-        $this->Input_sj_model->edit_sj($no_sj, $data);
+        $this->Input_sj_model->edit_sj($id, $data);
+
+        
         $query = $this->db->affected_rows();
 
         if ($query) {
@@ -1062,7 +1065,65 @@ class Input_sj extends CI_Controller
             'btl_sj' => "stl"
         );
 
+        
+
         $this->Input_sj_model->tambah_surat_sj($data);
+        $query_sj_blnaktif = $this->Input_sj_model->get_sj_by_blnaktif($no_sj,$blnaktif);
+        foreach($query_sj_blnaktif as $qb){
+
+            $data = array(
+                'no_sj' => $qb->no_sj,
+                'kd_unit' => $qb->kd_unit,
+                'n_cus' => $qb->n_cus,
+                'k_cus' => $qb->k_cus,
+                'al1_cus' => $qb->al1_cus,
+                'al2_cus' => $qb->al2_cus,
+                'al3_cus' => $qb->al3_cus,
+                'alk_cus1' => $qb->alk_cus1,
+                'alk_cus2' => $qb->alk_cus2,
+                'alk_cus3' => $qb->alk_cus3,
+                'k_wil' => $qb->k_wil,
+                'k_altk' => $qb->k_altk,
+                'npwp_krm' => $qb->npwp_krm,
+                'npwp' => $qb->npwp,
+                'no_po' => $qb->no_po,
+                'tgl_po' => $qb->tgl_po,
+                'ppn_persen' => $qb->ppn_persen,
+                'no_urutspm' => $qb->no_urutspm,
+                'spm_brlk' => $qb->spm_brlk,
+                'no_urut' => $qb->no_urut,
+                'tgl_sj' => $qb->tgl_sj,
+                'tk' => $qb->tk,
+                'no_mobil' => $qb->no_mobil,
+                'unit_mkt' => $qb->unit_mkt,
+                'n_sales' => $qb->n_sales,
+                'k_sales' => $qb->k_sales,
+                'k_barang' => $qb->k_barang,
+                'qty_kirim' => $qb->qty_kirim,
+                'kg_kirim' => $qb->kg_kirim,
+                'ket' => $qb->ket,
+                'k_supl' => $qb->k_supl,
+                'n_supl' => $qb->n_supl,
+                'no_faktur' => $qb->no_faktur,
+                'no_segel' => $qb->no_segel,
+                'awl_presur' => $qb->awl_presur,
+                'awl_suhu' => $qb->awl_suhu,
+                'awal' => $qb->awal,
+                'akhir' => $qb->akhir,
+                'tgl_update' => $qb->tgl_update,
+                'blnaktif' => "",
+                'btl_sj' => "sbl"
+            );
+
+        }
+        $this->Input_sj_model->tambah_surat_sj($data);
+        
+
+        $data = array(
+            'btl_sj' => 'edited',
+        );
+        $this->Input_sj_model->edit_sj_setelah($id, $data);
+
         $query = $this->db->affected_rows();
 
         if ($query) {

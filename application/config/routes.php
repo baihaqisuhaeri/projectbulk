@@ -136,7 +136,7 @@ $route['input-sj/tambah-sj'] = 'Input_sj/tambah_sj';
 $route['input-sj/get-unit-sj-edit'] = 'Input_sj/get_unit_sj';
 $route['input-sj/get-sj'] = 'Input_sj/get_sj';
 $route['input-sj/get-supplier-by-no-sj'] = 'Input_sj/get_supplier_by_no_sj';
-$route['input-sj/edit-sj'] = 'Input_sj/edit_sj';
+
 $route['input-sj/hapus-alamat-kirim'] = 'Input_sj/hapus_alamat_kirim';
 $route['input-sj/edit-alamat-kirim'] = 'Input_sj/edit_alamat_kirim';
 $route['input-sj/cetak'] = 'Cetak/print';

@@ -347,9 +347,26 @@ class Input_sj_model extends CI_Model
         return $query->result();
     }
 
-    public function edit_sj($no_sj, $data)
+    public function get_sj_by_blnaktif($no_sj, $blnaktif)
     {
+        $this->db->select('*');
+        $this->db->from('tb_sj');
         $this->db->where('no_sj', $no_sj);
+        $this->db->where('blnaktif', $blnaktif);
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+    public function edit_sj($id, $data)
+    {
+        $this->db->where('id', $id);
+        $this->db->update('tb_sj', $data);
+    }
+
+    public function edit_sj_setelah($id, $data)
+    {
+        $this->db->where('id', $id);
         $this->db->update('tb_sj', $data);
     }
 

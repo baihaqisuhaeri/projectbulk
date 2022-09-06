@@ -161,6 +161,7 @@ class Input_sj extends CI_Controller
             $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';
             $row[] = $p->blnaktif;
             $row[] = $p->btl_sj;
+            $row[] = $p->k_altk;
 
             //$row[] = '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
             //echo '<input hidden type="text" id="cetak_no_sj" value=" '. $p->no_sj. '" name="cetak_no_sj">';
@@ -608,7 +609,8 @@ class Input_sj extends CI_Controller
 
         $unit_mkt = $this->input->post('unit_mkt');
         $status_edit = $this->input->post('status_edit');
-
+        $kd_unit = $this->input->post("kd_unit");
+        var_dump($kd_unit);
 
         $unit_marketing = $this->Input_sj_model->get_unit_marketing();
 
@@ -621,7 +623,14 @@ class Input_sj extends CI_Controller
 
         foreach ($unit_marketing as $u) {
             if ($status_edit == null) {
-                echo '<option value="' . $u->unit_mkt . '">' . $u->unit_mkt . '</option>';
+                if($u->kd_unit == $kd_unit){
+                    var_dump($u->kd_unit);
+                    //die();
+                    echo '<option selected value="' . $u->unit_mkt . '">' . $u->unit_mkt . '</option>';
+                }else{
+                    echo '<option value="' . $u->unit_mkt . '">' . $u->unit_mkt . '</option>';
+                }
+                
             } else {
                 if ($u->unit_mkt == $unit_mkt) {
                     echo '<option selected value="' . $u->unit_mkt . '">' . $u->unit_mkt . '</option>';
@@ -698,7 +707,7 @@ class Input_sj extends CI_Controller
 
         date_default_timezone_set('Asia/Jakarta');
         $tgl_io = date("Y-m-d");
-
+        $tanggal_surat_jalan = $_POST['tanggal_surat_jalan'];
 
 
 
@@ -709,7 +718,7 @@ class Input_sj extends CI_Controller
         foreach ($query_kode_nomor as $qkn) {
             $kode_nomor = $qkn->kode_nomor;
         }
-        $no_sj .= $kode_nomor . substr(date("Y"), 2) . date("m");
+        $no_sj .= $kode_nomor . substr($tanggal_surat_jalan, 2,2) . substr($tanggal_surat_jalan, 5,2);
         //var_dump($no_sj);
         $query_last_sj = $this->Input_sj_model->get_last_sj($no_sj);
         // var_dump($query_last_sj == null);
@@ -768,7 +777,7 @@ class Input_sj extends CI_Controller
         $no_spm = $_POST['no_spm'];
         $spm_brlk = $_POST['spm_brlk'];
 
-        $tanggal_surat_jalan = $_POST['tanggal_surat_jalan'];
+        
         $tk = $_POST['tk'];
         $no_kendaraan = $_POST['no_kendaraan'];
         $unit_marketing = $_POST['unit_marketing'];

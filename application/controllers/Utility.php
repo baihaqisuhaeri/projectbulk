@@ -102,11 +102,14 @@ class Utility extends CI_Controller
         // //var_dump($interval->m);
         $selisih = $interval->m;
         $cek = false;
+        
         if($bulanSekarang> $bulanAktif){
 
         
 
         if($selisih==0){
+        //     var_dump($bulanAktif);
+        // die();
             $data = array(
                 'status' => "failed",
             );

@@ -4,7 +4,7 @@ var spm_brlk = "";
 $(".modal").css("overflow-y", "auto");
 var volume_spm = "kosong";
 var tk_sj = "";
-get_unit_marketing();
+
 get_suplier();
 get_ppn();
 
@@ -173,9 +173,13 @@ function get_barang_sj_2() {
 }
 
 function get_unit_marketing() {
+  var kd_unit = $("#unitSj").val();
   $.ajax({
     url: "input-sj/get-unit-marketing",
-
+    type: "POST",
+    data: {
+      kd_unit: kd_unit,
+    },
     success: function (data) {
       $("#unit_marketing").html(data);
       //$("#unit_spm").html(data);
@@ -214,6 +218,7 @@ $("#unitSj").on("change", function () {
   get_supir_sj();
   get_barang_sj();
   get_bulan_aktif();
+  get_unit_marketing();
   $("#alamat1").val("");
   $("#alamat2").val("");
   $("#alamat3").val("");
@@ -222,13 +227,18 @@ $("#unitSj").on("change", function () {
 });
 
 $("#unitSj_2").on("change", function () {
-  //$("#data_plafon").slideUp("slow");
+  
 
   get_customer_2();
    get_mobil_sj_2();
    get_supir_sj_2();
    get_barang_sj_2();
   get_bulan_aktif_2();
+  $("#alamat1_2").val("");
+  $("#alamat2_2").val("");
+  $("#alamat3_2").val("");
+  $("#kode_alamat_2").val("");
+  $("#npwp_2").val("");
 });
 
 function get_bulan_aktif() {
@@ -603,7 +613,8 @@ $("#no_spm").on("change", function () {
 $(document).on("submit", "#tambahSuratJalan", function (e) {
   // console.log(k_cus);
   e.preventDefault();
-
+  console.log(todayDate);
+  
   $("#error_unitSj").html("");
   $("#error_nama_customer").html("");
   $("#error_no_spm").html("");
@@ -660,6 +671,12 @@ $(document).on("submit", "#tambahSuratJalan", function (e) {
   if (tanggal_surat_jalan == "") {
     $("#error_tanggal_surat_jalan").html(
       "Tanggal Surat Jalan tidak boleh kosong!"
+    );
+    err += 1;
+  }
+  if($("#tanggal_surat_jalan").val()< todayDate){
+    $("#error_tanggal_surat_jalan").html(
+      "Tanggal Surat Jalan tidak boleh lebih kecil dari tanggal hari ini!"
     );
     err += 1;
   }
@@ -744,6 +761,7 @@ $(document).on("submit", "#tambahSuratJalan", function (e) {
 
 function tambahSj() {
   $("#modal_konfirmasi_tambah_sj").modal("hide");
+
 
   var unitSj = $("#unitSj").val();
   var customer = $("#nama_customer").val().split("_");
@@ -1004,6 +1022,8 @@ $(document).ready(function () {
     $("#ppn_2").val(data[13]);
     $("#no_surat_jalan_2").val(data[1]);
     $("#tanggal_surat_jalan_2").val(data[10]);
+
+    $("#kode_alamat_2").val(data[37]);
 
     if (data[14] == "Tunai") {
       $("#rd_tunai_2").prop("checked", true);

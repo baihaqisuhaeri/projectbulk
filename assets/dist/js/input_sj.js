@@ -15,6 +15,7 @@ var today = new Date();
 
 
 var todayDate = new Date().toISOString().slice(0, 10);
+var bulan_aktif = "";
 
 $("#tanggal_surat_jalan").val(todayDate);
 
@@ -251,7 +252,12 @@ function get_bulan_aktif() {
     },
     success: function (data) {
       data = JSON.parse(data);
-      //console.log(data.tgl_aktif);
+      
+      // todayDate =  todayDate.substring(0, 7);
+      // console.log(todayDate);
+      // console.log(data.tgl_aktif);
+      // console.log(todayDate<data.tgl_aktif);
+      bulan_aktif = data.tgl_aktif;
       $("#aktif_unitSj").html("Bulan aktif : " + data.tgl_aktif);
     },
   });
@@ -673,13 +679,14 @@ $(document).on("submit", "#tambahSuratJalan", function (e) {
       "Tanggal Surat Jalan tidak boleh kosong!"
     );
     err += 1;
-  }
-  if($("#tanggal_surat_jalan").val()< todayDate){
+  }else if($("#tanggal_surat_jalan").val().substring(0, 7)< bulan_aktif){
     $("#error_tanggal_surat_jalan").html(
       "Tanggal Surat Jalan tidak boleh lebih kecil dari tanggal hari ini!"
     );
     err += 1;
   }
+  console.log($("#tanggal_surat_jalan").val().substring(0, 7)< bulan_aktif);
+  
   if (no_kendaraan == "") {
     $("#error_no_kendaraan").html("Kendaraan harus dipilih!");
     err += 1;

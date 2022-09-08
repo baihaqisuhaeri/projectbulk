@@ -151,3 +151,34 @@ $route['utility/unit'] = 'Utility/get_unit';
 $route['utility/get-bulan-aktif'] = 'Utility/get_bulan_aktif';
 $route['utility/tutup-bulan'] = 'Utility/tutup_bulan';
 
+
+$route['realisasi-sj'] = 'Realisasi_sj';
+$route['realisasi-sj/tabel-sj'] = 'Realisasi_sj/ajax_list';
+$route['realisasi-sj/hapus-sj'] = 'Realisasi_sj/hapus_sj';
+$route['realisasi-sj/edit-sj'] = 'Realisasi_sj/edit_sj';
+$route['realisasi-sj/unit-sj'] = 'Realisasi_sj/get_unit_sj';
+$route['realisasi-sj/customer'] = 'Realisasi_sj/get_customer';
+$route['realisasi-sj/tabel-alamat-kirim'] = 'Realisasi_sj/get_alamat_kirim';
+$route['realisasi-sj/get-nama-customer'] = 'Realisasi_sj/get_nama_customer';
+$route['realisasi-sj/tambah-alamat-baru'] = 'Realisasi_sj/tambah_alamat_baru';
+$route['realisasi-sj/get-no-spm'] = 'Realisasi_sj/get_no_spm';
+$route['realisasi-sj/get-volume-spm'] = 'Realisasi_sj/get_volume_spm';
+$route['realisasi-sj/get-mobil-sj'] = 'Realisasi_sj/get_mobil_sj';
+$route['realisasi-sj/get-supir-sj'] = 'Realisasi_sj/get_supir_sj';
+$route['realisasi-sj/get-barang-sj'] = 'Realisasi_sj/get_barang_sj';
+$route['realisasi-sj/get-unit-marketing'] = 'Realisasi_sj/get_unit_marketing';
+$route['realisasi-sj/get-kg-barang'] = 'Realisasi_sj/get_kg_barang';
+$route['realisasi-sj/get-suplier'] = 'Realisasi_sj/get_suplier';
+$route['realisasi-sj/get-ppn'] = 'Realisasi_sj/get_ppn';
+$route['realisasi-sj/get-data-spm'] = 'Realisasi_sj/get_data_spm';
+$route['realisasi-sj/tambah-sj'] = 'Realisasi_sj/tambah_sj';
+$route['realisasi-sj/get-unit-sj-edit'] = 'Realisasi_sj/get_unit_sj';
+$route['realisasi-sj/get-sj'] = 'Realisasi_sj/get_sj';
+$route['realisasi-sj/get-supplier-by-no-sj'] = 'Realisasi_sj/get_supplier_by_no_sj';
+
+$route['realisasi-sj/hapus-alamat-kirim'] = 'Realisasi_sj/hapus_alamat_kirim';
+$route['realisasi-sj/edit-alamat-kirim'] = 'Realisasi_sj/edit_alamat_kirim';
+$route['realisasi-sj/cetak'] = 'Cetak/print';
+$route['realisasi-sj/get-bulan-aktif'] = 'Realisasi_sj/get_bulan_aktif';
+$route['realisasi-sj/get-bulan-aktif-sj'] = 'Realisasi_sj/get_bulan_aktif_sj';
+$route['realisasi-sj/batal-sj'] = 'Realisasi_sj/batal_sj';

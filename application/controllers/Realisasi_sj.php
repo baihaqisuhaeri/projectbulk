@@ -1,6 +1,6 @@
 <?php
 
-class Input_sj extends CI_Controller
+class Realisasi_sj extends CI_Controller
 {
 
     function __construct()
@@ -11,7 +11,7 @@ class Input_sj extends CI_Controller
             redirect('masuk');
         }
 
-        $this->load->model('Input_sj_model');
+        $this->load->model('Realisasi_sj_model');
 
         $this->session->keep_flashdata('error');
         $this->session->keep_flashdata('sukses');
@@ -34,7 +34,7 @@ class Input_sj extends CI_Controller
         $data['bulanAktif']  = $bulan->result_array();
 
         $this->load->view('material/Head_view');
-        $this->load->view("Input_sj_view", $data);
+        $this->load->view("Realisasi_sj_view", $data);
     }
 
 
@@ -92,7 +92,7 @@ class Input_sj extends CI_Controller
         }
 
 
-        $list = $this->Input_sj_model->get_datatables();
+        $list = $this->Realisasi_sj_model->get_datatables();
         $data = array();
         $total = 0;
         $no = $_POST['start'];
@@ -145,32 +145,29 @@ class Input_sj extends CI_Controller
 
 
             
-            if($p->btl_sj == "*" || $p->btl_sj == "sbl" || $p->btl_sj == "edited" ){
-                $row[] = '<a href="#!" style="pointer-events: none;" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> | <a style="pointer-events: none;" href="#!" class="fas fa-trash deleteSj" data-id="' . $p->id . '" title="Hapus Surat Jalan" style="color:black;"></a>';
-            
-                $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded cetak_sj" value="' . $p->no_sj . '" name="no_sj" type="submit">Cetak</button>';
-                $row[] = "Dibatalkan";
-            }else{
-                $row[] = '<a href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteSj" data-id="' . $p->id . '" title="Hapus Surat Jalan" style="color:black;"></a>';
-            
-                $row[] = '<button class="btn btn-primary btn-small btn-primary btn-rounded cetak_sj" value="' . $p->no_sj . '" name="no_sj" type="submit">Cetak</button>';
-                $row[] = "Belum batal";
-            }
+           // if($p->btl_sj == "*" || $p->btl_sj == "sbl" || $p->btl_sj == "edited" ){
+            //    $row[] = '<a href="#!" style="pointer-events: none;" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> ';
+           // }
+            //else{
+                $row[] = '<a href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> ';  
+                $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';
+            //}
             
             
-            $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';
+            
             $row[] = $p->blnaktif;
             $row[] = $p->btl_sj;
             $row[] = $p->k_altk;
 
-           
+            
+
             $data[] = $row;
         }
 
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->Input_sj_model->count_all(),
-            "recordsFiltered" => $this->Input_sj_model->count_filtered(),
+            "recordsTotal" => $this->Realisasi_sj_model->count_all(),
+            "recordsFiltered" => $this->Realisasi_sj_model->count_filtered(),
             "data" => $data,
         );
         //output to json format
@@ -183,7 +180,7 @@ class Input_sj extends CI_Controller
     {
         $id = $_POST['id'];
         
-        $sj = $this->Input_sj_model->get_sj_by_id($id);
+        $sj = $this->Realisasi_sj_model->get_sj_by_id($id);
         foreach($sj as $s){
             $btl_sj = $s->btl_sj;
             $no_sj = $s->no_sj;
@@ -191,12 +188,12 @@ class Input_sj extends CI_Controller
         
         if($btl_sj == "stl"){
 
-            $this->Input_sj_model->hapus_sj($id);
-            $this->Input_sj_model->hapus_sj_by_btl_sj($no_sj, "sbl");
+            $this->Realisasi_sj_model->hapus_sj($id);
+            $this->Realisasi_sj_model->hapus_sj_by_btl_sj($no_sj, "sbl");
             $data = array(
                 'btl_sj' => '',
             );
-            $this->Input_sj_model->edit_sj_setelah_dihapus($no_sj, "edited", $data);
+            $this->Realisasi_sj_model->edit_sj_setelah_dihapus($no_sj, "edited", $data);
             
             $query = $this->db->affected_rows();
             if ($query == true) {
@@ -219,7 +216,7 @@ class Input_sj extends CI_Controller
         else{
 
         
-        $this->Input_sj_model->hapus_sj($id);
+        $this->Realisasi_sj_model->hapus_sj($id);
         $query = $this->db->affected_rows();
         if ($query == true) {
             $data = array(
@@ -256,7 +253,7 @@ class Input_sj extends CI_Controller
 
 
         );
-        if ($this->Input_sj_model->check($supir_unik)) {
+        if ($this->Realisasi_sj_model->check($supir_unik)) {
             $data = array(
                 'status' => 'false',
 
@@ -265,7 +262,7 @@ class Input_sj extends CI_Controller
         } else {
 
 
-            $this->Input_sj_model->edit_supir($id, $data);
+            $this->Realisasi_sj_model->edit_supir($id, $data);
             $query = $this->db->affected_rows();
 
 
@@ -333,7 +330,7 @@ class Input_sj extends CI_Controller
 
         $k_cus = $this->input->post("k_cus");
         $status_edit = $this->input->post("status_edit");
-        $list = $this->Input_sj_model->get_datatables_alamat_kirim($k_cus);
+        $list = $this->Realisasi_sj_model->get_datatables_alamat_kirim($k_cus);
         $data = array();
         $total = 0;
         $no = $_POST['start'];
@@ -367,8 +364,8 @@ class Input_sj extends CI_Controller
 
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->Input_sj_model->count_all_alamat_kirim(),
-            "recordsFiltered" => $this->Input_sj_model->count_filtered_alamat_kirim($k_cus),
+            "recordsTotal" => $this->Realisasi_sj_model->count_all_alamat_kirim(),
+            "recordsFiltered" => $this->Realisasi_sj_model->count_filtered_alamat_kirim($k_cus),
             "data" => $data,
         );
         //output to json format
@@ -381,7 +378,7 @@ class Input_sj extends CI_Controller
     {
         $k_cus = $this->input->post("k_cus");
         $unit = $this->input->post("unitSj");
-        $data = $this->Input_sj_model->get_nama_customer($unit, $k_cus);
+        $data = $this->Realisasi_sj_model->get_nama_customer($unit, $k_cus);
 
         $output = array(
 
@@ -423,7 +420,7 @@ class Input_sj extends CI_Controller
             'tgl_input' => $tgl_input
         );
 
-        $this->Input_sj_model->tambah_alamat_baru($data);
+        $this->Realisasi_sj_model->tambah_alamat_baru($data);
         $query = $this->db->affected_rows();
 
         $data = array(
@@ -482,11 +479,10 @@ class Input_sj extends CI_Controller
         $status_edit = $this->input->post("status_edit");
 
         $noUrutSpm = $this->input->post("noUrutSpm");
-        //$data = $this->Input_sj_model->get_volume_spm($noUrutSpm);
+        //$data = $this->Realisasi_sj_model->get_volume_spm($noUrutSpm);
         $data =  $this->db->query("SELECT * FROM `tb_spm` WHERE no_urutspm = '$noUrutSpm'")->result();
         if ($status_edit == null) {
-           //sebelum revisi $dataSj = $this->db->query("SELECT * FROM `tb_sj` WHERE no_urutspm = '$noUrutSpm' and (btl_sj=''  or btl_sj != 'edited'  and (btl_sj != 'sbl')) ")->result();
-           $dataSj = $this->db->query("SELECT * FROM `tb_sj` WHERE no_urutspm = '$noUrutSpm' and (btl_sj='' or btl_sj = 'stl') ")->result();
+            $dataSj = $this->db->query("SELECT * FROM `tb_sj` WHERE no_urutspm = '$noUrutSpm' and (btl_sj=''  or btl_sj != 'edited'  and (btl_sj != 'sbl')) ")->result();
         } else {
             $dataSj = $this->db->query("SELECT * FROM `tb_sj` WHERE no_urutspm = '$noUrutSpm' and no_sj != '$no_surat_jalan' and (btl_sj='stl'  or btl_sj = ''  ) ")->result();
         }
@@ -531,10 +527,10 @@ class Input_sj extends CI_Controller
 
 
         if ($status_edit == null) {
-            $mobil = $this->Input_sj_model->get_mobil_sj($unit);
+            $mobil = $this->Realisasi_sj_model->get_mobil_sj($unit);
         } else {
 
-            $mobil = $this->Input_sj_model->get_mobil_sj($unit_edit);
+            $mobil = $this->Realisasi_sj_model->get_mobil_sj($unit_edit);
         }
 
 
@@ -568,7 +564,7 @@ class Input_sj extends CI_Controller
         $unit = $this->input->post("unitSj");
 
 
-        $supir = $this->Input_sj_model->get_supir_sj($unit);
+        $supir = $this->Realisasi_sj_model->get_supir_sj($unit);
 
 
         if (empty($supir)) {
@@ -599,7 +595,7 @@ class Input_sj extends CI_Controller
         $unit = $this->input->post("unitSj");
 
 
-        $barang = $this->Input_sj_model->get_barang_sj($unit);
+        $barang = $this->Realisasi_sj_model->get_barang_sj($unit);
 
 
         if (empty($barang)) {
@@ -630,7 +626,7 @@ class Input_sj extends CI_Controller
         $kd_unit = $this->input->post("kd_unit");
         var_dump($kd_unit);
 
-        $unit_marketing = $this->Input_sj_model->get_unit_marketing();
+        $unit_marketing = $this->Realisasi_sj_model->get_unit_marketing();
 
 
         if (empty($unit_marketing)) {
@@ -663,7 +659,7 @@ class Input_sj extends CI_Controller
     {
         $kode_barang = $this->input->post('kode_barang');
 
-        $query = $this->Input_sj_model->get_kg_barang($kode_barang);
+        $query = $this->Realisasi_sj_model->get_kg_barang($kode_barang);
 
 
 
@@ -676,7 +672,7 @@ class Input_sj extends CI_Controller
         $k_supl = $this->input->post("k_supl");
         $status_edit = $this->input->post("status_edit");
 
-        $suplier = $this->Input_sj_model->get_suplier();
+        $suplier = $this->Realisasi_sj_model->get_suplier();
 
         //var_dump($k_supl);
 
@@ -704,7 +700,7 @@ class Input_sj extends CI_Controller
     {
 
 
-        $query = $this->Input_sj_model->get_ppn();
+        $query = $this->Realisasi_sj_model->get_ppn();
 
 
         echo json_encode($query);
@@ -714,7 +710,7 @@ class Input_sj extends CI_Controller
     {
         $noUrutSpm = $this->input->post("noUrutSpm");
 
-        $query = $this->Input_sj_model->get_data_spm($noUrutSpm);
+        $query = $this->Realisasi_sj_model->get_data_spm($noUrutSpm);
 
         echo json_encode($query);
     }
@@ -732,13 +728,13 @@ class Input_sj extends CI_Controller
         $unitSj = $_POST['unitSj'];
         $no_sj = "S";
         $kode_nomor = "";
-        $query_kode_nomor = $this->Input_sj_model->get_kode_nomor($unitSj);
+        $query_kode_nomor = $this->Realisasi_sj_model->get_kode_nomor($unitSj);
         foreach ($query_kode_nomor as $qkn) {
             $kode_nomor = $qkn->kode_nomor;
         }
         $no_sj .= $kode_nomor . substr($tanggal_surat_jalan, 2,2) . substr($tanggal_surat_jalan, 5,2);
         //var_dump($no_sj);
-        $query_last_sj = $this->Input_sj_model->get_last_sj($no_sj);
+        $query_last_sj = $this->Realisasi_sj_model->get_last_sj($no_sj);
         // var_dump($query_last_sj == null);
         // die();
         if ($query_last_sj == null) {
@@ -860,7 +856,7 @@ class Input_sj extends CI_Controller
 
         );
 
-        $this->Input_sj_model->tambah_surat_sj($data);
+        $this->Realisasi_sj_model->tambah_surat_sj($data);
         $query = $this->db->affected_rows();
 
         //var_dump($query);
@@ -885,7 +881,7 @@ class Input_sj extends CI_Controller
     function get_sj()
     {
         $no_sj = $this->input->post('no_sj');
-        $data = $this->Input_sj_model->get_sj($no_sj);
+        $data = $this->Realisasi_sj_model->get_sj($no_sj);
 
 
         $output = array(
@@ -989,7 +985,7 @@ class Input_sj extends CI_Controller
             'tgl_update' => $tgl_edit,
         );
 
-        $this->Input_sj_model->edit_sj($id, $data);
+        $this->Realisasi_sj_model->edit_sj($id, $data);
 
         
         $query = $this->db->affected_rows();
@@ -1094,8 +1090,8 @@ class Input_sj extends CI_Controller
 
         
 
-        $this->Input_sj_model->tambah_surat_sj($data);
-        $query_sj_blnaktif = $this->Input_sj_model->get_sj_by_blnaktif($no_sj,$blnaktif);
+        $this->Realisasi_sj_model->tambah_surat_sj($data);
+        $query_sj_blnaktif = $this->Realisasi_sj_model->get_sj_by_blnaktif($no_sj,$blnaktif);
         foreach($query_sj_blnaktif as $qb){
 
             $data = array(
@@ -1143,13 +1139,13 @@ class Input_sj extends CI_Controller
             );
 
         }
-        $this->Input_sj_model->tambah_surat_sj($data);
+        $this->Realisasi_sj_model->tambah_surat_sj($data);
         
 
         $data = array(
             'btl_sj' => 'edited',
         );
-        $this->Input_sj_model->edit_sj_setelah($id, $data);
+        $this->Realisasi_sj_model->edit_sj_setelah($id, $data);
 
         $query = $this->db->affected_rows();
 
@@ -1173,7 +1169,7 @@ class Input_sj extends CI_Controller
     {
         $id = $_POST['id'];
 
-        $this->Input_sj_model->hapus_alamat_kirim($id);
+        $this->Realisasi_sj_model->hapus_alamat_kirim($id);
         $query = $this->db->affected_rows();
         if ($query == true) {
             $data = array(
@@ -1216,7 +1212,7 @@ class Input_sj extends CI_Controller
 
 
 
-        $this->Input_sj_model->edit_alamat_kirim($id_alamat_edit, $data);
+        $this->Realisasi_sj_model->edit_alamat_kirim($id_alamat_edit, $data);
         $query = $this->db->affected_rows();
 
 
@@ -1249,7 +1245,7 @@ class Input_sj extends CI_Controller
 
 
 
-        $query = $this->Input_sj_model->get_bulan_aktif($kd_unit);
+        $query = $this->Realisasi_sj_model->get_bulan_aktif($kd_unit);
 
         foreach ($query as $q) {
             $bln_aktif = $q->tgl_aktif;
@@ -1267,7 +1263,7 @@ class Input_sj extends CI_Controller
 
 
 
-        $query = $this->Input_sj_model->get_sj($no_sj);
+        $query = $this->Realisasi_sj_model->get_sj($no_sj);
 
         foreach ($query as $q) {
             $blnaktif = $q->blnaktif;
@@ -1286,7 +1282,7 @@ class Input_sj extends CI_Controller
 
             'btl_sj' => "*",
         );
-        $this->Input_sj_model->batal_sj($no_sj, $data);
+        $this->Realisasi_sj_model->batal_sj($no_sj, $data);
         $query = $this->db->affected_rows();
 
         if ($query) {

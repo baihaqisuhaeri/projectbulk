@@ -1,6 +1,6 @@
 <?php
 
-class Input_sj_model extends CI_Model
+class Realisasi_sj_model extends CI_Model
 {
 
 
@@ -30,6 +30,7 @@ class Input_sj_model extends CI_Model
             $this->db->where('blnaktif', "");
         }
         $this->db->select('*,  tb_sj.id as id');
+        $this->db->group_by('tb_sj.no_sj');
         
         $this->db->join('hak_akses', 'tb_sj.kd_unit = hak_akses.kode_unit');
         $this->db->where('hak_akses.nama_user', $nama);

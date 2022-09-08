@@ -260,6 +260,27 @@
                             ?>
                         </li>
 
+
+                        <li class="nav-item">
+                            <?php
+                            if ($this->uri->segment(1) == "realisasi-sj") {
+                                echo '<a href="realisasi-sj" class="nav-link active">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>
+                                    Realiasasi Surat Jalan
+                                </p>
+                            </a>';
+                            } else {
+                                echo '<a href="realisasi-sj" class="nav-link">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>
+                                    Realisasi Surat Jalan
+                                </p>
+                            </a>';
+                            }
+                            ?>
+                        </li>
+
                        
 
                         

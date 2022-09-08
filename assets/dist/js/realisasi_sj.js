@@ -59,7 +59,7 @@ function get_no_spm() {
   kodeCustomer = kodeCustomer[0];
   var unitSj = $("#unitSj").val();
   $.ajax({
-    url: "input-sj/get-no-spm",
+    url: "realisasi-sj/get-no-spm",
     type: "post",
     data: { kodeCustomer: kodeCustomer,
             unitSj: unitSj
@@ -75,7 +75,7 @@ get_unit_sj();
 
 function get_unit_sj() {
   $.ajax({
-    url: "input-sj/unit-sj",
+    url: "realisasi-sj/unit-sj",
     success: function (data) {
       $("#unitSj").html(data);
       //$("#unit_spm").html(data);
@@ -86,7 +86,7 @@ function get_unit_sj() {
 function get_mobil_sj() {
   var unitSj = $("#unitSj").val();
   $.ajax({
-    url: "input-sj/get-mobil-sj",
+    url: "realisasi-sj/get-mobil-sj",
     type: "POST",
     data: {
       unitSj: unitSj,
@@ -101,7 +101,7 @@ function get_mobil_sj() {
 function get_mobil_sj_2() {
   var unitSj = $("#unitSj_2").val();
   $.ajax({
-    url: "input-sj/get-mobil-sj",
+    url: "realisasi-sj/get-mobil-sj",
     type: "POST",
     data: {
       unitSj: unitSj,
@@ -116,7 +116,7 @@ function get_mobil_sj_2() {
 function get_supir_sj() {
   var unitSj = $("#unitSj").val();
   $.ajax({
-    url: "input-sj/get-supir-sj",
+    url: "realisasi-sj/get-supir-sj",
     type: "POST",
     data: {
       unitSj: unitSj,
@@ -131,7 +131,7 @@ function get_supir_sj() {
 function get_supir_sj_2() {
   var unitSj = $("#unitSj_2").val();
   $.ajax({
-    url: "input-sj/get-supir-sj",
+    url: "realisasi-sj/get-supir-sj",
     type: "POST",
     data: {
       unitSj: unitSj,
@@ -146,7 +146,7 @@ function get_supir_sj_2() {
 function get_barang_sj() {
   var unitSj = $("#unitSj").val();
   $.ajax({
-    url: "input-sj/get-barang-sj",
+    url: "realisasi-sj/get-barang-sj",
     type: "POST",
     data: {
       unitSj: unitSj,
@@ -161,7 +161,7 @@ function get_barang_sj() {
 function get_barang_sj_2() {
   var unitSj = $("#unitSj_2").val();
   $.ajax({
-    url: "input-sj/get-barang-sj",
+    url: "realisasi-sj/get-barang-sj",
     type: "POST",
     data: {
       unitSj: unitSj,
@@ -176,7 +176,7 @@ function get_barang_sj_2() {
 function get_unit_marketing() {
   var kd_unit = $("#unitSj").val();
   $.ajax({
-    url: "input-sj/get-unit-marketing",
+    url: "realisasi-sj/get-unit-marketing",
     type: "POST",
     data: {
       kd_unit: kd_unit,
@@ -190,7 +190,7 @@ function get_unit_marketing() {
 
 function get_suplier() {
   $.ajax({
-    url: "input-sj/get-suplier",
+    url: "realisasi-sj/get-suplier",
 
     success: function (data) {
       $("#suplier").html(data);
@@ -201,7 +201,7 @@ function get_suplier() {
 
 function get_ppn() {
   $.ajax({
-    url: "input-sj/get-ppn",
+    url: "realisasi-sj/get-ppn",
 
     success: function (data) {
       data = JSON.parse(data);
@@ -245,7 +245,7 @@ $("#unitSj_2").on("change", function () {
 function get_bulan_aktif() {
   var kd_unit = $("#unitSj").val();
   $.ajax({
-    url: "input-sj/get-bulan-aktif",
+    url: "realisasi-sj/get-bulan-aktif",
     type: "POST",
     data: {
       kd_unit: kd_unit,
@@ -269,7 +269,7 @@ function get_bulan_aktif_2() {
 
   
   $.ajax({
-    url: "input-sj/get-bulan-aktif",
+    url: "realisasi-sj/get-bulan-aktif",
     type: "POST",
     data: {
       kd_unit: kd_unit,
@@ -328,7 +328,7 @@ $(document).on("click", "#btnAlamatKirim", function () {
 
         // Load data for the table's content from an Ajax source
         ajax: {
-          url: "input-sj/tabel-alamat-kirim",
+          url: "realisasi-sj/tabel-alamat-kirim",
           type: "POST",
           data: {
             k_cus: k_cus,
@@ -388,7 +388,7 @@ function get_customer() {
   unitSj = $("#unitSj").val();
 
   $.ajax({
-    url: "input-sj/customer",
+    url: "realisasi-sj/customer",
     type: "post",
     data: { unitSj: unitSj },
     success: function (data) {
@@ -401,7 +401,7 @@ function get_customer_2() {
   unitSj = $("#unitSj_2").val();
 
   $.ajax({
-    url: "input-sj/customer",
+    url: "realisasi-sj/customer",
     type: "post",
     data: { unitSj: unitSj },
     success: function (data) {
@@ -427,7 +427,7 @@ $(document).on("click", "#btn_tambah_alamat", function () {
     }
   }
   $.ajax({
-    url: "input-sj/get-nama-customer",
+    url: "realisasi-sj/get-nama-customer",
     type: "post",
     data: { unitSj: unitSj, k_cus: k_cus },
     success: function (data) {
@@ -516,7 +516,7 @@ function tambahAlamat() {
   var alamat3CustomerBaru = $("#alamat3_customer_baru_hidden").val();
 
   $.ajax({
-    url: "input-sj/tambah-alamat-baru",
+    url: "realisasi-sj/tambah-alamat-baru",
     type: "post",
     data: {
       kodeCustomerBaru: kodeCustomerBaru,
@@ -591,7 +591,7 @@ $("#no_spm").on("change", function () {
   if (sukses_tambah == null) {
     var noUrutSpm = $("#no_spm").val();
     $.ajax({
-      url: "input-sj/get-data-spm",
+      url: "realisasi-sj/get-data-spm",
       type: "post",
       dataType: "JSON",
       data: { noUrutSpm: noUrutSpm },
@@ -616,297 +616,9 @@ $("#no_spm").on("change", function () {
   }
 });
 
-$(document).on("submit", "#tambahSuratJalan", function (e) {
-  // console.log(k_cus);
-  e.preventDefault();
-  console.log(todayDate);
-  
-  $("#error_unitSj").html("");
-  $("#error_nama_customer").html("");
-  $("#error_no_spm").html("");
-  $("#error_no_surat_jalan").html("");
-  $("#error_tanggal_surat_jalan").html("");
-  $("#error_no_kendaraan").html("");
-  $("#error_unit_marketing").html("");
-  $("#error_nama_supir").html("");
-  $("#error_kode_barang").html("");
-  $("#error_jumlah").html("");
-  $("#error_keterangan").html("");
-  $("#error_suplier").html("");
-
-  $("#error_no_segel").html("");
-  $("#error_pressure").html("");
-  $("#error_temperatur").html("");
-  $("#error_nilai_persen_pengambilan").html("");
-  $("#error_nilai_persen_berangkat").html("");
-
-  var err = 0;
-
-  var unitSj = $("#unitSj").val();
-  var nama_customer = $("#nama_customer").val();
-  var no_spm = $("#no_spm").val();
-  var no_surat_jalan = $("#no_surat_jalan").val();
-  var tanggal_surat_jalan = $("#tanggal_surat_jalan").val();
-  var no_kendaraan = $("#no_kendaraan").val();
-  var unit_marketing = $("#unit_marketing").val();
-  var nama_supir = $("#nama_supir").val();
-  var kode_barang = $("#kode_barang").val();
-  var jumlah = $("#jumlah").val();
-  var keterangan = $("#keterangan").val();
-  var suplier = $("#suplier").val();
-  var no_faktur = $("#no_faktur").val();
-  var no_segel = $("#no_segel").val();
-  var pressure = $("#pressure").val();
-  var temperatur = $("#temperatur").val();
-  var nilai_persen_pengambilan = $("#nilai_persen_pengambilan").val();
-  var nilai_persen_berangkat = $("#nilai_persen_berangkat").val();
-
-  if (unitSj == "") {
-    $("#error_unitSj").html("Unit tidak boleh kosong!");
-    err += 1;
-  }
-  if (nama_customer == "") {
-    $("#error_nama_customer").html("Nama Customer harus dipilih!");
-    err += 1;
-  }
-  if (no_spm == "") {
-    $("#error_no_spm").html("Nomor SPM harus dipilih!");
-    err += 1;
-  }
-
-  if (tanggal_surat_jalan == "") {
-    $("#error_tanggal_surat_jalan").html(
-      "Tanggal Surat Jalan tidak boleh kosong!"
-    );
-    err += 1;
-  }else if($("#tanggal_surat_jalan").val().substring(0, 7)< bulan_aktif){
-    $("#error_tanggal_surat_jalan").html(
-      "Tanggal Surat Jalan tidak boleh lebih kecil dari tanggal hari ini!"
-    );
-    err += 1;
-  }
-  console.log($("#tanggal_surat_jalan").val().substring(0, 7)< bulan_aktif);
-  
-  if (no_kendaraan == "") {
-    $("#error_no_kendaraan").html("Kendaraan harus dipilih!");
-    err += 1;
-  }
-  if (unit_marketing == "") {
-    $("#error_unit_marketing").html("Unit marketing tidak boleh kosong!");
-    err += 1;
-  }
-  if (nama_supir == "") {
-    $("#error_nama_supir").html("Nama Supir harus dipilih!");
-    err += 1;
-  }
-  if (kode_barang == "") {
-    $("#error_kode_barang").html("Barang harus dipilih!");
-    err += 1;
-  }
-  if (jumlah == "") {
-    $("#error_jumlah").html("Jumlah tidak boleh kosong!");
-    err += 1;
-  }
-  if (keterangan == "") {
-    $("#error_keterangan").html("Keterangan tidak boleh kosong!");
-    err += 1;
-  }
-  if (suplier == "") {
-    $("#error_suplier").html("Suplier tidak boleh kosong!");
-    err += 1;
-  }
-
-  if (no_segel == "") {
-    $("#error_no_segel").html("Nomor Segel tidak boleh kosong!");
-    err += 1;
-  }
-  if (pressure == "") {
-    $("#error_pressure").html("Pressure tidak boleh kosong!");
-    err += 1;
-  }
-  if (temperatur == "") {
-    $("#error_temperatur").html("Temperatur tidak boleh kosong!");
-    err += 1;
-  }
-  if (nilai_persen_pengambilan == "") {
-    $("#error_nilai_persen_pengambilan").html(
-      "Nilai pengambilan tidak boleh kosong!"
-    );
-    err += 1;
-  }
-  if (nilai_persen_berangkat == "") {
-    $("#error_nilai_persen_berangkat").html(
-      "Nilai berangkat tidak boleh kosong!"
-    );
-    err += 1;
-  }
-  if (err == 0) {
-    var kg_kirim = $("#kilogram").val();
-    var noUrutSpm = $("#no_spm").val();
-    $.ajax({
-      url: "input-sj/get-volume-spm",
-      type: "post",
-      dataType: "JSON",
-      data: { noUrutSpm: noUrutSpm },
-      success: function (data) {
-        //console.log(data.volume_spm);
-
-        if (parseFloat(kg_kirim) > data.volume_spm) {
-          $("#error_kilogram").html(
-            "Maaf maksimal volume yang bisa diisi adalah " +
-              parseFloat(data.volume_spm) +
-              " kg"
-          );
-        } else {
-          $("#error_kilogram").html("");
-          $("#modal_konfirmasi_tambah_sj").modal("show");
-        }
-      },
-    });
-  }
-});
-
-function tambahSj() {
-  $("#modal_konfirmasi_tambah_sj").modal("hide");
 
 
-  var unitSj = $("#unitSj").val();
-  var customer = $("#nama_customer").val().split("_");
-  var alamat_kirim1 = $("#alamat1").val();
-  var alamat_kirim2 = $("#alamat2").val();
-  var alamat_kirim3 = $("#alamat3").val();
-  var k_altk = $("#kode_alamat").val();
-  var npwp = $("#npwp").val();
 
-  var no_po = $("#nomor_po").val();
-  var tgl_po = $("#tanggal_po").val();
-  var ppn = $("#ppn").val();
-
-  var no_spm = $("#no_spm").val();
-  var no_surat_jalan = $("#no_surat_jalan").val();
-  var tanggal_surat_jalan = $("#tanggal_surat_jalan").val();
-  var no_kendaraan = $("#no_kendaraan").val();
-  var unit_marketing = $("#unit_marketing").val();
-  var supir = $("#nama_supir").val().split("_");
-  var barang = $("#kode_barang").val().split("_");
-  var jumlah = $("#jumlah").val();
-  var kg_kirim = $("#kilogram").val();
-  var keterangan = $("#keterangan").val();
-  var suplier = $("#suplier").val().split("_");
-  var no_faktur = $("#no_faktur").val();
-  var no_segel = $("#no_segel").val();
-  var pressure = $("#pressure").val();
-  var temperatur = $("#temperatur").val();
-  var nilai_persen_pengambilan = $("#nilai_persen_pengambilan").val();
-  var nilai_persen_berangkat = $("#nilai_persen_berangkat").val();
-
-  $.ajax({
-    url: "input-sj/tambah-sj",
-    type: "post",
-    dataType: "text",
-
-    data: {
-      unitSj: unitSj,
-      kode_customer: customer[0],
-      nama_customer: customer[1],
-      al1_cus: customer[2],
-      al2_cus: customer[3],
-      al3_cus: customer[4],
-      k_wilayah: customer[5],
-      npwp: customer[6],
-      alamat_kirim1: alamat_kirim1,
-      alamat_kirim2: alamat_kirim2,
-      alamat_kirim3: alamat_kirim3,
-      k_altk: k_altk,
-      npwp_krm: npwp,
-      no_po: no_po,
-      tgl_po: tgl_po,
-      ppn: ppn,
-      no_spm: no_spm,
-      spm_brlk: spm_brlk,
-      no_surat_jalan: no_surat_jalan,
-      tanggal_surat_jalan: tanggal_surat_jalan,
-      no_kendaraan: no_kendaraan,
-      unit_marketing: unit_marketing,
-      nama_supir: supir[2],
-      kode_supir: supir[0],
-      kode_barang: barang[0],
-      k_div: barang[1],
-      kode_berat: barang[2],
-      h_jual: barang[3],
-      kode_tim: barang[4],
-      jumlah: jumlah,
-      kg_kirim: kg_kirim,
-      keterangan: keterangan,
-      k_supl: suplier[0],
-      n_supl: suplier[1],
-      no_faktur: no_faktur,
-      no_segel: no_segel,
-      pressure: pressure,
-      temperatur: temperatur,
-      nilai_persen_pengambilan: nilai_persen_pengambilan,
-      nilai_persen_berangkat: nilai_persen_berangkat,
-
-      tk: tk_sj,
-    },
-    success: function (data) {
-       var data = JSON.parse(data);
-       console.log(data.status);
-       
-      var status = data.status;
-      // var json = JSON.parse(data);
-     // console.log(data.status);
-      if (status == "success") {
-        mytable = $("#tabel_sj").DataTable();
-        mytable.draw();
-        $("#aktif_unitSj").html("");
-        Swal.fire("Berhasil!", "Surat jalan berhasil ditambahkan!", "success");
-      } else {
-        // alert("a");
-        Swal.fire(
-          "Gagal!",
-          "Surat Jalan sudah ada di unit yang sama!",
-          "error"
-        );
-      }
-      //Swal.fire("Berhasil!", "Surat jalan berhasil ditambahkan!", "success");
-      // $("#unitSupir").val("").change();
-      // $("#nama_supir").val("");
-      sukses_tambah = "yes";
-      $("#unitSj").val("").change();
-      $("#nama_customer").val("").change();
-      $("#alamat1").val("");
-      $("#alamat2").val("");
-      $("#alamat3").val("");
-      $("#kode_alamat").val("");
-      $("#npwp").val("");
-
-      $("#nomor_po").val("");
-      $("#tanggal_po").val("");
-      $("#ppn").val("");
-
-      $("#no_spm").val("").change();
-      $("#no_surat_jalan").val("");
-      $("#tanggal_surat_jalan").val("");
-      $("#no_kendaraan").val("");
-      $("#unit_marketing").val("").change();
-      $("#nama_supir").val("").change("");
-      $("#kode_barang").val("").change("");
-      $("#jumlah").val("");
-      $("#kilogram").val("");
-      $("#keterangan").val("");
-      $("#suplier").val("").change();
-      $("#no_faktur").val("");
-      $("#no_segel").val("");
-      $("#pressure").val("");
-      $("#temperatur").val("");
-      $("#nilai_persen_pengambilan").val("");
-      $("#nilai_persen_berangkat").val("");
-      $("#rd_tunai").prop("checked", false);
-      $("#rd_kredit").prop("checked", false);
-    },
-  });
-}
 
 $("input[name=jumlah]").on("change", function () {
   var kode_barang = $("#kode_barang").val().split("_");
@@ -914,7 +626,7 @@ $("input[name=jumlah]").on("change", function () {
   var jumlah = $("#jumlah").val();
   //console.log(kode_barang);
   $.ajax({
-    url: "input-sj/get-kg-barang",
+    url: "realisasi-sj/get-kg-barang",
     type: "post",
     dataType: "JSON",
     data: { kode_barang: kode_barang },
@@ -940,7 +652,7 @@ $(document).ready(function () {
 
     // Load data for the table's content from an Ajax source
     ajax: {
-      url: "input-sj/tabel-sj",
+      url: "realisasi-sj/tabel-sj",
       type: "POST",
     },
 
@@ -966,7 +678,7 @@ $(document).ready(function () {
     //   },
     // ],
     //bisa hide column
-    "aoColumnDefs": [{ "bVisible": false, "aTargets": [35,36,37] }]
+    "aoColumnDefs": [{ "bVisible": false, "aTargets": [32,33,34] }]
   });
   // fnSetColumnVis( 1, false );
 
@@ -1076,7 +788,7 @@ $(document).ready(function () {
     // var cetak_ = data[];
 
     $.ajax({
-      url: "input-sj/cetak",
+      url: "realisasi-sj/cetak",
       type: "post",
       data: {
         cetak_no_sj: cetak_no_sj,
@@ -1113,7 +825,7 @@ function deleteSj() {
   var table = $("#tabel_sj").DataTable();
 
   $.ajax({
-    url: "input-sj/hapus-sj",
+    url: "realisasi-sj/hapus-sj",
     data: {
       id: id_sj,
     },
@@ -1151,7 +863,7 @@ function batalSj() {
   var table = $("#tabel_sj").DataTable();
 
   $.ajax({
-    url: "input-sj/batal-sj",
+    url: "realisasi-sj/batal-sj",
     data: {
       no_sj: nomor_sj_batal,
     },
@@ -1181,7 +893,7 @@ function batalSj() {
 
 function get_unit_sj_edit(unit) {
   $.ajax({
-    url: "input-sj/unit-sj",
+    url: "realisasi-sj/unit-sj",
     type: "post",
     data: { unit: unit },
     success: function (data) {
@@ -1193,7 +905,7 @@ function get_unit_sj_edit(unit) {
 
 function get_customer_edit(kode_cus, unit_edit) {
   $.ajax({
-    url: "input-sj/customer",
+    url: "realisasi-sj/customer",
     type: "post",
     data: { kode_cus: kode_cus, unit_edit: unit_edit },
     success: function (data) {
@@ -1245,7 +957,7 @@ $(document).on("click", "#btnAlamatKirim_2", function () {
 
         // Load data for the table's content from an Ajax source
         ajax: {
-          url: "input-sj/tabel-alamat-kirim",
+          url: "realisasi-sj/tabel-alamat-kirim",
           type: "POST",
           data: {
             k_cus: k_cus,
@@ -1323,7 +1035,7 @@ function get_no_spm_edit(kode_cus, no_spm, unitSj) {
   //kodeCustomer = kodeCustomer[0];
   //console.log(kode_cus);
   $.ajax({
-    url: "input-sj/get-no-spm",
+    url: "realisasi-sj/get-no-spm",
     type: "post",
     data: { kodeCustomer: kode_cus, no_spm: no_spm,
             unitSj: unitSj
@@ -1339,7 +1051,7 @@ $("#no_spm_2").on("change", function () {
   // console.log($("#no_spm").val());
   var noUrutSpm = $("#no_spm_2").val();
   $.ajax({
-    url: "input-sj/get-data-spm",
+    url: "realisasi-sj/get-data-spm",
     type: "post",
     dataType: "JSON",
     data: { noUrutSpm: noUrutSpm },
@@ -1364,7 +1076,7 @@ $("#no_spm_2").on("change", function () {
 function get_mobil_sj_edit(mobil_unik) {
   var unitSj = $("#unitSj_2").val();
   $.ajax({
-    url: "input-sj/get-mobil-sj",
+    url: "realisasi-sj/get-mobil-sj",
     type: "POST",
     data: {
       mobil_unik: mobil_unik,
@@ -1380,7 +1092,7 @@ function get_mobil_sj_edit(mobil_unik) {
 
 function get_unit_marketing_edit(unit_mkt) {
   $.ajax({
-    url: "input-sj/get-unit-marketing",
+    url: "realisasi-sj/get-unit-marketing",
     type: "POST",
     data: {
       unit_mkt: unit_mkt,
@@ -1396,7 +1108,7 @@ function get_unit_marketing_edit(unit_mkt) {
 
 function get_supir_sj_edit(unitSj, k_sales) {
   $.ajax({
-    url: "input-sj/get-supir-sj",
+    url: "realisasi-sj/get-supir-sj",
     type: "POST",
     data: {
       unitSj: unitSj,
@@ -1412,7 +1124,7 @@ function get_supir_sj_edit(unitSj, k_sales) {
 
 function get_barang_sj_edit(unitSj, k_barang) {
   $.ajax({
-    url: "input-sj/get-barang-sj",
+    url: "realisasi-sj/get-barang-sj",
     type: "POST",
     data: {
       unitSj: unitSj,
@@ -1428,7 +1140,7 @@ function get_barang_sj_edit(unitSj, k_barang) {
 
 // function get_no_segel_edit(no_sj) {
 //   $.ajax({
-//     url: "input-sj/get-sj",
+//     url: "realisasi-sj/get-sj",
 //     type: "POST",
 //     data: {
 //       no_sj: no_sj,
@@ -1444,7 +1156,7 @@ function get_barang_sj_edit(unitSj, k_barang) {
 
 function get_no_segel_edit(no_sj) {
   $.ajax({
-    url: "input-sj/get-sj",
+    url: "realisasi-sj/get-sj",
     type: "POST",
     data: {
       no_sj: no_sj,
@@ -1467,7 +1179,7 @@ function get_no_segel_edit(no_sj) {
 
 function get_suplier_edit(k_supl) {
   $.ajax({
-    url: "input-sj/get-suplier",
+    url: "realisasi-sj/get-suplier",
     type: "POST",
     data: {
       k_supl: k_supl,
@@ -1486,7 +1198,7 @@ $("input[name=jumlah_2]").on("change", function () {
   var jumlah = $("#jumlah_2").val();
   //console.log(kode_barang);
   $.ajax({
-    url: "input-sj/get-kg-barang",
+    url: "realisasi-sj/get-kg-barang",
     type: "post",
     dataType: "JSON",
     data: { kode_barang: kode_barang },
@@ -1624,7 +1336,7 @@ $(document).on("submit", "#edit_sj", function (e) {
     var kg_kirim = $("#kilogram_2").val();
     var noUrutSpm = $("#no_spm_2").val();
     $.ajax({
-      url: "input-sj/get-volume-spm",
+      url: "realisasi-sj/get-volume-spm",
       type: "post",
       dataType: "JSON",
       data: {
@@ -1684,7 +1396,7 @@ function editSj() {
   var nilai_persen_berangkat = $("#nilai_persen_berangkat_2").val();
 
   $.ajax({
-    url: "input-sj/edit-sj",
+    url: "realisasi-sj/edit-sj",
     type: "post",
     dataType: "text",
 
@@ -1766,7 +1478,7 @@ function deleteAlamatKirim() {
   var table = $("#tabel_alamat_kirim").DataTable();
 
   $.ajax({
-    url: "input-sj/hapus-alamat-kirim",
+    url: "realisasi-sj/hapus-alamat-kirim",
     data: {
       id: id_alamat,
     },
@@ -1845,7 +1557,7 @@ function editAlamatKirim() {
 
   //console.log(id_alamat_edit);
   $.ajax({
-    url: "input-sj/edit-alamat-kirim",
+    url: "realisasi-sj/edit-alamat-kirim",
     type: "post",
     dataType: "JSON",
 
@@ -1881,9 +1593,9 @@ function editAlamatKirim() {
 }
 
 // function hasilPdf() {
-//   var win = window.open("input-sj/cetak", "_blank");
+//   var win = window.open("realisasi-sj/cetak", "_blank");
 //   $.ajax({
-//     url: "input-sj/cetak",
+//     url: "realisasi-sj/cetak",
 //     type: "post",
 //     data: { cetak_no_sj: "coba aja" },
 //     success: function (data) {
@@ -1923,13 +1635,13 @@ $(document).on("change", "#bulan_aktif", function () {
 
     // Load data for the table's content from an Ajax source
     ajax: {
-      url: "input-sj/tabel-sj",
+      url: "realisasi-sj/tabel-sj",
       type: "POST",
       data: {
         bulanAktif: bulanAktif,
       },
     },
-    "aoColumnDefs": [{ "bVisible": false, "aTargets": [35,36,37] }],
+    "aoColumnDefs": [{ "bVisible": false, "aTargets": [32,33,34] }],
     //Set column definition initialisation properties.
     "createdRow": function( row, data, dataIndex ) {
       if ( data[36] == "*" ) {

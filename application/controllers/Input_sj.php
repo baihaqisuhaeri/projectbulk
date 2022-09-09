@@ -150,15 +150,17 @@ class Input_sj extends CI_Controller
             
                 $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded cetak_sj" value="' . $p->no_sj . '" name="no_sj" type="submit">Cetak</button>';
                 $row[] = "Dibatalkan";
+                $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-id="' . $p->id . '" name="batal_sj" type="button">Batal</button>';
             }else{
                 $row[] = '<a href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteSj" data-id="' . $p->id . '" title="Hapus Surat Jalan" style="color:black;"></a>';
             
                 $row[] = '<button class="btn btn-primary btn-small btn-primary btn-rounded cetak_sj" value="' . $p->no_sj . '" name="no_sj" type="submit">Cetak</button>';
                 $row[] = "Belum batal";
+                $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';
             }
             
             
-            $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';
+            
             $row[] = $p->blnaktif;
             $row[] = $p->btl_sj;
             $row[] = $p->k_altk;
@@ -187,22 +189,28 @@ class Input_sj extends CI_Controller
         foreach($sj as $s){
             $btl_sj = $s->btl_sj;
             $no_sj = $s->no_sj;
+            $unit = $s->kd_unit;
+        }
+        $query_blnaktif = $this->Input_sj_model->get_bulan_aktif($unit);
+        foreach($query_blnaktif as $qb){
+            $blnaktif = $qb->tgl_aktif;
+            
         }
         
-        if($btl_sj == "stl"){
-
+        
+        if((substr($blnaktif,2,2) . substr($blnaktif,5,2)) > substr($no_sj,3,4)){
+            
             $this->Input_sj_model->hapus_sj($id);
             $this->Input_sj_model->hapus_sj_by_btl_sj($no_sj, "sbl");
             $data = array(
                 'btl_sj' => '',
             );
-            $this->Input_sj_model->edit_sj_setelah_dihapus($no_sj, "edited", $data);
+            $this->Input_sj_model->edit_sj_setelah_dihapus($no_sj, "*", $data);
             
             $query = $this->db->affected_rows();
             if ($query == true) {
                 $data = array(
                     'status' => 'success',
-    
                 );
     
                 echo json_encode($data);
@@ -455,7 +463,7 @@ class Input_sj extends CI_Controller
         }
         $vol_kirim_spm = 0;
         foreach ($spm as $sp) {
-            $spmVol = $this->db->query("SELECT * FROM `tb_sj` WHERE no_urutspm = '$sp->no_urutspm' and (btl_sj =''  or btl_sj = 'stl' ) ")->result();
+            $spmVol = $this->db->query("SELECT * FROM `tb_sj` WHERE no_urutspm = '$sp->no_urutspm' and btl_sj =''  ")->result();
             $vol_kirim_spm = $sp->volume_krm;
             foreach ($spmVol as $spVol) {
                 if ($sp->no_urutspm == $spVol->no_urutspm) {
@@ -485,10 +493,10 @@ class Input_sj extends CI_Controller
         //$data = $this->Input_sj_model->get_volume_spm($noUrutSpm);
         $data =  $this->db->query("SELECT * FROM `tb_spm` WHERE no_urutspm = '$noUrutSpm'")->result();
         if ($status_edit == null) {
-           //sebelum revisi $dataSj = $this->db->query("SELECT * FROM `tb_sj` WHERE no_urutspm = '$noUrutSpm' and (btl_sj=''  or btl_sj != 'edited'  and (btl_sj != 'sbl')) ")->result();
-           $dataSj = $this->db->query("SELECT * FROM `tb_sj` WHERE no_urutspm = '$noUrutSpm' and (btl_sj='' or btl_sj = 'stl') ")->result();
+
+           $dataSj = $this->db->query("SELECT * FROM `tb_sj` WHERE no_urutspm = '$noUrutSpm' and btl_sj=''  ")->result();
         } else {
-            $dataSj = $this->db->query("SELECT * FROM `tb_sj` WHERE no_urutspm = '$noUrutSpm' and no_sj != '$no_surat_jalan' and (btl_sj='stl'  or btl_sj = ''  ) ")->result();
+            $dataSj = $this->db->query("SELECT * FROM `tb_sj` WHERE no_urutspm = '$noUrutSpm' and no_sj != '$no_surat_jalan' and   btl_sj = ''   ")->result();
         }
 
 
@@ -1089,7 +1097,7 @@ class Input_sj extends CI_Controller
             'akhir' => $nilai_persen_berangkat,
             'tgl_update' => $tgl_edit,
             'blnaktif' => "",
-            'btl_sj' => "stl"
+            'btl_sj' => ""
         );
 
         
@@ -1139,7 +1147,7 @@ class Input_sj extends CI_Controller
                 'akhir' => $qb->akhir,
                 'tgl_update' => $qb->tgl_update,
                 'blnaktif' => "",
-                'btl_sj' => "sbl"
+                'btl_sj' => "*"
             );
 
         }
@@ -1147,7 +1155,7 @@ class Input_sj extends CI_Controller
         
 
         $data = array(
-            'btl_sj' => 'edited',
+            'btl_sj' => '*',
         );
         $this->Input_sj_model->edit_sj_setelah($id, $data);
 
@@ -1281,12 +1289,17 @@ class Input_sj extends CI_Controller
 
     public function batal_sj()
     {
+        $id = $this->input->post('id');
         $no_sj = $this->input->post('no_sj');
         $data = array(
 
             'btl_sj' => "*",
         );
-        $this->Input_sj_model->batal_sj($no_sj, $data);
+        $this->Input_sj_model->batal_sj($id, $data);
+        $data = array(
+            'btl_sj' => '',
+        );
+        $this->Input_sj_model->edit_sj_setelah_dihapus($no_sj, "edited", $data);
         $query = $this->db->affected_rows();
 
         if ($query) {

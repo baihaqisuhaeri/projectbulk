@@ -1138,10 +1138,12 @@ function deleteSj() {
   });
 }
 
-var nomor_sj_batal = "";
+var id_sj_batal = "";
+var no_sj_batal = "";
 $(document).on("click", ".batal_sj", function (event) {
-  nomor_sj_batal = $(this).data("no_sj");
-  //console.log(nomor_sj_batal);
+  id_sj_batal = $(this).data("id");
+  no_sj_batal = $(this).data("no_sj");
+  //console.log(no_sj_batal);
 
   $("#modal_konfirmasi_batal").modal("show");
 });
@@ -1153,7 +1155,8 @@ function batalSj() {
   $.ajax({
     url: "input-sj/batal-sj",
     data: {
-      no_sj: nomor_sj_batal,
+      id: id_sj_batal,
+      no_sj: no_sj_batal
     },
     type: "post",
     success: function (data) {
@@ -1163,7 +1166,7 @@ function batalSj() {
         mytable = $("#tabel_sj").DataTable();
         mytable.draw();
 
-        $("#" + nomor_sj_batal)
+        $("#" + id_sj_batal)
           .closest("tr")
           .remove();
         Swal.fire("Berhasil!", "Surat Jalan berhasil dibatalkan", "success");

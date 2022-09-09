@@ -99,53 +99,46 @@ class Utility extends CI_Controller
         $bulanAktif = date_create($bulanAktif);  
         $interval = date_diff($bulanSekarang, $bulanAktif); 
         
-        // //var_dump($interval->m);
+        
         $selisih = $interval->m;
         $cek = false;
         
         if($bulanSekarang> $bulanAktif){
-
-        
-
-        if($selisih==0){
-        //     var_dump($bulanAktif);
-        // die();
-            $data = array(
-                'status' => "failed",
-            );
-            echo json_encode($data);
-            $cek=false;
-        }else if($selisih==1){
-            $bulanAktif = $bulanAktif->format("Y-m-d");
-            $bulanAktif = date('Y-m-d', strtotime('+'.$selisih.' month', strtotime( $bulanAktif )));
-            $data = array(
-                'tgl_aktif' => $bulanAktif,
-            );
-            $query = $this->Utility_model->tutup_bulan($unit, $data);
-            $data = array(
-                'status' => "success",
-            );
-            echo json_encode($data);
-            $cek=true;
-        }else if($selisih>1){
-            $bulanAktif = $bulanAktif->format("Y-m-d");
-            $selisih = $selisih - ($selisih-1);
-            // var_dump($selisih);
-            // die();
-            $bulanAktif = date('Y-m-d', strtotime('+'.$selisih.' month', strtotime( $bulanAktif )));
-            $data = array(
-                'tgl_aktif' => $bulanAktif,
-            );
-            $query = $this->Utility_model->tutup_bulan($unit, $data);
-            $data = array(
-                'status' => "success",
-            );
-            echo json_encode($data);
-            $cek = true;
-        }
+            if($selisih==0){
+                $data = array(
+                    'status' => "failed",
+                );
+                echo json_encode($data);
+                $cek=false;
+            }else if($selisih==1){
+                $bulanAktif = $bulanAktif->format("Y-m-d");
+                $bulanAktif = date('Y-m-d', strtotime('+'.$selisih.' month', strtotime( $bulanAktif )));
+                $data = array(
+                    'tgl_aktif' => $bulanAktif,
+                );
+                $query = $this->Utility_model->tutup_bulan($unit, $data);
+                $data = array(
+                    'status' => "success",
+                );
+                echo json_encode($data);
+                $cek=true;
+            }else if($selisih>1){
+                $bulanAktif = $bulanAktif->format("Y-m-d");
+                $selisih = $selisih - ($selisih-1);
+                $bulanAktif = date('Y-m-d', strtotime('+'.$selisih.' month', strtotime( $bulanAktif )));
+                $data = array(
+                    'tgl_aktif' => $bulanAktif,
+                );
+                $query = $this->Utility_model->tutup_bulan($unit, $data);
+                $data = array(
+                    'status' => "success",
+                );
+                echo json_encode($data);
+                $cek = true;
+            }
         
     }
-    else{
+        else{
         $data = array(
             'status' => "failed",
         );

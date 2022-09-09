@@ -165,9 +165,12 @@ class Input_sj_model extends CI_Model
 
     public function hapus_sj_by_btl_sj($no_sj, $btl_sj)
     {
-        $this->db->where('no_sj', $no_sj);
-        $this->db->where('btl_sj', $btl_sj);
-        $this->db->delete('tb_sj');
+        $this->db->query('delete tb_sj.* FROM tb_sj
+
+        join tb_unit on tb_unit.kd_unit = tb_sj.kd_unit 
+        where no_sj = "' . $no_sj . '" and CONCAT(SUBSTRING(tb_unit.tgl_aktif, 3, 2), 
+        SUBSTRING(tb_unit.tgl_aktif, 6, 2)) > SUBSTRING(tb_sj.no_sj, 4, 4) and 
+        tb_sj.btl_sj = "*" and tb_sj.blnaktif = ""');
     }
 
 
@@ -425,9 +428,9 @@ class Input_sj_model extends CI_Model
 
         return $query->result();
     }
-    public function batal_sj($no_sj, $data)
+    public function batal_sj($id, $data)
     {
-        $this->db->where('no_sj', $no_sj);
+        $this->db->where('id', $id);
         $this->db->update('tb_sj', $data);
     }
 }

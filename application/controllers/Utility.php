@@ -144,6 +144,7 @@ class Utility extends CI_Controller
         );
         echo json_encode($data);
     }
+    
         
         if($cek){
         $query_updateBln = $this->Utility_model->update_blnaktif($bln, $unit);

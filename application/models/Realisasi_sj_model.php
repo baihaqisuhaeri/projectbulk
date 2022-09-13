@@ -23,12 +23,12 @@ class Realisasi_sj_model extends CI_Model
 
 
         $nama = $_SESSION['nama'];
-        if(isset($_SESSION['bulanAktif'])){
-            $bulanAktif = $_SESSION['bulanAktif'];
-            $this->db->where('blnaktif', $bulanAktif);
-        }else{
-            $this->db->where('blnaktif', "");
-        }
+        // if(isset($_SESSION['bulanAktif'])){
+        //     $bulanAktif = $_SESSION['bulanAktif'];
+        //     $this->db->where('blnaktif', $bulanAktif);
+        // }else{
+        //     $this->db->where('blnaktif', "");
+        // }
         $this->db->select('*,  tb_sj.id as id');
         $this->db->group_by('tb_sj.no_sj');
         

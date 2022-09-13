@@ -278,7 +278,7 @@
                                                         <div class="form-group col-lg-4">
                                                             <label>No Faktur<span style="color: red;">*</span></label>
                                                             <input class="form-control" type="text" name="no_faktur" id="no_faktur" placeholder="Nomor Faktur">
-                                                            <span class="text-danger" id="error_keterangan"></span>
+                                                            <span class="text-danger" id="error_no_faktur"></span>
                                                         </div>
                                                     </div>
                                                     <br>
@@ -961,7 +961,7 @@
                                                     <div class="form-group col-lg-4">
                                                         <label>No Faktur<span style="color: red;">*</span></label>
                                                         <input class="form-control" type="text" name="no_faktur_2" id="no_faktur_2" placeholder="Nomor Faktur">
-                                                        <span class="text-danger" id="error_keterangan_2"></span>
+                                                        <span class="text-danger" id="error_no_faktur_2"></span>
                                                     </div>
                                                 </div>
                                                 <br>

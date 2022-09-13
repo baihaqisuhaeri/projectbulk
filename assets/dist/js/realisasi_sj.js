@@ -678,13 +678,23 @@ $(document).ready(function () {
     //   },
     // ],
     //bisa hide column
-    "aoColumnDefs": [{ "bVisible": false, "aTargets": [32,33,34] }]
+    "aoColumnDefs": [{ "bVisible": false, "aTargets": [33,34,35] }]
   });
   // fnSetColumnVis( 1, false );
 
   $("#tabel_sj tbody").on("click", ".edit_sj", function () {
     var data = table.row($(this).parents("tr")).data();
     var id = $(this).data("id");
+    console.log(id);
+    console.log();
+    if($(this).data("no_sj") == null){
+      $("#realisasi_sj").hide();
+      $("#btn_edit_sj").show();
+    }else{
+      $("#btn_edit_sj").hide();
+      $("#realisasi_sj").show();
+    }
+    
     var no_sj = data[1];
     //$("#jumlah_2").val(parseInt(data[21].qty_kirim));
     no_sj_edit = no_sj;
@@ -1230,6 +1240,7 @@ $(document).on("submit", "#edit_sj", function (e) {
   $("#error_nama_supir_2").html("");
   $("#error_kode_barang_2").html("");
   $("#error_jumlah_2").html("");
+  $("#error_no_faktur_2").html("");
   $("#error_keterangan_2").html("");
   $("#error_suplier_2").html("");
 
@@ -1466,6 +1477,118 @@ function editSj() {
   });
 }
 
+
+
+$(document).on("click", "#realisasi_sj", function () {
+
+  $("#error_unitSj_2").html("");
+  $("#error_nama_customer_2").html("");
+  $("#error_no_spm_2").html("");
+  $("#error_no_surat_jalan_2").html("");
+  $("#error_tanggal_surat_jalan_2").html("");
+  $("#error_no_kendaraan_2").html("");
+  $("#error_unit_marketing_2").html("");
+  $("#error_nama_supir_2").html("");
+  $("#error_kode_barang_2").html("");
+  $("#error_jumlah_2").html("");
+  $("#error_keterangan_2").html("");
+  $("#error_suplier_2").html("");
+  $("#error_no_faktur_2").html("");
+
+  $("#error_no_segel_2").html("");
+  $("#error_pressure_2").html("");
+  $("#error_temperatur_2").html("");
+  $("#error_nilai_persen_pengambilan_2").html("");
+  $("#error_nilai_persen_berangkat_2").html("");
+
+  var err = 0;
+
+  
+  var no_surat_jalan = $("#no_surat_jalan_2").val();
+ 
+  var jumlah = $("#jumlah_2").val();
+  var keterangan = $("#keterangan_2").val();
+  var suplier = $("#suplier_2").val();
+  var no_faktur = $("#no_faktur_2").val();
+  
+
+  
+  if (jumlah == "") {
+    $("#error_jumlah_2").html("Jumlah tidak boleh kosong!");
+    err += 1;
+  }
+  if (keterangan == "") {
+    $("#error_keterangan_2").html("Keterangan tidak boleh kosong!");
+    err += 1;
+  }
+  if (suplier == "") {
+    $("#error_suplier_2").html("Suplier tidak boleh kosong!");
+    err += 1;
+  }
+
+  if (no_faktur == "") {
+    $("#error_no_faktur_2").html("Nomor Faktur tidak boleh kosong!");
+    err += 1;
+  }
+ 
+  
+  if (err == 0) {
+    $("#modal_konfirmasi_realisasi_sj").modal("show");
+   
+  }
+
+});
+
+
+function realisasiSj() {
+  $("#modal_konfirmasi_realisasi_sj").modal("hide");
+
+  var keterangan = $("#keterangan_2").val();
+  var suplier = $("#suplier_2").val().split("_");
+  var no_faktur = $("#no_faktur_2").val();
+  console.log(suplier[0]);
+  console.log(suplier[1]);
+
+  
+  $.ajax({
+    url: "realisasi-sj/edit-sj",
+    type: "post",
+    dataType: "text",
+    data: {
+      //id: id_sj_edit,
+    
+      keterangan: keterangan,
+      k_supl: suplier[0],
+      n_supl: suplier[1],
+      no_faktur: no_faktur,
+     
+    },
+    success: function (data) {
+
+      var data = JSON.parse(data);
+      var status = data.status;
+    
+      if (status == "true") {
+        mytable = $("#tabel_sj").DataTable();
+        mytable.draw();
+        Swal.fire("Berhasil!", "Surat jalan berhasil direalisasi", "success");
+        $("#bagian_2_edit").hide();
+      } else {
+  
+        Swal.fire("Berhasil!", "Surat jalan gagal direalisasi", "success");
+        $("#bagian_2_edit").hide();
+      }
+      
+    },
+  });
+}
+
+
+
+
+
+
+
 var id_alamat = "";
 $(document).on("click", ".deleteAlamatKirim", function (event) {
   id_alamat = $(this).data("id");
@@ -1641,7 +1764,7 @@ $(document).on("change", "#bulan_aktif", function () {
         bulanAktif: bulanAktif,
       },
     },
-    "aoColumnDefs": [{ "bVisible": false, "aTargets": [32,33,34] }],
+    "aoColumnDefs": [{ "bVisible": false, "aTargets": [33,34,35] }],
     //Set column definition initialisation properties.
     "createdRow": function( row, data, dataIndex ) {
       if ( data[36] == "*" ) {

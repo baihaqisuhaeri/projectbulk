@@ -84,12 +84,12 @@ class Realisasi_sj extends CI_Controller
     {
 
 
-        if(isset($_POST['bulanAktif'])){
-            $_SESSION['bulanAktif'] = $_POST['bulanAktif'];
+        // if(isset($_POST['bulanAktif'])){
+        //     $_SESSION['bulanAktif'] = $_POST['bulanAktif'];
             
-        }else{
-            $_SESSION['bulanAktif'] = "";
-        }
+        // }else{
+        //     $_SESSION['bulanAktif'] = "";
+        // }
 
 
         $list = $this->Realisasi_sj_model->get_datatables();
@@ -142,17 +142,16 @@ class Realisasi_sj extends CI_Controller
 
 
 
-
-
-            
-           // if($p->btl_sj == "*" || $p->btl_sj == "sbl" || $p->btl_sj == "edited" ){
-            //    $row[] = '<a href="#!" style="pointer-events: none;" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> ';
-           // }
-            //else{
-                $row[] = '<a href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> ';  
-                $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';
-            //}
-            
+        if($p->flag_real == '0000-00-00 00:00:00'){
+            $row[] = '<a style="pointer-events: none;" href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> ';  
+            $row[] = '<button class="btn btn-primary btn-small btn-primary btn-rounded edit_sj" id="edit_sj" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Realisasi</button>';
+        }else{
+            $row[] = '<a  href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> ';  
+            $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded edit_sj" id="edit_sj" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Realisasi</button>';
+        }
+                
+           
+                
             
             
             $row[] = $p->blnaktif;

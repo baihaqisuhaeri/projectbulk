@@ -22,13 +22,10 @@ class Utility_model extends CI_Model
 
     public function update_blnaktif($bln, $unit)
     {
-    //     $this->db->where('CONCAT(SUBSTRING(tgl_sj, 3, 2), SUBSTRING(tgl_sj, 6,2) )',$bln);
-    //     $this->db->where('blnaktif',"");
-    //    // $this->db->set('blnaktif', 'CONCAT(SUBSTRING(tgl_sj, 3, 2), SUBSTRING(tgl_sj, 6,2) )', FALSE);
-    //     $this->db->set('blnaktif', 'CONCAT(SUBSTRING(tgl_sj, 3, 2),\',\',\''.' SUBSTRING(tgl_sj, 6,2)'.'\')', FALSE);
-    //     $this->db->update('tb_sj');
-       $query =  $this->db->query('update tb_sj set blnaktif = CONCAT(SUBSTRING(tgl_sj, 3, 2), SUBSTRING(tgl_sj, 6,2) )
-        where CONCAT(SUBSTRING(tgl_sj, 3, 2), SUBSTRING(tgl_sj, 6,2) ) = '."'$bln'". ' and blnaktif = "" and kd_unit = '."'$unit'");
+        
+       $query =  $this->db->query('update tb_sj set blnaktif = '."'$bln'". '
+        where CONCAT(SUBSTRING(tgl_sj, 3, 2), SUBSTRING(tgl_sj, 6,2) ) <= '."'$bln'". ' and 
+        blnaktif = "" and kd_unit = '."'$unit'");
         if($query){
             return true;
         }else{
@@ -36,6 +33,5 @@ class Utility_model extends CI_Model
         }
 
     }
-    //update tb_sj set blnaktif = CONCAT(SUBSTRING(tgl_sj, 3, 2), SUBSTRING(tgl_sj, 6,2) )
-    // where CONCAT(SUBSTRING(tgl_sj, 3, 2), SUBSTRING(tgl_sj, 6,2) ) = "2205" and blnaktif = ""
+   
 }

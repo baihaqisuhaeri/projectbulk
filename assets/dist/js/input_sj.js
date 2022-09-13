@@ -631,6 +631,8 @@ $(document).on("submit", "#tambahSuratJalan", function (e) {
   $("#error_nama_supir").html("");
   $("#error_kode_barang").html("");
   $("#error_jumlah").html("");
+  $("#error_no_faktur").html("");
+  
   $("#error_keterangan").html("");
   $("#error_suplier").html("");
 
@@ -709,6 +711,10 @@ $(document).on("submit", "#tambahSuratJalan", function (e) {
   }
   if (keterangan == "") {
     $("#error_keterangan").html("Keterangan tidak boleh kosong!");
+    err += 1;
+  }
+  if (no_faktur == "") {
+    $("#error_no_faktur").html("Nomor Faktur tidak boleh kosong!");
     err += 1;
   }
   if (suplier == "") {
@@ -1521,6 +1527,8 @@ $(document).on("submit", "#edit_sj", function (e) {
   $("#error_nama_supir_2").html("");
   $("#error_kode_barang_2").html("");
   $("#error_jumlah_2").html("");
+  $("#error_no_faktur_2").html("");
+  
   $("#error_keterangan_2").html("");
   $("#error_suplier_2").html("");
 
@@ -1592,6 +1600,10 @@ $(document).on("submit", "#edit_sj", function (e) {
   }
   if (keterangan == "") {
     $("#error_keterangan_2").html("Keterangan tidak boleh kosong!");
+    err += 1;
+  }
+  if (no_faktur == "") {
+    $("#error_no_faktur_2").html("Nomor Faktur tidak boleh kosong!");
     err += 1;
   }
   if (suplier == "") {

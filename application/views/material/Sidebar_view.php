@@ -246,14 +246,14 @@
                                 echo '<a href="input-sj" class="nav-link active">
                                 <i class="nav-icon fas fa-file"></i>
                                 <p>
-                                    Surat Jalan
+                                    Input Surat Jalan
                                 </p>
                             </a>';
                             } else {
                                 echo '<a href="input-sj" class="nav-link">
                                 <i class="nav-icon fas fa-file"></i>
                                 <p>
-                                    Surat Jalan
+                                    Input Surat Jalan
                                 </p>
                             </a>';
                             }

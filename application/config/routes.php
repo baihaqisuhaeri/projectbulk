@@ -136,7 +136,6 @@ $route['input-sj/tambah-sj'] = 'Input_sj/tambah_sj';
 $route['input-sj/get-unit-sj-edit'] = 'Input_sj/get_unit_sj';
 $route['input-sj/get-sj'] = 'Input_sj/get_sj';
 $route['input-sj/get-supplier-by-no-sj'] = 'Input_sj/get_supplier_by_no_sj';
-
 $route['input-sj/hapus-alamat-kirim'] = 'Input_sj/hapus_alamat_kirim';
 $route['input-sj/edit-alamat-kirim'] = 'Input_sj/edit_alamat_kirim';
 $route['input-sj/cetak'] = 'Cetak/print';
@@ -171,14 +170,11 @@ $route['realisasi-sj/get-kg-barang'] = 'Realisasi_sj/get_kg_barang';
 $route['realisasi-sj/get-suplier'] = 'Realisasi_sj/get_suplier';
 $route['realisasi-sj/get-ppn'] = 'Realisasi_sj/get_ppn';
 $route['realisasi-sj/get-data-spm'] = 'Realisasi_sj/get_data_spm';
-$route['realisasi-sj/tambah-sj'] = 'Realisasi_sj/tambah_sj';
 $route['realisasi-sj/get-unit-sj-edit'] = 'Realisasi_sj/get_unit_sj';
 $route['realisasi-sj/get-sj'] = 'Realisasi_sj/get_sj';
 $route['realisasi-sj/get-supplier-by-no-sj'] = 'Realisasi_sj/get_supplier_by_no_sj';
-
 $route['realisasi-sj/hapus-alamat-kirim'] = 'Realisasi_sj/hapus_alamat_kirim';
 $route['realisasi-sj/edit-alamat-kirim'] = 'Realisasi_sj/edit_alamat_kirim';
-$route['realisasi-sj/cetak'] = 'Cetak/print';
 $route['realisasi-sj/get-bulan-aktif'] = 'Realisasi_sj/get_bulan_aktif';
 $route['realisasi-sj/get-bulan-aktif-sj'] = 'Realisasi_sj/get_bulan_aktif_sj';
-$route['realisasi-sj/batal-sj'] = 'Realisasi_sj/batal_sj';
+$route['realisasi-sj/realisasi-sj'] = 'Realisasi_sj/realisasi_sj';

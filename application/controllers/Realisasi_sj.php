@@ -84,12 +84,12 @@ class Realisasi_sj extends CI_Controller
     {
 
 
-        // if(isset($_POST['bulanAktif'])){
-        //     $_SESSION['bulanAktif'] = $_POST['bulanAktif'];
+        if(isset($_POST['bulanAktif'])){
+            $_SESSION['bulanAktif'] = $_POST['bulanAktif'];
             
-        // }else{
-        //     $_SESSION['bulanAktif'] = "";
-        // }
+        }else{
+            $_SESSION['bulanAktif'] = "";
+        }
 
 
         $list = $this->Realisasi_sj_model->get_datatables();
@@ -126,8 +126,8 @@ class Realisasi_sj extends CI_Controller
             $row[] = $p->k_sales;
             $row[] = $p->unit_mkt;
             $row[] = $p->k_barang;
-            $row[] = $p->qty_kirim;
-            $row[] = $p->kg_kirim . "kg";
+            $row[] = $p->qty_real;
+            $row[] = $p->kg_real . "kg";
             $row[] = $p->ket;
             $row[] = $p->n_supl;
             $row[] = $p->no_faktur;
@@ -155,7 +155,7 @@ class Realisasi_sj extends CI_Controller
             
             
             $row[] = $p->blnaktif;
-            $row[] = $p->btl_sj;
+            $row[] = $p->flag_real;
             $row[] = $p->k_altk;
 
             
@@ -1301,4 +1301,61 @@ class Realisasi_sj extends CI_Controller
             echo json_encode($data);
         }
     }
+
+    function realisasi_sj()
+    {
+        
+        
+        $no_sj = $_POST['no_sj'];
+        
+
+        
+        date_default_timezone_set('Asia/Jakarta');
+        $tgl_real = date("Y-m-d h:i:s");
+       
+      
+        $qty_real = $_POST['qty_real'];
+        $kg_real = $_POST['kg_real'];
+        $keterangan = $_POST['keterangan'];
+        $k_supl = $_POST['k_supl'];
+        $n_supl = $_POST['n_supl'];
+        $no_faktur = $_POST['no_faktur'];
+       
+
+        $data = array(
+            'no_sj' => $no_sj,
+        
+            'qty_real' => $qty_real,
+            'kg_real' => $kg_real,
+            'ket' => $keterangan,
+            'k_supl' => $k_supl,
+            'n_supl' => $n_supl,
+            'no_faktur' => $no_faktur,
+            'flag_real' => $tgl_real
+            
+        );
+
+        $this->Realisasi_sj_model->realisasi_sj($no_sj, $data);
+
+        
+        $query = $this->db->affected_rows();
+
+        if ($query) {
+            $data = array(
+                'status' => 'true',
+            );
+            echo json_encode($data);
+        } else {
+            $data = array(
+                'status' => 'false',
+            );
+            echo json_encode($data);
+        }
+    
+    
+    }
+
+
+
+
 }

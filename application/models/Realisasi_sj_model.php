@@ -23,16 +23,17 @@ class Realisasi_sj_model extends CI_Model
 
 
         $nama = $_SESSION['nama'];
-        // if(isset($_SESSION['bulanAktif'])){
-        //     $bulanAktif = $_SESSION['bulanAktif'];
-        //     $this->db->where('blnaktif', $bulanAktif);
-        // }else{
-        //     $this->db->where('blnaktif', "");
-        // }
-        $this->db->select('*,  tb_sj.id as id');
-        $this->db->group_by('tb_sj.no_sj');
+        if(isset($_SESSION['bulanAktif'])){
+            $bulanAktif = $_SESSION['bulanAktif'];
+            $this->db->where('blnaktif', $bulanAktif);
+        }else{
+            $this->db->where('blnaktif', "");
+        }
+        $this->db->select('*, tb_sj.id as id');
+       // $this->db->group_by('tb_sj.no_sj');
         
         $this->db->join('hak_akses', 'tb_sj.kd_unit = hak_akses.kode_unit');
+        $this->db->where('tb_sj.btl_sj', '');
         $this->db->where('hak_akses.nama_user', $nama);
         //$this->db->where('tb_sj.btl_sj', "");
         $this->db->order_by('no_sj asc');
@@ -392,6 +393,14 @@ class Realisasi_sj_model extends CI_Model
     {
         $this->db->where('no_sj', $no_sj);
         $this->db->where('btl_sj', $btl_sj);
+        $this->db->update('tb_sj', $data);
+    }
+
+    public function realisasi_sj($no_sj, $data)
+    {
+        $this->db->where('no_sj', $no_sj);
+        $this->db->where('btl_sj', '');
+        $this->db->where('flag_real', '');
         $this->db->update('tb_sj', $data);
     }
 

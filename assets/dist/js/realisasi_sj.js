@@ -657,8 +657,9 @@ $(document).ready(function () {
     },
 
     "createdRow": function( row, data, dataIndex ) {
-      if ( data[36] == "*" ) {
-          $(row).addClass( 'bg-danger' );
+      
+      if ( data[36] != "0000-00-00 00:00:00" ) {
+        $(row).css("background-color", "#9FFF8E");
       }else if(data[36] == "stl"){
         $(row).css("background-color", "gray");
       }else if(data[36] == "sbl"){
@@ -1546,28 +1547,32 @@ function realisasiSj() {
   var keterangan = $("#keterangan_2").val();
   var suplier = $("#suplier_2").val().split("_");
   var no_faktur = $("#no_faktur_2").val();
-  console.log(suplier[0]);
-  console.log(suplier[1]);
+  var no_sj = $("#no_surat_jalan_2").val();
+  var qty_real = $("#jumlah_2").val(); 
+  var kg_real = $("#kilogram_2").val(); 
+  
 
   
   $.ajax({
-    url: "realisasi-sj/edit-sj",
+    url: "realisasi-sj/realisasi-sj",
     type: "post",
     dataType: "text",
     data: {
-      //id: id_sj_edit,
-    
+      no_sj: no_sj,
       keterangan: keterangan,
       k_supl: suplier[0],
       n_supl: suplier[1],
       no_faktur: no_faktur,
+      qty_real: qty_real,
+      kg_real: kg_real,
      
     },
     success: function (data) {
 
       var data = JSON.parse(data);
       var status = data.status;
-    
+      
+
       if (status == "true") {
         mytable = $("#tabel_sj").DataTable();
         mytable.draw();
@@ -1575,7 +1580,7 @@ function realisasiSj() {
         $("#bagian_2_edit").hide();
       } else {
   
-        Swal.fire("Berhasil!", "Surat jalan gagal direalisasi", "success");
+        Swal.fire("error", "Surat jalan gagal direalisasi", "success");
         $("#bagian_2_edit").hide();
       }
       
@@ -1715,19 +1720,7 @@ function editAlamatKirim() {
   });
 }
 
-// function hasilPdf() {
-//   var win = window.open("realisasi-sj/cetak", "_blank");
-//   $.ajax({
-//     url: "realisasi-sj/cetak",
-//     type: "post",
-//     data: { cetak_no_sj: "coba aja" },
-//     success: function (data) {
-//       //  $("#no_spm").html(data);
-//       //$("#unit_spm").html(data);
-//     },
-//   });
-//   win.focus();
-// }
+
 
 $("#nama_customer_2").on("change", function () {
   var kodeCustomer = $("#nama_customer_2").val().split("_");
@@ -1767,9 +1760,11 @@ $(document).on("change", "#bulan_aktif", function () {
     "aoColumnDefs": [{ "bVisible": false, "aTargets": [33,34,35] }],
     //Set column definition initialisation properties.
     "createdRow": function( row, data, dataIndex ) {
-      if ( data[36] == "*" ) {
-          $(row).addClass( 'bg-danger' );
-      }else if(data[36] == "stl"){
+      
+      if ( data[34] != "0000-00-00 00:00:00" ) {
+        $(row).css("background-color", "#9FFF8E");
+      }
+      else if(data[36] == "stl"){
         $(row).css("background-color", "gray");
       }else if(data[36] == "sbl"){
         $(row).css("background-color", "red");

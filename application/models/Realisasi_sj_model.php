@@ -377,7 +377,7 @@ class Realisasi_sj_model extends CI_Model
         return $query->result();
     }
 
-    public function edit_sj($id, $data)
+    public function edit_realisasi_sj($id, $data)
     {
         $this->db->where('id', $id);
         $this->db->update('tb_sj', $data);

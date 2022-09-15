@@ -658,7 +658,7 @@ $(document).ready(function () {
 
     "createdRow": function( row, data, dataIndex ) {
       
-      if ( data[36] != "0000-00-00 00:00:00" ) {
+      if ( data[34] != "0000-00-00 00:00:00" ) {
         $(row).css("background-color", "#9FFF8E");
       }else if(data[36] == "stl"){
         $(row).css("background-color", "gray");
@@ -1253,6 +1253,8 @@ $(document).on("submit", "#edit_sj", function (e) {
 
   var err = 0;
 
+  
+
   var unitSj = $("#unitSj_2").val();
   var nama_customer = $("#nama_customer_2").val();
   var no_spm = $("#no_spm_2").val();
@@ -1272,41 +1274,6 @@ $(document).on("submit", "#edit_sj", function (e) {
   var nilai_persen_pengambilan = $("#nilai_persen_pengambilan_2").val();
   var nilai_persen_berangkat = $("#nilai_persen_berangkat_2").val();
 
-  if (unitSj == "") {
-    $("#error_unitSj_2").html("Unit tidak boleh kosong!");
-    err += 1;
-  }
-  if (nama_customer == "") {
-    $("#error_nama_customer_2").html("Nama Customer harus dipilih!");
-    err += 1;
-  }
-  if (no_spm == "") {
-    $("#error_no_spm_2").html("Nomor SPM harus dipilih!");
-    err += 1;
-  }
-
-  if (tanggal_surat_jalan == "") {
-    $("#error_tanggal_surat_jalan_2").html(
-      "Tanggal Surat Jalan tidak boleh kosong!"
-    );
-    err += 1;
-  }
-  if (no_kendaraan == "") {
-    $("#error_no_kendaraan_2").html("Kendaraan harus dipilih!");
-    err += 1;
-  }
-  if (unit_marketing == "") {
-    $("#error_unit_marketing_2").html("Unit marketing tidak boleh kosong!");
-    err += 1;
-  }
-  if (nama_supir == "") {
-    $("#error_nama_supir_2").html("Nama Supir harus dipilih!");
-    err += 1;
-  }
-  if (kode_barang == "") {
-    $("#error_kode_barang_2").html("Barang harus dipilih!");
-    err += 1;
-  }
   if (jumlah == "") {
     $("#error_jumlah_2").html("Jumlah tidak boleh kosong!");
     err += 1;
@@ -1320,92 +1287,27 @@ $(document).on("submit", "#edit_sj", function (e) {
     err += 1;
   }
 
-  if (no_segel == "") {
-    $("#error_no_segel_2").html("Nomor Segel tidak boleh kosong!");
+  if (no_faktur == "") {
+    $("#error_no_faktur_2").html("Nomor Faktur tidak boleh kosong!");
     err += 1;
   }
-  if (pressure == "") {
-    $("#error_pressure_2").html("Pressure tidak boleh kosong!");
-    err += 1;
-  }
-  if (temperatur == "") {
-    $("#error_temperatur_2").html("Temperatur tidak boleh kosong!");
-    err += 1;
-  }
-  if (nilai_persen_pengambilan == "") {
-    $("#error_nilai_persen_pengambilan_2").html(
-      "Nilai pengambilan tidak boleh kosong!"
-    );
-    err += 1;
-  }
-  if (nilai_persen_berangkat == "") {
-    $("#error_nilai_persen_berangkat_2").html(
-      "Nilai berangkat tidak boleh kosong!"
-    );
-    err += 1;
-  }
+ 
+  
+  
   if (err == 0) {
-    var kg_kirim = $("#kilogram_2").val();
-    var noUrutSpm = $("#no_spm_2").val();
-    $.ajax({
-      url: "realisasi-sj/get-volume-spm",
-      type: "post",
-      dataType: "JSON",
-      data: {
-        noUrutSpm: noUrutSpm,
-        no_surat_jalan: no_surat_jalan,
-        status_edit: "aktif",
-      },
-      success: function (data) {
-        //console.log(data.volume_spm);
-
-        if (parseFloat(kg_kirim) > data.volume_spm) {
-          $("#error_kilogram_2").html(
-            "Maaf maksimal volume yang bisa diisi adalah " +
-              parseFloat(data.volume_spm) +
-              " kg"
-          );
-        } else {
-          $("#error_kilogram_2").html("");
-          $("#modal_konfirmasi_edit_sj").modal("show");
-        }
-      },
-    });
+    $("#modal_konfirmasi_edit_sj").modal("show");
   }
 });
 
 function editSj() {
   $("#modal_konfirmasi_edit_sj").modal("hide");
 
-  var unitSj = $("#unitSj_2").val();
-  var customer = $("#nama_customer_2").val().split("_");
-  var alamat_kirim1 = $("#alamat1_2").val();
-  var alamat_kirim2 = $("#alamat2_2").val();
-  var alamat_kirim3 = $("#alamat3_2").val();
-  var k_altk = $("#kode_alamat_2").val();
-  var npwp = $("#npwp_2").val();
-
-  var no_po = $("#nomor_po_2").val();
-  var tgl_po = $("#tanggal_po_2").val();
-  var ppn = $("#ppn_2").val();
-
-  var no_spm = $("#no_spm_2").val();
-  var no_sj = no_sj_edit;
-  var tanggal_surat_jalan = $("#tanggal_surat_jalan_2").val();
-  var no_kendaraan = $("#no_kendaraan_2").val();
-  var unit_marketing = $("#unit_marketing_2").val();
-  var supir = $("#nama_supir_2").val().split("_");
-  var barang = $("#kode_barang_2").val().split("_");
-  var jumlah = $("#jumlah_2").val();
-  var kg_kirim = $("#kilogram_2").val();
   var keterangan = $("#keterangan_2").val();
   var suplier = $("#suplier_2").val().split("_");
   var no_faktur = $("#no_faktur_2").val();
-  var no_segel = $("#no_segel_2").val();
-  var pressure = $("#pressure_2").val();
-  var temperatur = $("#temperatur_2").val();
-  var nilai_persen_pengambilan = $("#nilai_persen_pengambilan_2").val();
-  var nilai_persen_berangkat = $("#nilai_persen_berangkat_2").val();
+  var no_sj = $("#no_surat_jalan_2").val();
+  var qty_real = $("#jumlah_2").val(); 
+  var kg_real = $("#kilogram_2").val(); 
 
   $.ajax({
     url: "realisasi-sj/edit-sj",
@@ -1413,49 +1315,13 @@ function editSj() {
     dataType: "text",
 
     data: {
-      id: id_sj_edit,
-      unitSj: unitSj,
-      kode_customer: customer[0],
-      nama_customer: customer[1],
-      al1_cus: customer[2],
-      al2_cus: customer[3],
-      al3_cus: customer[4],
-      k_wilayah: customer[5],
-      npwp: customer[6],
-      alamat_kirim1: alamat_kirim1,
-      alamat_kirim2: alamat_kirim2,
-      alamat_kirim3: alamat_kirim3,
-      k_altk: k_altk,
-      npwp_krm: npwp,
-      no_po: no_po,
-      tgl_po: tgl_po,
-      ppn: ppn,
-      no_spm: no_spm,
-      spm_brlk: spm_brlk,
       no_sj: no_sj,
-      tanggal_surat_jalan: tanggal_surat_jalan,
-      no_kendaraan: no_kendaraan,
-      unit_marketing: unit_marketing,
-      nama_supir: supir[2],
-      kode_supir: supir[0],
-      kode_barang: barang[0],
-      k_div: barang[1],
-      kode_berat: barang[2],
-      h_jual: barang[3],
-      kode_tim: barang[4],
-      jumlah: jumlah,
-      kg_kirim: kg_kirim,
       keterangan: keterangan,
       k_supl: suplier[0],
       n_supl: suplier[1],
       no_faktur: no_faktur,
-      no_segel: no_segel,
-      pressure: pressure,
-      temperatur: temperatur,
-      nilai_persen_pengambilan: nilai_persen_pengambilan,
-      nilai_persen_berangkat: nilai_persen_berangkat,
-      tk: tk_sj,
-      blnaktif: blnaktif_sj
+      qty_real: qty_real,
+      kg_real: kg_real,
     },
     success: function (data) {
       // console.log(data);

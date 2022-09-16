@@ -178,3 +178,10 @@ $route['realisasi-sj/edit-alamat-kirim'] = 'Realisasi_sj/edit_alamat_kirim';
 $route['realisasi-sj/get-bulan-aktif'] = 'Realisasi_sj/get_bulan_aktif';
 $route['realisasi-sj/get-bulan-aktif-sj'] = 'Realisasi_sj/get_bulan_aktif_sj';
 $route['realisasi-sj/realisasi-sj'] = 'Realisasi_sj/realisasi_sj';
+
+
+
+
+$route['verifikasi-sj'] = 'Verifikasi_sj';
+
+$route['verifikasi-sj/tabel-sj'] = 'Verifikasi_sj/ajax_list';

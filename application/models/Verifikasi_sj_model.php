@@ -440,4 +440,16 @@ class Verifikasi_sj_model extends CI_Model
         $this->db->where('no_sj', $no_sj);
         $this->db->update('tb_sj', $data);
     }
+
+    public function get_barang_verifikasi($unit, $k_barang)
+    {
+        $this->db->select('*');
+        $this->db->from('dbm002');
+        $this->db->where('kd_unit', $unit);
+        $this->db->where('k_barang', $k_barang);
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+    
 }

@@ -183,5 +183,32 @@ $route['realisasi-sj/realisasi-sj'] = 'Realisasi_sj/realisasi_sj';
 
 
 $route['verifikasi-sj'] = 'Verifikasi_sj';
-
 $route['verifikasi-sj/tabel-sj'] = 'Verifikasi_sj/ajax_list';
+$route['verifikasi-sj/hapus-sj'] = 'Verifikasi_sj/hapus_sj';
+$route['verifikasi-sj/edit-sj'] = 'Verifikasi_sj/edit_verifikasi_sj';
+$route['verifikasi-sj/unit-sj'] = 'Verifikasi_sj/get_unit_sj';
+$route['verifikasi-sj/customer'] = 'Verifikasi_sj/get_customer';
+$route['verifikasi-sj/tabel-alamat-kirim'] = 'Verifikasi_sj/get_alamat_kirim';
+$route['verifikasi-sj/get-nama-customer'] = 'Verifikasi_sj/get_nama_customer';
+$route['verifikasi-sj/tambah-alamat-baru'] = 'Verifikasi_sj/tambah_alamat_baru';
+$route['verifikasi-sj/get-no-spm'] = 'Verifikasi_sj/get_no_spm';
+$route['verifikasi-sj/get-volume-spm'] = 'Verifikasi_sj/get_volume_spm';
+$route['verifikasi-sj/get-mobil-sj'] = 'Verifikasi_sj/get_mobil_sj';
+$route['verifikasi-sj/get-supir-sj'] = 'Verifikasi_sj/get_supir_sj';
+$route['verifikasi-sj/get-barang-sj'] = 'Verifikasi_sj/get_barang_sj';
+$route['verifikasi-sj/get-unit-marketing'] = 'Verifikasi_sj/get_unit_marketing';
+$route['verifikasi-sj/get-kg-barang'] = 'Verifikasi_sj/get_kg_barang';
+$route['verifikasi-sj/get-suplier'] = 'Verifikasi_sj/get_suplier';
+$route['verifikasi-sj/get-ppn'] = 'Verifikasi_sj/get_ppn';
+$route['verifikasi-sj/get-data-spm'] = 'Verifikasi_sj/get_data_spm';
+$route['verifikasi-sj/get-unit-sj-edit'] = 'Verifikasi_sj/get_unit_sj';
+$route['verifikasi-sj/get-sj'] = 'Verifikasi_sj/get_sj';
+$route['verifikasi-sj/get-supplier-by-no-sj'] = 'Verifikasi_sj/get_supplier_by_no_sj';
+$route['verifikasi-sj/hapus-alamat-kirim'] = 'Verifikasi_sj/hapus_alamat_kirim';
+$route['verifikasi-sj/edit-alamat-kirim'] = 'Verifikasi_sj/edit_alamat_kirim';
+$route['verifikasi-sj/get-bulan-aktif'] = 'Verifikasi_sj/get_bulan_aktif';
+$route['verifikasi-sj/get-bulan-aktif-sj'] = 'Verifikasi_sj/get_bulan_aktif_sj';
+$route['verifikasi-sj/verifikasi-sj'] = 'Verifikasi_sj/verifikasi_sj';
+$route['verifikasi-sj/get-harga-barang'] = 'Verifikasi_sj/get_barang_verifikasi';
+
+

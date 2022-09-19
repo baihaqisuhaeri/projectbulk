@@ -377,10 +377,13 @@
                                                         <span class="text-danger" id="error_tanggal_po_2"></span>
                                                     </div>
 
+                                                    
+
                                                     <div class="form-group col-lg-4">
-                                                        <label>PPN<span style="color: red;">*</span></label>
-                                                        <input class="form-control" type="text" name="ppn_2" id="ppn_2" placeholder="PPN" disabled>
-                                                        <span class="text-danger" id="error_ppn_2"></span>
+                                                        <label>Kode Barang<span style="color: red;">*</span></label>
+                                                        <select disabled class="form-control select2" id="kode_barang_2" name="kode_barang_2">
+                                                        </select>
+                                                        <span class="text-danger" id="error_kode_barang_2"></span>
                                                     </div>
 
                                                 </div>
@@ -448,38 +451,13 @@
                                                     </div>
 
                                                 </div>
-                                                <br>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="form-group col-lg-4">
-                                                        <label>Kode Barang<span style="color: red;">*</span></label>
-                                                        <select disabled class="form-control select2" id="kode_barang_2" name="kode_barang_2">
-                                                        </select>
-                                                        <span class="text-danger" id="error_kode_barang_2"></span>
-                                                    </div>
-                                                    
-                                                    <div class="form-group col-lg-4">
-                                                        <label>Pengambilan dari<span style="color: red;">*</span></label>
-                                                        <select class="form-control select2" id="suplier_2" name="suplier_2">
-                                                        </select>
-                                                        <span class="text-danger" id="error_suplier_2"></span>
-                                                    </div>
 
-                                                    <div class="form-group col-lg-4">
-                                                        <label>No Faktur<span style="color: red;">*</span></label>
-                                                        <input class="form-control" type="text" name="no_faktur_2" id="no_faktur_2" placeholder="Nomor Faktur">
-                                                        <span class="text-danger" id="error_no_faktur_2"></span>
-                                                    </div>
-
-                                                    
-                                                </div>
 
                                                 <div class="row">
-                                                    
 
                                                     <div class="form-group col-lg-4">
-                                                        <label>Jumlah<span style="color: red;">*</span></label>
-                                                        <input class="form-control" type="number" name="jumlah_2" id="jumlah_2" placeholder="jumlah">Ton / Tabung
+                                                        <label>Jumlah Realisasi<span style="color: red;">*</span></label>
+                                                        <input disabled class="form-control" type="number" name="jumlah_2" id="jumlah_2" placeholder="jumlah">Ton / Tabung
                                                         <span class="text-danger" id="error_jumlah_2"></span>
                                                     </div>
 
@@ -489,14 +467,74 @@
                                                         <span class="text-danger" id="error_kilogram_2"></span>
                                                     </div>
 
+                                                    
+
+                                                </div>
+
+                                                <br>
+                                                <hr>
+                                                <div class="row">
                                                     <div class="form-group col-lg-4">
-                                                        <label>Keterangan<span style="color: red;">*</span></label>
-                                                        <input class="form-control" type="text" name="keterangan_2" id="keterangan_2" placeholder="Keterangan">
-                                                        <span class="text-danger" id="error_keterangan_2"></span>
+                                                        <label>PPN<span style="color: red;">*</span></label>
+                                                        <input class="form-control" type="text" name="ppn_2" id="ppn_2" placeholder="PPN" disabled>
+                                                        <span class="text-danger" id="error_ppn_2"></span>
                                                     </div>
+                                                    
+                                                    
+
+                                                    <div class="form-group col-lg-4">
+                                                        <label>Harga Jual<span style="color: red;">*</span></label>
+                                                        <input class="form-control" type="text" name="harga_jual_2" id="harga_jual_2" placeholder="Harga Jual" disabled>
+                                                        <span class="text-danger" id="error_harga_jual_2"></span>
+                                                    </div>
+                                                    
+                                                    
+
+                                                    
+                                                </div>
+
+                                                <div class="row">
+                                                    
+                                                    <div class="form-group col-lg-2">
+                                                        <label>Discount<span style="color: red;"></span></label>
+                                                       
+                                                        <input class="form-control" type="text" name="discount_2" id="discount_2" placeholder="Discount">
+                                                        <span class="text-danger" id="error_discount_2"></span>
+                                                    </div>
+                                                    <div class="form-group col-lg-2">
+                                                        <label>Rp.<span style="color: red;">*</span></label>
+                                                        <input disabled class="form-control" type="text" name="rp_2" id="rp_2" placeholder="">
+                                                        <span class="text-danger" id="error_rp_2"></span>
+                                                    </div>
+
+                                                    <div class="form-group col-lg-4">
+                                                        <label>Transport<span style="color: red;">*</span></label>
+                                                        <input class="form-control" type="text" name="transport_2" id="transport_2" placeholder="Transport">
+                                                        <span class="text-danger" id="error_transport_2"></span>
+                                                    </div>
+                                                    
                                                     
                                                 </div>
                                                
+
+                                                <div class="row">
+                                                    
+                                                   
+
+                                                    <div class="form-group col-lg-4">
+                                                        <label>PPN<span style="color: red;">*</span></label>
+                                                        <input disabled class="form-control" type="text" name="harga_ppn_2" id="harga_ppn_2" placeholder="PPN">
+                                                        <span class="text-danger" id="error_harga_ppn_2"></span>
+                                                    </div>
+
+                                                    <div class="form-group col-lg-4">
+                                                        <label>Jumlah(total)<span style="color: red;">*</span></label>
+                                                        <input disabled class="form-control" type="text" name="jumlah_total_2" id="jumlah_total_2" placeholder="Jumlah(total)">
+                                                        <span class="text-danger" id="error_jumlah_total_2"></span>
+                                                    </div>
+                                                    
+                                                    
+                                                </div>
                                                 
                                                 
                                                 

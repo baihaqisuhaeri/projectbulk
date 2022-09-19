@@ -155,7 +155,7 @@ class Verifikasi_sj extends CI_Controller
             
             
             $row[] = $p->blnaktif;
-            $row[] = $p->flag_real;
+            $row[] = $p->flag_ver;
             $row[] = $p->k_altk;
 
             
@@ -1296,6 +1296,24 @@ class Verifikasi_sj extends CI_Controller
         }
     
     
+    }
+
+    function get_barang_verifikasi(){
+        $k_barang = $_POST['k_barang'];
+        $unit = $_POST['unitSj'];
+
+
+
+        $query = $this->Verifikasi_sj_model->get_barang_verifikasi($unit, $k_barang);
+
+        foreach ($query as $q) {
+            $h_jual = $q->h_jual;
+        }
+        //$bln_aktif = substr($bln_aktif, 0, 7);
+        $data = array(
+            'h_jual' => $h_jual,
+        );
+        echo json_encode($data);
     }
 
 

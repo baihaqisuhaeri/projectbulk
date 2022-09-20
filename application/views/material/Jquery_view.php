@@ -44,3 +44,12 @@
     });
 </script>
 
+<script type="text/javascript">
+    $(document).ready(function($) {
+        // Format mata uang.
+        $('.persen').mask('999%', {
+            reverse: true
+        });
+    });
+</script>
+

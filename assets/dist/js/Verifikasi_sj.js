@@ -769,10 +769,11 @@ $(document).ready(function () {
     get_barang_sj_edit(unit, data[19]);
     get_harga_barang(unit, data[19]);
     get_no_segel_edit(no_sj);
-    //console.log(k_supl);
+    console.log($("#harga_jual_2").val());
     
 
-    $("#btn_edit").val(id);
+    //$("#btn_edit").val(id);
+
     
   });
 
@@ -1161,7 +1162,8 @@ function get_harga_barang(unitSj, k_barang) {
     },
     success: function (data) {
       data = JSON.parse(data);
-      $("#harga_jual_2").val(data.h_jual);
+      $("#harga_jual_2").val(parseInt(data.h_jual).toFixed(2));
+     // $("").val(data.h_jual.toFixed(2));
       //$("#unit_spm").html(data);
     },
   });
@@ -1635,5 +1637,113 @@ $(document).on("change", "#bulan_aktif", function () {
   
 });
 
+$("#discount_2").on("change", function () {
+  
+   $('input[name="rp_2"]').mask('#');
+   
+  var harga_diskon = parseInt($("#discount_2").val()) * $("#harga_jual_2").val() * $("#kilogram_2").val() / 100;
+  $("#rp_2").val(parseInt(harga_diskon));
+  $('#rp_2').mask('000,000,000,000,000,000.00', {
+    reverse: true
+});
+var jumlah_temp = $("#rp_2").val();
+jumlah_temp = jumlah_temp.substring(0, jumlah_temp.length-3);
+jumlah_temp = jumlah_temp.replace(".", "");
+//console.log(parseInt(jumlah_temp)+1000000);
+if($("#jumlah_total_2").val()==""){
+  $("#jumlah_total_2").val(jumlah_temp+$("#jumlah_total_2").val());
+  //$('input[name="jumlah_total_2"]').mask('#');
+  $('#jumlah_total_2').mask('000,000,000,000,000,000.00', {
+    reverse: true
+});
+}else{
+  var jumlah_total = $("#jumlah_total_2").val();
+   
+  jumlah_total = jumlah_total.substring(0, jumlah_total.length-3);
+  jumlah_total = jumlah_total.replace(",", "");
+  jumlah_total = jumlah_total.replace(".", "");
+  jumlah_total = jumlah_total.replace(".", "");
+  console.log(jumlah_total);
+  // console.log(jumlah_temp);
+  // console.log(parseInt(jumlah_total));
+  $("#jumlah_total_2").val(parseInt(jumlah_total)+parseInt(jumlah_temp));
+  console.log($("#jumlah_total_2").val());
+  $('input[name="jumlah_total_2"]').mask('#');
+    $('#jumlah_total_2').mask('000,000,000,000,000,000.00', {
+      reverse: true
+  });
+}
 
-//1 september 2022
+});
+
+
+$("#transport_2").on("change", function () {
+  var jumlah_total = $("#transport_2").val();
+  
+  //jumlah_total = jumlah_total.substring(0, jumlah_total.length-3);
+   jumlah_total = jumlah_total.replace(".", "");
+   jumlah_total = jumlah_total.replace(",", "");
+   jumlah_total = jumlah_total.replace(",", "");//nyampe sini 20 September 2022
+   
+  console.log(jumlah_total);
+  //console.log( parseInt($("#transport_2").val().replace(",", ""))+1000);
+  if($("#jumlah_total_2").val()==""){
+    $("#jumlah_total_2").val(parseInt(jumlah_total)+$("#jumlah_total_2").val());
+    $('#jumlah_total_2').mask('000,000,000,000,000,000.00', {
+      reverse: true
+  });
+  }else{
+  
+  }
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// var rupiah = document.getElementById("rp_2");
+// rupiah.addEventListener("keyup", function(e) {
+//   // tambahkan 'Rp.' pada saat form di ketik
+//   // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+//   rupiah.value = formatRupiah(this.value, "Rp. ");
+// });
+
+// /* Fungsi formatRupiah */
+// function formatRupiah(angka, prefix) {
+//   var number_string = angka.replace(/[^,\d]/g, "").toString(),
+//     split = number_string.split(","),
+//     sisa = split[0].length % 3,
+//     rupiah = split[0].substr(0, sisa),
+//     ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+//   // tambahkan titik jika yang di input sudah menjadi angka ribuan
+//   if (ribuan) {
+//     separator = sisa ? "." : "";
+//     rupiah += separator + ribuan.join(".");
+//   }
+
+//   rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+//   return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah+".00" : "";
+// }
+

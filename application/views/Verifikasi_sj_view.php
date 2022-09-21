@@ -484,7 +484,7 @@
 
                                                     <div class="form-group col-lg-4">
                                                         <label>Harga Jual<span style="color: red;">*</span></label>
-                                                        <input class="form-control" type="text" name="harga_jual_2" id="harga_jual_2" placeholder="Harga Jual" disabled>
+                                                        <input class="form-control" type="number" name="harga_jual_2" id="harga_jual_2" placeholder="Harga Jual">
                                                         <span class="text-danger" id="error_harga_jual_2"></span>
                                                     </div>
                                                     
@@ -509,7 +509,7 @@
 
                                                     <div class="form-group col-lg-4">
                                                         <label>Transport<span style="color: red;">*</span></label>
-                                                        <input class="form-control autonumber" type="text" name="transport_2" id="transport_2" placeholder="Transport">
+                                                        <input class="form-control autonumber2" type="text" name="transport_2" id="transport_2" placeholder="Transport">
                                                         <span class="text-danger" id="error_transport_2"></span>
                                                     </div>
                                                     

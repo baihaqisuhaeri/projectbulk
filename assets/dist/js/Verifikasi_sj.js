@@ -31,6 +31,13 @@ var kode_cus_global = data[3];
 var no_spm_global = data[9];
 var unit_global = data[8];
 
+var harga_normal_global=0;
+var harga_diskon_global=0;
+var harga_transport_global = 0;
+var harga_ppn_global = 0;
+var harga_total_global = 0;
+
+
 
 
 $(".select2").select2({ width: "100%" });
@@ -769,7 +776,7 @@ $(document).ready(function () {
     get_barang_sj_edit(unit, data[19]);
     get_harga_barang(unit, data[19]);
     get_no_segel_edit(no_sj);
-    console.log($("#harga_jual_2").val());
+    //console.log($("#harga_jual_2").val());
     
 
     //$("#btn_edit").val(id);
@@ -1163,6 +1170,11 @@ function get_harga_barang(unitSj, k_barang) {
     success: function (data) {
       data = JSON.parse(data);
       $("#harga_jual_2").val(parseInt(data.h_jual).toFixed(2));
+      harga_ppn_global = $("#ppn_2").val()*$("#harga_jual_2").val()*$("#kilogram_2").val()/100;
+      $("#harga_ppn_2").val(rupiah(harga_ppn_global));
+      harga_normal_global = $("#harga_jual_2").val()*$("#kilogram_2").val();
+      $("#jumlah_total_2").val(rupiah(harga_normal_global+harga_ppn_global));
+      //console.log($("#kilogram_2").val());
      // $("").val(data.h_jual.toFixed(2));
       //$("#unit_spm").html(data);
     },
@@ -1641,65 +1653,93 @@ $("#discount_2").on("change", function () {
   
    $('input[name="rp_2"]').mask('#');
    
-  var harga_diskon = parseInt($("#discount_2").val()) * $("#harga_jual_2").val() * $("#kilogram_2").val() / 100;
-  $("#rp_2").val(parseInt(harga_diskon));
-  $('#rp_2').mask('000,000,000,000,000,000.00', {
-    reverse: true
-});
-var jumlah_temp = $("#rp_2").val();
-jumlah_temp = jumlah_temp.substring(0, jumlah_temp.length-3);
-jumlah_temp = jumlah_temp.replace(".", "");
-//console.log(parseInt(jumlah_temp)+1000000);
-if($("#jumlah_total_2").val()==""){
-  $("#jumlah_total_2").val(jumlah_temp+$("#jumlah_total_2").val());
-  //$('input[name="jumlah_total_2"]').mask('#');
-  $('#jumlah_total_2').mask('000,000,000,000,000,000.00', {
-    reverse: true
-});
-}else{
-  var jumlah_total = $("#jumlah_total_2").val();
+  harga_diskon_global = parseInt($("#discount_2").val()) * $("#harga_jual_2").val() * $("#kilogram_2").val() / 100;
+  $("#rp_2").val(rupiah(harga_diskon_global));
+  var jumlah_temp = $("#rp_2").val();
+  harga_ppn_global = (harga_normal_global-harga_diskon_global)*$("#ppn_2").val()/100;
+  $("#harga_ppn_2").val(rupiah(harga_ppn_global));
+  $("#jumlah_total_2").val(rupiah((harga_normal_global-harga_diskon_global)+harga_ppn_global+harga_transport_global));
+
+// if($("#jumlah_total_2").val()==""){
+//   $("#jumlah_total_2").val(jumlah_temp);
+  
+// }else{
+//   var jumlah_total = $("#jumlah_total_2").val();
    
-  jumlah_total = jumlah_total.substring(0, jumlah_total.length-3);
-  jumlah_total = jumlah_total.replace(",", "");
-  jumlah_total = jumlah_total.replace(".", "");
-  jumlah_total = jumlah_total.replace(".", "");
-  console.log(jumlah_total);
-  // console.log(jumlah_temp);
-  // console.log(parseInt(jumlah_total));
-  $("#jumlah_total_2").val(parseInt(jumlah_total)+parseInt(jumlah_temp));
-  console.log($("#jumlah_total_2").val());
-  $('input[name="jumlah_total_2"]').mask('#');
-    $('#jumlah_total_2').mask('000,000,000,000,000,000.00', {
-      reverse: true
-  });
-}
+//   jumlah_total = jumlah_total.substring(0, jumlah_total.length-3);
+//   jumlah_total = jumlah_total.replace(",", "");
+//   jumlah_total = jumlah_total.replace(".", "");
+//   jumlah_total = jumlah_total.replace(".", "");
+//   console.log(jumlah_total);
+ 
+//   $("#jumlah_total_2").val(parseInt(jumlah_total)+parseInt(jumlah_temp));
+//   console.log($("#jumlah_total_2").val());
+//   $('input[name="jumlah_total_2"]').mask('#');
+//     $('#jumlah_total_2').mask('000,000,000,000,000,000.00', {
+//       reverse: true
+//   });
+// }
 
 });
 
 
 $("#transport_2").on("change", function () {
-  var jumlah_total = $("#transport_2").val();
+
   
-  //jumlah_total = jumlah_total.substring(0, jumlah_total.length-3);
-   jumlah_total = jumlah_total.replace(".", "");
-   jumlah_total = jumlah_total.replace(",", "");
-   jumlah_total = jumlah_total.replace(",", "");//nyampe sini 20 September 2022
-   
-  console.log(jumlah_total);
-  //console.log( parseInt($("#transport_2").val().replace(",", ""))+1000);
-  if($("#jumlah_total_2").val()==""){
-    $("#jumlah_total_2").val(parseInt(jumlah_total)+$("#jumlah_total_2").val());
-    $('#jumlah_total_2').mask('000,000,000,000,000,000.00', {
-      reverse: true
-  });
-  }else{
+  harga_transport_global = convert($("#transport_2").val());
   
-  }
+  const jumlah_temp = $("#transport_2").val();
+  $("#transport_2").val(rupiah(jumlah_temp));
+  var currency = "$1,100.00";
+  currency.replace(/[$,]+/g,"");
+
+
+$("#jumlah_total_2").val(rupiah((harga_normal_global-harga_diskon_global)+harga_ppn_global+harga_transport_global));
+
 
 });
 
+$("#harga_jual_2").on("change", function () {
 
+  harga_normal_global = $("#harga_jual_2").val()*$("#kilogram_2").val();
+  if($("#discount_2").val()==""){
+    $("#discount_2").val("0");//sampe sini 21 September 2022
+  }
+  harga_diskon_global = parseInt($("#discount_2").val()) * $("#harga_jual_2").val() * $("#kilogram_2").val() / 100;
+  console.log($("#discount_2").val());
+  console.log(harga_diskon_global);
+  console.log(harga_ppn_global);
+  console.log(harga_transport_global);
+  console.log((harga_normal_global-harga_diskon_global)+harga_ppn_global+harga_transport_global);
+  $("#jumlah_total_2").val(rupiah((harga_normal_global-harga_diskon_global)+harga_ppn_global+harga_transport_global));
 
+});
+
+const rupiah = (number)=>{
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR"
+  }).format(number);
+}
+ // Function to convert
+ function convert(currency){
+  var k, temp;
+  for(var i = 0; i < currency.length; i++){
+      k = currency.charCodeAt(i);
+      if(k > 47 && k < 58){
+          temp = currency.substring(i);
+          break;
+      }
+  }
+  temp = temp.replace('.', '');
+  temp = temp.replace('.', '');
+  temp = temp.replace('.', '');
+  temp = temp.replace('.', '');
+  
+  return parseFloat(temp);
+  }
+  
+    
 
 
 

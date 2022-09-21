@@ -42,12 +42,17 @@
             reverse: true
         });
     });
+
+    $(document).on("input", ".autonumber2", function (e) {
+  this.value = this.value.replace(/[^0-9]/g, '');
+});
+
 </script>
 
 <script type="text/javascript">
     $(document).ready(function($) {
         // Format mata uang.
-        $('.persen').mask('999%', {
+        $('.persen').mask('999.999%', {
             reverse: true
         });
     });

@@ -1169,10 +1169,10 @@ function get_harga_barang(unitSj, k_barang) {
     },
     success: function (data) {
       data = JSON.parse(data);
-      $("#harga_jual_2").val(parseInt(data.h_jual).toFixed(2));
-      harga_ppn_global = $("#ppn_2").val()*$("#harga_jual_2").val()*$("#kilogram_2").val()/100;
+      $("#harga_jual_2").val(rupiah(parseInt(data.h_jual).toFixed(2)));
+      harga_ppn_global = $("#ppn_2").val()*convert($("#harga_jual_2").val())*$("#kilogram_2").val()/100;
       $("#harga_ppn_2").val(rupiah(harga_ppn_global));
-      harga_normal_global = $("#harga_jual_2").val()*$("#kilogram_2").val();
+      harga_normal_global = convert($("#harga_jual_2").val())*$("#kilogram_2").val();
       $("#jumlah_total_2").val(rupiah(harga_normal_global+harga_ppn_global));
       //console.log($("#kilogram_2").val());
      // $("").val(data.h_jual.toFixed(2));
@@ -1380,31 +1380,42 @@ $(document).on("click", "#verifikasi_sj", function () {
   $("#error_nilai_persen_pengambilan_2").html("");
   $("#error_nilai_persen_berangkat_2").html("");
 
+  $("#error_harga_jual_2").html("");
+  $("#error_discount_2").html("");
+  $("#error_transport_2").html("");
+
   var err = 0;
 
   
   var no_surat_jalan = $("#no_surat_jalan_2").val();
  
-  var jumlah = $("#jumlah_2").val();
-  var keterangan = $("#keterangan_2").val();
+  var harga_jual = $("#harga_jual_2").val();
+  var diskon = $("#discount_2").val();
+  var transport_2 = $("#transport_2").val();
+  
 
   
   
 
   
-  if (jumlah == "") {
-    $("#error_jumlah_2").html("Jumlah tidak boleh kosong!");
+  if (harga_jual == "") {
+    $("#error_harga_jual_2").html("Harga jual tidak boleh kosong!");
     err += 1;
   }
-  if (keterangan == "") {
-    $("#error_keterangan_2").html("Keterangan tidak boleh kosong!");
+  if (diskon == "") {
+    $("#error_discount_2").html("Diskon tidak boleh kosong!");
+    err += 1;
+  }
+  if (transport_2 == "") {
+    $("#error_transport_2").html("Harga transport tidak boleh kosong!");
     err += 1;
   }
   
 
  
-  
+  console.log(675000 + (675000*11/100) - (675000*43/100));//sampe sini 22 September 2022
   if (err == 0) {
+   
     $("#modal_konfirmasi_verifikasi_sj").modal("show");
    
   }
@@ -1413,6 +1424,8 @@ $(document).on("click", "#verifikasi_sj", function () {
 
 
 function verifikasiSj() {
+  var kodeCustomer = $("#nama_customer_2").val().split("_");
+  
   $("#modal_konfirmasi_verifikasi_sj").modal("hide");
 
   var keterangan = $("#keterangan_2").val();
@@ -1431,6 +1444,7 @@ function verifikasiSj() {
     data: {
       no_sj: no_sj,
       keterangan: keterangan,
+      k_cus: kodeCustomer[0],
       
       
       qty_real: qty_real,
@@ -1650,10 +1664,11 @@ $(document).on("change", "#bulan_aktif", function () {
 });
 
 $("#discount_2").on("change", function () {
+  $("#error_discount_2").html("");
   
    $('input[name="rp_2"]').mask('#');
    
-  harga_diskon_global = parseInt($("#discount_2").val()) * $("#harga_jual_2").val() * $("#kilogram_2").val() / 100;
+  harga_diskon_global = parseInt($("#discount_2").val()) * convert($("#harga_jual_2").val()) * $("#kilogram_2").val() / 100;
   $("#rp_2").val(rupiah(harga_diskon_global));
   var jumlah_temp = $("#rp_2").val();
   harga_ppn_global = (harga_normal_global-harga_diskon_global)*$("#ppn_2").val()/100;
@@ -1684,14 +1699,15 @@ $("#discount_2").on("change", function () {
 
 
 $("#transport_2").on("change", function () {
+  $("#error_transport_2").html("");
 
   
   harga_transport_global = convert($("#transport_2").val());
   
   const jumlah_temp = $("#transport_2").val();
   $("#transport_2").val(rupiah(jumlah_temp));
-  var currency = "$1,100.00";
-  currency.replace(/[$,]+/g,"");
+  // var currency = "$1,100.00";
+  // currency.replace(/[$,]+/g,"");
 
 
 $("#jumlah_total_2").val(rupiah((harga_normal_global-harga_diskon_global)+harga_ppn_global+harga_transport_global));
@@ -1700,17 +1716,25 @@ $("#jumlah_total_2").val(rupiah((harga_normal_global-harga_diskon_global)+harga_
 });
 
 $("#harga_jual_2").on("change", function () {
+  $("#error_harga_jual_2").html("");
 
-  harga_normal_global = $("#harga_jual_2").val()*$("#kilogram_2").val();
+  const harga_jual_2 = $("#harga_jual_2").val();
+  $("#harga_jual_2").val(rupiah(harga_jual_2));
+
+  //harga_diskon_global = parseInt($("#discount_2").val()) * convert($("#harga_jual_2").val()) * $("#kilogram_2").val() / 100;
+  $("#rp_2").val(rupiah(harga_diskon_global));
+
+  harga_normal_global = convert($("#harga_jual_2").val())*$("#kilogram_2").val();
   if($("#discount_2").val()==""){
-    $("#discount_2").val("0");//sampe sini 21 September 2022
+    $("#discount_2").val("0%");//sampe sini 21 September 2022
+    $('input[name="#discount_2"]').mask('#');
+    $('#discount_2').mask('999.999%', {
+      reverse: true
+  });
   }
-  harga_diskon_global = parseInt($("#discount_2").val()) * $("#harga_jual_2").val() * $("#kilogram_2").val() / 100;
-  console.log($("#discount_2").val());
-  console.log(harga_diskon_global);
-  console.log(harga_ppn_global);
-  console.log(harga_transport_global);
-  console.log((harga_normal_global-harga_diskon_global)+harga_ppn_global+harga_transport_global);
+  harga_diskon_global = parseInt($("#discount_2").val()) * convert($("#harga_jual_2").val()) * $("#kilogram_2").val() / 100;
+  harga_ppn_global = (harga_normal_global-harga_diskon_global)*$("#ppn_2").val()/100;
+  $("#harga_ppn_2").val(rupiah(harga_ppn_global));
   $("#jumlah_total_2").val(rupiah((harga_normal_global-harga_diskon_global)+harga_ppn_global+harga_transport_global));
 
 });
@@ -1741,7 +1765,12 @@ const rupiah = (number)=>{
   
     
 
-
+  $(document).ready(function($) {
+    // Format mata uang.
+    $('.persen').mask('999.999%', {
+        reverse: true
+    });
+});
 
 
 

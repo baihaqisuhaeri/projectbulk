@@ -484,7 +484,7 @@
 
                                                     <div class="form-group col-lg-4">
                                                         <label>Harga Jual<span style="color: red;">*</span></label>
-                                                        <input class="form-control" type="number" name="harga_jual_2" id="harga_jual_2" placeholder="Harga Jual">
+                                                        <input class="form-control autonumber2" type="text" name="harga_jual_2" id="harga_jual_2" placeholder="Harga Jual">
                                                         <span class="text-danger" id="error_harga_jual_2"></span>
                                                     </div>
                                                     

@@ -451,5 +451,29 @@ class Verifikasi_sj_model extends CI_Model
 
         return $query->result();
     }
+
+    public function get_customer($k_cus){
+        $this->db->select('*');
+        $this->db->from('customer');
+        $this->db->where('k_cus', $k_cus);
+      
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+    public function get_last_harga_jual($k_cus, $k_barang){
+        $this->db->select('*');
+        $this->db->from('tb_sj');
+        $this->db->where('k_cus', $k_cus);
+        $this->db->where('k_barang', $k_barang);
+        $this->db->where('flag_ver !=', "");
+        $this->db->order_by('id desc');
+        $this->db->limit(1); 
+      
+        $query = $this->db->get();
+
+        return $query->result();
+    }
     
 }

@@ -1245,7 +1245,7 @@ class Verifikasi_sj extends CI_Controller
         }
     }
 
-    function realisasi_sj()
+    function verifikasi_sj()
     {
         
         
@@ -1254,31 +1254,60 @@ class Verifikasi_sj extends CI_Controller
 
         
         date_default_timezone_set('Asia/Jakarta');
-        $tgl_real = date("Y-m-d h:i:s");
+        $tgl_ver = date("Y-m-d h:i:s");
+       
        
       
-        $qty_real = $_POST['qty_real'];
-        $kg_real = $_POST['kg_real'];
-        $keterangan = $_POST['keterangan'];
-        $k_supl = $_POST['k_supl'];
-        $n_supl = $_POST['n_supl'];
-        $no_faktur = $_POST['no_faktur'];
-       
+      
+        $k_cus = $_POST['k_cus'];
+        $k_barang = $_POST['k_barang'];
+        $h_jual = $_POST['harga_jual'];
+        $n_trans = $_POST['transport'];
+        $discp = $_POST['discp'];
+        $discr = $_POST['discr'];
+        $n_jual = $_POST['n_jual'];
+        $jumlah = $_POST['jumlah'];
+        $hppn = $_POST['hppn'];
+
+
+        $query = $this->Verifikasi_sj_model->get_customer($k_cus);
+        // $queryLastHarga = $this->Verifikasi_sj_model->get_last_harga_jual($k_cus, $k_barang);
+        // var_dump($queryLastHarga);
+        // die();
+
+        foreach($query as $q){
+            $materai = $q->materai;
+            $ppn = $q->ikut_ppn;
+            $ppnie= $q->ppn_ie;
+            $jt_kwt = $q->jt_tempo;
+            $jp = $q->jp;
+        }
+        
+    //  var_dump($jt_kwt . " " .$jp );
+    //  die();
+
 
         $data = array(
             'no_sj' => $no_sj,
-        
-            'qty_real' => $qty_real,
-            'kg_real' => $kg_real,
-            'ket' => $keterangan,
-            'k_supl' => $k_supl,
-            'n_supl' => $n_supl,
-            'no_faktur' => $no_faktur,
-            'flag_real' => $tgl_real
+            'h_jual' => $h_jual,
+            'n_trans' => $n_trans,
+            'discp' => $discp,
+            'discr' => $discr,
+            'jumlah' => $jumlah,
+            'hppn' => $hppn,
+            'materai' => $materai,
+            'ppn' => $ppn,
+            'ppnie' => $ppnie,
+            'jt_kwt' => $jt_kwt,
+            'jp' => $jp,
+            'flag_ver' => $tgl_ver,
+            
+            
+           
             
         );
 
-        $this->Verifikasi_sj_model->realisasi_sj($no_sj, $data);
+        $this->Verifikasi_sj_model->verifikasi_sj($no_sj, $data);//sampe sini 23 September 2022
 
         
         $query = $this->db->affected_rows();
@@ -1301,19 +1330,34 @@ class Verifikasi_sj extends CI_Controller
     function get_barang_verifikasi(){
         $k_barang = $_POST['k_barang'];
         $unit = $_POST['unitSj'];
+        $k_cus = $_POST['k_cus'];
 
+        $queryLastHarga = $this->Verifikasi_sj_model->get_last_harga_jual($k_cus, $k_barang);
+        // var_dump($queryLastHarga);
+        // die();
+        if($queryLastHarga==null){
+            $query = $this->Verifikasi_sj_model->get_barang_verifikasi($unit, $k_barang);
 
-
-        $query = $this->Verifikasi_sj_model->get_barang_verifikasi($unit, $k_barang);
-
-        foreach ($query as $q) {
-            $h_jual = $q->h_jual;
+            foreach ($query as $q) {
+                $h_jual = $q->h_jual;
+            }
+            //$bln_aktif = substr($bln_aktif, 0, 7);
+            $data = array(
+                'h_jual' => $h_jual,
+            );
+            echo json_encode($data);
+        }else{
+            foreach ($queryLastHarga as $q) {
+                $h_jual = $q->h_jual;
+            }
+            //$bln_aktif = substr($bln_aktif, 0, 7);
+            $data = array(
+                'h_jual' => $h_jual,
+            );
+            echo json_encode($data);
         }
-        //$bln_aktif = substr($bln_aktif, 0, 7);
-        $data = array(
-            'h_jual' => $h_jual,
-        );
-        echo json_encode($data);
+
+        
     }
 
 

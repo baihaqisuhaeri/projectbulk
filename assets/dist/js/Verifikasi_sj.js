@@ -693,7 +693,7 @@ $(document).ready(function () {
   $("#tabel_sj tbody").on("click", ".edit_sj", function () {
     var data = table.row($(this).parents("tr")).data();
     var id = $(this).data("id");
-    console.log(data[19]);
+   // console.log(data[19]);
    
     if($(this).data("no_sj") == null){
       $("#verifikasi_sj").hide();
@@ -774,7 +774,7 @@ $(document).ready(function () {
     get_unit_marketing_edit(data[18]);
     get_supir_sj_edit(unit, k_sales);
     get_barang_sj_edit(unit, data[19]);
-    get_harga_barang(unit, data[19]);
+    get_harga_barang(unit, data[19], kode_cus);
     get_no_segel_edit(no_sj);
     //console.log($("#harga_jual_2").val());
     
@@ -1158,21 +1158,22 @@ function get_barang_sj_edit(unitSj, k_barang) {
   });
 }
 
-function get_harga_barang(unitSj, k_barang) {
+function get_harga_barang(unitSj, k_barang, k_cus) {
   $.ajax({
     url: "verifikasi-sj/get-harga-barang",
     type: "POST",
     data: {
       unitSj: unitSj,
       k_barang: k_barang,
+      k_cus: k_cus,
       status_edit: "aktif",
     },
     success: function (data) {
       data = JSON.parse(data);
       $("#harga_jual_2").val(rupiah(parseInt(data.h_jual).toFixed(2)));
-      harga_ppn_global = $("#ppn_2").val()*convert($("#harga_jual_2").val())*$("#kilogram_2").val()/100;
+      harga_ppn_global = Math.round($("#ppn_2").val()*convert($("#harga_jual_2").val())*$("#kilogram_2").val()/100);
       $("#harga_ppn_2").val(rupiah(harga_ppn_global));
-      harga_normal_global = convert($("#harga_jual_2").val())*$("#kilogram_2").val();
+      harga_normal_global = Math.round(convert($("#harga_jual_2").val())*$("#kilogram_2").val());
       $("#jumlah_total_2").val(rupiah(harga_normal_global+harga_ppn_global));
       //console.log($("#kilogram_2").val());
      // $("").val(data.h_jual.toFixed(2));
@@ -1413,7 +1414,12 @@ $(document).on("click", "#verifikasi_sj", function () {
   
 
  
-  console.log(675000 + (675000*11/100) - (675000*43/100));//sampe sini 22 September 2022
+  
+  //console.log(parseInt($("#discount_2").val())/100 * convert($("#harga_jual_2").val()));
+  //console.log($("#kode_barang_2").val().split("_"));
+  // var k_barang= $("#kode_barang_2").val().split("_");
+  // console.log(k_barang);
+  // console.log(k_barang[0]);
   if (err == 0) {
    
     $("#modal_konfirmasi_verifikasi_sj").modal("show");
@@ -1425,6 +1431,7 @@ $(document).on("click", "#verifikasi_sj", function () {
 
 function verifikasiSj() {
   var kodeCustomer = $("#nama_customer_2").val().split("_");
+  var k_barang= $("#kode_barang_2").val().split("_");
   
   $("#modal_konfirmasi_verifikasi_sj").modal("hide");
 
@@ -1435,6 +1442,15 @@ function verifikasiSj() {
   var qty_real = $("#jumlah_2").val(); 
   var kg_real = $("#kilogram_2").val(); 
   
+  var harga_jual = $("#harga_jual_2").val();
+  var transport = $("#transport_2").val();
+  var discp = $("#discount_2").val();
+  var discr = parseInt($("#discount_2").val())/100 * convert($("#harga_jual_2").val());
+  var n_jual = (convert($("#harga_jual_2").val()) * $("#kilogram_2").val()) - convert($("#rp_2").val());
+  var jumlah = convert($("#jumlah_total_2").val());
+  var hppn = convert($("#harga_ppn_2").val());
+
+
 
   
   $.ajax({
@@ -1443,12 +1459,15 @@ function verifikasiSj() {
     dataType: "text",
     data: {
       no_sj: no_sj,
-      keterangan: keterangan,
       k_cus: kodeCustomer[0],
-      
-      
-      qty_real: qty_real,
-      kg_real: kg_real,
+      k_barang: k_barang[0],
+      harga_jual: harga_jual,
+      transport: transport,
+      discp: discp,
+      discr: discr,
+      n_jual: n_jual,
+      jumlah: jumlah,
+      hppn: hppn,
      
     },
     success: function (data) {
@@ -1668,10 +1687,10 @@ $("#discount_2").on("change", function () {
   
    $('input[name="rp_2"]').mask('#');
    
-  harga_diskon_global = parseInt($("#discount_2").val()) * convert($("#harga_jual_2").val()) * $("#kilogram_2").val() / 100;
+  harga_diskon_global = Math.round(parseInt($("#discount_2").val()) * convert($("#harga_jual_2").val()) * $("#kilogram_2").val() / 100);
   $("#rp_2").val(rupiah(harga_diskon_global));
   var jumlah_temp = $("#rp_2").val();
-  harga_ppn_global = (harga_normal_global-harga_diskon_global)*$("#ppn_2").val()/100;
+  harga_ppn_global = Math.round((harga_normal_global-harga_diskon_global)*$("#ppn_2").val()/100);
   $("#harga_ppn_2").val(rupiah(harga_ppn_global));
   $("#jumlah_total_2").val(rupiah((harga_normal_global-harga_diskon_global)+harga_ppn_global+harga_transport_global));
 
@@ -1702,7 +1721,7 @@ $("#transport_2").on("change", function () {
   $("#error_transport_2").html("");
 
   
-  harga_transport_global = convert($("#transport_2").val());
+  harga_transport_global = Math.round(convert($("#transport_2").val()));
   
   const jumlah_temp = $("#transport_2").val();
   $("#transport_2").val(rupiah(jumlah_temp));
@@ -1724,7 +1743,7 @@ $("#harga_jual_2").on("change", function () {
   //harga_diskon_global = parseInt($("#discount_2").val()) * convert($("#harga_jual_2").val()) * $("#kilogram_2").val() / 100;
   $("#rp_2").val(rupiah(harga_diskon_global));
 
-  harga_normal_global = convert($("#harga_jual_2").val())*$("#kilogram_2").val();
+  harga_normal_global = Math.round(convert($("#harga_jual_2").val())*$("#kilogram_2").val());
   if($("#discount_2").val()==""){
     $("#discount_2").val("0%");//sampe sini 21 September 2022
     $('input[name="#discount_2"]').mask('#');
@@ -1732,8 +1751,8 @@ $("#harga_jual_2").on("change", function () {
       reverse: true
   });
   }
-  harga_diskon_global = parseInt($("#discount_2").val()) * convert($("#harga_jual_2").val()) * $("#kilogram_2").val() / 100;
-  harga_ppn_global = (harga_normal_global-harga_diskon_global)*$("#ppn_2").val()/100;
+  harga_diskon_global = Math.round(parseInt($("#discount_2").val()) * convert($("#harga_jual_2").val()) * $("#kilogram_2").val() / 100);
+  harga_ppn_global = Math.round((harga_normal_global-harga_diskon_global)*$("#ppn_2").val()/100);
   $("#harga_ppn_2").val(rupiah(harga_ppn_global));
   $("#jumlah_total_2").val(rupiah((harga_normal_global-harga_diskon_global)+harga_ppn_global+harga_transport_global));
 
@@ -1779,40 +1798,4 @@ const rupiah = (number)=>{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-// var rupiah = document.getElementById("rp_2");
-// rupiah.addEventListener("keyup", function(e) {
-//   // tambahkan 'Rp.' pada saat form di ketik
-//   // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
-//   rupiah.value = formatRupiah(this.value, "Rp. ");
-// });
-
-// /* Fungsi formatRupiah */
-// function formatRupiah(angka, prefix) {
-//   var number_string = angka.replace(/[^,\d]/g, "").toString(),
-//     split = number_string.split(","),
-//     sisa = split[0].length % 3,
-//     rupiah = split[0].substr(0, sisa),
-//     ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
-//   // tambahkan titik jika yang di input sudah menjadi angka ribuan
-//   if (ribuan) {
-//     separator = sisa ? "." : "";
-//     rupiah += separator + ribuan.join(".");
-//   }
-
-//   rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
-//   return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah+".00" : "";
-// }
 

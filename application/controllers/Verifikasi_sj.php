@@ -158,6 +158,10 @@ class Verifikasi_sj extends CI_Controller
             $row[] = $p->flag_ver;
             $row[] = $p->k_altk;
 
+            $row[] = $p->discp;
+            $row[] = $p->n_trans;
+
+
             
 
             $data[] = $row;
@@ -1302,9 +1306,6 @@ class Verifikasi_sj extends CI_Controller
             'jp' => $jp,
             'flag_ver' => $tgl_ver,
             
-            
-           
-            
         );
 
         $this->Verifikasi_sj_model->verifikasi_sj($no_sj, $data);//sampe sini 23 September 2022
@@ -1335,9 +1336,11 @@ class Verifikasi_sj extends CI_Controller
         $queryLastHarga = $this->Verifikasi_sj_model->get_last_harga_jual($k_cus, $k_barang);
         // var_dump($queryLastHarga);
         // die();
+        // var_dump($queryLastHarga);
+        // die();
         if($queryLastHarga==null){
             $query = $this->Verifikasi_sj_model->get_barang_verifikasi($unit, $k_barang);
-
+            //var_dump("masuk kesini");
             foreach ($query as $q) {
                 $h_jual = $q->h_jual;
             }
@@ -1347,9 +1350,11 @@ class Verifikasi_sj extends CI_Controller
             );
             echo json_encode($data);
         }else{
+            
             foreach ($queryLastHarga as $q) {
                 $h_jual = $q->h_jual;
             }
+            //var_dump($h_jual);
             //$bln_aktif = substr($bln_aktif, 0, 7);
             $data = array(
                 'h_jual' => $h_jual,

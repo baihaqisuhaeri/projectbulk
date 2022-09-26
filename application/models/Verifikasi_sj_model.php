@@ -396,11 +396,11 @@ class Verifikasi_sj_model extends CI_Model
         $this->db->update('tb_sj', $data);
     }
 
-    public function realisasi_sj($no_sj, $data)
+    public function verifikasi_sj($no_sj, $data)
     {
         $this->db->where('no_sj', $no_sj);
-        $this->db->where('btl_sj', '');
-        $this->db->where('flag_real', '');
+        
+        $this->db->where('flag_ver', '');
         $this->db->update('tb_sj', $data);
     }
 

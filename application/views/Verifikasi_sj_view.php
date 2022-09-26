@@ -269,6 +269,9 @@
                                                             <td>Bulan Aktif</td>
                                                             <td>btl_sj</td>
                                                             <td>Kode Alamat</td>
+                                                            <td>Diskon</td>
+                                                            <td>Transport</td>
+
 
 
                                                         </tr>

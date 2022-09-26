@@ -1,3 +1,7 @@
+$(document).on("input", ".autonumber2", function (e) {
+  this.value = this.value.replace(/[^0-9]/g, '');
+});
+
 var table_alamat;
 var harga_po = "";
 var spm_brlk = "";
@@ -686,7 +690,7 @@ $(document).ready(function () {
     //   },
     // ],
     //bisa hide column
-    "aoColumnDefs": [{ "bVisible": false, "aTargets": [33,34,35] }]
+    "aoColumnDefs": [{ "bVisible": false, "aTargets": [33,34,35,36, 37] }]
   });
   // fnSetColumnVis( 1, false );
 
@@ -698,9 +702,16 @@ $(document).ready(function () {
     if($(this).data("no_sj") == null){
       $("#verifikasi_sj").hide();
       $("#btn_edit_sj").show();
+      $("#transport_2").val(rupiah(data[37]));
+      $("#discount_2").val(parseInt(data[36]));
+      
+    $('#discount_2').mask('999.999%', {
+      reverse: true
+  });
     }else{
       $("#btn_edit_sj").hide();
       $("#verifikasi_sj").show();
+      
     }
     
     var no_sj = data[1];
@@ -1294,12 +1305,25 @@ $(document).on("submit", "#edit_sj", function (e) {
   var nilai_persen_pengambilan = $("#nilai_persen_pengambilan_2").val();
   var nilai_persen_berangkat = $("#nilai_persen_berangkat_2").val();
 
-  if (jumlah == "") {
-    $("#error_jumlah_2").html("Jumlah tidak boleh kosong!");
+  var harga_jual = $("#harga_jual_2").val();
+  var diskon = $("#discount_2").val();
+  var transport_2 = $("#transport_2").val();
+  
+
+  
+  
+
+  
+  if (harga_jual == "") {
+    $("#error_harga_jual_2").html("Harga jual tidak boleh kosong!");
     err += 1;
   }
-  if (keterangan == "") {
-    $("#error_keterangan_2").html("Keterangan tidak boleh kosong!");
+  if (diskon == "") {
+    $("#error_discount_2").html("Diskon tidak boleh kosong!");
+    err += 1;
+  }
+  if (transport_2 == "") {
+    $("#error_transport_2").html("Harga transport tidak boleh kosong!");
     err += 1;
   }
   
@@ -1317,7 +1341,7 @@ function editSj() {
   $("#modal_konfirmasi_edit_sj").modal("hide");
 
   var keterangan = $("#keterangan_2").val();
-  
+  //sampe sini 26 September 2022
   
   var no_sj = $("#no_surat_jalan_2").val();
   var qty_real = $("#jumlah_2").val(); 
@@ -1442,8 +1466,8 @@ function verifikasiSj() {
   var qty_real = $("#jumlah_2").val(); 
   var kg_real = $("#kilogram_2").val(); 
   
-  var harga_jual = $("#harga_jual_2").val();
-  var transport = $("#transport_2").val();
+  var harga_jual = convert($("#harga_jual_2").val());
+  var transport = convert($("#transport_2").val());
   var discp = $("#discount_2").val();
   var discr = parseInt($("#discount_2").val())/100 * convert($("#harga_jual_2").val());
   var n_jual = (convert($("#harga_jual_2").val()) * $("#kilogram_2").val()) - convert($("#rp_2").val());
@@ -1660,7 +1684,7 @@ $(document).on("change", "#bulan_aktif", function () {
         bulanAktif: bulanAktif,
       },
     },
-    "aoColumnDefs": [{ "bVisible": false, "aTargets": [33,34,35] }],
+    "aoColumnDefs": [{ "bVisible": false, "aTargets": [33,34,35,36, 37] }],
     //Set column definition initialisation properties.
     "createdRow": function( row, data, dataIndex ) {
       
@@ -1774,6 +1798,7 @@ const rupiah = (number)=>{
           break;
       }
   }
+  temp = temp.replace('.', '');
   temp = temp.replace('.', '');
   temp = temp.replace('.', '');
   temp = temp.replace('.', '');

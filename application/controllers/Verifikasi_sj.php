@@ -641,7 +641,7 @@ class Verifikasi_sj extends CI_Controller
         foreach ($unit_marketing as $u) {
             if ($status_edit == null) {
                 if($u->kd_unit == $kd_unit){
-                    var_dump($u->kd_unit);
+                    //var_dump($u->kd_unit);
                     //die();
                     echo '<option selected value="' . $u->unit_mkt . '">' . $u->unit_mkt . '</option>';
                 }else{
@@ -895,41 +895,42 @@ class Verifikasi_sj extends CI_Controller
         echo json_encode($data);
     }
 
-    function edit_realisasi_sj()
+    function edit_verifikasi_sj()
     {
         $blnaktif = $_POST['blnaktif'];
         $id = $_POST['id'];
-        // var_dump($blnaktif);
-        // die();
+       
         date_default_timezone_set('Asia/Jakarta');
+        $tgl_ver = date("Y-m-d h:i:s");
         $no_sj = $_POST['no_sj'];
-        $qty_real = $_POST['qty_real'];
-        $kg_real = $_POST['kg_real'];
-        $keterangan = $_POST['keterangan'];
-        $k_supl = $_POST['k_supl'];
-        $n_supl = $_POST['n_supl'];
-        $no_faktur = $_POST['no_faktur'];
+        $id = $_POST['id'];
 
+        $h_jual = $_POST['harga_jual'];
+        $n_trans = $_POST['transport'];
+        $discp = $_POST['discp'];
+        $discr = $_POST['discr'];
+        $n_jual = $_POST['n_jual'];
+        $jumlah = $_POST['jumlah'];
+        $hppn = $_POST['hppn'];
 
+        
        
         if($blnaktif==""){
 
-        
-        
-
         $data = array(
-            'no_sj' => $no_sj,
-        
-            'qty_real' => $qty_real,
-            'kg_real' => $kg_real,
-            'ket' => $keterangan,
-            'k_supl' => $k_supl,
-            'n_supl' => $n_supl,
-            'no_faktur' => $no_faktur,
-            'flag_real' => $tgl_real
+            
+            'h_jual' => $h_jual,
+            'n_jual' => $n_jual,
+            'n_trans' => $n_trans,
+            'discp' => $discp,
+            'discr' => $discr,
+            'jumlah' => $jumlah,
+            'hppn' => $hppn,
+
+            'tgl_update' => $tgl_ver
         );
 
-        $this->Input_sj_model->edit_realisasi_sj($id, $data);
+        $this->Verifikasi_sj_model->edit_verifikasi_sj($id, $data);
 
         
         $query = $this->db->affected_rows();
@@ -1294,6 +1295,7 @@ class Verifikasi_sj extends CI_Controller
         $data = array(
             'no_sj' => $no_sj,
             'h_jual' => $h_jual,
+            'n_jual' => $n_jual,
             'n_trans' => $n_trans,
             'discp' => $discp,
             'discr' => $discr,

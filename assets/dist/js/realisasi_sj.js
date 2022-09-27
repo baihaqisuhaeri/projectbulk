@@ -642,6 +642,7 @@ $("input[name=jumlah]").on("change", function () {
   });
 });
 
+var id_real_sj = $(this).data("id");
 $(document).ready(function () {
   //datatables
   table = $("#tabel_sj").DataTable({
@@ -685,9 +686,8 @@ $(document).ready(function () {
 
   $("#tabel_sj tbody").on("click", ".edit_sj", function () {
     var data = table.row($(this).parents("tr")).data();
-    var id = $(this).data("id");
-    console.log(id);
-    console.log();
+     id_real_sj = $(this).data("id");
+    
     if($(this).data("no_sj") == null){
       $("#realisasi_sj").hide();
       $("#btn_edit_sj").show();
@@ -771,7 +771,7 @@ $(document).ready(function () {
     //console.log(k_supl);
     get_suplier_edit(k_supl);
 
-    $("#btn_edit").val(id);
+    //$("#btn_edit").val(id);
     
   });
 
@@ -1315,6 +1315,7 @@ function editSj() {
     dataType: "text",
 
     data: {
+      id: id_real_sj,
       no_sj: no_sj,
       keterangan: keterangan,
       k_supl: suplier[0],

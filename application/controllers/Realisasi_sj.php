@@ -893,11 +893,12 @@ class Realisasi_sj extends CI_Controller
 
     function edit_realisasi_sj()
     {
-        $blnaktif = $_POST['blnaktif'];
+       // $blnaktif = $_POST['blnaktif'];
         $id = $_POST['id'];
         // var_dump($blnaktif);
         // die();
         date_default_timezone_set('Asia/Jakarta');
+        $tgl_real = date("Y-m-d h:i:s");
         $no_sj = $_POST['no_sj'];
         $qty_real = $_POST['qty_real'];
         $kg_real = $_POST['kg_real'];
@@ -908,7 +909,7 @@ class Realisasi_sj extends CI_Controller
 
 
        
-        if($blnaktif==""){
+       // if($blnaktif==""){
 
         
         
@@ -922,10 +923,10 @@ class Realisasi_sj extends CI_Controller
             'k_supl' => $k_supl,
             'n_supl' => $n_supl,
             'no_faktur' => $no_faktur,
-            'flag_real' => $tgl_real
+            'tgl_update' => $tgl_real
         );
 
-        $this->Input_sj_model->edit_realisasi_sj($id, $data);
+        $this->Realisasi_sj_model->edit_realisasi_sj($id, $data);
 
         
         $query = $this->db->affected_rows();
@@ -941,7 +942,7 @@ class Realisasi_sj extends CI_Controller
             );
             echo json_encode($data);
         }
-    }
+    //}
     // else{
 
     //     date_default_timezone_set('Asia/Jakarta');

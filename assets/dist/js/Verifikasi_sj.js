@@ -652,7 +652,7 @@ $("input[name=jumlah]").on("change", function () {
     },
   });
 });
-
+var id_edit_sj="";
 $(document).ready(function () {
   //datatables
   table = $("#tabel_sj").DataTable({
@@ -696,7 +696,7 @@ $(document).ready(function () {
 
   $("#tabel_sj tbody").on("click", ".edit_sj", function () {
     var data = table.row($(this).parents("tr")).data();
-    var id = $(this).data("id");
+     id_edit_sj = $(this).data("id");
    // console.log(data[19]);
    
     if($(this).data("no_sj") == null){
@@ -780,7 +780,7 @@ $(document).ready(function () {
       $("#rd_kredit_2").prop("checked", true);
       tk_sj = "K";
     }
-    blnaktif_sj = data[35];
+    blnaktif_sj = data[33];
     get_mobil_sj_edit(data[15] + "_" + data[8]);
     get_unit_marketing_edit(data[18]);
     get_supir_sj_edit(unit, k_sales);
@@ -1347,18 +1347,30 @@ function editSj() {
   var qty_real = $("#jumlah_2").val(); 
   var kg_real = $("#kilogram_2").val(); 
 
+  var harga_jual = convert($("#harga_jual_2").val());
+  var transport = convert($("#transport_2").val());
+  var discp = parseInt($("#discount_2").val());
+  var discr = parseInt($("#discount_2").val())/100 * convert($("#harga_jual_2").val());
+  var n_jual = (convert($("#harga_jual_2").val()) * $("#kilogram_2").val()) - convert($("#rp_2").val());
+  var jumlah = convert($("#jumlah_total_2").val());
+  var hppn = convert($("#harga_ppn_2").val());
+
   $.ajax({
-    url: "verifikasi-sj/edit-sj",
+    url: "verifikasi-sj/edit-verifikasi-sj",
     type: "post",
     dataType: "text",
 
     data: {
+      id: id_edit_sj,
       no_sj: no_sj,
-      keterangan: keterangan,
-      
-     
-      qty_real: qty_real,
-      kg_real: kg_real,
+      harga_jual: harga_jual,
+      transport: transport,
+      discp: discp,
+      discr: discr,
+      n_jual: n_jual,
+      jumlah: jumlah,
+      hppn: hppn,
+      blnaktif: blnaktif_sj
     },
     success: function (data) {
       // console.log(data);
@@ -1468,7 +1480,7 @@ function verifikasiSj() {
   
   var harga_jual = convert($("#harga_jual_2").val());
   var transport = convert($("#transport_2").val());
-  var discp = $("#discount_2").val();
+  var discp = parseInt($("#discount_2").val());
   var discr = parseInt($("#discount_2").val())/100 * convert($("#harga_jual_2").val());
   var n_jual = (convert($("#harga_jual_2").val()) * $("#kilogram_2").val()) - convert($("#rp_2").val());
   var jumlah = convert($("#jumlah_total_2").val());

@@ -155,11 +155,13 @@ class Verifikasi_sj extends CI_Controller
             
             
             $row[] = $p->blnaktif;
-            $row[] = $p->flag_ver;
+            $row[] = $p->btl_sj;
             $row[] = $p->k_altk;
 
             $row[] = $p->discp;
             $row[] = $p->n_trans;
+            $row[] = $p->flag_real;
+            $row[] = $p->flag_ver;
 
 
             

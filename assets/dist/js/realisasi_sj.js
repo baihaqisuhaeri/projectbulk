@@ -659,12 +659,14 @@ $(document).ready(function () {
 
     "createdRow": function( row, data, dataIndex ) {
       
-      if ( data[34] != "0000-00-00 00:00:00" ) {
-        $(row).css("background-color", "#9FFF8E");
-      }else if(data[36] == "stl"){
-        $(row).css("background-color", "gray");
-      }else if(data[36] == "sbl"){
-        $(row).css("background-color", "red");
+      
+      
+      //if ( data[36] == "0000-00-00 00:00:00" ) {
+      
+      if ( data[36] == "*" ) {
+        $(row).css("background-color", "#f0ecec");
+      }else if(data[34] != "0000-00-00 00:00:00"){
+        $(row).css("background-color", "#d8d4fc");
       }
       else{
          $(row).css("background-color", "white");
@@ -680,7 +682,7 @@ $(document).ready(function () {
     //   },
     // ],
     //bisa hide column
-    "aoColumnDefs": [{ "bVisible": false, "aTargets": [33,34,35] }]
+    "aoColumnDefs": [{ "bVisible": false, "aTargets": [33,34,35,36] }]
   });
   // fnSetColumnVis( 1, false );
 
@@ -861,9 +863,9 @@ function deleteSj() {
   });
 }
 
-var nomor_sj_batal = "";
+var id_sj_batal = "";
 $(document).on("click", ".batal_sj", function (event) {
-  nomor_sj_batal = $(this).data("no_sj");
+  id_sj_batal = $(this).data("id");
   //console.log(nomor_sj_batal);
 
   $("#modal_konfirmasi_batal").modal("show");
@@ -872,11 +874,11 @@ $(document).on("click", ".batal_sj", function (event) {
 function batalSj() {
   $("#modal_konfirmasi_batal").modal("hide");
   var table = $("#tabel_sj").DataTable();
-
+//console.log(id_sj_batal);
   $.ajax({
     url: "realisasi-sj/batal-sj",
     data: {
-      no_sj: nomor_sj_batal,
+      id: id_sj_batal,
     },
     type: "post",
     success: function (data) {
@@ -886,7 +888,7 @@ function batalSj() {
         mytable = $("#tabel_sj").DataTable();
         mytable.draw();
 
-        $("#" + nomor_sj_batal)
+        $("#" + id_sj_batal)
           .closest("tr")
           .remove();
         Swal.fire("Berhasil!", "Surat Jalan berhasil dibatalkan", "success");
@@ -1624,17 +1626,15 @@ $(document).on("change", "#bulan_aktif", function () {
         bulanAktif: bulanAktif,
       },
     },
-    "aoColumnDefs": [{ "bVisible": false, "aTargets": [33,34,35] }],
+    "aoColumnDefs": [{ "bVisible": false, "aTargets": [33,34,35,36] }],
     //Set column definition initialisation properties.
     "createdRow": function( row, data, dataIndex ) {
       
-      if ( data[34] != "0000-00-00 00:00:00" ) {
-        $(row).css("background-color", "#9FFF8E");
+      if(data[34] != "0000-00-00 00:00:00"){
+        $(row).css("background-color", "#d8d4fc");
       }
-      else if(data[36] == "stl"){
-        $(row).css("background-color", "gray");
-      }else if(data[36] == "sbl"){
-        $(row).css("background-color", "red");
+      else if ( data[36] == "*" ) {
+        $(row).css("background-color", "#f0ecec");
       }
       else{
          $(row).css("background-color", "white");

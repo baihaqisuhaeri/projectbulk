@@ -157,9 +157,10 @@ class Realisasi_sj extends CI_Controller
             $row[] = $p->blnaktif;
             $row[] = $p->flag_real;
             $row[] = $p->k_altk;
+            $row[] = $p->btl_sj;
 
             
-
+            $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';
             $data[] = $row;
         }
 
@@ -1220,12 +1221,12 @@ class Realisasi_sj extends CI_Controller
 
     public function batal_sj()
     {
-        $no_sj = $this->input->post('no_sj');
+        $id = $this->input->post('id');
         $data = array(
 
-            'btl_sj' => "*",
+            'flag_real' => "",
         );
-        $this->Realisasi_sj_model->batal_sj($no_sj, $data);
+        $this->Realisasi_sj_model->batal_sj($id, $data);
         $query = $this->db->affected_rows();
 
         if ($query) {

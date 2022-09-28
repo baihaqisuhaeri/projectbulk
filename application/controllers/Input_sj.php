@@ -164,7 +164,8 @@ class Input_sj extends CI_Controller
             $row[] = $p->blnaktif;
             $row[] = $p->btl_sj;
             $row[] = $p->k_altk;
-
+            $row[] = $p->flag_real;
+            
            
             $data[] = $row;
         }
@@ -1296,10 +1297,7 @@ class Input_sj extends CI_Controller
             'btl_sj' => "*",
         );
         $this->Input_sj_model->batal_sj($id, $data);
-        $data = array(
-            'btl_sj' => '',
-        );
-        $this->Input_sj_model->edit_sj_setelah_dihapus($no_sj, "edited", $data);
+       
         $query = $this->db->affected_rows();
 
         if ($query) {

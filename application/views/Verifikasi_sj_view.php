@@ -271,7 +271,8 @@
                                                             <td>Kode Alamat</td>
                                                             <td>Diskon</td>
                                                             <td>Transport</td>
-
+                                                            <td>flag_real</td>
+                                                            <td>flag_ver</td>
 
 
                                                         </tr>

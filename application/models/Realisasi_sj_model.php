@@ -33,7 +33,7 @@ class Realisasi_sj_model extends CI_Model
        // $this->db->group_by('tb_sj.no_sj');
         
         $this->db->join('hak_akses', 'tb_sj.kd_unit = hak_akses.kode_unit');
-        $this->db->where('tb_sj.btl_sj', '');
+       // $this->db->where('tb_sj.btl_sj', '');
         $this->db->where('hak_akses.nama_user', $nama);
         //$this->db->where('tb_sj.btl_sj', "");
         $this->db->order_by('no_sj asc');
@@ -435,9 +435,9 @@ class Realisasi_sj_model extends CI_Model
 
         return $query->result();
     }
-    public function batal_sj($no_sj, $data)
+    public function batal_sj($id, $data)
     {
-        $this->db->where('no_sj', $no_sj);
+        $this->db->where('id', $id);
         $this->db->update('tb_sj', $data);
     }
 }

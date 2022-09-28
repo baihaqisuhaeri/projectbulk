@@ -742,6 +742,7 @@
                                                             <td>Bulan Aktif</td>
                                                             <td>btl_sj</td>
                                                             <td>Kode Alamat</td>
+                                                            <td>flag_real</td>
 
 
                                                         </tr>

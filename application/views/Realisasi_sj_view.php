@@ -267,8 +267,11 @@
                                                             <td>Aksi</td>
                                                             <td>Realisasi Surat Jalan</td>
                                                             <td>Bulan Aktif</td>
-                                                            <td>btl_sj</td>
+                                                            <td>flag_real</td>
                                                             <td>Kode Alamat</td>
+                                                            <td>btl_sj</td>
+                                                            <td>Batal Surat Jalan</td>
+                                                            
 
 
                                                         </tr>

@@ -951,12 +951,11 @@ $(document).ready(function () {
     },
 
     "createdRow": function( row, data, dataIndex ) {
+      console.log(data[38]);
       if ( data[36] == "*" ) {
-          $(row).addClass( 'bg-danger' );
-      }else if(data[36] == "stl"){
-        $(row).css("background-color", "gray");
-      }else if(data[36] == "sbl"){
-        $(row).css("background-color", "red");
+        $(row).css("background-color", "#f0ecec");
+      }else if(data[38] != "0000-00-00 00:00:00"){
+        $(row).css("background-color", "#d8d4fc");
       }
       else{
          $(row).css("background-color", "white");
@@ -1948,9 +1947,9 @@ $(document).on("change", "#bulan_aktif", function () {
     //Set column definition initialisation properties.
     "createdRow": function( row, data, dataIndex ) {
       if ( data[36] == "*" ) {
-          $(row).addClass( 'bg-danger' );
-      }else if(data[36] == "stl"){
-        $(row).css("background-color", "gray");
+        $(row).css("background-color", "#f0ecec");
+      }else if(data[37] != "0000-00-00 00:00:00"){
+        $(row).css("background-color", "#d8d4fc");
       }else if(data[36] == "sbl"){
         $(row).css("background-color", "red");
       }

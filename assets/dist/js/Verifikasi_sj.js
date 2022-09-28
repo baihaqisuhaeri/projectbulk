@@ -668,14 +668,10 @@ $(document).ready(function () {
     },
 
     "createdRow": function( row, data, dataIndex ) {
-      
-      if ( data[34] != "0000-00-00 00:00:00" ) {
-        $(row).css("background-color", "#9FFF8E");
-      }else if(data[36] == "stl"){
-        $(row).css("background-color", "gray");
-      }else if(data[36] == "sbl"){
-        $(row).css("background-color", "red");
-      }
+      //console.log(data[39]);
+      if ( data[39] != "0000-00-00 00:00:00" ) {
+        $(row).css("background-color", "#d8fcd4");
+      }// sampe sini 28 September 2022
       else{
          $(row).css("background-color", "white");
       }
@@ -690,7 +686,7 @@ $(document).ready(function () {
     //   },
     // ],
     //bisa hide column
-    "aoColumnDefs": [{ "bVisible": false, "aTargets": [33,34,35,36, 37] }]
+    "aoColumnDefs": [{ "bVisible": false, "aTargets": [0] }]
   });
   // fnSetColumnVis( 1, false );
 

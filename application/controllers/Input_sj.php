@@ -145,17 +145,17 @@ class Input_sj extends CI_Controller
 
 
             
-            if($p->btl_sj == "*" || $p->blnaktif != "" ){
+            if($p->btl_sj == "*" || $p->blnaktif != "" || $p->flag_real != '0000-00-00 00:00:00' ){
                 $row[] = '<a href="#!" style="pointer-events: none;" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> | <a style="pointer-events: none;" href="#!" class="fas fa-trash deleteSj" data-id="' . $p->id . '" title="Hapus Surat Jalan" style="color:black;"></a>';
             
-                $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded cetak_sj" value="' . $p->no_sj . '" name="no_sj" type="submit">Cetak</button>';
-                $row[] = "Dibatalkan";
+                $row[] = '<button class="btn btn-primary btn-small btn-primary btn-rounded cetak_sj" value="' . $p->no_sj . '" name="no_sj" type="submit">Cetak</button>';
+                
                 $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-id="' . $p->id . '" name="batal_sj" type="button">Batal</button>';
             }else{
                 $row[] = '<a href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> | <a href="#!" class="fas fa-trash deleteSj" data-id="' . $p->id . '" title="Hapus Surat Jalan" style="color:black;"></a>';
             
                 $row[] = '<button class="btn btn-primary btn-small btn-primary btn-rounded cetak_sj" value="' . $p->no_sj . '" name="no_sj" type="submit">Cetak</button>';
-                $row[] = "Belum batal";
+               
                 $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';
             }
             

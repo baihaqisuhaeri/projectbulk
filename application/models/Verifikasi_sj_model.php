@@ -33,7 +33,7 @@ class Verifikasi_sj_model extends CI_Model
        // $this->db->group_by('tb_sj.no_sj');
         
         $this->db->join('hak_akses', 'tb_sj.kd_unit = hak_akses.kode_unit');
-        $this->db->where('tb_sj.flag_real', '');
+        //$this->db->where('tb_sj.flag_real', '');
         $this->db->where('hak_akses.nama_user', $nama);
         //$this->db->where('tb_sj.btl_sj', "");
         $this->db->order_by('no_sj asc');

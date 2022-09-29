@@ -737,7 +737,7 @@
 
                                                             <td>Aksi</td>
                                                             <td>Cetak Surat Jalan</td>
-                                                            <td>Status</td>
+                                                           
                                                             <td>Batal Surat Jalan</td>
                                                             <td>Bulan Aktif</td>
                                                             <td>btl_sj</td>

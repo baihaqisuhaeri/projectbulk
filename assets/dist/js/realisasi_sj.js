@@ -662,7 +662,7 @@ $(document).ready(function () {
       
       
       //if ( data[36] == "0000-00-00 00:00:00" ) {
-      
+      console.log(data[36]);
       if ( data[36] == "*" ) {
         $(row).css("background-color", "#f0ecec");
       }else if(data[34] != "0000-00-00 00:00:00"){

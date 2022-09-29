@@ -668,10 +668,15 @@ $(document).ready(function () {
     },
 
     "createdRow": function( row, data, dataIndex ) {
-      //console.log(data[39]);
+      //console.log(data[34]);
       if ( data[39] != "0000-00-00 00:00:00" ) {
         $(row).css("background-color", "#d8fcd4");
       }// sampe sini 28 September 2022
+      else if ( data[38] != "0000-00-00 00:00:00" ) {
+        $(row).css("background-color", "#d8d4fc");
+      }else if ( data[34] == "*" ) {
+        $(row).css("background-color", "#f0ecec");
+      }
       else{
          $(row).css("background-color", "white");
       }
@@ -686,7 +691,7 @@ $(document).ready(function () {
     //   },
     // ],
     //bisa hide column
-    "aoColumnDefs": [{ "bVisible": false, "aTargets": [0] }]
+    "aoColumnDefs": [{ "bVisible": false, "aTargets": [33,34,35,36,37,38,39] }]
   });
   // fnSetColumnVis( 1, false );
 
@@ -1692,17 +1697,17 @@ $(document).on("change", "#bulan_aktif", function () {
         bulanAktif: bulanAktif,
       },
     },
-    "aoColumnDefs": [{ "bVisible": false, "aTargets": [33,34,35,36, 37] }],
+    "aoColumnDefs": [{ "bVisible": false, "aTargets": [33,34,35,36,37,38,39] }],
     //Set column definition initialisation properties.
     "createdRow": function( row, data, dataIndex ) {
       
-      if ( data[34] != "0000-00-00 00:00:00" ) {
-        $(row).css("background-color", "#9FFF8E");
-      }
-      else if(data[36] == "stl"){
-        $(row).css("background-color", "gray");
-      }else if(data[36] == "sbl"){
-        $(row).css("background-color", "red");
+      if ( data[39] != "0000-00-00 00:00:00" ) {
+        $(row).css("background-color", "#d8fcd4");
+      }// sampe sini 28 September 2022
+      else if ( data[38] != "0000-00-00 00:00:00" ) {
+        $(row).css("background-color", "#d8d4fc");
+      }else if ( data[34] == "*" ) {
+        $(row).css("background-color", "#f0ecec");
       }
       else{
          $(row).css("background-color", "white");

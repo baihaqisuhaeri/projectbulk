@@ -161,7 +161,7 @@ class Realisasi_sj extends CI_Controller
     }
            
                 
-            
+            //sampe sini 29 September 2022
             
             $row[] = $p->blnaktif;
             $row[] = $p->flag_real;

@@ -698,6 +698,7 @@ $(document).ready(function () {
   $("#tabel_sj tbody").on("click", ".edit_sj", function () {
     var data = table.row($(this).parents("tr")).data();
      id_edit_sj = $(this).data("id");
+     console.log(id_edit_sj);
    // console.log(data[19]);
    
     if($(this).data("no_sj") == null){
@@ -882,9 +883,9 @@ function deleteSj() {
   });
 }
 
-var nomor_sj_batal = "";
+var id_sj_batal = "";
 $(document).on("click", ".batal_sj", function (event) {
-  nomor_sj_batal = $(this).data("no_sj");
+  id_sj_batal = $(this).data("id");
   //console.log(nomor_sj_batal);
 
   $("#modal_konfirmasi_batal").modal("show");
@@ -897,7 +898,7 @@ function batalSj() {
   $.ajax({
     url: "verifikasi-sj/batal-sj",
     data: {
-      no_sj: nomor_sj_batal,
+      id: id_sj_batal,
     },
     type: "post",
     success: function (data) {
@@ -907,7 +908,7 @@ function batalSj() {
         mytable = $("#tabel_sj").DataTable();
         mytable.draw();
 
-        $("#" + nomor_sj_batal)
+        $("#" + id_sj_batal)
           .closest("tr")
           .remove();
         Swal.fire("Berhasil!", "Surat Jalan berhasil dibatalkan", "success");
@@ -1488,13 +1489,14 @@ function verifikasiSj() {
   var hppn = convert($("#harga_ppn_2").val());
 
 
-
+console.log(id_edit_sj);
   
   $.ajax({
     url: "verifikasi-sj/verifikasi-sj",
     type: "post",
     dataType: "text",
     data: {
+      id: id_edit_sj,
       no_sj: no_sj,
       k_cus: kodeCustomer[0],
       k_barang: k_barang[0],
@@ -1520,7 +1522,7 @@ function verifikasiSj() {
         $("#bagian_2_edit").hide();
       } else {
   
-        Swal.fire("error", "Surat jalan gagal diverifikasi", "success");
+        Swal.fire("Gagal", "Surat jalan belum direalisasi", "error");
         $("#bagian_2_edit").hide();
       }
       

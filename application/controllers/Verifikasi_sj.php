@@ -144,11 +144,11 @@ class Verifikasi_sj extends CI_Controller
 
         if($p->flag_ver == '0000-00-00 00:00:00' && $p->flag_real != '0000-00-00 00:00:00' ){
             $row[] = '<a  href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> ';  
-            $row[] = '<button class="btn btn-primary btn-small btn-primary btn-rounded edit_sj" id="edit_sj" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Verifikasi</button>';
+            $row[] = '<button class="btn btn-primary btn-small btn-primary btn-rounded edit_sj" id="edit_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Verifikasi</button>';
         }else{
             
             $row[] = '<a style="pointer-events: none;" href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> '; 
-            $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded edit_sj" id="edit_sj" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Verifikasi</button>';
+            $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded edit_sj" id="edit_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Verifikasi</button>';
         }
                 
            
@@ -164,7 +164,14 @@ class Verifikasi_sj extends CI_Controller
             $row[] = $p->flag_real;
             $row[] = $p->flag_ver;
 
-
+            if($p->btl_sj == "*"){
+                $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';
+           
+            }else{
+                $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';
+           
+            }
+            
             
 
             $data[] = $row;
@@ -1227,12 +1234,12 @@ class Verifikasi_sj extends CI_Controller
 
     public function batal_sj()
     {
-        $no_sj = $this->input->post('no_sj');
+        $id = $this->input->post('id');
         $data = array(
 
-            'btl_sj' => "*",
+            'flag_ver' => "",
         );
-        $this->Verifikasi_sj_model->batal_sj($no_sj, $data);
+        $this->Verifikasi_sj_model->batal_sj($id, $data);
         $query = $this->db->affected_rows();
 
         if ($query) {
@@ -1256,79 +1263,94 @@ class Verifikasi_sj extends CI_Controller
     function verifikasi_sj()
     {
         
-        
-        $no_sj = $_POST['no_sj'];
-        
-
-        
-        date_default_timezone_set('Asia/Jakarta');
-        $tgl_ver = date("Y-m-d h:i:s");
-       
-       
-      
-      
-        $k_cus = $_POST['k_cus'];
-        $k_barang = $_POST['k_barang'];
-        $h_jual = $_POST['harga_jual'];
-        $n_trans = $_POST['transport'];
-        $discp = $_POST['discp'];
-        $discr = $_POST['discr'];
-        $n_jual = $_POST['n_jual'];
-        $jumlah = $_POST['jumlah'];
-        $hppn = $_POST['hppn'];
-
-
-        $query = $this->Verifikasi_sj_model->get_customer($k_cus);
-        // $queryLastHarga = $this->Verifikasi_sj_model->get_last_harga_jual($k_cus, $k_barang);
-        // var_dump($queryLastHarga);
-        // die();
-
-        foreach($query as $q){
-            $materai = $q->materai;
-            $ppn = $q->ikut_ppn;
-            $ppnie= $q->ppn_ie;
-            $jt_kwt = $q->jt_tempo;
-            $jp = $q->jp;
+        $id = $_POST['id'];
+        $queryCek = $this->Verifikasi_sj_model->get_sj_by_id($id);  
+        foreach($queryCek as $c){
+            if($c->flag_real != "0000-00-00 00:00:00" ){
+                $cek = true;
+            }else{
+                $cek = false;
+            }
         }
-        
-    //  var_dump($jt_kwt . " " .$jp );
-    //  die();
 
-
-        $data = array(
-            'no_sj' => $no_sj,
-            'h_jual' => $h_jual,
-            'n_jual' => $n_jual,
-            'n_trans' => $n_trans,
-            'discp' => $discp,
-            'discr' => $discr,
-            'jumlah' => $jumlah,
-            'hppn' => $hppn,
-            'materai' => $materai,
-            'ppn' => $ppn,
-            'ppnie' => $ppnie,
-            'jt_kwt' => $jt_kwt,
-            'jp' => $jp,
-            'flag_ver' => $tgl_ver,
+        if($cek){
+            $no_sj = $_POST['no_sj'];
+            date_default_timezone_set('Asia/Jakarta');
+            $tgl_ver = date("Y-m-d h:i:s");
+           
+           
+          
+          
+            $k_cus = $_POST['k_cus'];
+            $k_barang = $_POST['k_barang'];
+            $h_jual = $_POST['harga_jual'];
+            $n_trans = $_POST['transport'];
+            $discp = $_POST['discp'];
+            $discr = $_POST['discr'];
+            $n_jual = $_POST['n_jual'];
+            $jumlah = $_POST['jumlah'];
+            $hppn = $_POST['hppn'];
+    
+    
+            $query = $this->Verifikasi_sj_model->get_customer($k_cus);
+            // $queryLastHarga = $this->Verifikasi_sj_model->get_last_harga_jual($k_cus, $k_barang);
+            // var_dump($queryLastHarga);
+            // die();
+    
+            foreach($query as $q){
+                $materai = $q->materai;
+                $ppn = $q->ikut_ppn;
+                $ppnie= $q->ppn_ie;
+                $jt_kwt = $q->jt_tempo;
+                $jp = $q->jp;
+            }
             
-        );
-
-        $this->Verifikasi_sj_model->verifikasi_sj($no_sj, $data);//sampe sini 23 September 2022
-
-        
-        $query = $this->db->affected_rows();
-
-        if ($query) {
+        //  var_dump($jt_kwt . " " .$jp );
+        //  die();
+    
+    
             $data = array(
-                'status' => 'true',
+                'no_sj' => $no_sj,
+                'h_jual' => $h_jual,
+                'n_jual' => $n_jual,
+                'n_trans' => $n_trans,
+                'discp' => $discp,
+                'discr' => $discr,
+                'jumlah' => $jumlah,
+                'hppn' => $hppn,
+                'materai' => $materai,
+                'ppn' => $ppn,
+                'ppnie' => $ppnie,
+                'jt_kwt' => $jt_kwt,
+                'jp' => $jp,
+                'flag_ver' => $tgl_ver,
+                
             );
-            echo json_encode($data);
-        } else {
+    
+            $this->Verifikasi_sj_model->verifikasi_sj($no_sj, $data);//sampe sini 23 September 2022
+    
+            
+            $query = $this->db->affected_rows();
+    
+            if ($query) {
+                $data = array(
+                    'status' => 'true',
+                );
+                echo json_encode($data);
+            } else {
+                $data = array(
+                    'status' => 'false',
+                );
+                echo json_encode($data);
+            }
+        }else{
             $data = array(
                 'status' => 'false',
             );
             echo json_encode($data);
         }
+
+      
     
     
     }

@@ -689,6 +689,7 @@ $(document).ready(function () {
   $("#tabel_sj tbody").on("click", ".edit_sj", function () {
     var data = table.row($(this).parents("tr")).data();
      id_real_sj = $(this).data("id");
+     
     
     if($(this).data("no_sj") == null){
       $("#realisasi_sj").hide();
@@ -1350,7 +1351,7 @@ function editSj() {
 
 
 $(document).on("click", "#realisasi_sj", function () {
-
+  
   $("#error_unitSj_2").html("");
   $("#error_nama_customer_2").html("");
   $("#error_no_spm_2").html("");
@@ -1420,13 +1421,14 @@ function realisasiSj() {
   var qty_real = $("#jumlah_2").val(); 
   var kg_real = $("#kilogram_2").val(); 
   
-
+  console.log(id_real_sj);
   
   $.ajax({
     url: "realisasi-sj/realisasi-sj",
     type: "post",
     dataType: "text",
     data: {
+      id: id_real_sj,
       no_sj: no_sj,
       keterangan: keterangan,
       k_supl: suplier[0],
@@ -1449,7 +1451,7 @@ function realisasiSj() {
         $("#bagian_2_edit").hide();
       } else {
   
-        Swal.fire("error", "Surat jalan gagal direalisasi", "success");
+        Swal.fire("Gagal", "Surat jalan sudah dibatalkan", "error");
         $("#bagian_2_edit").hide();
       }
       

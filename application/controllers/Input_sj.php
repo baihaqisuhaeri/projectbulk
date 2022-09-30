@@ -1291,30 +1291,48 @@ class Input_sj extends CI_Controller
     public function batal_sj()
     {
         $id = $this->input->post('id');
-        $no_sj = $this->input->post('no_sj');
-        $data = array(
-
-            'btl_sj' => "*",
-        );
-        $this->Input_sj_model->batal_sj($id, $data);
-       
-        $query = $this->db->affected_rows();
-
-        if ($query) {
-
+        $queryCek = $this->Input_sj_model->get_sj_by_id($id);  
+        foreach($queryCek as $c){
+            if($c->flag_real == "0000-00-00 00:00:00" || $c->flag_ver == "0000-00-00 00:00:00"){
+                $cek = true;
+            }else{
+                $cek = false;
+            }
+        }
+        if($cek){
+            $no_sj = $this->input->post('no_sj');
             $data = array(
-                'status' => 'success',
-
+    
+                'btl_sj' => "*",
             );
-
-            echo json_encode($data);
-        } else {
+            $this->Input_sj_model->batal_sj($id, $data);
+           
+            $query = $this->db->affected_rows();
+    
+            if ($query) {
+    
+                $data = array(
+                    'status' => 'success',
+    
+                );
+    
+                echo json_encode($data);
+            } else {
+                $data = array(
+                    'status' => 'failed',
+    
+                );
+    
+                echo json_encode($data);
+            }
+        }else{
             $data = array(
                 'status' => 'failed',
 
             );
 
             echo json_encode($data);
-        }
+        
+    }
     }
 }

@@ -273,6 +273,7 @@
                                                             <td>Transport</td>
                                                             <td>flag_real</td>
                                                             <td>flag_ver</td>
+                                                            <td>Batal Verifikasi</td>
 
 
                                                         </tr>

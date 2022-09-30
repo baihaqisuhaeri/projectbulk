@@ -142,20 +142,18 @@ class Realisasi_sj extends CI_Controller
         
         if($p->btl_sj == "*"){
             $row[] = '<a style="pointer-events: none;" href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> ';  
-            $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded edit_sj" id="edit_sj" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Realisasi</button>';
+            $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded edit_sj" id="edit_sj" data-no_sj="' . $p->no_sj . '" name="realisasi_sj" type="button">Realisasi</button>';
       
         }else{
-
-        
 
 
         if($p->flag_real == '0000-00-00 00:00:00' ){
             $row[] = '<a  href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> ';  
             
-            $row[] = '<button class="btn btn-primary btn-small btn-primary btn-rounded edit_sj" id="edit_sj" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Realisasi</button>';
+            $row[] = '<button class="btn btn-primary btn-small btn-primary btn-rounded edit_sj" id="edit_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="realisasi_sj" type="button">Realisasi</button>';
         }else{
             $row[] = '<a style="pointer-events: none;" href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> ';  
-            $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded edit_sj" id="edit_sj" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Realisasi</button>';
+            $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded edit_sj" id="edit_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="realisasi_sj" type="button">Realisasi</button>';
       
         }
     }
@@ -172,8 +170,14 @@ class Realisasi_sj extends CI_Controller
                 $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';
            
             }else{
-                $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';
+                if($p->flag_ver == '0000-00-00 00:00:00' ){
+                    $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';
            
+                }else{
+                    $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';
+           
+                }
+               
             }
             $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';
            
@@ -1238,82 +1242,119 @@ class Realisasi_sj extends CI_Controller
     public function batal_sj()
     {
         $id = $this->input->post('id');
-        $data = array(
 
-            'flag_real' => "",
-        );
-        $this->Realisasi_sj_model->batal_sj($id, $data);
-        $query = $this->db->affected_rows();
+        $queryCek = $this->Realisasi_sj_model->get_sj_by_id($id);  
+        foreach($queryCek as $c){
+            if($c->flag_ver == "0000-00-00 00:00:00" ){
+                
+                $cek = true;
+            }else{
+                $cek = false;
+            }
+        }
 
-        if ($query) {
-
+        if($cek){
             $data = array(
-                'status' => 'success',
 
+                'flag_real' => "",
             );
-
-            echo json_encode($data);
-        } else {
+            $this->Realisasi_sj_model->batal_sj($id, $data);
+            $query = $this->db->affected_rows();
+    
+            if ($query) {
+    
+                $data = array(
+                    'status' => 'success',
+    
+                );
+    
+                echo json_encode($data);
+            } else {
+                $data = array(
+                    'status' => 'failed',
+    
+                );
+    
+                echo json_encode($data);
+            }
+        }else{
             $data = array(
                 'status' => 'failed',
 
             );
 
             echo json_encode($data);
-        }
+        
+    }
     }
 
     function realisasi_sj()
     {
-        
-        
-        $no_sj = $_POST['no_sj'];
-        
-
-        
-        date_default_timezone_set('Asia/Jakarta');
-        $tgl_real = date("Y-m-d h:i:s");
+        $id = $_POST['id'];
        
-      
-        $qty_real = $_POST['qty_real'];
-        $kg_real = $_POST['kg_real'];
-        $keterangan = $_POST['keterangan'];
-        $k_supl = $_POST['k_supl'];
-        $n_supl = $_POST['n_supl'];
-        $no_faktur = $_POST['no_faktur'];
-       
-
-        $data = array(
-            'no_sj' => $no_sj,
+        $queryCek = $this->Realisasi_sj_model->get_sj_by_id($id);  
+        foreach($queryCek as $c){
+            if($c->btl_sj == "" ){
+                $cek = true;
+            }else{
+                $cek = false;
+            }
+        }
         
-            'qty_real' => $qty_real,
-            'kg_real' => $kg_real,
-            'ket' => $keterangan,
-            'k_supl' => $k_supl,
-            'n_supl' => $n_supl,
-            'no_faktur' => $no_faktur,
-            'flag_real' => $tgl_real
-            
-        );
-
-        $this->Realisasi_sj_model->realisasi_sj($no_sj, $data);
+        if($cek){
+            $no_sj = $_POST['no_sj'];
+        
 
         
-        $query = $this->db->affected_rows();
-
-        if ($query) {
+            date_default_timezone_set('Asia/Jakarta');
+            $tgl_real = date("Y-m-d h:i:s");
+           
+          
+            $qty_real = $_POST['qty_real'];
+            $kg_real = $_POST['kg_real'];
+            $keterangan = $_POST['keterangan'];
+            $k_supl = $_POST['k_supl'];
+            $n_supl = $_POST['n_supl'];
+            $no_faktur = $_POST['no_faktur'];
+           
+    
             $data = array(
-                'status' => 'true',
+                'no_sj' => $no_sj,
+            
+                'qty_real' => $qty_real,
+                'kg_real' => $kg_real,
+                'ket' => $keterangan,
+                'k_supl' => $k_supl,
+                'n_supl' => $n_supl,
+                'no_faktur' => $no_faktur,
+                'flag_real' => $tgl_real
+                
             );
-            echo json_encode($data);
-        } else {
+    
+            $this->Realisasi_sj_model->realisasi_sj($no_sj, $data);
+    
+            
+            $query = $this->db->affected_rows();
+    
+            if ($query) {
+                $data = array(
+                    'status' => 'true',
+                );
+                echo json_encode($data);
+            } else {
+                $data = array(
+                    'status' => 'false',
+                );
+                echo json_encode($data);
+            }
+        }else{
             $data = array(
                 'status' => 'false',
             );
             echo json_encode($data);
-        }
+        
     
-    
+    }
     }
 
 

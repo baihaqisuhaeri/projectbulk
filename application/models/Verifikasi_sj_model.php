@@ -435,9 +435,9 @@ class Verifikasi_sj_model extends CI_Model
 
         return $query->result();
     }
-    public function batal_sj($no_sj, $data)
+    public function batal_sj($id, $data)
     {
-        $this->db->where('no_sj', $no_sj);
+        $this->db->where('id', $id);
         $this->db->update('tb_sj', $data);
     }
 

@@ -1946,9 +1946,11 @@ $(document).on("change", "#bulan_aktif", function () {
     "aoColumnDefs": [{ "bVisible": false, "aTargets": [34,35,36,37] }],
     //Set column definition initialisation properties.
     "createdRow": function( row, data, dataIndex ) {
+      //console.log(data[35]);
+      //sampe sini 30 September 2022, tinggal yg edit klo udah tutup bulan
       if ( data[35] == "*" ) {
         $(row).css("background-color", "#f0ecec");
-      }else if(data[36] != "0000-00-00 00:00:00"){
+      }else if(data[37] != "0000-00-00 00:00:00"){
         $(row).css("background-color", "#d8d4fc");
       }
       else{

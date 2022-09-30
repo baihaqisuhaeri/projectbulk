@@ -211,5 +211,6 @@ $route['verifikasi-sj/get-bulan-aktif'] = 'Verifikasi_sj/get_bulan_aktif';
 $route['verifikasi-sj/get-bulan-aktif-sj'] = 'Verifikasi_sj/get_bulan_aktif_sj';
 $route['verifikasi-sj/verifikasi-sj'] = 'Verifikasi_sj/verifikasi_sj';
 $route['verifikasi-sj/get-harga-barang'] = 'Verifikasi_sj/get_barang_verifikasi';
+$route['verifikasi-sj/batal-sj'] = 'Verifikasi_sj/batal_sj';
 
 

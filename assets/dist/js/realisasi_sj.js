@@ -1631,13 +1631,13 @@ $(document).on("change", "#bulan_aktif", function () {
     "aoColumnDefs": [{ "bVisible": false, "aTargets": [33,34,35,36] }],
     //Set column definition initialisation properties.
     "createdRow": function( row, data, dataIndex ) {
-      
-      if(data[34] != "0000-00-00 00:00:00"){
-        $(row).css("background-color", "#d8d4fc");
-      }
-      else if ( data[36] == "*" ) {
+      if ( data[36] == "*" ) {
         $(row).css("background-color", "#f0ecec");
       }
+      else if(data[34] != "0000-00-00 00:00:00"){
+        $(row).css("background-color", "#d8d4fc");
+      }
+      
       else{
          $(row).css("background-color", "white");
       }

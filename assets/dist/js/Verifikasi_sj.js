@@ -668,14 +668,14 @@ $(document).ready(function () {
     },
 
     "createdRow": function( row, data, dataIndex ) {
-      //console.log(data[34]);
-      if ( data[39] != "0000-00-00 00:00:00" ) {
+      if ( data[34] == "*" ) {
+        $(row).css("background-color", "#f0ecec");
+      }
+     else if ( data[39] != "0000-00-00 00:00:00" ) {
         $(row).css("background-color", "#d8fcd4");
       }// sampe sini 28 September 2022
       else if ( data[38] != "0000-00-00 00:00:00" ) {
         $(row).css("background-color", "#d8d4fc");
-      }else if ( data[34] == "*" ) {
-        $(row).css("background-color", "#f0ecec");
       }
       else{
          $(row).css("background-color", "white");
@@ -1342,6 +1342,10 @@ $(document).on("submit", "#edit_sj", function (e) {
 function editSj() {
   $("#modal_konfirmasi_edit_sj").modal("hide");
 
+  var kodeCustomer = $("#nama_customer_2").val().split("_");
+
+  
+
   var keterangan = $("#keterangan_2").val();
   //sampe sini 26 September 2022
   
@@ -1364,6 +1368,7 @@ function editSj() {
 
     data: {
       id: id_edit_sj,
+      k_cus: kodeCustomer[0],
       no_sj: no_sj,
       harga_jual: harga_jual,
       transport: transport,
@@ -1702,14 +1707,14 @@ $(document).on("change", "#bulan_aktif", function () {
     "aoColumnDefs": [{ "bVisible": false, "aTargets": [33,34,35,36,37,38,39] }],
     //Set column definition initialisation properties.
     "createdRow": function( row, data, dataIndex ) {
-      
-      if ( data[39] != "0000-00-00 00:00:00" ) {
+      if ( data[34] == "*" ) {
+        $(row).css("background-color", "#f0ecec");
+      }
+      else if ( data[39] != "0000-00-00 00:00:00" ) {
         $(row).css("background-color", "#d8fcd4");
       }// sampe sini 28 September 2022
       else if ( data[38] != "0000-00-00 00:00:00" ) {
         $(row).css("background-color", "#d8d4fc");
-      }else if ( data[34] == "*" ) {
-        $(row).css("background-color", "#f0ecec");
       }
       else{
          $(row).css("background-color", "white");

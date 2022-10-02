@@ -139,15 +139,19 @@ class Verifikasi_sj extends CI_Controller
             $row[] = $p->k_supl;
 
 
-
-
-
+            if($p->btl_sj == "*" || $p->flag_ver == '0000-00-00 00:00:00'){
+                $row[] = '<a style="pointer-events: none;" href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> ';
+            }else{
+                $row[] = '<a  href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> ';
+            }
+            
+             
         if($p->flag_ver == '0000-00-00 00:00:00' && $p->flag_real != '0000-00-00 00:00:00' ){
-            $row[] = '<a  href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> ';  
+            
             $row[] = '<button class="btn btn-primary btn-small btn-primary btn-rounded edit_sj" id="edit_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Verifikasi</button>';
         }else{
             
-            $row[] = '<a style="pointer-events: none;" href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> '; 
+            
             $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded edit_sj" id="edit_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Verifikasi</button>';
         }
                 
@@ -164,7 +168,7 @@ class Verifikasi_sj extends CI_Controller
             $row[] = $p->flag_real;
             $row[] = $p->flag_ver;
 
-            if($p->btl_sj == "*"){
+            if($p->btl_sj == "*" || $p->blnaktif != ""){
                 $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';
            
             }else{
@@ -914,16 +918,24 @@ class Verifikasi_sj extends CI_Controller
         $tgl_ver = date("Y-m-d h:i:s");
         $no_sj = $_POST['no_sj'];
         $id = $_POST['id'];
-
-        $h_jual = $_POST['harga_jual'];
-        $n_trans = $_POST['transport'];
-        $discp = $_POST['discp'];
-        $discr = $_POST['discr'];
-        $n_jual = $_POST['n_jual'];
-        $jumlah = $_POST['jumlah'];
-        $hppn = $_POST['hppn'];
+        
+        $k_cus = $_POST['k_cus'];
 
         
+
+        
+        $queryVer = $this->Verifikasi_sj_model->get_customer($k_cus);
+        foreach($queryVer as $qv){
+
+            $materai = $qv->materai;
+                $ppn = $qv->ikut_ppn;
+                $ppnie= $qv->ppn_ie;
+                $jt_kwt = $qv->jt_tempo;
+                $jp = $qv->jp;
+                
+                
+
+        }
        
         if($blnaktif==""){
 
@@ -957,167 +969,238 @@ class Verifikasi_sj extends CI_Controller
             echo json_encode($data);
         }
     }
-    // else{
+    else{
 
-    //     date_default_timezone_set('Asia/Jakarta');
-    //     $tgl_edit = date("Y-m-d");
-    //     $unitSj = $_POST['unitSj'];
-    //     $no_sj = $_POST['no_sj'];
-    //     $nama_customer = $_POST['nama_customer'];
-    //     $kode_customer = $_POST['kode_customer'];
-    //     $al1_cus = $_POST['al1_cus'];
-    //     $al2_cus = $_POST['al2_cus'];
-    //     $al3_cus = $_POST['al3_cus'];
-    //     $alamat_kirim1 = $_POST['alamat_kirim1'];
-    //     $alamat_kirim2 = $_POST['alamat_kirim2'];
-    //     $alamat_kirim3 = $_POST['alamat_kirim3'];
-    //     $k_wilayah = $_POST['k_wilayah'];
-    //     $k_altk = $_POST['k_altk'];
-    //     $npwp = $_POST['npwp'];
-    //     $npwp_krm = $_POST['npwp_krm'];
-    //     $no_po = $_POST['no_po'];
-    //     $tgl_po = $_POST['tgl_po'];
-    //     $ppn = $_POST['ppn'];
-    //     $no_spm = $_POST['no_spm'];
-    //     $spm_brlk = $_POST['spm_brlk'];
-    //     $tanggal_surat_jalan = $_POST['tanggal_surat_jalan'];
-    //     $tk = $_POST['tk'];
-    //     $no_kendaraan = $_POST['no_kendaraan'];
-    //     $unit_marketing = $_POST['unit_marketing'];
-    //     $nama_supir = $_POST['nama_supir'];
-    //     $kode_supir = $_POST['kode_supir'];
-    //     $kode_barang = $_POST['kode_barang'];
-    //     $jumlah = $_POST['jumlah'];
-    //     $kg_kirim = $_POST['kg_kirim'];
-    //     $keterangan = $_POST['keterangan'];
-    //     $k_supl = $_POST['k_supl'];
-    //     $n_supl = $_POST['n_supl'];
-    //     $no_faktur = $_POST['no_faktur'];
-    //     $no_segel = $_POST['no_segel'];
-    //     $pressure = $_POST['pressure'];
-    //     $temperatur = $_POST['temperatur'];
-    //     $nilai_persen_pengambilan = $_POST['nilai_persen_pengambilan'];
-    //     $nilai_persen_berangkat = $_POST['nilai_persen_berangkat'];
+        date_default_timezone_set('Asia/Jakarta');
+        $tgl_edit = date("Y-m-d");
 
-    //     $data = array(
-    //         'no_sj' => $no_sj,
-    //         'kd_unit' => $unitSj,
-    //         'n_cus' => $nama_customer,
-    //         'k_cus' => $kode_customer,
-    //         'al1_cus' => $al1_cus,
-    //         'al2_cus' => $al2_cus,
-    //         'al3_cus' => $al3_cus,
-    //         'alk_cus1' => $alamat_kirim1,
-    //         'alk_cus2' => $alamat_kirim2,
-    //         'alk_cus3' => $alamat_kirim3,
-    //         'k_wil' => $k_wilayah,
-    //         'k_altk' => $k_altk,
-    //         'npwp_krm' => $npwp_krm,
-    //         'npwp' => $npwp,
-    //         'no_po' => $no_po,
-    //         'tgl_po' => $tgl_po,
-    //         'ppn_persen' => $ppn,
-    //         'no_urutspm' => $no_spm,
-    //         'spm_brlk' => $spm_brlk,
-    //         'no_urut' => $no_spm,
-    //         'tgl_sj' => $tanggal_surat_jalan,
-    //         'tk' => $tk,
-    //         'no_mobil' => $no_kendaraan,
-    //         'unit_mkt' => $unit_marketing,
-    //         'n_sales' => $nama_supir,
-    //         'k_sales' => $kode_supir,
-    //         'k_barang' => $kode_barang,
-    //         'qty_kirim' => $jumlah,
-    //         'kg_kirim' => $kg_kirim,
-    //         'ket' => $keterangan,
-    //         'k_supl' => $k_supl,
-    //         'n_supl' => $n_supl,
-    //         'no_faktur' => $no_faktur,
-    //         'no_segel' => $no_segel,
-    //         'awl_presur' => $pressure,
-    //         'awl_suhu' => $temperatur,
-    //         'awal' => $nilai_persen_pengambilan,
-    //         'akhir' => $nilai_persen_berangkat,
-    //         'tgl_update' => $tgl_edit,
-    //         'blnaktif' => "",
-    //         'btl_sj' => ""
-    //     );
+        $querySjBaru = $this->Verifikasi_sj_model->get_sj_by_id($id);
+        foreach($querySjBaru as $qb){
+            $no_sj = $qb->no_sj;
+            $unitSj = $qb->kd_unit;
+            $nama_customer = $qb->n_cus;
+            $kode_customer = $qb->k_cus;
+            $al1_cus = $qb->al1_cus;
+            $al2_cus = $qb->al2_cus;
+            $al3_cus = $qb->al3_cus;
+            $alamat_kirim1 = $qb->alk_cus1;
+            $alamat_kirim2 = $qb->alk_cus2;
+            $alamat_kirim3 = $qb->alk_cus3;
+            $k_wilayah = $qb->k_wil;
+            $k_altk = $qb->k_altk;
+            $npwp_krm = $qb->npwp_krm;
+            $npwp = $qb->npwp;
+            $no_po = $qb->no_po;
+            $tgl_po = $qb->tgl_po;
+            $ppn = $qb->ppn_persen;
+            $no_spm = $qb->no_urutspm;
+            $spm_brlk = $qb->spm_brlk;
+            $no_spm = $qb->no_urut;
+            $tanggal_surat_jalan = $qb->tgl_sj;
+            $tk = $qb->tk;
+            $no_kendaraan = $qb->no_mobil;
+            $unit_marketing = $qb->unit_mkt;
+            $nama_supir = $qb->n_sales;
+            $kode_supir = $qb->k_sales;
+            $kode_barang = $qb->k_barang;
+            $jumlah = $qb->qty_kirim;
+            $kg_kirim = $qb->kg_kirim;
+            $keterangan = $qb->ket;
+            $k_supl = $qb->k_supl;
+            $n_supl = $qb->n_supl;
+            $no_faktur = $qb->no_faktur;
+            $no_segel = $qb->no_segel;
+            $pressure = $qb->awl_presur;
+            $temperatur = $qb->awl_suhu;
+            $nilai_persen_pengambilan = $qb->awal;
+            $nilai_persen_berangkat = $qb->akhir;
+        
+            // 'blnaktif' => "",
+            // 'btl_sj' => "",
+
+            $materai = $qb->materai;
+            $ppn = $qb->ppn;
+            $ppnie = $qb->ppnie;
+            $jt_kwt = $qb->jt_kwt;
+            $jp = $qb->jp;
+            
+            $h_jual = $qb->h_jual;
+            $n_trans = $qb->n_trans;
+            $discp = $qb->discp;
+            $discr = $qb->discr;
+            $n_jual = $qb->n_jual;
+            $jumlah = $qb->jumlah;
+            $hppn = $qb->hppn;
+
+            $flag_real = $qb->flag_real;
+            $flag_ver = $qb->flag_ver;
+        }
 
         
 
-    //     $this->Input_sj_model->tambah_surat_sj($data);
-    //     $query_sj_blnaktif = $this->Input_sj_model->get_sj_by_blnaktif($no_sj,$blnaktif);
-    //     foreach($query_sj_blnaktif as $qb){
+        $data = array(
+            'no_sj' => $no_sj,
+            'kd_unit' => $unitSj,
+            'n_cus' => $nama_customer,
+            'k_cus' => $kode_customer,
+            'al1_cus' => $al1_cus,
+            'al2_cus' => $al2_cus,
+            'al3_cus' => $al3_cus,
+            'alk_cus1' => $alamat_kirim1,
+            'alk_cus2' => $alamat_kirim2,
+            'alk_cus3' => $alamat_kirim3,
+            'k_wil' => $k_wilayah,
+            'k_altk' => $k_altk,
+            'npwp_krm' => $npwp_krm,
+            'npwp' => $npwp,
+            'no_po' => $no_po,
+            'tgl_po' => $tgl_po,
+            'ppn_persen' => $ppn,
+            'no_urutspm' => $no_spm,
+            'spm_brlk' => $spm_brlk,
+            'no_urut' => $no_spm,
+            'tgl_sj' => $tanggal_surat_jalan,
+            'tk' => $tk,
+            'no_mobil' => $no_kendaraan,
+            'unit_mkt' => $unit_marketing,
+            'n_sales' => $nama_supir,
+            'k_sales' => $kode_supir,
+            'k_barang' => $kode_barang,
+            'qty_kirim' => $jumlah,
+            'kg_kirim' => $kg_kirim,
+            'ket' => $keterangan,
+            'k_supl' => $k_supl,
+            'n_supl' => $n_supl,
+            'no_faktur' => $no_faktur,
+            'no_segel' => $no_segel,
+            'awl_presur' => $pressure,
+            'awl_suhu' => $temperatur,
+            'awal' => $nilai_persen_pengambilan,
+            'akhir' => $nilai_persen_berangkat,
+            'tgl_update' => $tgl_edit,
+            'blnaktif' => "",
+            'btl_sj' => "*",
 
-    //         $data = array(
-    //             'no_sj' => $qb->no_sj,
-    //             'kd_unit' => $qb->kd_unit,
-    //             'n_cus' => $qb->n_cus,
-    //             'k_cus' => $qb->k_cus,
-    //             'al1_cus' => $qb->al1_cus,
-    //             'al2_cus' => $qb->al2_cus,
-    //             'al3_cus' => $qb->al3_cus,
-    //             'alk_cus1' => $qb->alk_cus1,
-    //             'alk_cus2' => $qb->alk_cus2,
-    //             'alk_cus3' => $qb->alk_cus3,
-    //             'k_wil' => $qb->k_wil,
-    //             'k_altk' => $qb->k_altk,
-    //             'npwp_krm' => $qb->npwp_krm,
-    //             'npwp' => $qb->npwp,
-    //             'no_po' => $qb->no_po,
-    //             'tgl_po' => $qb->tgl_po,
-    //             'ppn_persen' => $qb->ppn_persen,
-    //             'no_urutspm' => $qb->no_urutspm,
-    //             'spm_brlk' => $qb->spm_brlk,
-    //             'no_urut' => $qb->no_urut,
-    //             'tgl_sj' => $qb->tgl_sj,
-    //             'tk' => $qb->tk,
-    //             'no_mobil' => $qb->no_mobil,
-    //             'unit_mkt' => $qb->unit_mkt,
-    //             'n_sales' => $qb->n_sales,
-    //             'k_sales' => $qb->k_sales,
-    //             'k_barang' => $qb->k_barang,
-    //             'qty_kirim' => $qb->qty_kirim,
-    //             'kg_kirim' => $qb->kg_kirim,
-    //             'ket' => $qb->ket,
-    //             'k_supl' => $qb->k_supl,
-    //             'n_supl' => $qb->n_supl,
-    //             'no_faktur' => $qb->no_faktur,
-    //             'no_segel' => $qb->no_segel,
-    //             'awl_presur' => $qb->awl_presur,
-    //             'awl_suhu' => $qb->awl_suhu,
-    //             'awal' => $qb->awal,
-    //             'akhir' => $qb->akhir,
-    //             'tgl_update' => $qb->tgl_update,
-    //             'blnaktif' => "",
-    //             'btl_sj' => "*"
-    //         );
+            'materai' => $materai,
+            'ppn' => $ppn,
+            'ppnie' => $ppnie,
+            'jt_kwt' => $jt_kwt,
+            'jp' => $jp,
 
-    //     }
-    //     $this->Input_sj_model->tambah_surat_sj($data);
+            'h_jual' => $h_jual,
+            'n_jual' => $n_jual,
+            'n_trans' => $n_trans,
+            'discp' => $discp,
+            'discr' => $discr,
+            'jumlah' => $jumlah,
+            'hppn' => $hppn,
+
+            'flag_real' => $flag_real, 
+            'flag_ver' => $flag_ver
+        );
+
         
 
-    //     $data = array(
-    //         'btl_sj' => '*',
-    //     );
-    //     $this->Input_sj_model->edit_sj_setelah($id, $data);
+        $this->Verifikasi_sj_model->tambah_surat_sj($data);
+        
+        $h_jual = $_POST['harga_jual'];
+        $n_trans = $_POST['transport'];
+        $discp = $_POST['discp'];
+        $discr = $_POST['discr'];
+        $n_jual = $_POST['n_jual'];
+        $jumlah = $_POST['jumlah'];
+        $hppn = $_POST['hppn'];
 
-    //     $query = $this->db->affected_rows();
+        $query_sj_by_id = $this->Verifikasi_sj_model->get_sj_by_id($id);
+        foreach($query_sj_by_id as $qb){
 
-    //     if ($query) {
-    //         $data = array(
-    //             'status' => 'true',
-    //         );
-    //         echo json_encode($data);
-    //     } else {
-    //         $data = array(
-    //             'status' => 'false',
-    //         );
-    //         echo json_encode($data);
-    //     }
+            $data = array(
+                'no_sj' => $qb->no_sj,
+                'kd_unit' => $qb->kd_unit,
+                'n_cus' => $qb->n_cus,
+                'k_cus' => $qb->k_cus,
+                'al1_cus' => $qb->al1_cus,
+                'al2_cus' => $qb->al2_cus,
+                'al3_cus' => $qb->al3_cus,
+                'alk_cus1' => $qb->alk_cus1,
+                'alk_cus2' => $qb->alk_cus2,
+                'alk_cus3' => $qb->alk_cus3,
+                'k_wil' => $qb->k_wil,
+                'k_altk' => $qb->k_altk,
+                'npwp_krm' => $qb->npwp_krm,
+                'npwp' => $qb->npwp,
+                'no_po' => $qb->no_po,
+                'tgl_po' => $qb->tgl_po,
+                'ppn_persen' => $qb->ppn_persen,
+                'no_urutspm' => $qb->no_urutspm,
+                'spm_brlk' => $qb->spm_brlk,
+                'no_urut' => $qb->no_urut,
+                'tgl_sj' => $qb->tgl_sj,
+                'tk' => $qb->tk,
+                'no_mobil' => $qb->no_mobil,
+                'unit_mkt' => $qb->unit_mkt,
+                'n_sales' => $qb->n_sales,
+                'k_sales' => $qb->k_sales,
+                'k_barang' => $qb->k_barang,
+                'qty_kirim' => $qb->qty_kirim,
+                'kg_kirim' => $qb->kg_kirim,
+                'ket' => $qb->ket,
+                'k_supl' => $qb->k_supl,
+                'n_supl' => $qb->n_supl,
+                'no_faktur' => $qb->no_faktur,
+                'no_segel' => $qb->no_segel,
+                'awl_presur' => $qb->awl_presur,
+                'awl_suhu' => $qb->awl_suhu,
+                'awal' => $qb->awal,
+                'akhir' => $qb->akhir,
+                'tgl_update' => $qb->tgl_update,
+                'blnaktif' => "",
+                'btl_sj' => "",
+                
+                
+                'materai' => $materai,
+                'ppn' => $ppn,
+                'ppnie' => $ppnie,
+                'jt_kwt' => $jt_kwt,
+                'jp' => $jp, 
+                
+                'h_jual' => $h_jual,
+                'n_jual' => $n_jual,
+                'n_trans' => $n_trans,
+                'discp' => $discp,
+                'discr' => $discr,
+                'jumlah' => $jumlah,
+                'hppn' => $hppn,
+
+                'flag_real' => $flag_real, 
+                'flag_ver' => $flag_ver
+            );
+
+        }
+        $this->Verifikasi_sj_model->tambah_surat_sj($data);
+        
+
+        $data = array(
+            'btl_sj' => '*',
+        );
+        $this->Verifikasi_sj_model->edit_sj_setelah($id, $data);
+
+        $query = $this->db->affected_rows();
+
+        if ($query) {
+            $data = array(
+                'status' => 'true',
+            );
+            echo json_encode($data);
+        } else {
+            $data = array(
+                'status' => 'false',
+            );
+            echo json_encode($data);
+        }
 
 
-    // }
+    }
     }
 
    

@@ -139,20 +139,24 @@ class Realisasi_sj extends CI_Controller
             $row[] = $p->k_supl;
 
 
+            if($p->btl_sj == "*" || $p->blnaktif != "" || $p->flag_real == '0000-00-00 00:00:00' || $p->flag_ver != '0000-00-00 00:00:00' ){
+                $row[] = '<a style="pointer-events: none;" href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> ';
+            }else{
+                $row[] = '<a href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> ';
+            }
         
-        if($p->btl_sj == "*"){
-            $row[] = '<a style="pointer-events: none;" href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> ';  
+        if($p->btl_sj == "*" || $p->blnaktif != ""){
+           
             $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded edit_sj" id="edit_sj" data-no_sj="' . $p->no_sj . '" name="realisasi_sj" type="button">Realisasi</button>';
       
         }else{
 
 
         if($p->flag_real == '0000-00-00 00:00:00' ){
-            $row[] = '<a  href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> ';  
-            
+          
             $row[] = '<button class="btn btn-primary btn-small btn-primary btn-rounded edit_sj" id="edit_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="realisasi_sj" type="button">Realisasi</button>';
         }else{
-            $row[] = '<a style="pointer-events: none;" href="#!" class="fas fa-edit edit_sj" data-id="' . $p->id . '"  title="Ubah Surat Jalan" style="color:black;"></a> ';  
+            
             $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded edit_sj" id="edit_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="realisasi_sj" type="button">Realisasi</button>';
       
         }
@@ -166,7 +170,7 @@ class Realisasi_sj extends CI_Controller
             $row[] = $p->k_altk;
             $row[] = $p->btl_sj;
 
-            if($p->btl_sj == "*"){
+            if($p->btl_sj == "*" || $p->blnaktif != ""){
                 $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';
            
             }else{
@@ -179,7 +183,7 @@ class Realisasi_sj extends CI_Controller
                 }
                
             }
-            $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';
+            //$row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';
            
             $data[] = $row;
         }

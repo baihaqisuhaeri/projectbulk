@@ -683,7 +683,7 @@ $(document).on("submit", "#tambahSuratJalan", function (e) {
     err += 1;
   }else if($("#tanggal_surat_jalan").val().substring(0, 7)< bulan_aktif){
     $("#error_tanggal_surat_jalan").html(
-      "Tanggal Surat Jalan tidak boleh lebih kecil dari tanggal hari ini!"
+      "Tanggal Surat Jalan tidak boleh lebih kecil dari tanggal aktif unit!"
     );
     err += 1;
   }

@@ -165,6 +165,7 @@ class Input_sj extends CI_Controller
             $row[] = $p->btl_sj;
             $row[] = $p->k_altk;
             $row[] = $p->flag_real;
+            $row[] = $p->flag_ver;
             
            
             $data[] = $row;
@@ -738,37 +739,37 @@ class Input_sj extends CI_Controller
 
 
 
-        $unitSj = $_POST['unitSj'];
-        $no_sj = "S";
-        $kode_nomor = "";
-        $query_kode_nomor = $this->Input_sj_model->get_kode_nomor($unitSj);
-        foreach ($query_kode_nomor as $qkn) {
-            $kode_nomor = $qkn->kode_nomor;
-        }
-        $no_sj .= $kode_nomor . substr($tanggal_surat_jalan, 2,2) . substr($tanggal_surat_jalan, 5,2);
-        //var_dump($no_sj);
-        $query_last_sj = $this->Input_sj_model->get_last_sj($no_sj);
-        // var_dump($query_last_sj == null);
-        // die();
-        if ($query_last_sj == null) {
-            $urut = "001";
-        } else {
+        // $unitSj = $_POST['unitSj'];
+        // $no_sj = "S";
+        // $kode_nomor = "";
+        // $query_kode_nomor = $this->Input_sj_model->get_kode_nomor($unitSj);
+        // foreach ($query_kode_nomor as $qkn) {
+        //     $kode_nomor = $qkn->kode_nomor;
+        // }
+        // $no_sj .= $kode_nomor . substr($tanggal_surat_jalan, 2,2) . substr($tanggal_surat_jalan, 5,2);
+        // //var_dump($no_sj);
+        // $query_last_sj = $this->Input_sj_model->get_last_sj($no_sj);
+        // // var_dump($query_last_sj == null);
+        // // die();
+        // if ($query_last_sj == null) {
+        //     $urut = "001";
+        // } else {
 
 
-            foreach ($query_last_sj as $ls) {
-                $urut = substr($ls->no_sj, 7);
+        //     foreach ($query_last_sj as $ls) {
+        //         $urut = substr($ls->no_sj, 7);
 
-                if ($urut > 0 && $urut < 9) {
-                    $urut = "00" . ($urut + 1);
-                } else if ($urut >= 9 && $urut < 99) {
-                    $urut = "0" . ($urut + 1);
-                } else if ($urut >= 99 && $urut <= 999) {
-                    $urut = $urut + 1;
-                }
-            }
-            //var_dump($urut);
-        }
-        $no_sj .= $urut;
+        //         if ($urut > 0 && $urut < 9) {
+        //             $urut = "00" . ($urut + 1);
+        //         } else if ($urut >= 9 && $urut < 99) {
+        //             $urut = "0" . ($urut + 1);
+        //         } else if ($urut >= 99 && $urut <= 999) {
+        //             $urut = $urut + 1;
+        //         }
+        //     }
+        //     //var_dump($urut);
+        // }
+        // $no_sj .= $urut;
 
 
 
@@ -777,7 +778,7 @@ class Input_sj extends CI_Controller
         // die();
 
 
-
+        $no_sj = $_POST['no_surat_jalan'];
 
         $nama_customer = $_POST['nama_customer'];
         $kode_customer = $_POST['kode_customer'];
@@ -1264,6 +1265,8 @@ class Input_sj extends CI_Controller
             $bln_aktif = $q->tgl_aktif;
         }
         $bln_aktif = substr($bln_aktif, 0, 7);
+        
+        
         $data = array(
             'tgl_aktif' => $bln_aktif,
         );
@@ -1335,4 +1338,85 @@ class Input_sj extends CI_Controller
         
     }
     }
+
+    public function get_tgl_aktif()
+    {
+        $kd_unit = $_POST['kd_unit'];
+
+
+
+        $query = $this->Input_sj_model->get_bulan_aktif($kd_unit);
+
+        foreach ($query as $q) {
+            $bln_aktif = $q->tgl_aktif;
+        }
+        //$bln_aktif = substr($bln_aktif, 0, 7);
+        $data = array(
+            'tgl_aktif' => $bln_aktif,
+        );
+        echo json_encode($data);
+    }
+
+    public function set_no_jalan()
+    {
+        $kd_unit = $_POST['kd_unit'];
+
+        //
+        $tanggal_surat_jalan = $_POST['tanggal_surat_jalan'];
+        
+        $no_sj = "S";
+        $kode_nomor = "";
+        $query_kode_nomor = $this->Input_sj_model->get_kode_nomor($kd_unit);
+        foreach ($query_kode_nomor as $qkn) {
+            $kode_nomor = $qkn->kode_nomor;
+        }
+        $no_sj .= $kode_nomor . substr($tanggal_surat_jalan, 2,2) . substr($tanggal_surat_jalan, 5,2);
+        //var_dump($no_sj);
+        $query_last_sj = $this->Input_sj_model->get_last_sj($no_sj);
+        // var_dump($query_last_sj == null);
+        // die();
+        if ($query_last_sj == null) {
+            $urut = "001";
+        } else {
+
+
+            foreach ($query_last_sj as $ls) {
+                $urut = substr($ls->no_sj, 7);
+
+                if ($urut > 0 && $urut < 9) {
+                    $urut = "00" . ($urut + 1);
+                } else if ($urut >= 9 && $urut < 99) {
+                    $urut = "0" . ($urut + 1);
+                } else if ($urut >= 99 && $urut <= 999) {
+                    $urut = $urut + 1;
+                }
+            }
+            //var_dump($urut);
+        }
+        $no_sj .= $urut;
+
+        // var_dump($no_sj);
+        // die();
+
+        //
+
+
+
+        // $query = $this->Input_sj_model->get_bulan_aktif($kd_unit);
+
+        // foreach ($query as $q) {
+        //     $bln_aktif = $q->tgl_aktif;
+        // }
+        // $bln_aktif = substr($bln_aktif, 0, 7);
+        // $bln_aktif = substr($bln_aktif, 2, 2).substr($bln_aktif, 5, 2);
+        $data = array(
+            'no_sj' => $no_sj,
+        );
+        echo json_encode($data);
+    }
+
+    
 }
+
+
+

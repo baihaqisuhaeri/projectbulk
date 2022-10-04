@@ -169,6 +169,7 @@ class Realisasi_sj extends CI_Controller
             $row[] = $p->flag_real;
             $row[] = $p->k_altk;
             $row[] = $p->btl_sj;
+            $row[] = $p->flag_ver;
 
             if($p->btl_sj == "*" || $p->blnaktif != ""){
                 $row[] = '<button disabled class="btn btn-primary btn-small btn-primary btn-rounded batal_sj" id="batal_sj" data-id="' . $p->id . '" data-no_sj="' . $p->no_sj . '" name="batal_sj" type="button">Batal</button>';

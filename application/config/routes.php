@@ -142,6 +142,10 @@ $route['input-sj/cetak'] = 'Cetak/print';
 $route['input-sj/get-bulan-aktif'] = 'Input_sj/get_bulan_aktif';
 $route['input-sj/get-bulan-aktif-sj'] = 'Input_sj/get_bulan_aktif_sj';
 $route['input-sj/batal-sj'] = 'Input_sj/batal_sj';
+$route['input-sj/tgl-aktif'] = 'Input_sj/get_tgl_aktif';
+$route['input-sj/set-no-jalan'] = 'Input_sj/set_no_jalan';
+
+
 
 
 

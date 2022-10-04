@@ -743,6 +743,7 @@
                                                             <td>btl_sj</td>
                                                             <td>Kode Alamat</td>
                                                             <td>flag_real</td>
+                                                            <td>flag_ver</td>
 
 
                                                         </tr>

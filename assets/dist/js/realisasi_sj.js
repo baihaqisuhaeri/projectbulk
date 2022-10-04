@@ -665,7 +665,11 @@ $(document).ready(function () {
       console.log(data[36]);
       if ( data[36] == "*" ) {
         $(row).css("background-color", "#f0ecec");
-      }else if(data[34] != "0000-00-00 00:00:00"){
+      }
+      else if ( data[37] != "0000-00-00 00:00:00" ) {
+        $(row).css("background-color", "#d8fcd4");
+      }
+      else if(data[34] != "0000-00-00 00:00:00"){
         $(row).css("background-color", "#d8d4fc");
       }
       else{
@@ -682,7 +686,7 @@ $(document).ready(function () {
     //   },
     // ],
     //bisa hide column
-    "aoColumnDefs": [{ "bVisible": false, "aTargets": [33,34,35,36] }]
+    "aoColumnDefs": [{ "bVisible": false, "aTargets": [33,34,35,36,37] }]
   });
   // fnSetColumnVis( 1, false );
 
@@ -1628,11 +1632,14 @@ $(document).on("change", "#bulan_aktif", function () {
         bulanAktif: bulanAktif,
       },
     },
-    "aoColumnDefs": [{ "bVisible": false, "aTargets": [33,34,35,36] }],
+    "aoColumnDefs": [{ "bVisible": false, "aTargets": [33,34,35,36,37] }],
     //Set column definition initialisation properties.
     "createdRow": function( row, data, dataIndex ) {
       if ( data[36] == "*" ) {
         $(row).css("background-color", "#f0ecec");
+      }
+      else if ( data[37] != "0000-00-00 00:00:00" ) {
+        $(row).css("background-color", "#d8fcd4");
       }
       else if(data[34] != "0000-00-00 00:00:00"){
         $(row).css("background-color", "#d8d4fc");

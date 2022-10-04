@@ -270,6 +270,7 @@
                                                             <td>flag_real</td>
                                                             <td>Kode Alamat</td>
                                                             <td>btl_sj</td>
+                                                            <td>flag_ver</td>
                                                             <td>Batal Realisasi</td>
                                                             
 

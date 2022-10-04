@@ -1,3 +1,4 @@
+var no_surat_jalan = "";
 var table_alamat;
 var harga_po = "";
 var spm_brlk = "";
@@ -17,7 +18,7 @@ var today = new Date();
 var todayDate = new Date().toISOString().slice(0, 10);
 var bulan_aktif = "";
 
-$("#tanggal_surat_jalan").val(todayDate);
+//$("#tanggal_surat_jalan").val(todayDate);
 
 
 
@@ -213,6 +214,8 @@ function get_ppn() {
 
 $("#unitSj").on("change", function () {
   //$("#data_plafon").slideUp("slow");
+  //set_no_surat_jalan();
+  get_tgl_aktif();
 
   get_customer();
   get_mobil_sj();
@@ -284,6 +287,26 @@ function get_bulan_aktif_2() {
 }
 }
 
+
+function set_no_surat_jalan() {
+  var kd_unit = $("#unitSj").val();
+  var tanggal_surat_jalan = $("#tanggal_surat_jalan").val();
+  $.ajax({
+    url: "input-sj/set-no-jalan",
+    type: "POST",
+    data: {
+      kd_unit: kd_unit,
+      tanggal_surat_jalan: tanggal_surat_jalan,
+    },
+    success: function (data) {
+      data = JSON.parse(data);
+      
+    //console.log(data.no_sj);
+      //bulan_aktif = data.tgl_aktif;
+      $("#no_surat_jalan").val(data.no_sj);
+    },
+  });
+}
 
 
 
@@ -409,6 +432,25 @@ function get_customer_2() {
     },
   });
 }
+
+function get_tgl_aktif() {
+  var kd_unit = $("#unitSj").val();
+
+  $.ajax({
+    url: "input-sj/tgl-aktif",
+    type: "post",
+    data: { kd_unit: kd_unit },
+    success: function (data) {
+      var data = JSON.parse(data);
+      console.log(data.tgl_aktif);
+      //var p = dateString.split(/\D/g)
+      $("#tanggal_surat_jalan").val(data.tgl_aktif);
+      set_no_surat_jalan();
+    },
+  });
+}
+
+
 
 $(document).on("click", "#btn_tambah_alamat", function () {
   $("#modal_tambah_alamat").modal("show");
@@ -647,7 +689,7 @@ $(document).on("submit", "#tambahSuratJalan", function (e) {
   var unitSj = $("#unitSj").val();
   var nama_customer = $("#nama_customer").val();
   var no_spm = $("#no_spm").val();
-  var no_surat_jalan = $("#no_surat_jalan").val();
+  no_surat_jalan = $("#no_surat_jalan").val();
   var tanggal_surat_jalan = $("#tanggal_surat_jalan").val();
   var no_kendaraan = $("#no_kendaraan").val();
   var unit_marketing = $("#unit_marketing").val();
@@ -789,7 +831,7 @@ function tambahSj() {
   var ppn = $("#ppn").val();
 
   var no_spm = $("#no_spm").val();
-  var no_surat_jalan = $("#no_surat_jalan").val();
+  no_surat_jalan = $("#no_surat_jalan").val();
   var tanggal_surat_jalan = $("#tanggal_surat_jalan").val();
   var no_kendaraan = $("#no_kendaraan").val();
   var unit_marketing = $("#unit_marketing").val();
@@ -954,7 +996,11 @@ $(document).ready(function () {
       console.log(data[34]);
       if ( data[35] == "*" ) {
         $(row).css("background-color", "#f0ecec");
-      }else if(data[37] != "0000-00-00 00:00:00"){
+      }
+      else if ( data[38] != "0000-00-00 00:00:00" ) {
+        $(row).css("background-color", "#d8fcd4");
+      }
+      else if(data[37] != "0000-00-00 00:00:00"){
         $(row).css("background-color", "#d8d4fc");
       }
       else{
@@ -971,7 +1017,7 @@ $(document).ready(function () {
     //   },
     // ],
     //bisa hide column
-    "aoColumnDefs": [{ "bVisible": false, "aTargets": [34,35,36,37] }]
+    "aoColumnDefs": [{ "bVisible": false, "aTargets": [34,35,36,37,38] }]
   });
   // fnSetColumnVis( 1, false );
 
@@ -1943,14 +1989,18 @@ $(document).on("change", "#bulan_aktif", function () {
         bulanAktif: bulanAktif,
       },
     },
-    "aoColumnDefs": [{ "bVisible": false, "aTargets": [34,35,36,37] }],
+    "aoColumnDefs": [{ "bVisible": false, "aTargets": [34,35,36,37,38] }],
     //Set column definition initialisation properties.
     "createdRow": function( row, data, dataIndex ) {
       //console.log(data[35]);
       //sampe sini 30 September 2022, tinggal yg edit klo udah tutup bulan
       if ( data[35] == "*" ) {
         $(row).css("background-color", "#f0ecec");
-      }else if(data[37] != "0000-00-00 00:00:00"){
+      }
+      else if ( data[38] != "0000-00-00 00:00:00" ) {
+        $(row).css("background-color", "#d8fcd4");
+      }
+      else if(data[37] != "0000-00-00 00:00:00"){
         $(row).css("background-color", "#d8d4fc");
       }
       else{

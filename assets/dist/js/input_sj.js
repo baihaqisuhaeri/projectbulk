@@ -233,6 +233,7 @@ $("#unitSj").on("change", function () {
 $("#unitSj_2").on("change", function () {
   
 
+  
   get_customer_2();
    get_mobil_sj_2();
    get_supir_sj_2();
@@ -280,6 +281,8 @@ function get_bulan_aktif_2() {
     success: function (data) {
       
       data = JSON.parse(data);
+      bulan_aktif = data.tgl_aktif;
+      console.log(data);
       //console.log(data.tgl_aktif);
       $("#aktif_unitSj_2").html("Bulan aktif : " + data.tgl_aktif);
     },
@@ -445,6 +448,23 @@ function get_tgl_aktif() {
       console.log(data.tgl_aktif);
       //var p = dateString.split(/\D/g)
       $("#tanggal_surat_jalan").val(data.tgl_aktif);
+      set_no_surat_jalan();
+    },
+  });
+}
+
+function get_tgl_aktif_2() {
+  var kd_unit = $("#unitSj_2").val();
+
+  $.ajax({
+    url: "input-sj/tgl-aktif",
+    type: "post",
+    data: { kd_unit: kd_unit },
+    success: function (data) {
+      var data = JSON.parse(data);
+      console.log(data.tgl_aktif);
+      //var p = dateString.split(/\D/g)
+      $("#tanggal_surat_jalan_2").val(data.tgl_aktif);
       set_no_surat_jalan();
     },
   });
@@ -909,18 +929,7 @@ function tambahSj() {
         mytable.draw();
         $("#aktif_unitSj").html("");
         Swal.fire("Berhasil!", "Surat jalan berhasil ditambahkan!", "success");
-      } else {
-        // alert("a");
-        Swal.fire(
-          "Gagal!",
-          "Surat Jalan sudah ada di unit yang sama!",
-          "error"
-        );
-      }
-      //Swal.fire("Berhasil!", "Surat jalan berhasil ditambahkan!", "success");
-      // $("#unitSupir").val("").change();
-      // $("#nama_supir").val("");
-      sukses_tambah = "yes";
+        sukses_tambah = "yes";
       $("#unitSj").val("").change();
       $("#nama_customer").val("").change();
       $("#alamat1").val("");
@@ -952,6 +961,18 @@ function tambahSj() {
       $("#nilai_persen_berangkat").val("");
       $("#rd_tunai").prop("checked", false);
       $("#rd_kredit").prop("checked", false);
+      } else {
+        // alert("a");
+        Swal.fire(
+          "Gagal!",
+          "Nomor Surat Jalan sudah ada!",
+          "error"
+        );
+      }
+      //Swal.fire("Berhasil!", "Surat jalan berhasil ditambahkan!", "success");
+      // $("#unitSupir").val("").change();
+      // $("#nama_supir").val("");
+      
     },
   });
 }
@@ -1622,7 +1643,14 @@ $(document).on("submit", "#edit_sj", function (e) {
       "Tanggal Surat Jalan tidak boleh kosong!"
     );
     err += 1;
+  }else if($("#tanggal_surat_jalan_2").val().substring(0, 7)< bulan_aktif){
+    $("#error_tanggal_surat_jalan_2").html(
+      "Tanggal Surat Jalan tidak boleh lebih kecil dari tanggal aktif unit!"
+    );
+    err += 1;
   }
+  //console.log($("#tanggal_surat_jalan").val().substring(0, 7)< bulan_aktif);
+  
   if (no_kendaraan == "") {
     $("#error_no_kendaraan_2").html("Kendaraan harus dipilih!");
     err += 1;
@@ -1805,8 +1833,9 @@ function editSj() {
         $("#bagian_2_edit").hide();
       } else {
         // alert("a");
-        Swal.fire("Berhasil!", "Tidak ada perubahan!", "success");
+        Swal.fire("Gagal!", "Nomor Surat Jalan sudah ada!", "error");
         $("#bagian_2_edit").hide();
+        // sampe sini 5 Oktober 2022 , lagi di cek no_sj duplikat di edit sj
       }
       //  Swal.fire("Berhasil!", "Surat jalan berhasil diubah!", "success");
       //  $("#bagian_2_edit").hide();
@@ -2015,3 +2044,8 @@ $(document).on("change", "#bulan_aktif", function () {
 
 
 //1 september 2022
+
+$("#tanggal_surat_jalan_2").on("change", function () {
+  get_bulan_aktif_2();
+  
+});

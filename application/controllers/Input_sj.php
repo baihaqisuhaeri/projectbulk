@@ -739,7 +739,8 @@ class Input_sj extends CI_Controller
 
 
 
-        // $unitSj = $_POST['unitSj'];
+         $unitSj = $_POST['unitSj'];
+         
         // $no_sj = "S";
         // $kode_nomor = "";
         // $query_kode_nomor = $this->Input_sj_model->get_kode_nomor($unitSj);
@@ -779,6 +780,16 @@ class Input_sj extends CI_Controller
 
 
         $no_sj = $_POST['no_surat_jalan'];
+
+        if ($this->Input_sj_model->check($no_sj)) {
+            $data = array(
+                'status' => 'false',
+
+            );
+            echo json_encode($data);
+        }else{
+
+        
 
         $nama_customer = $_POST['nama_customer'];
         $kode_customer = $_POST['kode_customer'];
@@ -888,6 +899,7 @@ class Input_sj extends CI_Controller
         //var_dump($data);
 
     }
+}
 
 
 
@@ -915,12 +927,23 @@ class Input_sj extends CI_Controller
         // die();
         $id = $_POST['id'];
        // if($blnaktif==""){
+        //$no_sj = $_POST['no_surat_jalan'];
+        $no_sj = $_POST['no_sj'];
 
+        if ($this->Input_sj_model->check($no_sj)) {
+            $data = array(
+                'status' => 'false',
+
+            );
+            echo json_encode($data);
+        }else{
+
+        
         
         date_default_timezone_set('Asia/Jakarta');
         $tgl_edit = date("Y-m-d");
         $unitSj = $_POST['unitSj'];
-        $no_sj = $_POST['no_sj'];
+        
         $nama_customer = $_POST['nama_customer'];
         $kode_customer = $_POST['kode_customer'];
         $al1_cus = $_POST['al1_cus'];
@@ -1178,7 +1201,7 @@ class Input_sj extends CI_Controller
 
     // }
     }
-
+}
     function hapus_alamat_kirim()
     {
         $id = $_POST['id'];
@@ -1415,6 +1438,8 @@ class Input_sj extends CI_Controller
         echo json_encode($data);
     }
 
+
+    
     
 }
 

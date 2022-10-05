@@ -433,4 +433,22 @@ class Input_sj_model extends CI_Model
         $this->db->where('id', $id);
         $this->db->update('tb_sj', $data);
     }
+
+
+
+    function check($no_sj){
+
+        $this->db->select();
+        $query = $this->db->get_where('tb_sj', array('no_sj' => $no_sj));
+        $result = $query->result_array();
+        
+        $count = count($result);
+        
+        if(empty($count)){
+        return false;
+        }
+        else{
+        return true;
+        }
+        }
 }

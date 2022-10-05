@@ -179,7 +179,7 @@
                                                     <div class="row">
                                                         <div class="form-group col-lg-4">
                                                             <label>No. Surat Jalan<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="no_surat_jalan" id="no_surat_jalan" placeholder="Nomor Surat Jalan" disabled>
+                                                            <input class="form-control" type="text" name="no_surat_jalan" id="no_surat_jalan" placeholder="Nomor Surat Jalan" >
                                                             <span class="text-danger" id="error_no_surat_jalan"></span>
                                                         </div>
 
@@ -863,7 +863,7 @@
                                                 <div class="row">
                                                     <div class="form-group col-lg-4">
                                                         <label>No. Surat Jalan<span style="color: red;">*</span></label>
-                                                        <input class="form-control" type="text" name="no_surat_jalan_2" id="no_surat_jalan_2" placeholder="Nomor Surat Jalan" disabled>
+                                                        <input class="form-control" type="text" name="no_surat_jalan_2" id="no_surat_jalan_2" placeholder="Nomor Surat Jalan">
                                                         <span class="text-danger" id="error_no_surat_jalan_2"></span>
                                                     </div>
 

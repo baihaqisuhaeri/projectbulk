@@ -218,3 +218,6 @@ $route['verifikasi-sj/get-harga-barang'] = 'Verifikasi_sj/get_barang_verifikasi'
 $route['verifikasi-sj/batal-sj'] = 'Verifikasi_sj/batal_sj';
 
 
+
+
+$route['permohonan-kwitansi'] = 'Permohonan_kwitansi';

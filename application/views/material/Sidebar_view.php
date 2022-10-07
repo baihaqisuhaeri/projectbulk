@@ -302,6 +302,27 @@
                             ?>
                         </li>
 
+
+                        <li class="nav-item">
+                            <?php
+                            if ($this->uri->segment(1) == "permohonan-kwitansi") {
+                                echo '<a href="permohonan-kwitansi" class="nav-link active">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>
+                                    Permohonan Kwitansi
+                                </p>
+                            </a>';
+                            } else {
+                                echo '<a href="permohonan-kwitansi" class="nav-link">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>
+                                    Permohonan Kwitansi
+                                </p>
+                            </a>';
+                            }
+                            ?>
+                        </li>
+
                        
 
                         

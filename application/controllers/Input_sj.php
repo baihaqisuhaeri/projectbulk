@@ -930,7 +930,7 @@ class Input_sj extends CI_Controller
         //$no_sj = $_POST['no_surat_jalan'];
         $no_sj = $_POST['no_sj'];
 
-        if ($this->Input_sj_model->check($no_sj)) {
+        if ($this->Input_sj_model->check_edit_sj($no_sj, $id)) {
             $data = array(
                 'status' => 'false',
 

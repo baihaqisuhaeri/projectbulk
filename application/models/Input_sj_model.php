@@ -440,6 +440,7 @@ class Input_sj_model extends CI_Model
 
         $this->db->select();
         $query = $this->db->get_where('tb_sj', array('no_sj' => $no_sj));
+        //$this->db->where('no_sj', $no_sj);
         $result = $query->result_array();
         
         $count = count($result);
@@ -451,4 +452,22 @@ class Input_sj_model extends CI_Model
         return true;
         }
         }
+
+        
+        function check_edit_sj($no_sj, $id){
+
+            $this->db->select();
+            $this->db->where_not_in('id', $id);
+            $query = $this->db->get_where('tb_sj', array('no_sj' => $no_sj));
+            $result = $query->result_array();
+            
+            $count = count($result);
+            
+            if(empty($count)){
+            return false;
+            }
+            else{
+            return true;
+            }
+            }
 }

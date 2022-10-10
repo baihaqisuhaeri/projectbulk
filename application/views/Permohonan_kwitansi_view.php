@@ -19,7 +19,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Bulk | Supir</h1>
+                            <h1 class="m-0 text-dark">Bulk | Permohonan Kwitansi</h1>
 
                         </div><!-- /.col -->
                         <div class="col-sm-6">
@@ -127,6 +127,7 @@
                                                     </div>
 
                                                     <div class="form-group text-right">
+                                                    <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_tambah_detail">Tambah Detail</button>
                                                         <button class="btn btn-primary btn-small btn-primary btn-rounded" type="submit" id="btn_next">Tambah</button>
 
                                                     </div>
@@ -140,6 +141,79 @@
                                             <!--tab3-->
 
                                         </div>
+
+                                        <!--Modal Tambah Detail-->
+
+                                        <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" id="modal_detail" aria-hidden="true">
+                                                    <div class="modal-dialog modal-xl">
+
+                                                        <div class="modal-content" style="padding: 10px">
+                                                            <div class="form-group text-right" style="float: right;">
+                                                                <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_tambah_alamat" style="margin-right: 941px">+ Tambah Alamat Baru</button>
+
+                                                            </div>
+
+                                                            
+
+
+                                                            
+
+                                                            <div class="form-group text-right">
+                                                                <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_simpan_alamat">Simpan</button>
+
+                                                            </div>
+
+
+                                                            <div class="callout callout-warning table-responsive" width="100%" style="background-color: #FFF8E5;" id="bagian_3">
+
+                                                                <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_alamat_kirim">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>No</th>
+                                                                            <th>Nama Faktur Pajak</th>
+                                                                            <th>NPWP</th>
+                                                                            <th>Kode Alamat</th>
+                                                                            <th>Alamat 1</th>
+                                                                            <th>Alamat 2</th>
+                                                                            <th>Alamat 3</th>
+
+                                                                            <th>Pilih</th>
+                                                                            <th>Aksi</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+                                                            <div class="callout callout-warning table-responsive" width="100%" style="background-color: #FFF8E5;" id="bagian_3">
+
+                                                                <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_alamat_kirim">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>No</th>
+                                                                            <th>Nama Faktur Pajak</th>
+                                                                            <th>NPWP</th>
+                                                                            <th>Kode Alamat</th>
+                                                                            <th>Alamat 1</th>
+                                                                            <th>Alamat 2</th>
+                                                                            <th>Alamat 3</th>
+
+                                                                            <th>Pilih</th>
+                                                                            <th>Aksi</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
 
                                         <!--<button type="button" class="btn btn-primary mb-2" id="btn_modal_pengguna"><i class="fas fa-plus-circle"></i></button>-->
                                         <div class="callout callout-warning" style="background-color: #FFF8E5;" id="bagian_3">
@@ -285,7 +359,7 @@
 
 
 
-    <script src="<?php echo base_url(); ?>assets/dist/js/supir.js"></script>
+    <script src="<?php echo base_url(); ?>assets/dist/js/permohonan_kwitansi.js"></script>
 
 
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>

@@ -221,3 +221,5 @@ $route['verifikasi-sj/batal-sj'] = 'Verifikasi_sj/batal_sj';
 
 
 $route['permohonan-kwitansi'] = 'Permohonan_kwitansi';
+$route['permohonan-kwitansi/customer'] = 'Permohonan_kwitansi/get_customer';
+$route['permohonan-kwitansi/get-nama-customer'] = 'Permohonan_kwitansi/get_nama_customer';

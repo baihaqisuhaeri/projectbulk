@@ -85,6 +85,14 @@ class Permohonan_kwitansi_model extends CI_Model
         $this->db->update('supir', $data);
     }
 
-    
+    public function get_nama_customer($id)
+    {
+        $this->db->select('*');
+        $this->db->from('customer');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+
+        return $query->result();
+    }
 
 }

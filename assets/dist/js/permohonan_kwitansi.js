@@ -1,6 +1,6 @@
 $(".select2").select2({ width: "100%" });
 $(".select2bln").select2({ width: "15%" });
-
+var id_array = [];
 $(".select2bs4").select2({
   theme: "bootstrap4",
 });
@@ -8,16 +8,34 @@ $(".select2bs4").select2({
 $(document).on("click", "#btn_tambah_detail", function () {
 
   var err = 0;
-  var kode_customer = $("#kode_customer").val();
-  console.log(kode_customer);
-  if (kode_customer == "") {
+  var k_cus = $("#kode_customer").val();
+  //console.log(k_cus);
+  if (k_cus == "") {
     $("#error_nama_customer").html(
       "Customer harus dipilih terlebih dahulu"
     );
     err += 1;
   }
   if (err == 0) {
+    var tes = [3,4,6];
     $("#modal_detail").modal("show");
+    $("#tabel_sj_detail").dataTable().fnDestroy();
+    table = $("#tabel_sj_detail").DataTable({
+      //scrollX: true,
+      processing: true, //Feature control the processing indicator.
+      serverSide: true, //Feature control DataTables' server-side processing mode.
+      order: [], //Initial no order.
+  
+      // Load data for the table's content from an Ajax source
+      ajax: {
+        url: "permohonan-kwitansi/get-sj-detail",
+        type: "POST",
+        data: { k_cus: k_cus,
+                tes: tes },
+      },
+  
+    });
+   
   }
     
     
@@ -48,11 +66,25 @@ $("#nama_customer").on("change", function () {
         type: "post",
         data: { id_cust: id_cust },
         success: function (data) {
-            console.log(id_cust);
+           // console.log(id_cust);
             data = JSON.parse(data);
           $("#kode_customer").val(data.kode_customer);
         },
       });
+  });
+
+
+  $(document).on("click", ".pilih_sj", function (event) {
+    var id = $(this).data("id");
+    if(id_array.includes(id)){
+
+    }else{
+      id_array.push(id);
+    }
+    
+    console.log(id_array);
+    // Sampe sini 12 Oktober 2022, tinggal masukin sj yg di pilih 
+    
   });
 
 // List of Function

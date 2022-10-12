@@ -4,25 +4,27 @@ class Permohonan_kwitansi_model extends CI_Model
 {
     
 
-    var $table = 'supir';
-    var $column_order = array(null, 'id', 'k_sales', 'n_sales', 'kd_unit'); //set column field database for datatable orderable
-    var $column_search = array('id', 'k_sales', 'n_sales', 'kd_unit'); //set column field database for datatable searchable
-    var $order = array('k_sales' => 'desc'); // default order
-    public function get_data_tabel_supir()
+    var $table_sj_detail = 'tb_sj';
+    var $column_order_sj_detail = array(null, 'id', 'tgl_sj', 'no_sj', 'jumlah', 'k_barang', 'k_altk', 'alk_cus1'); //set column field database for datatable orderable
+    var $column_search_sj_detail = array('id', 'tgl_sj', 'no_sj', 'jumlah', 'k_barang', 'k_altk', 'alk_cus1'); //set column field database for datatable searchable
+    var $order_sj_detail = array('no_sj' => 'desc'); // default order
+    public function get_data_tabel_sj_detail()
     {
 
 
-        $nama = $_SESSION['nama'];
-        $this->db->select('*, supir.id as id');
-        $this->db->join('hak_akses', 'supir.kd_unit = hak_akses.kode_unit');
-        $this->db->where('hak_akses.nama_user', $nama);
-        $this->db->order_by('k_sales asc');
+        $k_cus = $_SESSION['k_cus'];
+        $this->db->select('*');
+        $this->db->where('k_cus', $k_cus);
+        $this->db->where('flag_ver !=', "");
+        $this->db->where('k_cus', $k_cus);
+        $this->db->where('blnaktif', "");
+        $this->db->order_by('no_sj asc');
 
-        $this->db->from($this->table);
+        $this->db->from($this->table_sj_detail);
 
         $i = 0;
 
-        foreach ($this->column_search as $item) // loop column 
+        foreach ($this->column_search_sj_detail as $item) // loop column 
         {
             if ($_POST['search']['value']) // if datatable send POST for search
             {
@@ -35,7 +37,7 @@ class Permohonan_kwitansi_model extends CI_Model
                     $this->db->or_like($item, $_POST['search']['value']);
                 }
 
-                if (count($this->column_search) - 1 == $i) //last loop
+                if (count($this->column_search_sj_detail) - 1 == $i) //last loop
                     $this->db->group_end(); //close bracket
             }
             $i++;
@@ -43,53 +45,53 @@ class Permohonan_kwitansi_model extends CI_Model
 
         if (isset($_POST['order'])) // here order processing
         {
-            $this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-        } else if (isset($this->order)) {
-            $order = $this->order;
+            $this->db->order_by($this->column_order_sj_detail[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        } else if (isset($this->order_sj_detail)) {
+            $order = $this->order_sj_detail;
             $this->db->order_by(key($order), $order[key($order)]);
         }
     }
 
-    public function get_datatables()
+    public function get_datatables_sj_detail()
     {
-        $this->get_data_tabel_supir();
+        $this->get_data_tabel_sj_detail();
         if ($_POST['length'] != -1)
             $this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
         return $query->result();
     }
 
-    public function count_filtered()
+    public function count_filtered_sj_detail()
     {
-        $this->get_data_tabel_supir();
+        $this->get_data_tabel_sj_detail();
         $query = $this->db->get();
         return $query->num_rows();
     }
 
 
-    public function count_all()
+    public function count_all_sj_detail()
     {
-        $this->db->from($this->table);
+        $this->db->from($this->table_sj_detail);
         return $this->db->count_all_results();
     }
 
-    public function hapus_supir($id)
-    {
-        $this->db->where('id', $id);
-        $this->db->delete($this->table);
-    }
+    
 
-    public function edit_supir($id, $data)
-    {
-        $this->db->where('id', $id);
-        $this->db->update('supir', $data);
-    }
-
+    
     public function get_nama_customer($id)
     {
         $this->db->select('*');
         $this->db->from('customer');
         $this->db->where('id', $id);
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+    public function get_nama_barang($k_barang){
+        $this->db->select('*');
+        $this->db->from('dbm002');
+        $this->db->where('k_barang', $k_barang);
         $query = $this->db->get();
 
         return $query->result();

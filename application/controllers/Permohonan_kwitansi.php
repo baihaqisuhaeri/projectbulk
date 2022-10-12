@@ -69,4 +69,50 @@ class Permohonan_kwitansi extends CI_Controller
     }
     // Sampe sini 10 Oktober 2022, selesai narik data customer buat permohonan kwitansi
 
+
+    function get_sj_detail(){
+        $k_cus = $this->input->post("k_cus");
+        
+        $_SESSION['k_cus'] = $k_cus;
+        $status_edit = $this->input->post("status_edit");
+        $list = $this->Permohonan_kwitansi_model->get_datatables_sj_detail($k_cus);
+       
+        $data = array();
+        $n_barang = "";
+        $total = 0;
+        $no = $_POST['start'];
+        foreach ($list as $p) {
+            // var_dump($p->no_sj);
+            // die();
+            $no++;
+            $row = array();
+
+            $row[] = $no;
+
+            $row[] = $p->tgl_sj;
+            $row[] = $p->no_sj;
+            $row[] = $p->jumlah;
+            $row[] = $p->k_barang;
+            $get_nama_barang = $this->Permohonan_kwitansi_model->get_nama_barang($p->k_barang);
+            foreach($get_nama_barang as $nb){
+                $n_barang = $nb->n_barang;
+            }
+
+            $row[] = $n_barang;
+            $row[] = "flag tes";
+            $row[] = $p->k_altk;
+            $row[] = $p->alk_cus1;
+            $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded pilih_sj" id="pilih_sj" data-id="' . $p->id . '"  name="pilih_sj" type="button">Pilih</button>';
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->Permohonan_kwitansi_model->count_all_sj_detail(),
+            "recordsFiltered" => $this->Permohonan_kwitansi_model->count_filtered_sj_detail($k_cus),
+            "data" => $data,
+        );
+        //output to json format
+        echo json_encode($output);
+    }
 }

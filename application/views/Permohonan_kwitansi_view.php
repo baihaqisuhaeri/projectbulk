@@ -168,10 +168,7 @@
                                                     <div class="modal-dialog modal-xl">
 
                                                         <div class="modal-content" style="padding: 10px">
-                                                            <div class="form-group text-right" style="float: right;">
-                                                                <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_tambah_alamat" style="margin-right: 941px">+ Tambah Alamat Baru</button>
-
-                                                            </div>
+                                                           
 
                                                             
 
@@ -183,7 +180,7 @@
 
                                                             <div class="callout callout-warning table-responsive" width="100%" style="background-color: #FFF8E5;" id="bagian_3">
 
-                                                                <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_alamat_kirim">
+                                                                <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_sj_detail">
                                                                     <thead>
                                                                         <tr>
                                                                         <th>No</th>
@@ -195,6 +192,7 @@
                                                                         <th>Flag</th>
                                                                         <th>Kode Alamat</th>
                                                                         <th>Alamat Kirim</th>
+                                                                        <th>Aksi</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>

@@ -1,12 +1,15 @@
 $(".select2").select2({ width: "100%" });
 $(".select2bln").select2({ width: "15%" });
 var id_array = [];
+var id_array_use = [];
+var id_array_dipilih = [];
 $(".select2bs4").select2({
   theme: "bootstrap4",
 });
 
 $(document).on("click", "#btn_tambah_detail", function () {
-
+  id_array_dipilih = id_array_use;// sampe sini 13 Oktober 2022 
+  id_array = [];
   var err = 0;
   var k_cus = $("#kode_customer").val();
   //console.log(k_cus);
@@ -17,7 +20,7 @@ $(document).on("click", "#btn_tambah_detail", function () {
     err += 1;
   }
   if (err == 0) {
-    var tes = [3,4,6];
+    
     $("#modal_detail").modal("show");
     $("#tabel_sj_detail").dataTable().fnDestroy();
     table = $("#tabel_sj_detail").DataTable({
@@ -31,7 +34,7 @@ $(document).on("click", "#btn_tambah_detail", function () {
         url: "permohonan-kwitansi/get-sj-detail",
         type: "POST",
         data: { k_cus: k_cus,
-                tes: tes },
+                 },
       },
   
     });
@@ -40,6 +43,36 @@ $(document).on("click", "#btn_tambah_detail", function () {
     
     
   });
+
+
+
+  $(document).on("click", "#btn_simpan_sj_detail", function () {
+    var k_cus = $("#kode_customer").val();
+    id_array_use = id_array;
+      
+      
+      $("#modal_detail").modal("hide");
+
+      $("#tabel_sj_detail_dipilih").dataTable().fnDestroy();
+    table = $("#tabel_sj_detail_dipilih").DataTable({
+      //scrollX: true,
+      processing: true, //Feature control the processing indicator.
+      serverSide: true, //Feature control DataTables' server-side processing mode.
+      order: [], //Initial no order.
+  
+      // Load data for the table's content from an Ajax source
+      ajax: {
+        url: "permohonan-kwitansi/get-sj-detail-pilih",
+        type: "POST",
+        data: { id: id_array_use,
+                k_cus: k_cus },
+      },
+  
+    });
+    });
+
+
+
 
   $(document).on("click", "#btn_simpan_alamat", function () {
     
@@ -82,7 +115,7 @@ $("#nama_customer").on("change", function () {
       id_array.push(id);
     }
     
-    console.log(id_array);
+    
     // Sampe sini 12 Oktober 2022, tinggal masukin sj yg di pilih 
     
   });

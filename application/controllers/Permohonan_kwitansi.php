@@ -74,8 +74,8 @@ class Permohonan_kwitansi extends CI_Controller
         $k_cus = $this->input->post("k_cus");
         
         $_SESSION['k_cus'] = $k_cus;
-        $status_edit = $this->input->post("status_edit");
-        $list = $this->Permohonan_kwitansi_model->get_datatables_sj_detail($k_cus);
+    
+        $list = $this->Permohonan_kwitansi_model->get_datatables_sj_detail();
        
         $data = array();
         $n_barang = "";
@@ -114,5 +114,55 @@ class Permohonan_kwitansi extends CI_Controller
         );
         //output to json format
         echo json_encode($output);
+    }
+
+    function get_sj_detail_pilih(){
+        $id = $this->input->post("id");
+        
+        $list = array();
+        foreach($id as $i){
+            
+            $_SESSION['id'] = $i;
+            array_push($list,$this->Permohonan_kwitansi_model->get_datatables_sj_detail_pilih());
+        }
+        $data = array();
+        $n_barang = "";
+        $total = 0;
+        $no = $_POST['start'];
+        
+        foreach ($list as $l) {
+            foreach ($l as $p) {
+            // var_dump($p->no_sj);
+            // die();
+            $no++;
+            $row = array();
+
+            $row[] = $no;
+
+            $row[] = $p->tgl_sj;
+            $row[] = $p->no_sj;
+            $row[] = $p->k_barang;
+            $get_nama_barang = $this->Permohonan_kwitansi_model->get_nama_barang($p->k_barang);
+            foreach($get_nama_barang as $nb){
+                $n_barang = $nb->n_barang;
+            }
+            $row[] = $n_barang;
+            $row[] = $p->qty_kirim;
+            $data[] = $row;
+        }
+        }
+    
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->Permohonan_kwitansi_model->count_all_sj_detail_pilih(),
+            "recordsFiltered" => $this->Permohonan_kwitansi_model->count_filtered_sj_detail_pilih(),
+            "data" => $data,
+        );
+        //output to json format
+    
+        echo json_encode($output);
+    
+    
     }
 }

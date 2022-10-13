@@ -130,7 +130,7 @@
                                             <h5>Daftar Surat Jalan</h5>
 
 
-                                            <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_supir">
+                                            <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_sj_detail_dipilih">
                                                 <thead>
                                                     <tr>
                                                         <td>No</td>
@@ -202,7 +202,7 @@
                                                             </div>
 
                                                             <div class="form-group text-right">
-                                                                <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_simpan_alamat">Simpan</button>
+                                                                <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_simpan_sj_detail">Simpan</button>
 
                                                             </div>
 

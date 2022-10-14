@@ -8,7 +8,7 @@ $(".select2bs4").select2({
 });
 
 $(document).on("click", "#btn_tambah_detail", function () {
-  id_array_dipilih = id_array_use;// sampe sini 13 Oktober 2022 
+  // sampe sini 13 Oktober 2022 
   id_array = [];
   var err = 0;
   var k_cus = $("#kode_customer").val();
@@ -49,6 +49,7 @@ $(document).on("click", "#btn_tambah_detail", function () {
   $(document).on("click", "#btn_simpan_sj_detail", function () {
     var k_cus = $("#kode_customer").val();
     id_array_use = id_array;
+    id_array_dipilih = id_array_use;
       
       
       $("#modal_detail").modal("hide");

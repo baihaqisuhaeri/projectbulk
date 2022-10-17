@@ -139,6 +139,7 @@
                                                         <td>Kode Barang</td>
                                                         <td>Nama Barang</td>
                                                         <td>Qty Kirim</td>
+                                                        <td>Aksi</td>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -148,7 +149,7 @@
 
                                                     <div class="form-group text-right">
                                                     <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_tambah_detail">Tambah Detail</button>
-                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="submit" id="btn_next">Tambah</button>
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="submit" id="simpan_permohonan_kwitansi">Simpan</button>
 
                                                     </div>
 

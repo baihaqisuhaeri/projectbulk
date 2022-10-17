@@ -148,6 +148,7 @@ class Permohonan_kwitansi extends CI_Controller
             }
             $row[] = $n_barang;
             $row[] = $p->qty_kirim;
+            $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded hapus_pilih_sj" id="hapus_pilih_sj" data-id="' . $p->id . '"  name="hapus_pilih_sj" type="button">Hapus</button>';
             $data[] = $row;
         }
         }

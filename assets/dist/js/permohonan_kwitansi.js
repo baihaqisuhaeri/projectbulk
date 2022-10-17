@@ -9,7 +9,7 @@ $(".select2bs4").select2({
 
 $(document).on("click", "#btn_tambah_detail", function () {
   // sampe sini 13 Oktober 2022 
-  id_array = [];
+  //id_array = [];
   var err = 0;
   var k_cus = $("#kode_customer").val();
   //console.log(k_cus);
@@ -56,7 +56,7 @@ $(document).on("click", "#btn_tambah_detail", function () {
 
       $("#tabel_sj_detail_dipilih").dataTable().fnDestroy();
     table = $("#tabel_sj_detail_dipilih").DataTable({
-      //scrollX: true,
+      scrollX: true,
       processing: true, //Feature control the processing indicator.
       serverSide: true, //Feature control DataTables' server-side processing mode.
       order: [], //Initial no order.

@@ -181,6 +181,16 @@ class Permohonan_kwitansi_model extends CI_Model
         return $query->result();
     }
 
+
+    public function get_alamat($id){
+        $this->db->select('k_altk');
+        $this->db->from('tb_sj');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
 }
 
 

@@ -166,4 +166,40 @@ class Permohonan_kwitansi extends CI_Controller
     
     
     }
+
+
+
+    function validasi_alamat_kirim(){
+        $id_awal = $this->input->post("id_awal");
+        $id_cek = $this->input->post("id_cek");
+        $alamat_awal = $this->Permohonan_kwitansi_model->get_alamat($id_awal);
+        $alamat_cek = $this->Permohonan_kwitansi_model->get_alamat($id_cek);
+        foreach($alamat_awal as $aw){
+            $k_altk_awal = $aw->k_altk;
+        }
+        foreach($alamat_cek as $ac){
+            $k_altk_cek = $ac->k_altk;
+        }
+
+       
+        if ($k_altk_awal==$k_altk_cek) {
+    
+            $data = array(
+                'status' => 'success',
+
+            );
+
+            echo json_encode($data);
+        }else{
+            $data = array(
+                'status' => 'failed',
+
+            );
+
+            echo json_encode($data);
+        }
+
+    }
+
+
 }

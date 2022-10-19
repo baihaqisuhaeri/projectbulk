@@ -2,7 +2,7 @@ $(".select2").select2({ width: "100%" });
 $(".select2bln").select2({ width: "15%" });
 var id_array = [];
 var id_array_use = [];
-var id_array_dipilih = [];
+//var id_array_dipilih = [];
 $(".select2bs4").select2({
   theme: "bootstrap4",
 });
@@ -49,7 +49,7 @@ $(document).on("click", "#btn_tambah_detail", function () {
   $(document).on("click", "#btn_simpan_sj_detail", function () {
     var k_cus = $("#kode_customer").val();
     id_array_use = id_array;
-    id_array_dipilih = id_array_use;
+    //id_array_dipilih = id_array_use;
       
       
       $("#modal_detail").modal("hide");
@@ -110,16 +110,66 @@ $("#nama_customer").on("change", function () {
 
   $(document).on("click", ".pilih_sj", function (event) {
     var id = $(this).data("id");
+    var id_awal = id_array[0];
+    if(id_array.length==0){
+
+    
     if(id_array.includes(id)){
 
     }else{
       id_array.push(id);
     }
+  }else{
+    $.ajax({
+      url: "permohonan-kwitansi/validasi-alamat-kirim",
+      type: "post",
+      data: { id_awal: id_awal,
+              id_cek: id },
+      success: function (data) {
+         // console.log(id_cust);
+          data = JSON.parse(data);
+          console.log(data.status);
+        if(data.status=="success"){
+          //console.log("aneh");
+          if(id_array.includes(id)){
+           // console.log("aneh");
+           Swal.fire("Warning!", "Alamat kirim sudah dipilih", "warning");
+           //sampe sini 19 Oktober, tinggal bikin no mohon otomatisnya
+          }else{
+          //  console.log("aneh2");
+            id_array.push(id);
+          }
+        }else{
+          
+          Swal.fire("Gagal!", "Alamat kirim harus sama dengan alamat yang pertama kali dipilih!", "error");
+        }
+      },
+    });
+  }
     
     
     // Sampe sini 12 Oktober 2022, tinggal masukin sj yg di pilih 
     
   });
+
+
+  $("#tabel_sj_detail_dipilih tbody").on("click", ".hapus_pilih_sj", function () {
+    var id = $(this).data("id");
+    var index = id_array_use.indexOf(id); 
+    id_array_use.splice(index,1);
+    //console.log(id);
+    $(this).closest('tr').remove();
+
+  });
+
+
+
+
+
+
+
+
+
 
 // List of Function
 

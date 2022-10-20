@@ -226,4 +226,5 @@ $route['permohonan-kwitansi/get-nama-customer'] = 'Permohonan_kwitansi/get_nama_
 $route['permohonan-kwitansi/get-sj-detail'] = 'Permohonan_kwitansi/get_sj_detail';
 $route['permohonan-kwitansi/get-sj-detail-pilih'] = 'Permohonan_kwitansi/get_sj_detail_pilih';
 $route['permohonan-kwitansi/validasi-alamat-kirim'] = 'Permohonan_kwitansi/validasi_alamat_kirim';
-
+$route['permohonan-kwitansi/set-tgl-mohon'] = 'Permohonan_kwitansi/set_tgl_mohon';
+$route['permohonan-kwitansi/set-alamat-dipilih'] = 'Permohonan_kwitansi/set_alamat_dipilih';

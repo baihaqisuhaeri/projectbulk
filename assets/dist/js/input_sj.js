@@ -282,7 +282,7 @@ function get_bulan_aktif_2() {
       
       data = JSON.parse(data);
       bulan_aktif = data.tgl_aktif;
-      console.log(data);
+      //console.log(data);
       //console.log(data.tgl_aktif);
       $("#aktif_unitSj_2").html("Bulan aktif : " + data.tgl_aktif);
     },
@@ -445,7 +445,7 @@ function get_tgl_aktif() {
     data: { kd_unit: kd_unit },
     success: function (data) {
       var data = JSON.parse(data);
-      console.log(data.tgl_aktif);
+     // console.log(data.tgl_aktif);
       //var p = dateString.split(/\D/g)
       $("#tanggal_surat_jalan").val(data.tgl_aktif);
       set_no_surat_jalan();
@@ -681,7 +681,7 @@ $("#no_spm").on("change", function () {
 $(document).on("submit", "#tambahSuratJalan", function (e) {
   // console.log(k_cus);
   e.preventDefault();
-  console.log(todayDate);
+  //console.log(todayDate);
   
   $("#error_unitSj").html("");
   $("#error_nama_customer").html("");
@@ -749,7 +749,9 @@ $(document).on("submit", "#tambahSuratJalan", function (e) {
     );
     err += 1;
   }
-  console.log($("#tanggal_surat_jalan").val().substring(0, 7)< bulan_aktif);
+  // console.log($("#tanggal_surat_jalan").val().substring(0, 7));
+  // console.log($("#tanggal_surat_jalan").val());
+  // console.log(bulan_aktif);
   
   if (no_kendaraan == "") {
     $("#error_no_kendaraan").html("Kendaraan harus dipilih!");
@@ -919,7 +921,7 @@ function tambahSj() {
     },
     success: function (data) {
        var data = JSON.parse(data);
-       console.log(data.status);
+       //console.log(data.status);
        
       var status = data.status;
       // var json = JSON.parse(data);
@@ -1014,7 +1016,7 @@ $(document).ready(function () {
     },
 
     "createdRow": function( row, data, dataIndex ) {
-      console.log(data[34]);
+      //console.log(data[34]);
       if ( data[35] == "*" ) {
         $(row).css("background-color", "#f0ecec");
       }

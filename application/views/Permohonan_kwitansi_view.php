@@ -60,7 +60,7 @@
                                         <!--tab1-->
 
                                         <div class="tab-pane fade show active" id="satu" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
-                                            <form class="form-horizontal" id="tambahSupir">
+                                            <form class="form-horizontal" id="tambahPermohonanKwitansi">
                                                 <div class="callout callout-info" style="background-color: #EDEEF7;" id="bagian_1">
                                                     <!-- CAF0F8 F9DFDC -->
                                                     <div class="row">
@@ -103,7 +103,7 @@
 
                                                         <div class="form-group col-lg-4">
                                                             <label>Alamat Kirim 1<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="alamat_kirim_1" id="alamat_kirim_1" placeholder="Alamat Kirim 1">
+                                                            <input disabled class="form-control" type="text" name="alamat_kirim_1" id="alamat_kirim_1" placeholder="Alamat Kirim 1">
                                                             <span class="text-danger" id="error_alamat_kirim_1"></span>
                                                         </div>                                                                                                                 
                                                         
@@ -114,13 +114,13 @@
 
                                                         <div class="form-group col-lg-4">
                                                             <label>Alamat Kirim 2<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="alamat_kirim_2" id="alamat_kirim_2" placeholder="Alamat Kirim 2">
+                                                            <input disabled class="form-control" type="text" name="alamat_kirim_2" id="alamat_kirim_2" placeholder="Alamat Kirim 2">
                                                             <span class="text-danger" id="error_alamat_kirim_2"></span>
                                                         </div>   
 
                                                         <div class="form-group col-lg-4">
                                                             <label>Alamat Kirim 3<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="alamat_kirim_3" id="alamat_kirim_3" placeholder="Alamat Kirim 3">
+                                                            <input disabled class="form-control" type="text" name="alamat_kirim_3" id="alamat_kirim_3" placeholder="Alamat Kirim 3">
                                                             <span class="text-danger" id="error_alamat_kirim_3"></span>
                                                         </div>                                                                                                                 
                                                         

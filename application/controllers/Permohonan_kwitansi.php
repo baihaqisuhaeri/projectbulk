@@ -44,12 +44,12 @@ class Permohonan_kwitansi extends CI_Controller
         // if(empty($customer)){
         //     echo '<option value="">Belum ada data</option>';
         // }else{
-            echo '<option value="">Nama Customer (NPWP)</option>';
+            echo '<option value="">Nama Customer (NPWP) (Unit)</option>';
      //   }
         // var_dump($_SESSION['nama']);
         // die();
         foreach ($customer as $u){
-            echo '<option value="'.$u->id.'">'.$u->n_cus.' ('.$u->npwp.')</option>';
+            echo '<option value="'.$u->id.'">'.$u->n_cus.' ('.$u->npwp.') ('.$u->unit.')</option>';
         }
         
     }
@@ -198,6 +198,47 @@ class Permohonan_kwitansi extends CI_Controller
 
             echo json_encode($data);
         }
+
+    }
+
+
+    function set_tgl_mohon(){
+       // $k_cus = $_POST['k_cus'];
+        $id_cus = $_POST['id_cus'];
+        $get_kd_unit = $this->Permohonan_kwitansi_model->get_kd_unit($id_cus);
+
+        foreach ($get_kd_unit as $u) {
+            $kd_unit = $u->unit;
+        }
+        
+        $query = $this->Permohonan_kwitansi_model->get_bulan_aktif($kd_unit);
+
+        foreach ($query as $q) {
+            $bln_aktif = $q->tgl_aktif;
+        }
+        //$bln_aktif = substr($bln_aktif, 0, 7);
+        $data = array(
+            'tgl_aktif' => $bln_aktif,
+        );
+        echo json_encode($data);
+    }
+
+
+    function set_alamat_dipilih(){
+        $id = $this->input->post("id");
+        $alamat = $this->Permohonan_kwitansi_model->get_sj_by_id($id);
+        foreach($alamat as $a){
+            $alk_cus1 = $a->alk_cus1;
+            $alk_cus2 = $a->alk_cus2;
+            $alk_cus3 = $a->alk_cus3;
+        }
+        $data = array(
+            'alk_cus1' => $alk_cus1,
+            'alk_cus2' => $alk_cus2,
+            'alk_cus3' => $alk_cus3,
+        );
+        //Sampe sini 20 Oktober , tinggal input doang sm auto generate no_mohon nya
+        echo json_encode($data);
 
     }
 

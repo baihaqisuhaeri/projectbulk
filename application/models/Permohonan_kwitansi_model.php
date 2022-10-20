@@ -191,6 +191,33 @@ class Permohonan_kwitansi_model extends CI_Model
         return $query->result();
     }
 
+    public function get_kd_unit($id_cus){
+        $this->db->select('unit');
+        $this->db->from('customer');
+        $this->db->where('id', $id_cus);
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+    public function get_bulan_aktif($kd_unit)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_unit');
+        $this->db->where('kd_unit', $kd_unit);
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+    public function get_sj_by_id($id){
+        $this->db->select('*');
+        $this->db->from('tb_sj');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
 }
 
 

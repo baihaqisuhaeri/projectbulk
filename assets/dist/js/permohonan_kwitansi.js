@@ -3,6 +3,7 @@ $(".select2bln").select2({ width: "15%" });
 var id_array = [];
 var id_array_use = [];
 //var id_array_dipilih = [];
+var bulan_aktif_global;
 $(".select2bs4").select2({
   theme: "bootstrap4",
 });
@@ -70,6 +71,20 @@ $(document).on("click", "#btn_tambah_detail", function () {
       },
   
     });
+    if(id_array_use.length>0){
+      $.ajax({
+        url: "permohonan-kwitansi/set-alamat-dipilih",
+        type: "post",
+        data: { id: id_array_use[0] },
+        success: function (data) {
+           // console.log(id_cust);
+            data = JSON.parse(data);
+          $("#alamat_kirim_1").val(data.alk_cus1);
+          $("#alamat_kirim_2").val(data.alk_cus2);
+          $("#alamat_kirim_3").val(data.alk_cus3);
+        },
+      });
+    }
     });
 
 
@@ -103,8 +118,11 @@ $("#nama_customer").on("change", function () {
            // console.log(id_cust);
             data = JSON.parse(data);
           $("#kode_customer").val(data.kode_customer);
+          set_tgl_mohon();
         },
       });
+
+      
   });
 
 
@@ -163,6 +181,36 @@ $("#nama_customer").on("change", function () {
   });
 
 
+  $(document).on("submit", "#tambahPermohonanKwitansi", function (e) {
+    e.preventDefault();
+    $("#error_no_mohon").html("");
+    $("#error_tanggal_mohon").html("");
+    $("#error_nama_customer").html("");
+    $("#error_kode_customer").html("");
+    $("#error_tanggal_berita_acara").html("");
+    $("#error_alamat_kirim_1").html("");
+    $("#error_alamat_kirim_2").html("");
+    $("#error_alamat_kirim_3").html("");
+    var err = 0;
+
+    var tanggal_mohon = $("#tanggal_mohon").val();
+
+    console.log($("#tanggal_mohon").val().substring(0, 7));
+    if (tanggal_mohon == "") {
+      $("#error_tanggal_mohon").html(
+        "Tanggal Mohon tidak boleh kosong!"
+      );
+      err += 1;
+    }else if($("#tanggal_mohon").val().substring(0, 7)< bulan_aktif_global.substring(0, 7)){
+      $("#error_tanggal_mohon").html(
+        "Tanggal Mohon tidak boleh lebih kecil dari tanggal aktif unit!"
+      );
+      err += 1;
+    }
+    
+  });
+
+
 
 
 
@@ -180,6 +228,26 @@ $("#nama_customer").on("change", function () {
       //data: { unitSj: unitSj },
       success: function (data) {
         $("#nama_customer").html(data);
+      },
+    });
+  }
+
+
+  function set_tgl_mohon() {
+    //var k_cus = $("#kode_customer").val();
+    var id_cus = $("#nama_customer").val();
+    
+    $.ajax({
+      url: "permohonan-kwitansi/set-tgl-mohon",
+      type: "post",
+      data: { id_cus: id_cus},
+      success: function (data) {
+        var data = JSON.parse(data);
+        console.log(data.tgl_aktif);
+        //var p = dateString.split(/\D/g)
+        bulan_aktif_global = data.tgl_aktif;
+        $("#tanggal_mohon").val(data.tgl_aktif);
+       
       },
     });
   }

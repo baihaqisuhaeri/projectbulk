@@ -18,6 +18,7 @@ class Permohonan_kwitansi_model extends CI_Model
         $this->db->where('flag_ver !=', "");
         $this->db->where('k_cus', $k_cus);
         $this->db->where('blnaktif', "");
+        $this->db->where('no_mohon', "");
         $this->db->order_by('no_sj asc');
 
         $this->db->from($this->table_sj_detail);
@@ -216,6 +217,35 @@ class Permohonan_kwitansi_model extends CI_Model
         $this->db->where('id', $id);
         $query = $this->db->get();
         return $query->result();
+    }
+
+    public function get_kode_nomor($unit)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_unit');
+        $this->db->where('kd_unit', $unit);
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+    public function get_last_permohonan_kwitansi($no_mohon)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_sj');
+        $this->db->like('no_mohon', $no_mohon);
+        $this->db->order_by('no_mohon', 'DESC');
+        $this->db->limit(1);
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+
+    public function tambah_permohonan_kwitansi($data, $id)
+    {
+        $this->db->where('id', $id);
+        $this->db->update('tb_sj', $data);
     }
 
 }

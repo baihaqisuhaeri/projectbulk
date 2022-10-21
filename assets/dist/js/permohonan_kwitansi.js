@@ -54,7 +54,7 @@ $(document).on("click", "#btn_tambah_detail", function () {
       
       
       $("#modal_detail").modal("hide");
-
+      if(id_array_use.length>0){
       $("#tabel_sj_detail_dipilih").dataTable().fnDestroy();
     table = $("#tabel_sj_detail_dipilih").DataTable({
       scrollX: true,
@@ -71,7 +71,7 @@ $(document).on("click", "#btn_tambah_detail", function () {
       },
   
     });
-    if(id_array_use.length>0){
+    
       $.ajax({
         url: "permohonan-kwitansi/set-alamat-dipilih",
         type: "post",
@@ -84,6 +84,7 @@ $(document).on("click", "#btn_tambah_detail", function () {
           $("#alamat_kirim_3").val(data.alk_cus3);
         },
       });
+      $("#error_sj").html("");
     }
     });
 
@@ -191,9 +192,12 @@ $("#nama_customer").on("change", function () {
     $("#error_alamat_kirim_1").html("");
     $("#error_alamat_kirim_2").html("");
     $("#error_alamat_kirim_3").html("");
+    $("#error_sj").html("");
     var err = 0;
 
     var tanggal_mohon = $("#tanggal_mohon").val();
+    var nama_customer = $("#nama_customer").val();
+    var tanggal_berita_acara = $("#tanggal_berita_acara").val();
 
     console.log($("#tanggal_mohon").val().substring(0, 7));
     if (tanggal_mohon == "") {
@@ -207,11 +211,114 @@ $("#nama_customer").on("change", function () {
       );
       err += 1;
     }
+
+    if (nama_customer == "") {
+      $("#error_nama_customer").html(
+        "Nama Customer tidak boleh kosong!"
+      );
+      err += 1;
+    }
+
+    if (tanggal_berita_acara == "") {
+      $("#error_tanggal_berita_acara").html(
+        "Tanggal berita acara tidak boleh kosong!"
+      );
+      err += 1;
+    }
+
+    if (id_array_use.length == 0) {
+      $("#error_sj").html(
+        "Surat jalan harus dipilih terlebih dahulu!"
+      );
+      err += 1;
+    }
+
+    if (tanggal_berita_acara == "") {
+      $("#error_tanggal_berita_acara").html(
+        "Tanggal berita acara tidak boleh kosong!"
+      );
+      err += 1;
+    }
+
+    if (err == 0) {
+      var kg_kirim = $("#kilogram").val();
+      var noUrutSpm = $("#no_spm").val();
+      $("#modal_konfirmasi_tambah_permohonan_kwitansi").modal("show");
+    }
     
   });
 
 
+  function tambahPermohonanKwitansi() {
+    $("#modal_konfirmasi_tambah_permohonan_kwitansi").modal("hide");
+  
+    var no_mohon = $("#no_mohon").val();
+    var tanggal_mohon = $("#tanggal_mohon").val();
+    var nama_customer = $("#nama_customer").val();
+    var kode_customer = $("#kode_customer").val();
+    var tanggal_berita_acara = $("#tanggal_berita_acara").val();
+    var alamat_kirim_1 = $("#alamat_kirim_1").val();
+    var alamat_kirim_2 = $("#alamat_kirim_2").val();
+    var alamat_kirim_3 = $("#alamat_kirim_3").val();
+    
+  
+    $.ajax({
+      url: "permohonan-kwitansi/tambah-permohonan-kwitansi",
+      type: "post",
+      dataType: "text",
+  
+      data: {
+        no_mohon: no_mohon,
+        tgl_mohon: tanggal_mohon,
+        id_cus: nama_customer,
+        k_cus: kode_customer,
+        tgl_Area: tanggal_berita_acara,
+        alk_cus1: alamat_kirim_1,
+        alk_cus2: alamat_kirim_2,
+        alk_cus3: alamat_kirim_3,
+        id_sj: id_array_use,
 
+
+        
+      },
+      success: function (data) {
+         var data = JSON.parse(data);
+         //console.log(data.status);
+         
+        var status = data.status;
+        // var json = JSON.parse(data);
+       // console.log(data.status);
+        if (status == "true") {
+          mytable = $("#tabel_permohonan_kwitansi").DataTable();
+          mytable.draw();
+
+          mytable = $("#tabel_sj_detail_dipilih").DataTable();
+          mytable.draw();
+          
+          Swal.fire("Berhasil!", "Permintaan Kwitansi berhasil ditambahkan!", "success");
+          //sukses_tambah = "yes";
+          $("#no_mohon").val("");
+          $("#tanggal_mohon").val("");
+          $("#nama_customer").val("");
+          $("#kode_customer").val("");
+          $("#tanggal_berita_acara").val("");
+          $("#alamat_kirim_1").val("");
+          $("#alamat_kirim_2").val("");
+          $("#alamat_kirim_3").val("");
+        
+        } else {
+          // alert("a");
+          Swal.fire(
+            "Gagal!",
+            "Nomor Permohnan Kwitansi Jalan sudah ada!",
+            "error"
+          );
+        }
+       
+        
+      },
+    });
+  }
 
 
 

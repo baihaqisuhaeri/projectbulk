@@ -891,7 +891,7 @@ class Input_sj extends CI_Controller
             );
             echo json_encode($data);
         } else {
-            $data1 = array(
+            $data = array(
                 'status' => 'failed',
             );
             echo json_encode($data);

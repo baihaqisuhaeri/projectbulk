@@ -67,7 +67,7 @@
 
                                                         <div class="form-group col-lg-4">
                                                             <label>No Mohon<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="no_mohon" id="no_mohon" placeholder="No Mohon">
+                                                            <input disabled class="form-control" type="text" name="no_mohon" id="no_mohon" placeholder="No Mohon">
                                                             <span class="text-danger" id="error_no_mohon"></span>
                                                         </div>
                                     
@@ -127,6 +127,7 @@
                                                     </div>
 
                                         <div class="callout callout-warning" style="background-color: #FFF8E5;" id="bagian_tambah_detail">
+                                        <span class="text-danger" id="error_sj"></span>
                                             <h5>Daftar Surat Jalan</h5>
 
 
@@ -239,7 +240,21 @@
                                         </div>
 
                                         
-                                        
+                                        <div class="modal fade" id="modal_konfirmasi_tambah_permohonan_kwitansi">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <h5>Apa Anda sudah yakin?</h5>
+                                                        <div class="form-group text-right">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                                                            <button class="btn btn-primary btn-small btn-primary btn-rounded" onclick="tambahPermohonanKwitansi()">Ya</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
 
 
 

@@ -243,4 +243,87 @@ class Permohonan_kwitansi extends CI_Controller
     }
 
 
+    function tambah_permohonan_kwitansi(){
+        $id_cus = $_POST['id_cus'];
+        $get_kd_unit = $this->Permohonan_kwitansi_model->get_kd_unit($id_cus);
+        foreach($get_kd_unit as $u){
+            $kd_unit = $u->unit;
+        }
+
+        $get_bulan_aktif = $this->Permohonan_kwitansi_model->get_bulan_aktif($kd_unit);
+
+        foreach($get_bulan_aktif as $bln){
+            $tgl_aktif = $bln->tgl_aktif;
+        }
+        
+        
+        $no_mohon = "M";
+        $kode_nomor = "";
+        $query_kode_nomor = $this->Permohonan_kwitansi_model->get_kode_nomor($kd_unit);
+        foreach ($query_kode_nomor as $qkn) {
+            $kode_nomor = $qkn->kode_nomor;
+        }
+        $no_mohon .= $kode_nomor . substr($tgl_aktif, 2,2) . substr($tgl_aktif, 5,2);
+        //var_dump($no_sj);
+        $query_last_permohonan_kwitansi = $this->Permohonan_kwitansi_model->get_last_permohonan_kwitansi($no_mohon);
+        // var_dump($query_last_sj == null);
+        // die();
+        if ($query_last_permohonan_kwitansi == null) {
+            $urut = "001";
+        } else {
+
+
+            foreach ($query_last_permohonan_kwitansi as $ls) {
+                $urut = substr($ls->no_sj, 7);
+
+                if ($urut > 0 && $urut < 9) {
+                    $urut = "00" . ($urut + 1);
+                } else if ($urut >= 9 && $urut < 99) {
+                    $urut = "0" . ($urut + 1);
+                } else if ($urut >= 99 && $urut <= 999) {
+                    $urut = $urut + 1;
+                }
+            }
+            //var_dump($urut);
+        }
+        $no_mohon .= $urut;
+
+        
+        $tgl_mohon = $_POST['tgl_mohon'];
+        $tgl_Area = $_POST['tgl_Area'];
+        $alk_cus1 = $_POST['alk_cus1'];
+        $alk_cus2 = $_POST['alk_cus2'];
+        $alk_cus3 = $_POST['alk_cus3'];
+        $id_sj = $_POST['id_sj'];
+
+        foreach($id_sj as $d){
+
+        
+        $data = array(
+            'no_mohon' => $no_mohon,
+            'tgl_mohon' =>$tgl_mohon ,
+            'tgl_Area' => $tgl_Area,
+            'alk_cus1' => $alk_cus1,
+            'alk_cus2' => $alk_cus2,
+            'alk_cus3' => $alk_cus3,
+
+        );
+
+        $this->Permohonan_kwitansi_model->tambah_permohonan_kwitansi($data, $d);
+        $query = $this->db->affected_rows();
+    }
+
+        if ($query) {
+            $data = array(
+                'status' => 'true',
+            );
+            echo json_encode($data);
+        } else {
+            $data = array(
+                'status' => 'false',
+            );
+            echo json_encode($data);
+        }
+    }
+
 }

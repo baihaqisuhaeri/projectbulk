@@ -98,8 +98,51 @@ $(document).on("click", "#btn_tambah_detail", function () {
   
   $(document).ready(function () {
     get_customer();
-    $("#bagian_2_edit").hide();
+    
     //$("#bagian_tambah_detail").hide();
+    table = $("#tabel_permohonan_kwitansi").DataTable({
+      scrollX: true,
+      processing: true, //Feature control the processing indicator.
+      serverSide: true, //Feature control DataTables' server-side processing mode.
+      order: [], //Initial no order.
+  
+      // Load data for the table's content from an Ajax source
+      ajax: {
+        url: "permohonan-kwitansi/tabel-permohonan-kwitansi",
+        type: "POST",
+      },
+  
+      //Set column definition initialisation properties.
+      // columnDefs: [
+      //   {
+      //     targets: "_all", //first column / numbering column
+      //     orderable: false, //set not orderable
+      //   },
+      // ],
+      
+    });
+    
+    $("#tabel_supir tbody").on("click", ".edit_supir", function () {
+      var data = table.row($(this).parents("tr")).data();
+      var id = $(this).data("id");
+      //var unitBarang = $("#unitBarang :selected").text();
+  
+      $("html, body").animate(
+        {
+          scrollTop: 1300,
+        },
+        500
+      );
+  
+      $("#bagian_2_edit").slideDown("slow");
+      get_unit_supir2();
+      //$("#unitSupir2").val(data[1]);
+      kode_supir2 = data[2]; // revisi
+      $("#nama_supir2").val(data[1]);
+  
+      $("#btn_edit").val(id);
+    });
+    $("#bagian_2_edit").hide();
     
     
   });
@@ -289,12 +332,33 @@ $("#nama_customer").on("change", function () {
         // var json = JSON.parse(data);
        // console.log(data.status);
         if (status == "true") {
-          mytable = $("#tabel_permohonan_kwitansi").DataTable();
-          mytable.draw();
+          // mytable = $("#tabel_permohonan_kwitansi").DataTable();
+          // mytable.draw();
 
           mytable = $("#tabel_sj_detail_dipilih").DataTable();
-          mytable.draw();
-          
+          $("#tabel_sj_detail_dipilih").dataTable().fnDestroy();
+          var tes = ["kosong"];
+    table = $("#tabel_sj_detail_dipilih").DataTable({
+      scrollX: true,
+      processing: true, //Feature control the processing indicator.
+      serverSide: true, //Feature control DataTables' server-side processing mode.
+      order: [], //Initial no order.
+  
+      // Load data for the table's content from an Ajax source
+      ajax: {
+        url: "permohonan-kwitansi/get-sj-detail-pilih",
+        type: "POST",
+        data: { id: tes
+                },
+      },
+  
+    });
+
+    id_array = [];
+    id_array_use = [];
+    $("#nama_customer").val("").change();
+    mytable = $("#tabel_permohonan_kwitansi").DataTable();
+    mytable.draw();
           Swal.fire("Berhasil!", "Permintaan Kwitansi berhasil ditambahkan!", "success");
           //sukses_tambah = "yes";
           $("#no_mohon").val("");
@@ -305,6 +369,7 @@ $("#nama_customer").on("change", function () {
           $("#alamat_kirim_1").val("");
           $("#alamat_kirim_2").val("");
           $("#alamat_kirim_3").val("");
+          
         
         } else {
           // alert("a");
@@ -319,6 +384,44 @@ $("#nama_customer").on("change", function () {
       },
     });
   }
+
+  var id_sj_batal = "";
+$(document).on("click", ".batal_permohonan_kwitansi", function (event) {
+  id_sj_batal_permohonan_kwitansi = $(this).data("id");
+  //console.log(nomor_sj_batal);
+
+  $("#modal_konfirmasi_batal_permohonan_kwitansi").modal("show");
+});
+
+function batalPermohonanKwitansi() {
+  $("#modal_konfirmasi_batal_permohonan_kwitansi").modal("hide");
+  //var table = $("#tabel_sj").DataTable();
+
+  $.ajax({
+    url: "permohonan-kwitansi/batal-permohonan-kwitansi",
+    data: {
+      id: id_sj_batal_permohonan_kwitansi,
+    },
+    type: "post",
+    success: function (data) {
+      var json = JSON.parse(data);
+      status = json.status;
+      if (status == "success") {
+        mytable = $("#tabel_permohonan_kwitansi").DataTable();
+        mytable.draw();
+
+        $("#" + id_sj_batal_permohonan_kwitansi)
+          .closest("tr")
+          .remove();
+        Swal.fire("Berhasil!", "Permohonan Kwitansi berhasil dibatalkan", "success");
+      } else {
+        // alert("Failed");
+        Swal.fire("Information", "Permohonan Kwitansi sudah dibatalkan", "warning");
+        return;
+      }
+    },
+  });
+}
 
 
 

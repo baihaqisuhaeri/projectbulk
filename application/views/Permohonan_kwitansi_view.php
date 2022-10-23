@@ -25,7 +25,7 @@
                         <div class="col-sm-6">
 
                             <ol class="breadcrumb float-sm-right">
-                                
+
                                 <!--<li class="breadcrumb-item"><a href="pengadaan-aspal">Pengadaan Aspal</a></li>
                                         <li class="breadcrumb-item active">Administrator</li>-->
                             </ol>
@@ -49,7 +49,7 @@
                                             <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#satu" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Tambah Supir</a>
                                         </li>
 
-                                        
+
                                     </ul>
                                 </div>
                                 <!-- /.card-header -->
@@ -70,7 +70,7 @@
                                                             <input disabled class="form-control" type="text" name="no_mohon" id="no_mohon" placeholder="No Mohon">
                                                             <span class="text-danger" id="error_no_mohon"></span>
                                                         </div>
-                                    
+
                                                         <div class="form-group col-lg-2">
                                                             <label>Tanggal Mohon<span style="color: red;">*</span></label>
                                                             <input class="form-control" type="date" name="tanggal_mohon" id="tanggal_mohon" placeholder="Tanggal Mohon">
@@ -83,7 +83,7 @@
                                                             </select>
                                                             <span class="text-danger" id="error_nama_customer"></span>
                                                         </div>
-                                                        
+
 
                                                     </div>
 
@@ -105,8 +105,8 @@
                                                             <label>Alamat Kirim 1<span style="color: red;">*</span></label>
                                                             <input disabled class="form-control" type="text" name="alamat_kirim_1" id="alamat_kirim_1" placeholder="Alamat Kirim 1">
                                                             <span class="text-danger" id="error_alamat_kirim_1"></span>
-                                                        </div>                                                                                                                 
-                                                        
+                                                        </div>
+
                                                     </div>
 
 
@@ -116,40 +116,40 @@
                                                             <label>Alamat Kirim 2<span style="color: red;">*</span></label>
                                                             <input disabled class="form-control" type="text" name="alamat_kirim_2" id="alamat_kirim_2" placeholder="Alamat Kirim 2">
                                                             <span class="text-danger" id="error_alamat_kirim_2"></span>
-                                                        </div>   
+                                                        </div>
 
                                                         <div class="form-group col-lg-4">
                                                             <label>Alamat Kirim 3<span style="color: red;">*</span></label>
                                                             <input disabled class="form-control" type="text" name="alamat_kirim_3" id="alamat_kirim_3" placeholder="Alamat Kirim 3">
                                                             <span class="text-danger" id="error_alamat_kirim_3"></span>
-                                                        </div>                                                                                                                 
-                                                        
+                                                        </div>
+
                                                     </div>
 
-                                        <div class="callout callout-warning" style="background-color: #FFF8E5;" id="bagian_tambah_detail">
-                                        <span class="text-danger" id="error_sj"></span>
-                                            <h5>Daftar Surat Jalan</h5>
+                                                    <div class="callout callout-warning" style="background-color: #FFF8E5;" id="bagian_tambah_detail">
+                                                        <span class="text-danger" id="error_sj"></span>
+                                                        <h5>Daftar Surat Jalan</h5>
 
 
-                                            <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_sj_detail_dipilih">
-                                                <thead>
-                                                    <tr>
-                                                        <td>No</td>
-                                                        <td>Tanggal Surat Jalan</td>
-                                                        <td>No Surat Jalan</td>
-                                                        <td>Kode Barang</td>
-                                                        <td>Nama Barang</td>
-                                                        <td>Qty Kirim</td>
-                                                        <td>Aksi</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                        <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_sj_detail_dipilih">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>No</td>
+                                                                    <td>Tanggal Surat Jalan</td>
+                                                                    <td>No Surat Jalan</td>
+                                                                    <td>Kode Barang</td>
+                                                                    <td>Nama Barang</td>
+                                                                    <td>Qty Kirim</td>
+                                                                    <td>Aksi</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
 
                                                     <div class="form-group text-right">
-                                                    <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_tambah_detail">Tambah Detail</button>
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_tambah_detail">Tambah Detail</button>
                                                         <button class="btn btn-primary btn-small btn-primary btn-rounded" type="submit" id="simpan_permohonan_kwitansi">Simpan</button>
 
                                                     </div>
@@ -167,53 +167,53 @@
                                         <!--Modal Tambah Detail-->
 
                                         <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" id="modal_detail" aria-hidden="true">
-                                                    <div class="modal-dialog modal-xl">
+                                            <div class="modal-dialog modal-xl">
 
-                                                        <div class="modal-content" style="padding: 10px">
-                                                           
-
-                                                            
+                                                <div class="modal-content" style="padding: 10px">
 
 
-                                                            
-
-                                                            
 
 
-                                                            <div class="callout callout-warning table-responsive" width="100%" style="background-color: #FFF8E5;" id="bagian_3">
 
-                                                                <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_sj_detail">
-                                                                    <thead>
-                                                                        <tr>
-                                                                        <th>No</th>
-                                                                        <th>Tanggal Surat Jalan</th>
-                                                                        <th>No Surat Jalan</th>
-                                                                        <th>Jumlah</th>
-                                                                        <th>Kode Barang</th>
-                                                                        <th>Nama Barang</th>
-                                                                        <th>Flag</th>
-                                                                        <th>Kode Alamat</th>
-                                                                        <th>Alamat Kirim</th>
-                                                                        <th>Aksi</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
 
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
 
-                                                            <div class="form-group text-right">
-                                                                <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_simpan_sj_detail">Simpan</button>
 
-                                                            </div>
 
-                                                        </div>
+
+                                                    <div class="callout callout-warning table-responsive" width="100%" style="background-color: #FFF8E5;" id="bagian_3">
+
+                                                        <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_sj_detail">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>No</th>
+                                                                    <th>Tanggal Surat Jalan</th>
+                                                                    <th>No Surat Jalan</th>
+                                                                    <th>Jumlah</th>
+                                                                    <th>Kode Barang</th>
+                                                                    <th>Nama Barang</th>
+                                                                    <th>Flag</th>
+                                                                    <th>Kode Alamat</th>
+                                                                    <th>Alamat Kirim</th>
+                                                                    <th>Aksi</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+
+                                                            </tbody>
+                                                        </table>
                                                     </div>
-                                                </div>
-                                        
 
-                                                
+                                                    <div class="form-group text-right">
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_simpan_sj_detail">Simpan</button>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
 
 
                                         <!--<button type="button" class="btn btn-primary mb-2" id="btn_modal_pengguna"><i class="fas fa-plus-circle"></i></button>-->
@@ -231,7 +231,8 @@
                                                         <td>Nama Customer</td>
                                                         <td>No Surat Jalan</td>
                                                         <td>Jumlah</td>
-                                                       
+                                                        <td>Batal</td>
+
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -239,7 +240,7 @@
                                             </table>
                                         </div>
 
-                                        
+
                                         <div class="modal fade" id="modal_konfirmasi_tambah_permohonan_kwitansi">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -248,6 +249,22 @@
                                                         <div class="form-group text-right">
                                                             <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                                                             <button class="btn btn-primary btn-small btn-primary btn-rounded" onclick="tambahPermohonanKwitansi()">Ya</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+
+                                        <div class="modal fade" id="modal_konfirmasi_batal_permohonan_kwitansi">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <h5>Apa Anda sudah yakin?</h5>
+                                                        <div class="form-group text-right">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                                                            <button class="btn btn-primary btn-small btn-primary btn-rounded" onclick="batalPermohonanKwitansi()">Ya</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -305,7 +322,7 @@
                                                     <h5>Apa Anda sudah yakin?</h5>
                                                     <div class="form-group text-right">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" onclick="cekTambah()" >Ya</button>
+                                                        <button class="btn btn-primary btn-small btn-primary btn-rounded" onclick="cekTambah()">Ya</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -315,10 +332,10 @@
                                     </div>
 
 
-                                  
 
 
-                                    
+
+
 
 
 

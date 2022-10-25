@@ -13,12 +13,14 @@ class Permohonan_kwitansi_model extends CI_Model
 
 
         $k_cus = $_SESSION['k_cus'];
+        $kd_unit = $_SESSION['kd_unit'];
         $this->db->select('*');
         $this->db->where('k_cus', $k_cus);
         $this->db->where('flag_ver !=', "");
         $this->db->where('k_cus', $k_cus);
         $this->db->where('blnaktif', "");
         $this->db->where('no_mohon', "");
+        $this->db->where('kd_unit', $kd_unit);
         $this->db->order_by('no_sj asc');
 
         $this->db->from($this->table_sj_detail);

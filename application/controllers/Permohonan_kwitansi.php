@@ -57,12 +57,15 @@ class Permohonan_kwitansi extends CI_Controller
     {
         $id_cust = $this->input->post("id_cust");
         $customer = $this->Permohonan_kwitansi_model->get_nama_customer($id_cust);
-
+        $kode_customer ="";
+        $kd_unit = "";
         foreach ($customer as $qc) {
             $kode_customer = $qc->k_Cus;
+            $kd_unit = $qc->unit;
         }
         $data = array(
             'kode_customer' => $kode_customer,
+            'kd_unit' => $kd_unit,
         );
         echo json_encode($data);
     }
@@ -72,8 +75,10 @@ class Permohonan_kwitansi extends CI_Controller
     function get_sj_detail()
     {
         $k_cus = $this->input->post("k_cus");
+        $kd_unit = $this->input->post("kd_unit");
 
         $_SESSION['k_cus'] = $k_cus;
+        $_SESSION['kd_unit'] = $kd_unit;
 
         $list = $this->Permohonan_kwitansi_model->get_datatables_sj_detail();
 
@@ -256,13 +261,13 @@ class Permohonan_kwitansi extends CI_Controller
         // $k_cus = $_POST['k_cus'];
         $id_cus = $_POST['id_cus'];
         $get_kd_unit = $this->Permohonan_kwitansi_model->get_kd_unit($id_cus);
-
+        $kd_unit = "";
         foreach ($get_kd_unit as $u) {
             $kd_unit = $u->unit;
         }
 
         $query = $this->Permohonan_kwitansi_model->get_bulan_aktif($kd_unit);
-
+        $bln_aktif ="";
         foreach ($query as $q) {
             $bln_aktif = $q->tgl_aktif;
         }
@@ -314,8 +319,10 @@ class Permohonan_kwitansi extends CI_Controller
         foreach ($query_kode_nomor as $qkn) {
             $kode_nomor = $qkn->kode_nomor;
         }
+        
         $no_mohon .= $kode_nomor . substr($tgl_aktif, 2, 2) . substr($tgl_aktif, 5, 2);
         //var_dump($no_sj);
+        //var_dump($no_mohon);
         $query_last_permohonan_kwitansi = $this->Permohonan_kwitansi_model->get_last_permohonan_kwitansi($no_mohon);
         // var_dump($query_last_sj == null);
         // die();
@@ -325,8 +332,8 @@ class Permohonan_kwitansi extends CI_Controller
 
 
             foreach ($query_last_permohonan_kwitansi as $ls) {
-                $urut = substr($ls->no_sj, 7);
-
+                $urut = substr($ls->no_mohon, 7);
+                //var_dump($ls->no_sj);
                 if ($urut > 0 && $urut < 9) {
                     $urut = "00" . ($urut + 1);
                 } else if ($urut >= 9 && $urut < 99) {
@@ -335,8 +342,9 @@ class Permohonan_kwitansi extends CI_Controller
                     $urut = $urut + 1;
                 }
             }
-            //var_dump($urut);
+            
         }
+
         $no_mohon .= $urut;
 
 

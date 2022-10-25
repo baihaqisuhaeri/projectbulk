@@ -2,6 +2,7 @@ $(".select2").select2({ width: "100%" });
 $(".select2bln").select2({ width: "15%" });
 var id_array = [];
 var id_array_use = [];
+var kd_unit_global
 //var id_array_dipilih = [];
 var bulan_aktif_global;
 $(".select2bs4").select2({
@@ -35,6 +36,7 @@ $(document).on("click", "#btn_tambah_detail", function () {
         url: "permohonan-kwitansi/get-sj-detail",
         type: "POST",
         data: { k_cus: k_cus,
+                kd_unit: kd_unit_global
                  },
       },
   
@@ -163,6 +165,7 @@ $("#nama_customer").on("change", function () {
             data = JSON.parse(data);
           $("#kode_customer").val(data.kode_customer);
           set_tgl_mohon();
+          kd_unit_global = data.kd_unit;
         },
       });
 
@@ -262,12 +265,12 @@ $("#nama_customer").on("change", function () {
       err += 1;
     }
 
-    if (tanggal_berita_acara == "") {
-      $("#error_tanggal_berita_acara").html(
-        "Tanggal berita acara tidak boleh kosong!"
-      );
-      err += 1;
-    }
+    // if (tanggal_berita_acara == "") {
+    //   $("#error_tanggal_berita_acara").html(
+    //     "Tanggal berita acara tidak boleh kosong!"
+    //   );
+    //   err += 1;
+    // }
 
     if (id_array_use.length == 0) {
       $("#error_sj").html(
@@ -276,12 +279,7 @@ $("#nama_customer").on("change", function () {
       err += 1;
     }
 
-    if (tanggal_berita_acara == "") {
-      $("#error_tanggal_berita_acara").html(
-        "Tanggal berita acara tidak boleh kosong!"
-      );
-      err += 1;
-    }
+   
 
     if (err == 0) {
       var kg_kirim = $("#kilogram").val();

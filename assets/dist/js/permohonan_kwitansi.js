@@ -199,10 +199,18 @@ $("#nama_customer").on("change", function () {
           if(id_array.includes(id)){
            // console.log("aneh");
            Swal.fire("Warning!", "Alamat kirim sudah dipilih", "warning");
+           
            //sampe sini 19 Oktober, tinggal bikin no mohon otomatisnya
           }else{
           //  console.log("aneh2");
             id_array.push(id);
+            var table = $('#tabel_sj_detail').DataTable();
+$('#tabel_sj_detail').on('click', 'tr', function () {
+   var data = table.row( this ).data();
+   // below some operations with the data
+   // How can I set the row color as red?
+  $(this).addClass('highlight').siblings().removeClass('highlight');
+});
           }
         }else{
           

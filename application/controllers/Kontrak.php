@@ -6,7 +6,10 @@ class Kontrak extends CI_Controller
     function __construct()
     {
         parent::__construct();
-
+        error_reporting(0);
+        $this->load->library("session");
+        $this->load->helper('url');
+        
         if (!isset($_SESSION['nama'])) {
             redirect('Login');
         }

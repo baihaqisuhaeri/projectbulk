@@ -6,7 +6,9 @@ class Permohonan_kwitansi extends CI_Controller
     function __construct()
     {
         parent::__construct();
-
+        error_reporting(0);
+        $this->load->library("session");
+        $this->load->helper('url');
         if (!isset($_SESSION['nama'])) {
             redirect('masuk');
         }
@@ -108,6 +110,7 @@ class Permohonan_kwitansi extends CI_Controller
             $row[] = $p->k_altk;
             $row[] = $p->alk_cus1;
             $row[] = '<button  class="btn btn-primary btn-small btn-primary btn-rounded pilih_sj" id="pilih_sj" data-id="' . $p->id . '"  name="pilih_sj" type="button">Pilih</button>';
+            $row[] = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input disabled class="form-check-input" type="checkbox" value="" id="defaultCheck1">';
             $data[] = $row;
         }
 

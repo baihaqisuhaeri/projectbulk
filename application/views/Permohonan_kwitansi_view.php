@@ -195,6 +195,7 @@
                                                                     <th>Kode Alamat</th>
                                                                     <th>Alamat Kirim</th>
                                                                     <th>Aksi</th>
+                                                                    <th>cek</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>

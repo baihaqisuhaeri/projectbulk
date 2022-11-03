@@ -6,6 +6,10 @@ class Utility extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        error_reporting(0);
+        $this->load->library("session");
+        $this->load->helper('url');
+        
         date_default_timezone_set('Asia/Jakarta');
         if (!isset($_SESSION['nama'])) {
             redirect('masuk');

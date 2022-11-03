@@ -14,6 +14,9 @@ class Cetak extends CI_CONTROLLER
     function __construct()
     {
         parent::__construct();
+        error_reporting(0);
+        $this->load->library("session");
+        $this->load->helper('url');
         $this->load->model('Input_sj_model');
     }
 

@@ -676,6 +676,7 @@ $(document).ready(function () {
       }// sampe sini 28 September 2022
       else if ( data[38] != "0000-00-00 00:00:00" ) {
         $(row).css("background-color", "#d8d4fc");
+        
       }
       else{
          $(row).css("background-color", "white");

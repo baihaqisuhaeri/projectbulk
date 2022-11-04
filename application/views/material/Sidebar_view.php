@@ -323,6 +323,27 @@
                             ?>
                         </li>
 
+
+                        <li class="nav-item">
+                            <?php
+                            if ($this->uri->segment(1) == "pembukaan-kwitansi") {
+                                echo '<a href="pembukaan-kwitansi" class="nav-link active">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>
+                                    Pembukaan Kwitansi
+                                </p>
+                            </a>';
+                            } else {
+                                echo '<a href="pembukaan-kwitansi" class="nav-link">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>
+                                    Pembukaan Kwitansi
+                                </p>
+                            </a>';
+                            }
+                            ?>
+                        </li>
+
                        
 
                         

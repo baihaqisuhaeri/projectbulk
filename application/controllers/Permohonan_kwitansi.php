@@ -23,7 +23,7 @@ class Permohonan_kwitansi extends CI_Controller
     {
 
         $this->load->view('material/Head_view');
-        $this->load->view("Permohonan_Kwitansi_view");
+        $this->load->view("Permohonan_kwitansi_view");
     }
 
 

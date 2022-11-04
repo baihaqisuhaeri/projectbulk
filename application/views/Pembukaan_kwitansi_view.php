@@ -19,7 +19,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Bulk | Permohonan Kwitansi</h1>
+                            <h1 class="m-0 text-dark">Bulk | Pembukaan Kwitansi</h1>
 
                         </div><!-- /.col -->
                         <div class="col-sm-6">
@@ -66,15 +66,30 @@
                                                     <div class="row">
 
                                                         <div class="form-group col-lg-4">
-                                                            <label>No Mohon<span style="color: red;">*</span></label>
-                                                            <input disabled class="form-control" type="text" name="no_mohon" id="no_mohon" placeholder="No Mohon">
-                                                            <span class="text-danger" id="error_no_mohon"></span>
-                                                        </div>
+                                                            <label>No. Kwitansi<span style="color: red;">*</span></label>
+                                                            <input disabled class="form-control" type="text" name="no_kwitansi" id="no_kwitansi" placeholder="No Kwitansi">
+                                                            <span class="text-danger" id="error_no_kwitansi"></span>
+                                                        </div>                                                    
 
                                                         <div class="form-group col-lg-2">
-                                                            <label>Tanggal Mohon<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="date" name="tanggal_mohon" id="tanggal_mohon" placeholder="Tanggal Mohon">
-                                                            <span class="text-danger" id="error_tanggal_mohon"></span>
+                                                            <label>Ganti No Kwitansi<span style="color: red;">*</span></label>
+                                                            <button class="btn btn-primary btn-small btn-primary btn-rounded" type="button" id="btn_simpan_sj_detail">Ganti</button>
+                                                        </div>
+
+                                                        <div class="form-group col-lg-4">
+                                                            <label><span style="color: red;">&nbsp;</span></label>
+                                                            <input class="form-control" type="text" name="no_kwitansi" id="no_kwitansi" placeholder="No Kwitansi">
+                                                            <span class="text-danger" id="error_no_kwitansi"></span>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="form-group col-lg-2">
+                                                            <label>Tanggal Kwitansi<span style="color: red;"></span></label>
+                                                            <input class="form-control" type="date" name="tanggal_kwitansi" id="tanggal_kwitansi" placeholder="Tanggal Berita Acara">
+                                                            <span class="text-danger" id="error_tanggal_kwitansi"></span>
                                                         </div>
 
                                                         <div class="form-group col-lg-4">
@@ -84,31 +99,15 @@
                                                             <span class="text-danger" id="error_nama_customer"></span>
                                                         </div>
 
-
-                                                    </div>
-
-                                                    <div class="row">
-
-                                                        <div class="form-group col-lg-4">
-                                                            <label>Kode Customer<span style="color: red;">*</span></label>
-                                                            <input class="form-control" type="text" name="kode_customer" id="kode_customer" placeholder="Kode Customer" disabled>
-                                                            <span class="text-danger" id="error_kode_customer"></span>
-                                                        </div>
-
-                                                        <div class="form-group col-lg-2">
-                                                            <label>Tanggal Berita Acara<span style="color: red;"></span></label>
-                                                            <input class="form-control" type="date" name="tanggal_berita_acara" id="tanggal_berita_acara" placeholder="Tanggal Berita Acara">
-                                                            <span class="text-danger" id="error_tanggal_berita_acara"></span>
-                                                        </div>
-
                                                         <div class="form-group col-lg-4">
                                                             <label>Alamat Kirim 1<span style="color: red;">*</span></label>
                                                             <input disabled class="form-control" type="text" name="alamat_kirim_1" id="alamat_kirim_1" placeholder="Alamat Kirim 1">
                                                             <span class="text-danger" id="error_alamat_kirim_1"></span>
                                                         </div>
 
-                                                    </div>
+                                                        
 
+                                                    </div>
 
                                                     <div class="row">
 
@@ -128,18 +127,19 @@
 
                                                     <div class="callout callout-warning" style="background-color: #FFF8E5;" id="bagian_tambah_detail">
                                                         <span class="text-danger" id="error_sj"></span>
-                                                        <h5>Daftar Surat Jalan</h5>
+                                                        <h5>Daftar Permohonan Kwitansi</h5>
 
 
                                                         <table class="table table-bordered table-striped" style="font-size: 10pt;" id="tabel_sj_detail_dipilih">
                                                             <thead>
                                                                 <tr>
                                                                     <td>No</td>
+                                                                    <td>Tanggal Mohon</td>
+                                                                    <td>No Mohon</td>
                                                                     <td>Tanggal Surat Jalan</td>
                                                                     <td>No Surat Jalan</td>
-                                                                    <td>Kode Barang</td>
-                                                                    <td>Nama Barang</td>
-                                                                    <td>Qty Kirim</td>
+                                                                    <td>Jumlah</td>
+                                                                    <td>Nama Customer</td>
                                                                     <td>Aksi</td>
                                                                 </tr>
                                                             </thead>
@@ -153,6 +153,12 @@
                                                         <button class="btn btn-primary btn-small btn-primary btn-rounded" type="submit" id="simpan_permohonan_kwitansi">Simpan</button>
 
                                                     </div>
+
+
+
+                                                    
+
+                                                   
 
                                                 </div>
 
@@ -395,7 +401,7 @@
 
 
 
-    <script src="<?php echo base_url(); ?>assets/dist/js/permohonan_kwitansi.js"></script>
+    <script src="<?php echo base_url(); ?>assets/dist/js/pembukaan_kwitansi.js"></script>
 
 
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
